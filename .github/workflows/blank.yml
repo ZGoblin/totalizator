@@ -1,6 +1,5 @@
-
 name: CI
- 
+
 on:
   pull_request:
     branches: [ main ]
@@ -22,8 +21,13 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Run Unit tests
+      - name: Run unit tests
         run: ./gradlew app:test
-        
+
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
       - name: Run detekt
         run: ./gradlew app:detekt
