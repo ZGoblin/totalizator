@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id("io.gitlab.arturbosch.detekt").version("1.16.0")
-    id 'androidx.navigation.safeargs'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -57,7 +57,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.7.1'
-    testImplementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.30'
+    testImplementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.31'
     testImplementation "io.mockk:mockk:1.10.0"
     testImplementation 'io.kotlintest:kotlintest-runner-junit5:3.4.2'
 
