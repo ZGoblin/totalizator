@@ -19,8 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set flag
-        run: git update-index --chmod=+x gradlew
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
 
       - name: Run Unit tests
         run: ./gradlew app:test
