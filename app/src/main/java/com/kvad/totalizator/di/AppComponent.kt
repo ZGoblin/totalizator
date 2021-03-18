@@ -1,6 +1,7 @@
 package com.kvad.totalizator.di
 
 import com.kvad.totalizator.MainActivity
+import com.kvad.totalizator.header.HeaderFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -9,4 +10,6 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(activity: MainActivity)
+
+    fun inject(fragment: HeaderFragment)
 }
