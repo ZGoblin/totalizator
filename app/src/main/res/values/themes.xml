@@ -13,4 +13,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="TabLayoutStyle">
+        <item name="tabIndicatorColor">@color/yellow</item>
+<!--        <item name="tabIndicatorHeight">2dp</item>-->
+<!--        <item name="tabPaddingStart">8dp</item>-->
+<!--        <item name="tabPaddingEnd">8dp</item>-->
+        <item name="tabBackground">@color/dark_yellow</item>
+        <item name="tabSelectedTextColor">@color/grey</item>
+    </style>
 </resources>
