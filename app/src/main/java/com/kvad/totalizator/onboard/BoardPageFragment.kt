@@ -10,7 +10,7 @@ import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.BoardPageBinding
 import com.kvad.totalizator.onboard.model.BoardInfo
 import com.kvad.totalizator.onboard.titleAdapter.BoardTitlesAdapter
-import com.kvad.totalizator.tools.Constants.Companion.INFO_PAGER_KEY
+import com.kvad.totalizator.tools.INFO_PAGER_KEY
 
 class BoardPageFragment : Fragment(R.layout.board_page) {
 
