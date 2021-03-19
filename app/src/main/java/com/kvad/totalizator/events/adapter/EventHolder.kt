@@ -11,6 +11,14 @@ class EventHolder(view: View, private val onEventClick: (Event) -> Unit): Recycl
     fun onBind(event: Event) {
         binding = EventHolderBinding.bind(itemView)
 
+        binding.evgEvent.apply {
+            setFirstPlayerName(event.participantdto1.name)
+            setSecondPlayerName(event.participantdto2.name)
+            setFirstPlayerBet(event.betPool.firstAmount.toInt())
+            setSecondPlayerBet(event.betPool.secondAmount.toInt())
+            setDrawBet(0)
+        }
+
         binding.root.setOnClickListener {
             onEventClick(event)
         }
