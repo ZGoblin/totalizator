@@ -79,5 +79,4 @@ class BoardPageFragment : Fragment(R.layout.board_page) {
             }
     }
 
-
 }

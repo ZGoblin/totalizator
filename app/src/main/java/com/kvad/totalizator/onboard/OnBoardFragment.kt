@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
+import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.OnBoardBinding
-import com.kvad.totalizator.onboard.model.BoardInfo
 import com.kvad.totalizator.onboard.viewPagerAdapter.BoardPagerAdapter
+import javax.inject.Inject
 
 class OnBoardFragment : Fragment(R.layout.on_board) {
 
     private lateinit var binding: OnBoardBinding
+
+    @Inject
+    lateinit var repository: BoardInfoRepository
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,6 +30,12 @@ class OnBoardFragment : Fragment(R.layout.on_board) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupTableLayout()
+        setupDi()
+    }
+
+    private fun setupDi() {
+        val app = requireActivity().application as App
+        app.getComponent().inject(this)
     }
 
     fun swipeRight() {
@@ -37,7 +47,7 @@ class OnBoardFragment : Fragment(R.layout.on_board) {
     }
 
     private fun setupTableLayout() {
-        binding.vpInfo.adapter = BoardPagerAdapter(this, BoardInfo.items)
+        binding.vpInfo.adapter = BoardPagerAdapter(this, repository.boardInfoList)
         TabLayoutMediator(binding.tlOnBoard, binding.vpInfo) { _, _ -> }.attach()
     }
 
