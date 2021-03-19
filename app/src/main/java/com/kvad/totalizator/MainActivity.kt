@@ -4,21 +4,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.kvad.totalizator.databinding.ActivityMainBinding
 import com.kvad.totalizator.header.HeaderFragment
+import com.kvad.totalizator.onboard.OnBoardFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setupBinding()
 
         supportActionBar?.hide()
-
-        //delete late
+        //todo
         supportFragmentManager.beginTransaction()
             .add(binding.fcvHeader.id, HeaderFragment())
             .commit()
     }
+
+    private fun setupBinding(){
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
 }
