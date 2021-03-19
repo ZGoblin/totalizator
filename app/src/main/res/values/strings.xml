@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Totalizator</string>
+    <string name="first_player">First player</string>
+
+    <string name="bet_currency">%d UAN</string>
+    <string name="draw_bet_amount">Draw %d UAN</string>
 </resources>
