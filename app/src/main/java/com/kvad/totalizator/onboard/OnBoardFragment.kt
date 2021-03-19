@@ -40,4 +40,5 @@ class OnBoardFragment : Fragment(R.layout.on_board) {
         binding.vpInfo.adapter = BoardPagerAdapter(this, BoardInfo.items)
         TabLayoutMediator(binding.tlOnBoard, binding.vpInfo) { _, _ -> }.attach()
     }
+
 }

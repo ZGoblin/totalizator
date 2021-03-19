@@ -9,4 +9,5 @@ class BoardTitleHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
     fun onBind(title : String){
         binding.tvTitleItem.text = title
     }
+
 }

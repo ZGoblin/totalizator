@@ -18,4 +18,5 @@ class BoardPagerAdapter(
         return BoardPageFragment.newInstance(items[position])
     }
 
+
 }
