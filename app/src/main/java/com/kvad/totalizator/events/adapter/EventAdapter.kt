@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.kvad.totalizator.R
 import com.kvad.totalizator.events.EventResponse
 
-class EventsAdapter(
+class EventAdapter(
     private val onEventClick: (EventResponse) -> Unit = {}
 ) : ListAdapter<EventResponse, EventHolder>(EventDiffUtils()) {
 
