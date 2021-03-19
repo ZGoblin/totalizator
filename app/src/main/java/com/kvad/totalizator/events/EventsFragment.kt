@@ -61,6 +61,7 @@ class EventsFragment : Fragment() {
     }
 
     private fun onEventClick(event: Event) {
-        Toast.makeText(context, "${event.id} clicked", Toast.LENGTH_SHORT).show()
+        val action = EventsFragmentDirections.actionDetailFragment(event.id)
+        findNavController().navigate(action)
     }
 }
