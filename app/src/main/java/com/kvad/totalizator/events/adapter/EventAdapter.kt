@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.kvad.totalizator.R
-import com.kvad.totalizator.events.EventResponse
+import com.kvad.totalizator.data.models.Event
 
 class EventAdapter(
-    private val onEventClick: (EventResponse) -> Unit = {}
-) : ListAdapter<EventResponse, EventHolder>(EventDiffUtils()) {
+    private val onEventClick: (Event) -> Unit = {}
+) : ListAdapter<Event, EventHolder>(EventDiffUtils()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.event_holder, parent, false)

@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kvad.totalizator.App
+import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.databinding.EventsFragmentBinding
 import com.kvad.totalizator.events.adapter.EventAdapter
 import javax.inject.Inject
@@ -48,7 +49,7 @@ class EventsFragment : Fragment() {
         }
     }
 
-    private fun updateEvents(events: List<EventResponse>) {
+    private fun updateEvents(events: List<Event>) {
         eventAdapter.submitList(events)
     }
 
@@ -58,7 +59,7 @@ class EventsFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    private fun onEventClick(event: EventResponse) {
+    private fun onEventClick(event: Event) {
         Toast.makeText(context, "${event.id} clicked", Toast.LENGTH_SHORT).show()
     }
 }
