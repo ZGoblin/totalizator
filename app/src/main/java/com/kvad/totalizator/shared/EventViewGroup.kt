@@ -15,6 +15,9 @@ class EventViewGroup @JvmOverloads constructor(
     defAttrStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defAttrStyle) {
 
+    private val defValuePlayersNameTextSize = 12
+    private val defValueBetAmountTextSize = 16
+
     private val binding: EventViewGroupBinding =
         EventViewGroupBinding.bind(inflate(context, R.layout.event_view_group, this))
 
@@ -22,9 +25,15 @@ class EventViewGroup @JvmOverloads constructor(
         val typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.EventViewGroup)
 
         val nameTextSize =
-            typedArray.getInt(R.styleable.EventViewGroup_playersNameTextSize, 12).toFloat()
+            typedArray.getInt(
+                R.styleable.EventViewGroup_playersNameTextSize,
+                defValuePlayersNameTextSize
+            ).toFloat()
         val betTextSize =
-            typedArray.getInt(R.styleable.EventViewGroup_betAmountTextSize, 16).toFloat()
+            typedArray.getInt(
+                R.styleable.EventViewGroup_betAmountTextSize,
+                defValueBetAmountTextSize
+            ).toFloat()
 
         binding.apply {
 
@@ -64,15 +73,15 @@ class EventViewGroup @JvmOverloads constructor(
         binding.tvDraw.text = resources.getString(R.string.draw_bet_amount, betAmount)
     }
 
-    fun setFirstPlayerImg(url: String){
+    fun setFirstPlayerImg(url: String) {
         Glide.with(this).load(url).into(binding.ivFirstPlayer)
     }
 
-    fun setSecondPlayerImg(url: String){
+    fun setSecondPlayerImg(url: String) {
         Glide.with(this).load(url).into(binding.ivSecondPlayer)
     }
 
-    fun setBetScale(betAmountForEachOutcome: BetAmountForEachOutcome){
+    fun setBetScale(betAmountForEachOutcome: BetAmountForEachOutcome) {
         binding.bettingScale.setupData(betAmountForEachOutcome)
     }
 }
