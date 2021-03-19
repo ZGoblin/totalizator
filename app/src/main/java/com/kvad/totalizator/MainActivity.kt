@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .add(binding.fcvHeader.id, HeaderFragment())
             .commit()
+        supportFragmentManager.beginTransaction().replace(binding.fcvBody.id, BetFragment()).commit()
     }
 
     private fun setupBinding(){

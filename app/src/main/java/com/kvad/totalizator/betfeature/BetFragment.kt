@@ -29,6 +29,9 @@ class BetFragment : Fragment() {
     private fun setupListeners(){
         binding.btnBet.setOnClickListener {
             Toast.makeText(this.requireContext(), "BET", Toast.LENGTH_SHORT).show()
+            childFragmentManager.beginTransaction()
+                .add(BetDialogFragment(),"TAG")
+                .commitAllowingStateLoss()
         }
     }
 
