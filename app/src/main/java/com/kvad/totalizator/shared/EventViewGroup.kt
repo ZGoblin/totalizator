@@ -15,8 +15,10 @@ class EventViewGroup @JvmOverloads constructor(
     defAttrStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defAttrStyle) {
 
-    private val defValuePlayersNameTextSize = 12
-    private val defValueBetAmountTextSize = 16
+    companion object{
+        private const val defValuePlayersNameTextSize = 12
+        private const val defValueBetAmountTextSize = 16
+    }
 
     private val binding: EventViewGroupBinding =
         EventViewGroupBinding.bind(inflate(context, R.layout.event_view_group, this))
