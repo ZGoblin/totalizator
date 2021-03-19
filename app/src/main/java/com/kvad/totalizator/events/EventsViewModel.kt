@@ -16,7 +16,11 @@ class EventsViewModel @Inject constructor(
 
     fun getEvents() {
         viewModelScope.launch {
-            _eventsLiveData.postValue(eventRepository.getEvents())
+            updateEvents()
         }
+    }
+
+    private suspend fun updateEvents() {
+        _eventsLiveData.postValue(eventRepository.getEvents())
     }
 }

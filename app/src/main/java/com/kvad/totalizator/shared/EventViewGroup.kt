@@ -15,7 +15,7 @@ class EventViewGroup @JvmOverloads constructor(
     defAttrStyle: Int = 0
 ) : ConstraintLayout(context, attributeSet, defAttrStyle) {
 
-    companion object{
+    companion object {
         private const val defValuePlayersNameTextSize = 12
         private const val defValueBetAmountTextSize = 16
     }
@@ -73,6 +73,14 @@ class EventViewGroup @JvmOverloads constructor(
 
     fun setDrawBet(betAmount: Int) {
         binding.tvDraw.text = resources.getString(R.string.draw_bet_amount, betAmount)
+    }
+
+    fun hideDrawBet(hide: Boolean) {
+        if (hide) {
+            binding.tvDraw.visibility = View.GONE
+        } else {
+            binding.tvDraw.visibility = View.VISIBLE
+        }
     }
 
     fun setFirstPlayerImg(url: String) {
