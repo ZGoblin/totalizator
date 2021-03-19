@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Totalizator</string>
+
+    <string name="players_vs_players_title">Players VS Players</string>
+    <string name="players_vs_players_body">Bet on winner - grab losers money. \nThe more you bet, the more prize share you get. When event started - bets stopped, video stream begins.</string>
+
+    <string name="chat_troll_provoke_title">Chat, troll, provoke…</string>
+    <string name="chat_troll_provoke_body">Application chat brings fun to the game.</string>
+
+    <string name="less_commission_title_1">LESS COMMISSION</string>
+    <string name="less_commission_title_2">MORE BONUSES</string>
+
+    <string name="less_commission_body">3% commission is taken from winnings. \n2% goes to the system, 1% - to the referrers. Get bonuses, spend them for little advantages like live coupons or cashouts.</string>
+
+    <string name="error_title">ERROR</string>
+    <string name="error_body">ERROR</string>
+    <string name="next">NEXT</string>
+    <string name="back">BACK</string>
+    <string name="text">Text</string>
+
 </resources>
