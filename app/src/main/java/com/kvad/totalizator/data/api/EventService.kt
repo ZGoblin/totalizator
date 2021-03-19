@@ -1,3 +1,7 @@
 package com.kvad.totalizator.data.api
 
-interface EventService
+import com.kvad.totalizator.events.EventResponse
+
+interface EventService {
+    suspend fun getEvents() : List<EventResponse>
+}
