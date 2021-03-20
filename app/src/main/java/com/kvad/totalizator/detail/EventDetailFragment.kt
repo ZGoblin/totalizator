@@ -8,10 +8,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.databinding.EventDetailFragmentBinding
+import com.kvad.totalizator.events.EventsViewModel
+import javax.inject.Inject
 
-class EventDetailFragment: Fragment() {
+class EventDetailFragment : Fragment() {
 
+    @Inject
+    lateinit var viewModel: EventDetailViewModel
     private lateinit var binding: EventDetailFragmentBinding
+
+    private var eventId : Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +31,7 @@ class EventDetailFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-            val eventId = EventDetailFragmentArgs.fromBundle(it).eventId
+            eventId = EventDetailFragmentArgs.fromBundle(it).eventId
             Toast.makeText(context, eventId.toString(), Toast.LENGTH_SHORT).show()
         }
 

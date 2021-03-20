@@ -1,9 +1,9 @@
 package com.kvad.totalizator.data.api
 
 import com.kvad.totalizator.data.models.BetPool
+import com.kvad.totalizator.data.models.Characteristic
 import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.data.models.ParticipantDTO
-import com.kvad.totalizator.data.models.Player
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -20,16 +20,16 @@ class EventMockService @Inject constructor() : EventService {
         val participant = ParticipantDTO(
             id = 1,
             name = "Oleg Zaets",
-            photoLink = "https",
-            Player(50, 50, 50)
+            photoLink = "https"
         )
         for (i in startRange..endRange) {
             list.add(Event(
                 id = i,
                 sport = "sport",
-                participantdto1 = participant,
-                participantdto2 = participant,
-                betPool = betpool
+                participantDto1 = participant,
+                participantDto2 = participant,
+                betPool = betpool,
+                setOf(Characteristic("Weight", "1", "2"))
             ))
         }
 
