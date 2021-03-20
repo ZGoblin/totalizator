@@ -2,7 +2,6 @@ package com.kvad.totalizator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kvad.totalizator.betfeature.BetFragment
 import com.kvad.totalizator.databinding.ActivityMainBinding
 import com.kvad.totalizator.header.HeaderFragment
 import com.kvad.totalizator.onboard.OnBoardFragment
@@ -15,12 +14,10 @@ class MainActivity : AppCompatActivity() {
         setupBinding()
 
         supportActionBar?.hide()
-
         //todo
         supportFragmentManager.beginTransaction()
             .add(binding.fcvHeader.id, HeaderFragment())
             .commit()
-        supportFragmentManager.beginTransaction().replace(binding.fcvBody.id, BetFragment()).commit()
     }
 
     private fun setupBinding(){
