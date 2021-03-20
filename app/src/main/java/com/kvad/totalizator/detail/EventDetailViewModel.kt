@@ -9,5 +9,7 @@ class EventDetailViewModel @Inject constructor(
 ) : ViewModel(){
 
 
-
+    fun uploadData(){
+        eventRepository
+    }
 }

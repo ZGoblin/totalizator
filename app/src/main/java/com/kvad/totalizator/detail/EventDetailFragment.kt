@@ -39,6 +39,6 @@ class EventDetailFragment: Fragment() {
     }
 
     private fun setupRecyclerView() {
-
+        //todo
     }
 }
