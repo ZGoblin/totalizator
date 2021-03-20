@@ -22,4 +22,5 @@
     <string name="back">BACK</string>
     <string name="text">Text</string>
 
+    <string name="events_network_error">An error occurred while download events</string>
 </resources>
