@@ -31,4 +31,5 @@
     <string name="possible_gain">Возможный выиграш %d</string>
     <string name="draw">Draw</string>
 
+    <string name="events_network_error">An error occurred while download events</string>
 </resources>
