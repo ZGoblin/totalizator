@@ -16,8 +16,8 @@
 
     <fragment
         android:id="@+id/detail_fragment"
-        android:name="com.kvad.totalizator.detail.DetailFragment"
-        tools:layout="@layout/detail_fragment">
+        android:name="com.kvad.totalizator.detail.EventDetailFragment"
+        tools:layout="@layout/event_detail_fragment">
         <argument
             android:name="eventId"
             app:argType="integer"
