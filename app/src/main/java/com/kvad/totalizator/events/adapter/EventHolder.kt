@@ -12,8 +12,8 @@ class EventHolder(view: View, private val onEventClick: (Event) -> Unit): Recycl
         binding = EventHolderBinding.bind(itemView)
 
         binding.evgEvent.apply {
-            setFirstPlayerName(event.participantdto1.name)
-            setSecondPlayerName(event.participantdto2.name)
+            setFirstPlayerName(event.participantDto1.name)
+            setSecondPlayerName(event.participantDto2.name)
             setFirstPlayerBet(event.betPool.firstAmount.toInt())
             setSecondPlayerBet(event.betPool.secondAmount.toInt())
             setDrawBet(0)
