@@ -28,13 +28,13 @@ class BetViewModel @Inject constructor(
 
 
     //TODO
-    fun sendBet(betAmount: Int) {
-        /*
-        betAmount : Int,
-        -go to repository for request to backend
-        -when state
-         */
-    }
+//    fun sendBet(betAmount: Int) {
+//        /*
+//        betAmount : Int,
+//        -go to repository for request to backend
+//        -when state
+//         */
+//    }
 
     private fun setupBetDetail(detailBet: ChoiceModel) {
         when (detailBet.choiceState) {
