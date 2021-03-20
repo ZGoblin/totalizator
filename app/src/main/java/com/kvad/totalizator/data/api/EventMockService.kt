@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @Suppress("MagicNumber")
-class EventMockService @Inject constructor() : EventService {
+class EventMockService : EventService {
 
     override suspend fun getEvents(): List<Event> = withContext(Dispatchers.IO) {
         val list = mutableListOf<Event>()
@@ -23,14 +23,16 @@ class EventMockService @Inject constructor() : EventService {
             photoLink = "https"
         )
         for (i in startRange..endRange) {
-            list.add(Event(
-                id = i,
-                sport = "sport",
-                participantDto1 = participant,
-                participantDto2 = participant,
-                betPool = betpool,
-                setOf(Characteristic("Weight", "1", "2"))
-            ))
+            list.add(
+                Event(
+                    id = i,
+                    sport = "sport",
+                    participantDto1 = participant,
+                    participantDto2 = participant,
+                    betPool = betpool,
+                    setOf(Characteristic("Weight", "1", "2"))
+                )
+            )
         }
 
         return@withContext list

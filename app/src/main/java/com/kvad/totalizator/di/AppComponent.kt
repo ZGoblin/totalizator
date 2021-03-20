@@ -4,6 +4,7 @@ import com.kvad.totalizator.MainActivity
 import com.kvad.totalizator.detail.EventDetailFragment
 import com.kvad.totalizator.events.EventsFragment
 import com.kvad.totalizator.header.HeaderFragment
+import com.kvad.totalizator.login.LoginFragment
 import com.kvad.totalizator.onboard.OnBoardFragment
 import dagger.Component
 import javax.inject.Singleton
@@ -21,4 +22,6 @@ interface AppComponent {
     fun inject(fragment: OnBoardFragment)
 
     fun inject(fragment: EventDetailFragment)
+
+    fun inject(fragment: LoginFragment)
 }

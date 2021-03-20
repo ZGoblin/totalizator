@@ -32,4 +32,8 @@
     <string name="draw">Draw</string>
 
     <string name="events_network_error">An error occurred while download events</string>
+
+
+    <string name="login_password_wrong">Forgot your password?</string>
+    <string name="login_terms_of_use">Terms of use</string>
 </resources>

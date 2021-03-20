@@ -24,4 +24,9 @@
             android:defaultValue="0" />
     </fragment>
 
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.kvad.totalizator.login.LoginFragment"
+        tools:layout="@layout/login_fragment"/>
+
 </navigation>
