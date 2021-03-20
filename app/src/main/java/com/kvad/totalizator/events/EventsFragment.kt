@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.kvad.totalizator.App
+import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.databinding.EventsFragmentBinding
 import com.kvad.totalizator.events.adapter.EventAdapter
 import javax.inject.Inject
@@ -48,17 +52,21 @@ class EventsFragment : Fragment() {
         }
     }
 
-    private fun updateEvents(events: List<EventResponse>) {
+    private fun updateEvents(events: List<Event>) {
         eventAdapter.submitList(events)
     }
 
     private fun setupRecycler() {
-        binding.rvEvents.adapter = eventAdapter
-        binding.rvEvents.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.rvEvents)
+        binding.rvEvents.apply {
+            adapter = eventAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
     }
 
-    private fun onEventClick(event: EventResponse) {
-        Toast.makeText(context, "${event.id} clicked", Toast.LENGTH_SHORT).show()
+    private fun onEventClick(event: Event) {
+        val action = EventsFragmentDirections.actionDetailFragment(event.id)
+        findNavController().navigate(action)
     }
 }
