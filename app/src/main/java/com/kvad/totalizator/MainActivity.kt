@@ -6,7 +6,6 @@ import androidx.annotation.StringRes
 import com.afollestad.materialdialogs.MaterialDialog
 import com.kvad.totalizator.databinding.ActivityMainBinding
 import com.kvad.totalizator.header.HeaderFragment
-import com.kvad.totalizator.onboard.OnBoardFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
