@@ -1,32 +1,26 @@
 package com.kvad.totalizator.betfeature
 
-import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Dialog
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import androidx.core.widget.doOnTextChanged
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.R
+import com.kvad.totalizator.betfeature.model.ChoiceModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
+import com.kvad.totalizator.tools.BET_DETAIL_KEY
 import javax.inject.Inject
 
 class BetDialogFragment : BottomSheetDialogFragment() {
     private lateinit var binding: BetDialogFragmentBinding
-    private var coefficient: Double = 1.0
+    private var coefficient: Int = 1
     private lateinit var detailBet: ChoiceModel
 
     @Inject
-    lateinit var viewModel : BetViewModel
+    lateinit var viewModel: BetViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,12 +30,11 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding = BetDialogFragmentBinding.inflate(inflater, container, false)
         binding.amountLayout.error = getString(R.string.min_bet)
         binding.etBet.requestFocus()
-        coefficient = 2.0
-
+        coefficient = 2
         arguments?.let {
-            detailBet = it.getParcelable("key") ?: ChoiceModel(
+            detailBet = it.getParcelable(BET_DETAIL_KEY) ?: ChoiceModel(
                 ChoiceState.DRAW,
-                CommandInfoSum("Error", 1.0), CommandInfoSum("Error", 1.0)
+                CommandInfoSum("Error", 1), CommandInfoSum("Error", 1)
             )
         }
         return binding.root
@@ -49,28 +42,23 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupBinding()
+        setupData()
         setupTextWatcher()
         setupListeners()
     }
 
-    @SuppressLint("StringFormatMatches")
-    private fun setupBinding() {
+    private fun setupData() {
+        binding.tvGameDetails.text =
+            getString(R.string.event_vs, detailBet.commandFirst.name, detailBet.commandSecond.name)
         when (detailBet.choiceState) {
-            ChoiceState.FIRST -> {
+            ChoiceState.FIRST_PLAYER_WIN -> {
                 binding.tvWinnerName.text = detailBet.commandFirst.name
-                binding.tvGameDetails.text =
-                    getString(R.string.event_vs, detailBet.commandFirst, detailBet.commandSecond)
             }
-            ChoiceState.SECOND -> {
+            ChoiceState.SECOND_PLAYER_WIN -> {
                 binding.tvWinnerName.text = detailBet.commandSecond.name
-                binding.tvGameDetails.text =
-                    getString(R.string.event_vs, detailBet.commandFirst, detailBet.commandSecond)
             }
-            else -> {
-                binding.tvWinnerName.text = "DRAW"
-                binding.tvGameDetails.text =
-                    getString(R.string.event_vs, detailBet.commandFirst, detailBet.commandSecond)
+            ChoiceState.DRAW -> {
+                binding.tvWinnerName.text = getString(R.string.draw)
             }
         }
     }
@@ -80,6 +68,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             cancelBetDialog()
         }
         binding.btnBet.setOnClickListener {
+            //todo sendBet
             cancelBetDialog()
         }
     }
@@ -97,55 +86,41 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupTextWatcher() {
-        val textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                s?.also {
-                    when {
-                        it.isEmpty() -> {
-                            binding.apply {
-                                amountLayout.error = getString(R.string.min_bet)
-                                btnBet.isEnabled = false
-                                btnBet.text = getString(R.string.bet)
-                                val color = resources.getColor(R.color.light_grey)
-                                btnBet.setBackgroundColor(color)
-                            }
-                        }
-                        it.length == 1 -> {
-                            val possibleGain = (coefficient * binding.etBet.text.toString().toInt())
-                            binding.apply {
-                                amountLayout.error = getString(R.string.min_bet)
-                                btnBet.isEnabled = false
-                                val color = resources.getColor(R.color.light_grey)
-                                btnBet.setBackgroundColor(color)
-                                btnBet.text = getString(R.string.possible_gain, possibleGain)
-                            }
-                        }
-                        else -> {
-                            val possibleGain = (coefficient * binding.etBet.text.toString().toInt())
-                            binding.apply {
-                                amountLayout.error = null
-                                btnBet.isEnabled = true
-                                val color = resources.getColor(R.color.yellow)
-                                btnBet.setBackgroundColor(color)
-                                btnBet.text = getString(R.string.possible_gain, possibleGain)
-                            }
-                        }
+        binding.etBet.doOnTextChanged { text, _, _, _ ->
+            when {
+                text?.isEmpty() == true -> {
+                    binding.apply {
+                        amountLayout.error = getString(R.string.min_bet)
+                        btnBet.isEnabled = false
+                        val color = resources.getColor(R.color.light_grey)
+                        btnBet.setBackgroundColor(color)
+                    }
+                }
+                text?.length == 1 -> {
+                    binding.apply {
+                        amountLayout.error = getString(R.string.min_bet)
+                        btnBet.isEnabled = false
+                        val color = resources.getColor(R.color.light_grey)
+                        btnBet.setBackgroundColor(color)
+                    }
+                }
+                else -> {
+                    binding.apply {
+                        amountLayout.error = null
+                        btnBet.isEnabled = true
+                        val color = resources.getColor(R.color.yellow)
+                        btnBet.setBackgroundColor(color)
                     }
                 }
             }
         }
-        binding.etBet.addTextChangedListener(textWatcher)
     }
 
     companion object {
         fun newInstance(choice: ChoiceModel) =
             BetDialogFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable("key", choice)
+                    putParcelable(BET_DETAIL_KEY, choice)
                 }
             }
     }

@@ -16,7 +16,7 @@
     <dimen name="winner_name_text_size">20sp</dimen>
     <dimen name="padding_start_game_details">20dp</dimen>
     <dimen name="padding_bottom_game_details">4dp</dimen>
-    <dimen name="text_size_game_details">12sp</dimen>
+    <dimen name="text_size_game_details">16sp</dimen>
     <dimen name="margin_edit_text">20dp</dimen>
     <dimen name="padding_edit_text">10dp</dimen>
     <dimen name="margin_top_btn_bet">10dp</dimen>

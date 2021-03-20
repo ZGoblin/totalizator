@@ -6,5 +6,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class CommandInfoSum(
     val name: String,
-    val sum: Double
+    val sum: Int
 ) : Parcelable
