@@ -103,7 +103,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                             binding.apply {
                                 amountLayout.error = null
                                 btnBet.isEnabled = true
-                                val color = resources.getColor(R.color.yellow)
+                                val color = resources.getColor(R.color.light_grey)
                                 btnBet.setBackgroundColor(color)
                                 btnBet.text = getString(R.string.possible_gain, possibleGain)
                             }
