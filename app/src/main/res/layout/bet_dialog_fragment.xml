@@ -89,15 +89,14 @@
             android:textColorHint="@color/light_grey" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tvBet"
+            android:id="@+id/btnBet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/yellow"
+            android:background="@color/light_grey"
             android:gravity="center"
             android:text="@string/bet"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_btn_bet"
-            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/amountLayout" />
 
     </com.google.android.material.textfield.TextInputLayout>

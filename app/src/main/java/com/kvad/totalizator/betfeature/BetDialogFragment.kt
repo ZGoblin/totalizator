@@ -1,5 +1,6 @@
 package com.kvad.totalizator.betfeature
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
@@ -20,6 +21,7 @@ import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 
 class BetDialogFragment : BottomSheetDialogFragment() {
     private lateinit var binding: BetDialogFragmentBinding
+    private var coefficient: Int = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +31,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding = BetDialogFragmentBinding.inflate(inflater, container, false)
         binding.amountLayout.error = getString(R.string.min_bet)
         binding.etBet.requestFocus()
+        coefficient = 2
         return binding.root
     }
 
@@ -36,7 +39,6 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupTextWatcher()
         setupListeners()
-        setupInputManager()
     }
 
     private fun setupListeners() {
@@ -45,7 +47,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             dialog?.cancel()
             binding.etBet.clearFocus()
         }
-        binding.tvBet.setOnClickListener {
+        binding.btnBet.setOnClickListener {
             hideKeyBoard()
             dialog?.cancel()
             binding.etBet.clearFocus()
@@ -53,14 +55,14 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     //todo
-    private fun setupInputManager() {
-        val inputMethodManager =
-            this.context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.toggleSoftInput(
-            InputMethodManager.RESULT_SHOWN,
-            InputMethodManager.HIDE_IMPLICIT_ONLY
-        )
-    }
+//    private fun setupInputManager() {
+//        val inputMethodManager =
+//            this.context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+//        inputMethodManager.toggleSoftInput(
+//            InputMethodManager.RESULT_SHOWN,
+//            InputMethodManager.HIDE_IMPLICIT_ONLY
+//        )
+//    }
 
     private fun hideKeyBoard() {
         val inputMethodManager =
@@ -76,10 +78,36 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
             override fun afterTextChanged(s: Editable?) {
                 s?.also {
-                    if (it.length < 2) {
-                        binding.amountLayout.error = getString(R.string.min_bet)
-                    } else {
-                        binding.amountLayout.error = null
+                    when {
+                        it.isEmpty() -> {
+                            binding.apply {
+                                amountLayout.error = getString(R.string.min_bet)
+                                btnBet.isEnabled = false
+                                btnBet.text = getString(R.string.bet)
+                                val color = resources.getColor(R.color.light_grey)
+                                btnBet.setBackgroundColor(color)
+                            }
+                        }
+                        it.length == 1 -> {
+                            val possibleGain = (coefficient * binding.etBet.text.toString().toInt())
+                            binding.apply {
+                                amountLayout.error = getString(R.string.min_bet)
+                                btnBet.isEnabled = false
+                                val color = resources.getColor(R.color.light_grey)
+                                btnBet.setBackgroundColor(color)
+                                btnBet.text = getString(R.string.possible_gain, possibleGain)
+                            }
+                        }
+                        else -> {
+                            val possibleGain = (coefficient * binding.etBet.text.toString().toInt())
+                            binding.apply {
+                                amountLayout.error = null
+                                btnBet.isEnabled = true
+                                val color = resources.getColor(R.color.yellow)
+                                btnBet.setBackgroundColor(color)
+                                btnBet.text = getString(R.string.possible_gain, possibleGain)
+                            }
+                        }
                     }
                 }
             }
