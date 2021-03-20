@@ -43,26 +43,18 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     private fun setupListeners() {
         binding.tvCancel.setOnClickListener {
-            hideKeyBoard()
-            dialog?.cancel()
-            binding.etBet.clearFocus()
+            cancelBetDialog()
         }
         binding.btnBet.setOnClickListener {
-            hideKeyBoard()
-            dialog?.cancel()
-            binding.etBet.clearFocus()
+            cancelBetDialog()
         }
     }
 
-    //todo
-//    private fun setupInputManager() {
-//        val inputMethodManager =
-//            this.context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-//        inputMethodManager.toggleSoftInput(
-//            InputMethodManager.RESULT_SHOWN,
-//            InputMethodManager.HIDE_IMPLICIT_ONLY
-//        )
-//    }
+    private fun cancelBetDialog(){
+        hideKeyBoard()
+        dialog?.cancel()
+        binding.etBet.clearFocus()
+    }
 
     private fun hideKeyBoard() {
         val inputMethodManager =
@@ -114,7 +106,5 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
         binding.etBet.addTextChangedListener(textWatcher)
     }
-
-
 }
 
