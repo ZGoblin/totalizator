@@ -2,7 +2,7 @@ package com.kvad.totalizator.tools
 
 import android.view.View
 
-class LoaderShower(
+class Progress(
     private val progressBar: View,
     
 ) {
