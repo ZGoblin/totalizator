@@ -26,11 +26,4 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
-
-    fun showError(@StringRes errorText: Int) {
-        MaterialDialog(this).show {
-            title(R.string.error_title)
-            message(errorText)
-        }
-    }
 }
