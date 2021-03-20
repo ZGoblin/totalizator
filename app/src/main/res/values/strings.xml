@@ -20,7 +20,8 @@
     <string name="text">Text</string>
     <string name="cancel">Cancel</string>
     <string name="bet">BET</string>
-    <string name="command_a_command_b">Переможець матчу <br/> 19.03, 22:00 Command A - Command B</string>
+    <string name="command_a_command_b">Переможець матчу <br/> Command A - Command B</string>
+    <string name="event_vs">%1$s vs %2$s</string>
     <string name="min_bet">Минимальная ставка - 10.0</string>
     <string name="command_a">Command A</string>
     <string name="possible_gain">Возможный выиграш %d</string>

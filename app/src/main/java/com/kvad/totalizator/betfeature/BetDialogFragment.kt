@@ -18,10 +18,15 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
+import javax.inject.Inject
 
 class BetDialogFragment : BottomSheetDialogFragment() {
     private lateinit var binding: BetDialogFragmentBinding
-    private var coefficient: Int = 1
+    private var coefficient: Double = 1.0
+    private lateinit var detailBet: ChoiceModel
+
+    @Inject
+    lateinit var viewModel : BetViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,14 +36,43 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding = BetDialogFragmentBinding.inflate(inflater, container, false)
         binding.amountLayout.error = getString(R.string.min_bet)
         binding.etBet.requestFocus()
-        coefficient = 2
+        coefficient = 2.0
+
+        arguments?.let {
+            detailBet = it.getParcelable("key") ?: ChoiceModel(
+                ChoiceState.DRAW,
+                CommandInfoSum("Error", 1.0), CommandInfoSum("Error", 1.0)
+            )
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupBinding()
         setupTextWatcher()
         setupListeners()
+    }
+
+    @SuppressLint("StringFormatMatches")
+    private fun setupBinding() {
+        when (detailBet.choiceState) {
+            ChoiceState.FIRST -> {
+                binding.tvWinnerName.text = detailBet.commandFirst.name
+                binding.tvGameDetails.text =
+                    getString(R.string.event_vs, detailBet.commandFirst, detailBet.commandSecond)
+            }
+            ChoiceState.SECOND -> {
+                binding.tvWinnerName.text = detailBet.commandSecond.name
+                binding.tvGameDetails.text =
+                    getString(R.string.event_vs, detailBet.commandFirst, detailBet.commandSecond)
+            }
+            else -> {
+                binding.tvWinnerName.text = "DRAW"
+                binding.tvGameDetails.text =
+                    getString(R.string.event_vs, detailBet.commandFirst, detailBet.commandSecond)
+            }
+        }
     }
 
     private fun setupListeners() {
@@ -50,7 +84,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun cancelBetDialog(){
+    private fun cancelBetDialog() {
         hideKeyBoard()
         dialog?.cancel()
         binding.etBet.clearFocus()
@@ -95,7 +129,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                             binding.apply {
                                 amountLayout.error = null
                                 btnBet.isEnabled = true
-                                val color = resources.getColor(R.color.light_grey)
+                                val color = resources.getColor(R.color.yellow)
                                 btnBet.setBackgroundColor(color)
                                 btnBet.text = getString(R.string.possible_gain, possibleGain)
                             }
@@ -106,5 +140,15 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
         binding.etBet.addTextChangedListener(textWatcher)
     }
+
+    companion object {
+        fun newInstance(choice: ChoiceModel) =
+            BetDialogFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable("key", choice)
+                }
+            }
+    }
 }
+
 

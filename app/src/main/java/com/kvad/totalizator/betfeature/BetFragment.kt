@@ -25,11 +25,13 @@ class BetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
     }
-
+    val model = ChoiceModel(ChoiceState.FIRST,
+        CommandInfoSum("Connor",300.0),CommandInfoSum("Petia",400.0))
     private fun setupListeners(){
         binding.btnBet.setOnClickListener {
+
             childFragmentManager.beginTransaction()
-                .add(BetDialogFragment(),"TAG")
+                .add(BetDialogFragment.newInstance(model),"TAG")
                 .commitAllowingStateLoss()
         }
     }

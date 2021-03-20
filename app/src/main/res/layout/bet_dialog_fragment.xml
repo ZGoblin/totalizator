@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/padding_top_winner_name"
-        android:paddingStart="@dimen/padding_start_winner_name"
+        android:paddingHorizontal="@dimen/padding_start_winner_name"
         android:text="@string/command_a"
         android:textColor="@color/white"
         android:textSize="@dimen/winner_name_text_size"
