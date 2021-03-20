@@ -12,7 +12,7 @@
     <dimen name="line_height">2dp</dimen>
     <dimen name="padding_start_winner_name">20dp</dimen>
     <dimen name="padding_top_winner_name">4dp</dimen>
-    <dimen name="padding_bottom_winner_name">5dp</dimen>
+    <dimen name="padding_bottom_winner_name">4dp</dimen>
     <dimen name="winner_name_text_size">20sp</dimen>
     <dimen name="padding_start_game_details">20dp</dimen>
     <dimen name="padding_bottom_game_details">4dp</dimen>

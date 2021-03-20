@@ -1,6 +1,7 @@
 package com.kvad.totalizator.betfeature
 
 import android.app.Activity
+import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,8 +9,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
@@ -23,8 +27,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = BetDialogFragmentBinding.inflate(inflater, container, false)
+        //dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MODE_CHANGED)
         binding.amountLayout.error = getString(R.string.min_bet)
-        binding.etBet.requestFocus()
+        //binding.etBet.requestFocus()
         return binding.root
     }
 
@@ -35,13 +40,22 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         setupInputManager()
     }
 
+//    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+//        val dialog = super.onCreateDialog(savedInstanceState)
+//        if (dialog is BottomSheetDialog) {
+//            dialog.behavior.skipCollapsed = true
+//            dialog.behavior.state = STATE_EXPANDED
+//        }
+//        return dialog
+//    }
+
     private fun setupListeners() {
         binding.tvCancel.setOnClickListener {
-            hideKeyBoard()
+            //hideKeyBoard()
             dialog?.cancel()
         }
         binding.tvBet.setOnClickListener {
-            hideKeyBoard()
+            //hideKeyBoard()
             Toast.makeText(this.requireContext(), "${binding.etBet.text}", Toast.LENGTH_SHORT)
                 .show()
             dialog?.cancel()
