@@ -8,3 +8,4 @@ data class CommandInfoSum(
     val name: String,
     val sum: Int
 ) : Parcelable
+

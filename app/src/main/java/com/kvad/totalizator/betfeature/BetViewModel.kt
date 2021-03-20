@@ -35,31 +35,31 @@ class BetViewModel @Inject constructor(
 //        -when state
 //         */
 //    }
-
-    private fun setupBetDetail(detailBet: ChoiceModel) {
-        when (detailBet.choiceState) {
-            ChoiceState.FIRST_PLAYER_WIN -> {
-                BetDetailModel(
-                    detailBet.commandFirst.name,
-                    "${detailBet.commandFirst.name} vs ${detailBet.commandSecond.name}",
-                    //setupCoefficient(detailBet)
-                )
-            }
-            ChoiceState.SECOND_PLAYER_WIN -> {
-                BetDetailModel(
-                    detailBet.commandSecond.name,
-                    "${detailBet.commandFirst.name} vs ${detailBet.commandSecond.name}",
-                    //setupCoefficient(detailBet)
-                )
-            }
-            else -> {
-                BetDetailModel(
-                    "DRAW",
-                    "${detailBet.commandFirst.name} vs ${detailBet.commandSecond.name}",
-                    //setupCoefficient(detailBet)
-                )
-            }
-        }
-    }
+    //TODO
+//    private fun setupBetDetail(detailBet: ChoiceModel) {
+//        when (detailBet.choiceState) {
+//            ChoiceState.FIRST_PLAYER_WIN -> {
+//                BetDetailModel(
+//                    detailBet.commandFirst.name,
+//                    "${detailBet.commandFirst.name} vs ${detailBet.commandSecond.name}",
+//                    //setupCoefficient(detailBet)
+//                )
+//            }
+//            ChoiceState.SECOND_PLAYER_WIN -> {
+//                BetDetailModel(
+//                    detailBet.commandSecond.name,
+//                    "${detailBet.commandFirst.name} vs ${detailBet.commandSecond.name}",
+//                    //setupCoefficient(detailBet)
+//                )
+//            }
+//            else -> {
+//                BetDetailModel(
+//                    "DRAW",
+//                    "${detailBet.commandFirst.name} vs ${detailBet.commandSecond.name}",
+//                    //setupCoefficient(detailBet)
+//                )
+//            }
+//        }
+//    }
 
 }
