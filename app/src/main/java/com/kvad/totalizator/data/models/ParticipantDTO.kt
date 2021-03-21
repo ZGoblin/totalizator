@@ -6,5 +6,5 @@ data class ParticipantDTO(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
     @SerializedName("photo_link") val photoLink: String,
-    @SerializedName("player") val player: Player,
+    @SerializedName("parameters") val characteristics: Set<Characteristic>
 )

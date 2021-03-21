@@ -6,11 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.kvad.totalizator.App
+import com.kvad.totalizator.MainActivity
 import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.databinding.EventsFragmentBinding
 import com.kvad.totalizator.events.adapter.EventAdapter
+import com.kvad.totalizator.tools.ErrorState
+import com.kvad.totalizator.tools.Progress
+import com.kvad.totalizator.tools.State
 import javax.inject.Inject
 
 class EventsFragment : Fragment() {
@@ -19,12 +26,14 @@ class EventsFragment : Fragment() {
     lateinit var viewModel: EventsViewModel
     private lateinit var binding: EventsFragmentBinding
     private val eventAdapter = EventAdapter(::onEventClick)
+    private lateinit var progress: Progress
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = EventsFragmentBinding.inflate(inflater, container, false)
+        progress = Progress(binding.pbProgress, binding.tvError)
         return binding.root
     }
 
@@ -49,17 +58,28 @@ class EventsFragment : Fragment() {
         }
     }
 
-    private fun updateEvents(events: List<Event>) {
-        eventAdapter.submitList(events)
+    private fun updateEvents(state: State<List<Event>, ErrorState>) {
+        progress.hideAll()
+        when (state) {
+            is State.Content -> eventAdapter.submitList(state.data)
+            is State.Error -> {
+                progress.showError()
+            }
+            is State.Loading -> progress.showLoading()
+        }
     }
 
     private fun setupRecycler() {
-        binding.rvEvents.adapter = eventAdapter
-        binding.rvEvents.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.rvEvents)
+        binding.rvEvents.apply {
+            adapter = eventAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        }
     }
 
     private fun onEventClick(event: Event) {
-        Toast.makeText(context, "${event.id} clicked", Toast.LENGTH_SHORT).show()
+        val action = EventsFragmentDirections.actionDetailFragment(event.id)
+        findNavController().navigate(action)
     }
 }

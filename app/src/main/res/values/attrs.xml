@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="EventViewGroup">
+        <attr name="playersNameTextSize" format="integer"/>
+        <attr name="betAmountTextSize" format="integer"/>
+        <attr name="containDraw" format="boolean"/>
+    </declare-styleable>
+    
+</resources>

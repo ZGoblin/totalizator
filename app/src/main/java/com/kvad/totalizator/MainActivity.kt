@@ -2,9 +2,10 @@ package com.kvad.totalizator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.StringRes
+import com.afollestad.materialdialogs.MaterialDialog
 import com.kvad.totalizator.databinding.ActivityMainBinding
 import com.kvad.totalizator.header.HeaderFragment
-import com.kvad.totalizator.onboard.OnBoardFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,9 +21,8 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun setupBinding(){
+    private fun setupBinding() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
-
 }
