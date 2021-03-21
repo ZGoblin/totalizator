@@ -31,8 +31,8 @@ class BetFragment : Fragment() {
     private val fakeModelFromEvent = ChoiceModel(
         "1",
         Bet.FIRST_PLAYER_WIN,
-        "Connor",
-        "Ivan"
+        "First player",
+        "Second player"
     )
 
     private fun setupListeners() {

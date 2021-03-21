@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.betfeature.model.ChoiceModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
@@ -22,12 +24,11 @@ import com.kvad.totalizator.tools.State
 import javax.inject.Inject
 
 class BetDialogFragment : BottomSheetDialogFragment() {
-    private lateinit var binding: BetDialogFragmentBinding
-    private var coefficient: Int = 1
-    private lateinit var detailBet: ChoiceModel
 
     @Inject
     lateinit var viewModel: BetViewModel
+    private lateinit var binding: BetDialogFragmentBinding
+    private lateinit var detailBet: ChoiceModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,9 +36,6 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = BetDialogFragmentBinding.inflate(inflater, container, false)
-        binding.amountLayout.error = getString(R.string.min_bet)
-        binding.etBet.requestFocus()
-        coefficient = 2
         arguments?.let {
             detailBet = it.getParcelable(BET_DETAIL_KEY) ?: ChoiceModel(
                 "1",
@@ -46,22 +44,30 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                 "Error"
             )
         }
-        viewModel.setupData(detailBet.eventId, detailBet.betState)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupDi()
         setupData()
         setupTextWatcher()
         setupListeners()
         observeViewModel()
+
+        binding.amountLayout.error = getString(R.string.min_bet)
+        binding.etBet.requestFocus()
+        viewModel.setupData(detailBet.eventId, detailBet.betState)
+
+    }
+
+    private fun setupDi() {
+        val app = requireActivity().application as App
+        app.getComponent().inject(this)
     }
 
     private fun setupData() {
-        binding.tvGameDetails.text =
-            getString(R.string.event_vs, detailBet.firstPlayerName, detailBet.secondPlayerName)
+        binding.tvGameDetails.text = getString(R.string.event_vs, detailBet.firstPlayerName, detailBet.secondPlayerName)
         binding.tvWinnerName.text = when (detailBet.betState) {
             Bet.FIRST_PLAYER_WIN -> detailBet.firstPlayerName
             Bet.SECOND_PLAYER_WIN -> detailBet.secondPlayerName
@@ -92,11 +98,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.betDetailLiveData.observe(this) {
+        viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> {
-                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
-                }
+                is State.Loading -> { Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show() }
                 is State.Content -> cancelBetDialog()
                 is State.Error -> handleErrors(it.error)
             }
@@ -108,8 +112,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             ErrorState.LOGIN_ERROR -> {
                 Toast.makeText(context, "Open Login", Toast.LENGTH_SHORT).show()
                 //TODO
-//                val action = EventsFragmentDirections.actionDetailFragment()
-//                findNavController().navigate(action)
+                val action = EventsFragmentDirections.actionDetailFragment()
+                findNavController().navigate(action)
             }
             ErrorState.LOADING_ERROR -> {
                 //TODO
@@ -124,7 +128,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     binding.apply {
                         amountLayout.error = getString(R.string.min_bet)
                         btnBet.isEnabled = false
-                        val color = resources.getColor(R.color.light_grey)
+                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
                         btnBet.setBackgroundColor(color)
                     }
                 }
@@ -132,7 +136,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     binding.apply {
                         amountLayout.error = getString(R.string.min_bet)
                         btnBet.isEnabled = false
-                        val color = resources.getColor(R.color.light_grey)
+                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
                         btnBet.setBackgroundColor(color)
                     }
                 }
@@ -140,7 +144,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     binding.apply {
                         amountLayout.error = null
                         btnBet.isEnabled = true
-                        val color = resources.getColor(R.color.yellow)
+                        val color = ContextCompat.getColor(requireContext(), R.color.yellow)
                         btnBet.setBackgroundColor(color)
                     }
                 }

@@ -24,8 +24,8 @@ class BetViewModel @Inject constructor(
 
     private val _betDetailLiveData = MutableLiveData<BetDetailState>()
     val betDetailLiveData: LiveData<BetDetailState> = _betDetailLiveData
-    private var eventId: String = ""
-    private lateinit var bet: Bet
+    var eventId: String = ""
+    lateinit var bet: Bet
 
     fun setupData(eventId: String, bet: Bet) {
         this.eventId = eventId

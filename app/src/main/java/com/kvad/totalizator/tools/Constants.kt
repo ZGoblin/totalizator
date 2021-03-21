@@ -5,6 +5,6 @@ const val BET_DETAIL_KEY = "BET_DETAIL_KEY"
 
 const val LOGGING_ERROR_CODE = 403
 
-const val W1_SERVER_FLAG = 1
-const val W2_SERVER_FLAG = 2
-const val DRAW_SERVER_FLAG = 0
+const val W1_SERVER_FLAG = "W1"
+const val W2_SERVER_FLAG = "W2"
+const val DRAW_SERVER_FLAG = "X"
