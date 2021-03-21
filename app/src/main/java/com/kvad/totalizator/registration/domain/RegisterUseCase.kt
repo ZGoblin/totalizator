@@ -5,6 +5,7 @@ import com.kvad.totalizator.data.models.RegisterRequest
 import com.kvad.totalizator.registration.RegisterState
 import com.kvad.totalizator.registration.models.RawRegisterRequest
 import com.kvad.totalizator.shared.ResultWrapper
+import com.kvad.totalizator.tools.ADULT
 import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +16,9 @@ import javax.inject.Inject
 class RegisterUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
+    companion object {
+        private const val MONTH_BEFORE_ADD_NULL = 9
+    }
 
     suspend fun register(rawRegisterRequest: RawRegisterRequest) = withContext(Dispatchers.Default) {
 
@@ -32,35 +36,37 @@ class RegisterUseCase @Inject constructor(
         state
     }
 
-    private suspend fun verifyRegisterComponent(rawRegisterRequest: RawRegisterRequest) = withContext(Dispatchers.Default) {
-        when {
-            rawRegisterRequest.email.length < LOGIN_MIN_LENGTH -> RegisterState.LOGIN_LENGTH_ERROR
-            rawRegisterRequest.password.length < PASSWORD_MIN_LENGTH -> RegisterState.PASSWORD_LENGTH_ERROR
-            !isAdult(rawRegisterRequest) -> RegisterState.BIRTHDAY_ERROR
-            else -> RegisterState.WITHOUT_ERROR
+    private suspend fun verifyRegisterComponent(rawRegisterRequest: RawRegisterRequest) =
+        withContext(Dispatchers.Default) {
+            when {
+                rawRegisterRequest.email.length < LOGIN_MIN_LENGTH -> RegisterState.LOGIN_LENGTH_ERROR
+                rawRegisterRequest.password.length < PASSWORD_MIN_LENGTH -> RegisterState.PASSWORD_LENGTH_ERROR
+                !isAdult(rawRegisterRequest) -> RegisterState.BIRTHDAY_ERROR
+                else -> RegisterState.WITHOUT_ERROR
+            }
         }
-    }
 
-    private suspend fun isAdult(rawRegisterRequest: RawRegisterRequest) = withContext(Dispatchers.Default) {
+    private suspend fun isAdult(rawRegisterRequest: RawRegisterRequest) =
+        withContext(Dispatchers.Default) {
 
-        val calendarAdult = Calendar.getInstance()
-        calendarAdult.add(Calendar.YEAR, -18)
-        val calendarBirthday = Calendar.getInstance()
-        calendarBirthday.set(
-            rawRegisterRequest.year,
-            rawRegisterRequest.month,
-            rawRegisterRequest.day
-        )
+            val calendarAdult = Calendar.getInstance()
+            calendarAdult.add(Calendar.YEAR, ADULT.inv())
+            val calendarBirthday = Calendar.getInstance()
+            calendarBirthday.set(
+                rawRegisterRequest.year,
+                rawRegisterRequest.month,
+                rawRegisterRequest.day
+            )
 
-        calendarAdult >= calendarBirthday
-    }
+            calendarAdult >= calendarBirthday
+        }
 
     private suspend fun toRegisterRequest(rawRegisterRequest: RawRegisterRequest) = withContext(Dispatchers.Default) {
         RegisterRequest(
             email = rawRegisterRequest.email,
             password = rawRegisterRequest.password,
             dob = "${rawRegisterRequest.year}-${
-                if (rawRegisterRequest.month > 9) rawRegisterRequest.month
+                if (rawRegisterRequest.month > MONTH_BEFORE_ADD_NULL) rawRegisterRequest.month
                 else "0${rawRegisterRequest.month}"
             }-${rawRegisterRequest.day}"
         )
