@@ -27,9 +27,9 @@ class BetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
     }
-    @Suppress("MagicNumber")
+
     private val fakeModelFromEvent = ChoiceModel(
-        1,
+        "1",
         Bet.FIRST_PLAYER_WIN,
         "Connor",
         "Ivan"

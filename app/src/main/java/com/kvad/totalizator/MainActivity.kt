@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.StringRes
 import com.afollestad.materialdialogs.MaterialDialog
+import com.kvad.totalizator.betfeature.BetFragment
 import com.kvad.totalizator.databinding.ActivityMainBinding
 import com.kvad.totalizator.header.HeaderFragment
 
@@ -13,6 +14,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupBinding()
+
+        supportFragmentManager.beginTransaction()
+            .add(binding.fcvBody.id, BetFragment())
+            .commit()
 
         supportActionBar?.hide()
         //todo

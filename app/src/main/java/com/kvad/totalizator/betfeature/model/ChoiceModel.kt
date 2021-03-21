@@ -7,8 +7,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ChoiceModel (
-    val eventId : Int,
-    val choiceState : Bet,
+    val eventId : String,
+    val betState : Bet,
     val firstPlayerName: String,
     val secondPlayerName : String,
 ):Parcelable

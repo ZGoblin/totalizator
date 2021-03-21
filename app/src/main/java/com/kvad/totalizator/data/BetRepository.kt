@@ -13,9 +13,15 @@ class BetRepository @Inject constructor(
 ) {
 
     suspend fun doBet(betToServerModel: BetToServerModel): ResultWrapper<Unit> {
-        Log.d("TAG", "eventId -- ${betToServerModel.eventId}\nchoice -- ${betToServerModel.choice}\namount -- ${betToServerModel.amount}")
+        Log.d(
+            "TAG",
+            "${betToServerModel.eventId}${betToServerModel.choice}${betToServerModel.amount}"
+        )
         val choiceToServer = mapBetToString.map(betToServerModel.choice)
-        Log.d("TAG", "eventId -- ${betToServerModel.eventId}\nchoice -- ${choiceToServer}\namount -- ${betToServerModel.amount}")
+        Log.d(
+            "TAG",
+            "${betToServerModel.eventId}$choiceToServer${betToServerModel.amount}"
+        )
         return safeApiCall {
             return@safeApiCall Unit
         }
