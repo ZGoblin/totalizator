@@ -10,7 +10,7 @@ import com.kvad.totalizator.tools.safeApiCall
 import javax.inject.Inject
 
 class EventRepository @Inject constructor(
-    private val eventService: EventService,
+    private val eventService: EventService
 ) {
 
     suspend fun getEvents(): ResultWrapper<List<Event>> {
@@ -19,23 +19,27 @@ class EventRepository @Inject constructor(
         }
     }
 
-    @Suppress("MagicNumber")
-    suspend fun getEventById(): ResultWrapper<Event> {
+    @Suppress("UnusedPrivateMember")
+    suspend fun getEventById(id: String): ResultWrapper<Event> {
         return safeApiCall {
             return@safeApiCall Event(
                 "id",
                 "sport",
                 ParticipantDTO(
-                    5, "Olexiy", "link", setOf(
-                        Characteristic("weight", "55")
+                    1, "Olexiy", "link", setOf(
+                        Characteristic("weight", "55"),
+                        Characteristic("height", "55"),
+                        Characteristic("age", "55")
                     )
                 ),
                 ParticipantDTO(
-                    5, "Olexiy", "link", setOf(
-                        Characteristic("weight", "55")
+                    1, "Rodion", "link", setOf(
+                        Characteristic("weight", "55"),
+                        Characteristic("height", "55"),
+                        Characteristic("age", "55")
                     )
                 ),
-                BetPool(55F, 56F, 56F)
+                BetPool(1F, 1F, 1F)
             )
         }
     }
