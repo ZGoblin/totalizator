@@ -23,6 +23,10 @@ class EventDetailViewModel @Inject constructor(
     private val mapEventToDetailUiModel: MapEventToDetailUiModel
 ) : ViewModel() {
 
+    companion object{
+        const val delay: Long = 3000L
+    }
+
     private val _commentLiveData = MutableLiveData<eventDetailState>()
     val commentLiveData: LiveData<eventDetailState> = _commentLiveData
 
@@ -43,7 +47,7 @@ class EventDetailViewModel @Inject constructor(
                     }
                 }
 
-                delay(3000L)
+                delay(delay)
             }
         }
 

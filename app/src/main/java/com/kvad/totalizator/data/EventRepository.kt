@@ -19,19 +19,19 @@ class EventRepository @Inject constructor(
         }
     }
 
-    @Suppress("MagicNumber")
+    @Suppress("                    1, \"Olexiy\", \"link\", setOf(\n")
     suspend fun getEventById(id: String): ResultWrapper<Event> {
         return safeApiCall {
             return@safeApiCall Event(
                 "id",
                 "sport",
                 ParticipantDTO(
-                    5, "Olexiy", "link", setOf(
+                    1, "Olexiy", "link", setOf(
                         Characteristic("weight", "55")
                     )
                 ),
                 ParticipantDTO(
-                    5, "Olexiy", "link", setOf(
+                    1, "Olexiy", "link", setOf(
                         Characteristic("weight", "55")
                     )
                 ),
