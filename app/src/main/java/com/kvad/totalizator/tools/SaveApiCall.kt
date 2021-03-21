@@ -11,7 +11,7 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> T): ResultWrapper<T> {
     return withContext(Dispatchers.IO) {
         try {
             ResultWrapper.Success(apiCall())
-        } catch (throwable: IOException) {
+        } catch (throwable: Throwable) {
             when (throwable) {
                 is HttpException -> {
                     Log.d("safeApiCall", throwable.code().toString())
