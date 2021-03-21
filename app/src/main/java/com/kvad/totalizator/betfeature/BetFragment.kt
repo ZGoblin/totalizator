@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kvad.totalizator.betfeature.model.ChoiceModel
 import com.kvad.totalizator.databinding.BetFragmentBinding
+import com.kvad.totalizator.shared.Bet
 
 class BetFragment : Fragment() {
 
@@ -26,11 +27,12 @@ class BetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
     }
-    @Suppress("MagicNumber")
+
     private val fakeModelFromEvent = ChoiceModel(
-        ChoiceState.FIRST_PLAYER_WIN,
-        CommandInfoSum("Connor", 5000),
-        CommandInfoSum("Ivan", 1000)
+        "1",
+        Bet.FIRST_PLAYER_WIN,
+        "First player",
+        "Second player"
     )
 
     private fun setupListeners() {

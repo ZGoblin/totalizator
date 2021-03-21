@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kvad.totalizator.App
+import com.kvad.totalizator.betfeature.BetDialogFragment
+import com.kvad.totalizator.betfeature.model.ChoiceModel
 import com.kvad.totalizator.databinding.EventDetailFragmentBinding
 import com.kvad.totalizator.detail.adapter.EventDetailAdapter
 import com.kvad.totalizator.shared.Bet
@@ -59,14 +61,14 @@ class EventDetailFragment : Fragment() {
         }
     }
 
-    private fun setupViewModelObserver(){
-        viewModel.commentLiveData.observe(viewLifecycleOwner){
+    private fun setupViewModelObserver() {
+        viewModel.commentLiveData.observe(viewLifecycleOwner) {
             updateScreenInfo(it)
         }
     }
 
     private fun updateScreenInfo(state: eventDetailState) {
-        when(state){
+        when (state) {
             is State.Content -> eventDetailAdapter.submitList(state.data)
             is State.Error -> binding.rvEventDetailInfo.visibility = View.GONE
             is State.Loading -> Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
@@ -74,7 +76,13 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun onBtnBetClick(bet: Bet) {
-        Toast.makeText(context, "$eventId with bet $bet", Toast.LENGTH_SHORT).show()
-        // TODO 21.03.2021 start bottom sheet dialog
+        val fakeModelFromEvent = ChoiceModel(
+            eventId, bet,
+            "First player",
+            "Second player"
+        )
+        childFragmentManager.beginTransaction()
+            .add(BetDialogFragment.newInstance(fakeModelFromEvent), "TAG")
+            .commitAllowingStateLoss()
     }
 }

@@ -3,63 +3,45 @@ package com.kvad.totalizator.betfeature
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.betfeature.model.BetDetailModel
 import com.kvad.totalizator.betfeature.model.ChoiceModel
+import com.kvad.totalizator.data.BetRepository
+import com.kvad.totalizator.shared.Bet
+import com.kvad.totalizator.shared.ResultWrapper
+import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.IOException
 import javax.inject.Inject
 
-typealias BetDetailState = State<BetDetailModel, IOException>
+typealias BetDetailState = State<Unit, ErrorState>
 
 class BetViewModel @Inject constructor(
-    //todo
-    //add repo
+    private val betRepository: BetRepository
 ) : ViewModel() {
 
     private val _betDetailLiveData = MutableLiveData<BetDetailState>()
     val betDetailLiveData: LiveData<BetDetailState> = _betDetailLiveData
-    private lateinit var choice: ChoiceState
-    private var idEvent: Int = 0
 
-    fun setupData(choice: ChoiceState, idEvent: Int) {
-        this.choice = choice
-        this.idEvent = idEvent
+    private var eventId: String = ""
+    private lateinit var bet: Bet
+
+    fun setupData(eventId: String, bet: Bet) {
+        this.eventId = eventId
+        this.bet = bet
     }
 
-
-    //TODO
-//    fun sendBet(betAmount: Int) {
-//        /*
-//        betAmount : Int,
-//        -go to repository for request to backend
-//        -when state
-//         */
-//    }
-    //TODO
-//    private fun setupBetDetail(detailBet: ChoiceModel) {
-//        when (detailBet.choiceState) {
-//            ChoiceState.FIRST_PLAYER_WIN -> {
-//                BetDetailModel(
-//                    detailBet.commandFirst.name,
-//                    "${detailBet.commandFirst.name} vs ${detailBet.commandSecond.name}",
-//                    //setupCoefficient(detailBet)
-//                )
-//            }
-//            ChoiceState.SECOND_PLAYER_WIN -> {
-//                BetDetailModel(
-//                    detailBet.commandSecond.name,
-//                    "${detailBet.commandFirst.name} vs ${detailBet.commandSecond.name}",
-//                    //setupCoefficient(detailBet)
-//                )
-//            }
-//            else -> {
-//                BetDetailModel(
-//                    "DRAW",
-//                    "${detailBet.commandFirst.name} vs ${detailBet.commandSecond.name}",
-//                    //setupCoefficient(detailBet)
-//                )
-//            }
-//        }
-//    }
-
+    fun createBet(amount: Int) {
+        val betToServerModel = BetToServerModel(eventId, amount, bet)
+        _betDetailLiveData.postValue(State.Loading)
+        viewModelScope.launch {
+            _betDetailLiveData.value = when (betRepository.doBet(betToServerModel)) {
+                is ResultWrapper.Success -> State.Content(Unit)
+                is ResultWrapper.DataLoadingError -> State.Error(ErrorState.LOADING_ERROR)
+                is ResultWrapper.LoginError -> State.Error(ErrorState.LOGIN_ERROR)
+            }
+        }
+    }
 }

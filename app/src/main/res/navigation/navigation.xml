@@ -33,5 +33,9 @@
         android:id="@+id/registration_fragment"
         android:name="com.kvad.totalizator.registration.RegistrationFragment"
         tools:layout="@layout/registration_fragment" />
+    <fragment
+        android:id="@+id/header_fragment"
+        android:name="com.kvad.totalizator.header.HeaderFragment"
+        tools:layout="@layout/header_fragment" />
 
 </navigation>
