@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
@@ -21,6 +23,7 @@ import com.kvad.totalizator.login.LoginFragment
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.BET_DETAIL_KEY
 import com.kvad.totalizator.tools.ErrorState
+import com.kvad.totalizator.tools.Progress
 import com.kvad.totalizator.tools.State
 import javax.inject.Inject
 
@@ -28,8 +31,10 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var viewModel: BetViewModel
+
     private lateinit var binding: BetDialogFragmentBinding
     private lateinit var detailBet: ChoiceModel
+    private lateinit var progress: Progress
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,13 +43,10 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     ): View {
         binding = BetDialogFragmentBinding.inflate(inflater, container, false)
         arguments?.let {
-            detailBet = it.getParcelable(BET_DETAIL_KEY) ?: ChoiceModel(
-                "1",
-                Bet.DRAW,
-                "Error",
-                "Error"
-            )
+            detailBet =
+                it.getParcelable(BET_DETAIL_KEY) ?: ChoiceModel("1", Bet.DRAW, "Error", "Error")
         }
+
         return binding.root
     }
 
@@ -102,7 +104,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private fun observeViewModel() {
         viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> Log.d("Tag","Loading")
+                is State.Loading -> MaterialDialog(requireContext()).show { customView(R.layout.progress_dialog) }
                 is State.Content -> cancelBetDialog()
                 is State.Error -> handleErrors(it.error)
             }
