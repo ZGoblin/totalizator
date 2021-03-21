@@ -20,6 +20,9 @@
     <string name="error_body">ERROR</string>
     <string name="next">NEXT</string>
     <string name="back">BACK</string>
-    <string name="text">Text</string>
+
+    <string name="bet_win_and_take_money_from_rivals">Bet, win and take money from rivals</string>
+    <string name="bet_on">Bet on %s</string>
+    <string name="draw">Draw</string>
 
 </resources>
