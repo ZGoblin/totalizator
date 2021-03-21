@@ -12,7 +12,7 @@ sealed class EventDetail {
     ) : EventDetail()
 
     data class HeaderInfoUiModel(
-        val id: Int,
+        val id: String,
         val sport: String,
         val participantDto1: ParticipantDTO,
         val participantDto2: ParticipantDTO,
