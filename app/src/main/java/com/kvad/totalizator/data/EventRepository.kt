@@ -19,7 +19,7 @@ class EventRepository @Inject constructor(
         }
     }
 
-    @Suppress("                    1, \"Olexiy\", \"link\", setOf(\n")
+    @Suppress("UnusedPrivateMember")
     suspend fun getEventById(id: String): ResultWrapper<Event> {
         return safeApiCall {
             return@safeApiCall Event(
@@ -35,7 +35,7 @@ class EventRepository @Inject constructor(
                         Characteristic("weight", "55")
                     )
                 ),
-                BetPool(55F, 56F, 56F)
+                BetPool(1F, 1F, 1F)
             )
         }
     }
