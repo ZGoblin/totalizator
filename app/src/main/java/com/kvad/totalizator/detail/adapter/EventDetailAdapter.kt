@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kvad.totalizator.R
+import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.detail.model.EventDetail
+import com.kvad.totalizator.shared.Bet
 
-/*class EventDetailAdapter constructor(
-        
+class EventDetailAdapter constructor(
+    private val onBetButtonClick: (Int, Bet) -> Unit = { _, _ -> }
 ) : ListAdapter<EventDetail, RecyclerView.ViewHolder>(DetailEventDiffUtil()) {
 
     enum class HolderType {
@@ -24,25 +26,28 @@ import com.kvad.totalizator.detail.model.EventDetail
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val viewType = HolderType.values()[viewType]
+        val viewTypeEnum = HolderType.values()[viewType]
 
-        val view = if (viewType == HolderType.HEADER) {
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.event_detail_header_view_holder, parent, false)
+        val layout = if (viewTypeEnum == HolderType.HEADER) {
+            R.layout.event_detail_header_view_holder
         } else {
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.event_detail_player_characteristic, parent, false)
+            R.layout.event_detail_player_characteristic
         }
 
-        return if (viewType == HolderType.HEADER) {
+        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
 
+        return if (viewTypeEnum == HolderType.HEADER) {
+            HeaderViewHolder(view, onBetButtonClick)
         } else {
-
+            CharacteristicViewHolder(view)
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
+        when (holder) {
+            is HeaderViewHolder -> holder.onBind(getItem(position) as EventDetail.HeaderInfoUiModel)
+            is CharacteristicViewHolder -> holder.onBind(getItem(position) as EventDetail.CharacteristicUiModel)
+        }
     }
 
-}*/
+}
