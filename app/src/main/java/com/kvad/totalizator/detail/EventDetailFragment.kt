@@ -19,7 +19,7 @@ class EventDetailFragment : Fragment() {
     lateinit var viewModel: EventDetailViewModel
     private lateinit var binding: EventDetailFragmentBinding
 
-    private var eventId: Int = 0
+    private var eventId: String = ""
     private val eventDetailAdapter = EventDetailAdapter(::onBtnBetClick)
 
     override fun onCreateView(
@@ -35,7 +35,7 @@ class EventDetailFragment : Fragment() {
 
         arguments?.let {
             eventId = EventDetailFragmentArgs.fromBundle(it).eventId
-            Toast.makeText(context, eventId.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, eventId, Toast.LENGTH_SHORT).show()
         }
 
         setupDi()
