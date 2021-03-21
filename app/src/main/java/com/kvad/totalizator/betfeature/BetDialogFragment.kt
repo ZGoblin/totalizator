@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.R
 import com.kvad.totalizator.betfeature.model.ChoiceModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
+import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.BET_DETAIL_KEY
+import com.kvad.totalizator.tools.State
 import javax.inject.Inject
 
 class BetDialogFragment : BottomSheetDialogFragment() {
@@ -33,8 +36,10 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         coefficient = 2
         arguments?.let {
             detailBet = it.getParcelable(BET_DETAIL_KEY) ?: ChoiceModel(
-                ChoiceState.DRAW,
-                CommandInfoSum("Error", 1), CommandInfoSum("Error", 1)
+                1,
+                Bet.DRAW,
+                "Error",
+                "Error"
             )
         }
         return binding.root
@@ -49,17 +54,11 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     private fun setupData() {
         binding.tvGameDetails.text =
-            getString(R.string.event_vs, detailBet.commandFirst.name, detailBet.commandSecond.name)
-        when (detailBet.choiceState) {
-            ChoiceState.FIRST_PLAYER_WIN -> {
-                binding.tvWinnerName.text = detailBet.commandFirst.name
-            }
-            ChoiceState.SECOND_PLAYER_WIN -> {
-                binding.tvWinnerName.text = detailBet.commandSecond.name
-            }
-            ChoiceState.DRAW -> {
-                binding.tvWinnerName.text = getString(R.string.draw)
-            }
+            getString(R.string.event_vs, detailBet.firstPlayerName, detailBet.secondPlayerName)
+        binding.tvWinnerName.text = when (detailBet.choiceState) {
+            Bet.FIRST_PLAYER_WIN -> detailBet.firstPlayerName
+            Bet.SECOND_PLAYER_WIN -> detailBet.secondPlayerName
+            Bet.DRAW -> getString(R.string.draw)
         }
     }
 
@@ -69,7 +68,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
         binding.btnBet.setOnClickListener {
             //todo sendBet
-            cancelBetDialog()
+            val amount = binding.etBet.text.toString().toInt()
+            viewModel.createBet(amount)
+
         }
     }
 
@@ -83,6 +84,22 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         val inputMethodManager =
             this.context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.applicationWindowToken, 0)
+    }
+
+    private fun observeViewModel() {
+        viewModel.betDetailLiveData.observe(this) {
+            when (it) {
+                is State.Loading -> {
+                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+                }
+                is State.Content -> {
+                    cancelBetDialog()
+                }
+                is State.Error -> {
+
+                }
+            }
+        }
     }
 
     private fun setupTextWatcher() {
