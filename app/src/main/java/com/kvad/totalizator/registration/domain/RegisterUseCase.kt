@@ -13,8 +13,7 @@ import java.util.*
 import javax.inject.Inject
 
 class RegisterUseCase @Inject constructor(
-    private val userRepository: UserRepository,
-    private val calendar: Calendar
+    private val userRepository: UserRepository
 ) {
 
     suspend fun register(rawRegisterRequest: RawRegisterRequest): RegisterState {
@@ -46,8 +45,21 @@ class RegisterUseCase @Inject constructor(
     private suspend fun isAdult(rawRegisterRequest: RawRegisterRequest): Boolean {
         return withContext(Dispatchers.Default) {
 
-            val diff = calendar.get(Calendar.YEAR) - rawRegisterRequest.year
-            true
+            val calendar = Calendar.getInstance()
+            val diffYear = calendar.get(Calendar.YEAR) - rawRegisterRequest.year
+            when {
+                diffYear > 18 -> true
+                diffYear < 18 -> false
+                else -> {
+                    when {
+                        calendar.get(Calendar.MONTH) > rawRegisterRequest.month -> true
+                        calendar.get(Calendar.MONTH) < rawRegisterRequest.month -> false
+                        else -> {
+                            calendar.get(Calendar.DAY_OF_MONTH) >= rawRegisterRequest.day
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -56,7 +68,10 @@ class RegisterUseCase @Inject constructor(
             RegisterRequest(
                 email = rawRegisterRequest.email,
                 password = rawRegisterRequest.password,
-                dob = "${rawRegisterRequest.year}-${rawRegisterRequest.month}-${rawRegisterRequest.day}"
+                dob = "${rawRegisterRequest.year}-${
+                    if (rawRegisterRequest.month > 9) rawRegisterRequest.month
+                    else "0${rawRegisterRequest.month}"
+                }-${rawRegisterRequest.day}"
             )
         }
     }

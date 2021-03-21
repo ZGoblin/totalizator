@@ -42,5 +42,7 @@
     <string name="login_network_error_dialog_button">OK</string>
 
     <string name="register_title_date_picker">Date of birthday</string>
-    <string name="register_date">%d.%d.%d</string>
+    <string name="register_birthday_error">Only adults can use the application</string>
+    <string name="register_error_dialog_button">OK</string>
+
 </resources>
