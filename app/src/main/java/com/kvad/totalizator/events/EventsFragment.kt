@@ -59,9 +59,7 @@ class EventsFragment : Fragment() {
         progress.hideAll()
         when (state) {
             is State.Content -> eventAdapter.submitList(state.data)
-            is State.Error -> {
-                progress.showError()
-            }
+            is State.Error -> progress.showError()
             is State.Loading -> progress.showLoading()
         }
     }
