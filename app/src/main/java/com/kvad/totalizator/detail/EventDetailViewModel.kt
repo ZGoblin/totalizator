@@ -13,6 +13,7 @@ import javax.inject.Inject
 
 typealias eventDetailState = State<EventDetail, IOException>
 
+// TODO 21.03.2021   delete Suppress
 @Suppress("UnusedPrivateMember")
 class EventDetailViewModel @Inject constructor(
     private val eventRepository: EventRepository
