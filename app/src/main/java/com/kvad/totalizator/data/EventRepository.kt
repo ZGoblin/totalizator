@@ -27,12 +27,16 @@ class EventRepository @Inject constructor(
                 "sport",
                 ParticipantDTO(
                     1, "Olexiy", "link", setOf(
-                        Characteristic("weight", "55")
+                        Characteristic("weight", "55"),
+                        Characteristic("height", "55"),
+                        Characteristic("age", "55")
                     )
                 ),
                 ParticipantDTO(
-                    1, "Olexiy", "link", setOf(
-                        Characteristic("weight", "55")
+                    1, "Rodion", "link", setOf(
+                        Characteristic("weight", "55"),
+                        Characteristic("height", "55"),
+                        Characteristic("age", "55")
                     )
                 ),
                 BetPool(1F, 1F, 1F)
