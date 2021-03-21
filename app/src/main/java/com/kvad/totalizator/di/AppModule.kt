@@ -1,10 +1,18 @@
 package com.kvad.totalizator.di
 
 import android.content.Context
+import com.google.gson.GsonBuilder
 import com.kvad.totalizator.data.EventRepository
+import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.api.EventMockService
+import com.kvad.totalizator.data.api.UserService
+import com.kvad.totalizator.tools.API_URL
 import dagger.Module
 import dagger.Provides
+import okhttp3.HttpUrl
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -20,5 +28,25 @@ class AppModule(private val context: Context) {
     @Provides
     fun provideEventRepository(): EventRepository {
         return EventRepository(EventMockService())
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserRepository(userService: UserService): UserRepository {
+        return UserRepository(userService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserService(): UserService {
+        return Retrofit.Builder()
+            .baseUrl(API_URL)
+            .addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder().setLenient().create()
+                )
+            )
+            .build()
+            .create(UserService::class.java)
     }
 }

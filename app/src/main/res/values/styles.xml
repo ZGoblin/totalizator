@@ -6,4 +6,7 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
+    <style name="MyDatePicker" parent="android:Widget.Material.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
+    </style>
 </resources>

@@ -1,7 +1,7 @@
 package com.kvad.totalizator.login.domain
 
 import com.kvad.totalizator.data.UserRepository
-import com.kvad.totalizator.data.models.Login
+import com.kvad.totalizator.data.models.LoginRequest
 import com.kvad.totalizator.login.LoginState
 import com.kvad.totalizator.shared.ResultWrapper
 import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
@@ -13,12 +13,12 @@ import javax.inject.Inject
 class LoginUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
-    suspend fun login(login: Login) : LoginState {
+    suspend fun login(loginRequest: LoginRequest): LoginState {
         return withContext(Dispatchers.Default) {
 
-            val state = checkLoginComponent(login)
+            val state = verifyLoginComponent(loginRequest)
             if (state == LoginState.WITHOUT_ERROR) {
-                when (userRepository.login(login)) {
+                when (userRepository.login(loginRequest)) {
                     is ResultWrapper.Success -> return@withContext LoginState.WITHOUT_ERROR
                     else -> return@withContext LoginState.NETWORK_ERROR
                 }
@@ -28,11 +28,11 @@ class LoginUseCase @Inject constructor(
         }
     }
 
-    private suspend fun checkLoginComponent(login: Login) : LoginState {
+    private suspend fun verifyLoginComponent(loginRequest: LoginRequest): LoginState {
         return withContext(Dispatchers.Default) {
             when {
-                login.login.length < LOGIN_MIN_LENGTH -> LoginState.LOGIN_LENGTH_ERROR
-                login.password.length < PASSWORD_MIN_LENGTH -> LoginState.PASSWORD_LENGTH_ERROR
+                loginRequest.login.length < LOGIN_MIN_LENGTH -> LoginState.LOGIN_LENGTH_ERROR
+                loginRequest.password.length < PASSWORD_MIN_LENGTH -> LoginState.PASSWORD_LENGTH_ERROR
                 else -> LoginState.WITHOUT_ERROR
             }
         }
