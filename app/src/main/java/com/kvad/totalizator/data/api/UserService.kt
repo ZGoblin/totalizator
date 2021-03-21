@@ -3,10 +3,10 @@ package com.kvad.totalizator.data.api
 import com.kvad.totalizator.data.models.LoginRequest
 import com.kvad.totalizator.data.models.RegisterRequest
 import com.kvad.totalizator.data.models.Token
+import com.kvad.totalizator.data.models.Wallet
 import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface UserService {
 
@@ -15,4 +15,9 @@ interface UserService {
 
     @POST("/api/Auth/register")
     suspend fun register(@Body registerRequest: RegisterRequest): Token
+
+    @POST("/api/Wallet/{id}")
+    suspend fun wallet(
+        @Query("id") id: String
+    ): Wallet
 }

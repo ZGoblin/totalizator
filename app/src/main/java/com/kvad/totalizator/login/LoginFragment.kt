@@ -75,8 +75,13 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupListener() {
-        binding.btnLogin.setOnClickListener {
-            login()
+        binding.apply {
+            btnLogin.setOnClickListener {
+                login()
+            }
+            btnRegister.setOnClickListener {
+                findNavController().navigate(R.id.registration_fragment)
+            }
         }
     }
 
