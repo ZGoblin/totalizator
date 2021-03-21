@@ -58,7 +58,7 @@ class EventsFragment : Fragment() {
         }
     }
 
-    private fun updateEvents(state: State<List<Event>, ErrorState.LoadingError>) {
+    private fun updateEvents(state: State<List<Event>, ErrorState>) {
         progress.hideAll()
         when (state) {
             is State.Content -> eventAdapter.submitList(state.data)
