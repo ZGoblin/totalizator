@@ -76,13 +76,11 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun onBtnBetClick(bet: Bet) {
-        Toast.makeText(context, "$eventId with bet $bet", Toast.LENGTH_SHORT).show()
         val fakeModelFromEvent = ChoiceModel(
             eventId, bet,
             "First player",
             "Second player"
         )
-        // TODO 21.03.2021 start bottom sheet dialog
         childFragmentManager.beginTransaction()
             .add(BetDialogFragment.newInstance(fakeModelFromEvent), "TAG")
             .commitAllowingStateLoss()

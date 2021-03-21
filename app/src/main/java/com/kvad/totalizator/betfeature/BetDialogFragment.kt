@@ -34,7 +34,6 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: BetDialogFragmentBinding
     private lateinit var detailBet: ChoiceModel
-    private lateinit var progress: Progress
 
     override fun onCreateView(
         inflater: LayoutInflater,
