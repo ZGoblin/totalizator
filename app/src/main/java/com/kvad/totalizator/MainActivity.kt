@@ -15,10 +15,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupBinding()
 
-        supportFragmentManager.beginTransaction()
-            .add(binding.fcvBody.id, BetFragment())
-            .commit()
-
         supportActionBar?.hide()
         //todo
         supportFragmentManager.beginTransaction()

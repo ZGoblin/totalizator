@@ -17,6 +17,7 @@ import com.kvad.totalizator.R
 import com.kvad.totalizator.betfeature.model.ChoiceModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 import com.kvad.totalizator.events.EventsFragmentDirections
+import com.kvad.totalizator.login.LoginFragment
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.BET_DETAIL_KEY
 import com.kvad.totalizator.tools.ErrorState
@@ -67,7 +68,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupData() {
-        binding.tvGameDetails.text = getString(R.string.event_vs, detailBet.firstPlayerName, detailBet.secondPlayerName)
+        binding.tvGameDetails.text =
+            getString(R.string.event_vs, detailBet.firstPlayerName, detailBet.secondPlayerName)
         binding.tvWinnerName.text = when (detailBet.betState) {
             Bet.FIRST_PLAYER_WIN -> detailBet.firstPlayerName
             Bet.SECOND_PLAYER_WIN -> detailBet.secondPlayerName
@@ -100,7 +102,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private fun observeViewModel() {
         viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> { Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show() }
+                is State.Loading -> Log.d("Tag","Loading")
                 is State.Content -> cancelBetDialog()
                 is State.Error -> handleErrors(it.error)
             }
@@ -109,15 +111,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     private fun handleErrors(errorState: ErrorState) {
         when (errorState) {
-            ErrorState.LOGIN_ERROR -> {
-                Toast.makeText(context, "Open Login", Toast.LENGTH_SHORT).show()
-                //TODO
-                val action = EventsFragmentDirections.actionDetailFragment()
-                findNavController().navigate(action)
-            }
-            ErrorState.LOADING_ERROR -> {
-                //TODO
-            }
+            ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
+            ErrorState.LOADING_ERROR -> { }
         }
     }
 
