@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 // TODO 21.03.2021 clean up
 @Suppress("MagicNumber")
-class EventMockService @Inject constructor() : EventService {
+class EventMockService : EventService {
 
     @Suppress("UnusedPrivateMember")
     override suspend fun getEvents(): List<Event> = withContext(Dispatchers.IO) {
@@ -32,7 +32,7 @@ class EventMockService @Inject constructor() : EventService {
                     sport = "sport",
                     participantDto1 = participant,
                     participantDto2 = participant,
-                    betPool = betpool,
+                    betPool = betpool
                 )
             )
         }

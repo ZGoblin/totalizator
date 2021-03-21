@@ -1,5 +1,6 @@
 package com.kvad.totalizator.tools
 
+import android.util.Log
 import com.kvad.totalizator.shared.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,12 +14,14 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> T): ResultWrapper<T> {
         } catch (throwable: IOException) {
             when (throwable) {
                 is HttpException -> {
+                    Log.d("safeApiCall", throwable.code().toString())
                     when (throwable.code()) {
                         LOGGING_ERROR_CODE -> ResultWrapper.LoginError
                         else -> ResultWrapper.DataLoadingError
                     }
                 }
                 else -> {
+                    Log.d("safeApiCall", throwable.message.toString())
                     ResultWrapper.DataLoadingError
                 }
             }
