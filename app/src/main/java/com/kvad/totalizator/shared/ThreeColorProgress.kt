@@ -26,9 +26,9 @@ class ThreeColorProgress @JvmOverloads constructor(
     fun setupData(betAmountForEachOutcome: BetAmountForEachOutcome) {
 
         progressItems = arrayOf(
-            ProgressItemKt(R.color.blue, betAmountForEachOutcome.firstPlayerWinBetAmount),
-            ProgressItemKt(R.color.light_grey, betAmountForEachOutcome.draw),
-            ProgressItemKt(R.color.red, betAmountForEachOutcome.secondPlayerWinBetAmount)
+            ProgressItemKt(betAmountForEachOutcome.firstPlayerWinBetAmount, R.color.blue),
+            ProgressItemKt(betAmountForEachOutcome.draw, R.color.light_grey),
+            ProgressItemKt(betAmountForEachOutcome.secondPlayerWinBetAmount, R.color.red)
         )
 
         this.invalidate()
@@ -84,9 +84,3 @@ class ThreeColorProgress @JvmOverloads constructor(
     )
 
 }
-
-data class BetAmountForEachOutcome(
-    val firstPlayerWinBetAmount: Int,
-    val draw: Int,
-    val secondPlayerWinBetAmount: Int,
-)

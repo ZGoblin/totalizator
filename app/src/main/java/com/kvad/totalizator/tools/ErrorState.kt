@@ -1,6 +1,6 @@
 package com.kvad.totalizator.tools
 
-sealed class ErrorState {
-    object LoginError : ErrorState()
-    object LoadingError : ErrorState()
+enum class ErrorState {
+    LOGIN_ERROR,
+    LOADING_ERROR
 }

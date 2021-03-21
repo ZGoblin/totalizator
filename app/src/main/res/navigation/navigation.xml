@@ -20,7 +20,7 @@
         tools:layout="@layout/event_detail_fragment">
         <argument
             android:name="eventId"
-            app:argType="integer"
+            app:argType="string"
             android:defaultValue="0" />
     </fragment>
 

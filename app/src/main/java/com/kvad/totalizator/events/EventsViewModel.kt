@@ -11,7 +11,7 @@ import com.kvad.totalizator.tools.State
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-typealias EventState = State<List<Event>, ErrorState.LoadingError>
+typealias EventState = State<List<Event>, ErrorState>
 
 class EventsViewModel @Inject constructor(
     private val eventRepository: EventRepository
@@ -28,7 +28,7 @@ class EventsViewModel @Inject constructor(
     private suspend fun updateEvents() {
         when (val result = eventRepository.getEvents()) {
             is ResultWrapper.Success -> _eventsLiveData.postValue(State.Content(result.value))
-            is ResultWrapper.DataLoadingError -> _eventsLiveData.postValue(State.Error(ErrorState.LoadingError))
+            is ResultWrapper.DataLoadingError -> _eventsLiveData.postValue(State.Error(ErrorState.LOADING_ERROR))
         }
     }
 }

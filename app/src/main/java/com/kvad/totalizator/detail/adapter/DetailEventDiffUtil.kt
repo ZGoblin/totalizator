@@ -11,7 +11,7 @@ class DetailEventDiffUtil : DiffUtil.ItemCallback<EventDetail>() {
                 oldItem.id == newItem.id
             }
             oldItem is EventDetail.CharacteristicUiModel && newItem is EventDetail.CharacteristicUiModel -> {
-                oldItem.characteristic == newItem.characteristic
+                oldItem.characteristicName == newItem.characteristicName
             }
             else -> return false
         }

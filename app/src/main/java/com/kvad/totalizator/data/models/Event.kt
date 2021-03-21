@@ -3,16 +3,9 @@ package com.kvad.totalizator.data.models
 import com.google.gson.annotations.SerializedName
 
 data class Event(
-    @SerializedName("id") val id: Int,
+    @SerializedName("id") val id: String,
     @SerializedName("sport") val sport: String,
     @SerializedName("participantdto1") val participantDto1: ParticipantDTO,
     @SerializedName("participantdto2") val participantDto2: ParticipantDTO,
-    @SerializedName("bet_pool") val betPool: BetPool,
-    @SerializedName("parameters") val parameters: Set<Characteristic>
-)
-
-data class Characteristic(
-    @SerializedName("type") val type: String,
-    @SerializedName("first_player") val firstPlayerValue: String,
-    @SerializedName("first_player") val secondPlayerValue: String,
+    @SerializedName("bet_pool") val betPool: BetPool
 )

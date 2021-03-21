@@ -5,10 +5,14 @@ import com.kvad.totalizator.data.models.Characteristic
 import com.kvad.totalizator.data.models.ParticipantDTO
 
 sealed class EventDetail {
-    data class CharacteristicUiModel(val characteristic: Characteristic) : EventDetail()
+    data class CharacteristicUiModel(
+        val characteristicName: String,
+        val firstPlayerValue: String,
+        val secondPlayerValue: String
+    ) : EventDetail()
 
     data class HeaderInfoUiModel(
-        val id: Int,
+        val id: String,
         val sport: String,
         val participantDto1: ParticipantDTO,
         val participantDto2: ParticipantDTO,
