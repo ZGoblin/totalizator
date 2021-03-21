@@ -13,28 +13,27 @@ import javax.inject.Inject
 class LoginUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
-    suspend fun login(loginRequest: LoginRequest): LoginState {
-        return withContext(Dispatchers.Default) {
+    suspend fun login(loginRequest: LoginRequest) = withContext(Dispatchers.Default) {
 
-            val state = verifyLoginComponent(loginRequest)
-            if (state == LoginState.WITHOUT_ERROR) {
-                when (userRepository.login(loginRequest)) {
-                    is ResultWrapper.Success -> return@withContext LoginState.WITHOUT_ERROR
-                    else -> return@withContext LoginState.NETWORK_ERROR
+        val state = verifyLoginComponent(loginRequest)
+        if (state == LoginState.WITHOUT_ERROR) {
+            when (val result = userRepository.login(loginRequest)) {
+                is ResultWrapper.Success -> {
+                    userRepository.updateToken(result.value)
+                    return@withContext LoginState.WITHOUT_ERROR
                 }
+                else -> return@withContext LoginState.NETWORK_ERROR
             }
-
-            state
         }
+
+        state
     }
 
-    private suspend fun verifyLoginComponent(loginRequest: LoginRequest): LoginState {
-        return withContext(Dispatchers.Default) {
-            when {
-                loginRequest.login.length < LOGIN_MIN_LENGTH -> LoginState.LOGIN_LENGTH_ERROR
-                loginRequest.password.length < PASSWORD_MIN_LENGTH -> LoginState.PASSWORD_LENGTH_ERROR
-                else -> LoginState.WITHOUT_ERROR
-            }
+    private suspend fun verifyLoginComponent(loginRequest: LoginRequest) = withContext(Dispatchers.Default) {
+        when {
+            loginRequest.login.length < LOGIN_MIN_LENGTH -> LoginState.LOGIN_LENGTH_ERROR
+            loginRequest.password.length < PASSWORD_MIN_LENGTH -> LoginState.PASSWORD_LENGTH_ERROR
+            else -> LoginState.WITHOUT_ERROR
         }
     }
 }

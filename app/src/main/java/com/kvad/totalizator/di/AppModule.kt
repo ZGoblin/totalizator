@@ -7,6 +7,7 @@ import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.api.EventMockService
 import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.tools.API_URL
+import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
@@ -28,12 +29,6 @@ class AppModule(private val context: Context) {
     @Provides
     fun provideEventRepository(): EventRepository {
         return EventRepository(EventMockService())
-    }
-
-    @Singleton
-    @Provides
-    fun provideUserRepository(userService: UserService): UserRepository {
-        return UserRepository(userService)
     }
 
     @Singleton

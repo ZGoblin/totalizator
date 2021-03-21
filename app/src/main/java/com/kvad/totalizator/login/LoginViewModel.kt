@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.models.LoginRequest
 import com.kvad.totalizator.login.domain.LoginUseCase
+import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

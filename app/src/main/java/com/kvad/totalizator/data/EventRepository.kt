@@ -7,7 +7,7 @@ import com.kvad.totalizator.tools.safeApiCall
 import javax.inject.Inject
 
 class EventRepository @Inject constructor(
-    private val eventService: EventService,
+    private val eventService: EventService
 ) {
 
     suspend fun getEvents(): ResultWrapper<List<Event>> {
