@@ -11,6 +11,7 @@ import com.kvad.totalizator.App
 import com.kvad.totalizator.databinding.EventDetailFragmentBinding
 import com.kvad.totalizator.detail.adapter.EventDetailAdapter
 import com.kvad.totalizator.shared.Bet
+import com.kvad.totalizator.tools.State
 import javax.inject.Inject
 
 class EventDetailFragment : Fragment() {
@@ -35,11 +36,15 @@ class EventDetailFragment : Fragment() {
 
         arguments?.let {
             eventId = EventDetailFragmentArgs.fromBundle(it).eventId
+            //todo clean up
             Toast.makeText(context, eventId, Toast.LENGTH_SHORT).show()
         }
 
         setupDi()
         setupRecyclerView()
+        setupViewModelObserver()
+
+        viewModel.uploadData(eventId)
     }
 
     private fun setupDi() {
@@ -51,6 +56,20 @@ class EventDetailFragment : Fragment() {
         binding.rvEventDetailInfo.apply {
             adapter = eventDetailAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        }
+    }
+
+    private fun setupViewModelObserver(){
+        viewModel.commentLiveData.observe(viewLifecycleOwner){
+            updateScreenInfo(it)
+        }
+    }
+
+    private fun updateScreenInfo(state: eventDetailState) {
+        when(state){
+            is State.Content -> eventDetailAdapter.submitList(state.data)
+            is State.Error -> binding.rvEventDetailInfo.visibility = View.GONE
+            is State.Loading -> Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
         }
     }
 

@@ -20,7 +20,7 @@ class EventRepository @Inject constructor(
     }
 
     @Suppress("MagicNumber")
-    suspend fun getEventById(): ResultWrapper<Event> {
+    suspend fun getEventById(id: String): ResultWrapper<Event> {
         return safeApiCall {
             return@safeApiCall Event(
                 "id",
