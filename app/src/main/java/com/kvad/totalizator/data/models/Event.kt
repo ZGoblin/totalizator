@@ -7,12 +7,5 @@ data class Event(
     @SerializedName("sport") val sport: String,
     @SerializedName("participantdto1") val participantDto1: ParticipantDTO,
     @SerializedName("participantdto2") val participantDto2: ParticipantDTO,
-    @SerializedName("bet_pool") val betPool: BetPool,
-    @SerializedName("parameters") val parameters: Set<Characteristic>
-)
-
-data class Characteristic(
-    @SerializedName("type") val type: String,
-    @SerializedName("first_player") val firstPlayerValue: String,
-    @SerializedName("first_player") val secondPlayerValue: String,
+    @SerializedName("bet_pool") val betPool: BetPool
 )

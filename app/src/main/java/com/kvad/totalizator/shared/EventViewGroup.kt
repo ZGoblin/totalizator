@@ -63,18 +63,6 @@ class EventViewGroup @JvmOverloads constructor(
         binding.tvSecondPlayerName.text = name
     }
 
-    fun setFirstPlayerBet(betAmount: Int) {
-        binding.tvFirstPlayerBetAmount.text = resources.getString(R.string.bet_currency, betAmount)
-    }
-
-    fun setSecondPlayerBet(betAmount: Int) {
-        binding.tvSecondPlayerBetAmount.text = resources.getString(R.string.bet_currency, betAmount)
-    }
-
-    fun setDrawBet(betAmount: Int) {
-        binding.tvDraw.text = resources.getString(R.string.draw_bet_amount, betAmount)
-    }
-
     fun hideDrawBet(hide: Boolean) {
         if (hide) {
             binding.tvDraw.visibility = View.GONE
@@ -92,6 +80,19 @@ class EventViewGroup @JvmOverloads constructor(
     }
 
     fun setBetScale(betAmountForEachOutcome: BetAmountForEachOutcome) {
+        binding.tvFirstPlayerBetAmount.text = resources.getString(
+            R.string.bet_currency,
+            betAmountForEachOutcome.firstPlayerWinBetAmount
+        )
+        binding.tvSecondPlayerBetAmount.text = resources.getString(
+            R.string.bet_currency,
+            betAmountForEachOutcome.secondPlayerWinBetAmount
+        )
+        binding.tvDraw.text = resources.getString(
+            R.string.draw_bet_amount,
+            betAmountForEachOutcome.draw
+        )
+
         binding.bettingScale.setupData(betAmountForEachOutcome)
     }
 }

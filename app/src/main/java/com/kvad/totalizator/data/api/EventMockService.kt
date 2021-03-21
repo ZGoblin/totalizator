@@ -20,7 +20,8 @@ class EventMockService @Inject constructor() : EventService {
         val participant = ParticipantDTO(
             id = 1,
             name = "Oleg Zaets",
-            photoLink = "https"
+            photoLink = "https",
+            characteristics = setOf(Characteristic("weight", "100"))
         )
         for (i in startRange..endRange) {
             list.add(Event(
@@ -29,7 +30,6 @@ class EventMockService @Inject constructor() : EventService {
                 participantDto1 = participant,
                 participantDto2 = participant,
                 betPool = betpool,
-                setOf(Characteristic("Weight", "1", "2"))
             ))
         }
 
