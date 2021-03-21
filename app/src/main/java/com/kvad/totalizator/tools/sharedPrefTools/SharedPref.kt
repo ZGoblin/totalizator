@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SharedPref @Inject constructor(context: Context) {
-    
+
     private companion object {
         const val PRIVATE_SHARED_PREF = "PRIVATE_SHARED_PREF"
         const val KEY_TOKEN = "KEY_TOKEN"
