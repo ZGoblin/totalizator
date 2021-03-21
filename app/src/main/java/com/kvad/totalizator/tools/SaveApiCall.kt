@@ -7,6 +7,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
+@Suppress("TooGenericExceptionCaught")
 suspend fun <T> safeApiCall(apiCall: suspend () -> T): ResultWrapper<T> {
     return withContext(Dispatchers.IO) {
         try {

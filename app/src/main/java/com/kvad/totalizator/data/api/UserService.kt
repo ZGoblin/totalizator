@@ -4,7 +4,9 @@ import com.kvad.totalizator.data.models.LoginRequest
 import com.kvad.totalizator.data.models.RegisterRequest
 import com.kvad.totalizator.data.models.Token
 import com.kvad.totalizator.data.models.Wallet
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface UserService {
 
