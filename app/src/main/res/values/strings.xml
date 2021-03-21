@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Totalizator</string>
+
+    <string name="content_description_end_icon">end cross</string>
     <string name="first_player">First player</string>
 
     <string name="bet_currency">%d UAH</string>
     <string name="draw_bet_amount">Draw %d UAH</string>
-
     <string name="players_vs_players_title">Players VS Players</string>
     <string name="players_vs_players_body">Bet on winner - grab losers money. \nThe more you bet, the more prize share you get. When event started - bets stopped, video stream begins.</string>
 
@@ -23,6 +24,17 @@
 
     <string name="bet_win_and_take_money_from_rivals">Bet, win and take money from rivals</string>
     <string name="bet_on">Bet on %s</string>
+
+    <string name="text">Text</string>
+    <string name="cancel">Cancel</string>
+    <string name="bet">BET</string>
+    <string name="command_a_command_b">Command A vs Command B</string>
+    <string name="event_vs">%1$s vs %2$s</string>
+    <string name="min_bet">Минимальная ставка - 10.0</string>
+    <string name="command_a">Command A</string>
+    <string name="possible_gain">Возможный выиграш %d</string>
+
     <string name="draw">Draw</string>
 
+    <string name="events_network_error">An error occurred while download events</string>
 </resources>

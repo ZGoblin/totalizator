@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:background="@color/black"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    app:behavior_hideable="true"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_start_tv_cancel"
+        android:paddingVertical="@dimen/padding_top_tv_cancel"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/tv_cancel_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@id/tvCancel" />
+
+    <TextView
+        android:id="@+id/tvWinnerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/padding_top_winner_name"
+        android:paddingHorizontal="@dimen/padding_start_winner_name"
+        android:text="@string/command_a"
+        android:textColor="@color/white"
+        android:textSize="@dimen/winner_name_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line" />
+
+    <TextView
+        android:id="@+id/tvGameDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_start_game_details"
+        android:paddingBottom="@dimen/padding_bottom_game_details"
+        android:text="@string/command_a_command_b"
+        android:textColor="@color/light_grey"
+        android:textSize="@dimen/text_size_game_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvWinnerName" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/amountLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:counterMaxLength="9"
+        app:endIconCheckable="true"
+        app:endIconContentDescription="@string/content_description_end_icon"
+        app:endIconDrawable="@drawable/ic_cross_black"
+        app:endIconMode="clear_text"
+        app:errorEnabled="true"
+        app:errorTextColor="@color/red"
+        app:hintEnabled="false"
+        app:hintTextColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGameDetails"
+        app:suffixText="UAH">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etBet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_edit_text"
+            android:background="@color/white"
+            android:focusable="true"
+            android:inputType="numberSigned"
+            android:maxLength="9"
+            android:padding="@dimen/padding_edit_text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/light_grey" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_grey"
+            android:gravity="center"
+            android:text="@string/bet"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_btn_bet"
+            app:layout_constraintTop_toBottomOf="@id/amountLayout" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
