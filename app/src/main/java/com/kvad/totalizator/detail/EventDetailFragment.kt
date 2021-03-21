@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.kvad.totalizator.App
 import com.kvad.totalizator.databinding.EventDetailFragmentBinding
-import com.kvad.totalizator.events.EventsViewModel
+import com.kvad.totalizator.detail.adapter.EventDetailAdapter
+import com.kvad.totalizator.shared.Bet
 import javax.inject.Inject
 
 class EventDetailFragment : Fragment() {
@@ -17,7 +19,8 @@ class EventDetailFragment : Fragment() {
     lateinit var viewModel: EventDetailViewModel
     private lateinit var binding: EventDetailFragmentBinding
 
-    private var eventId : Int = 0
+    private var eventId: Int = 0
+    private val eventDetailAdapter = EventDetailAdapter(::onBtnBetClick)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +48,14 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        //todo
+        binding.rvEventDetailInfo.apply {
+            adapter = eventDetailAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        }
+    }
+
+    private fun onBtnBetClick(bet: Bet) {
+        Toast.makeText(context, "$eventId with bet $bet", Toast.LENGTH_SHORT).show()
+        // TODO 21.03.2021 start bottom sheet dialog
     }
 }

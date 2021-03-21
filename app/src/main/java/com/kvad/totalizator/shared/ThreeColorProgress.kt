@@ -84,9 +84,3 @@ class ThreeColorProgress @JvmOverloads constructor(
     )
 
 }
-
-data class BetAmountForEachOutcome(
-    val firstPlayerWinBetAmount: Int,
-    val draw: Int,
-    val secondPlayerWinBetAmount: Int,
-)

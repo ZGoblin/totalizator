@@ -9,7 +9,7 @@ import com.kvad.totalizator.shared.BetAmountForEachOutcome
 
 class HeaderViewHolder(
     view: View,
-    private val onBetButtonClick: (Int, Bet) -> Unit = { _, _ -> }
+    private val onBetButtonClick: (Bet) -> Unit = {  _ -> }
 ) : RecyclerView.ViewHolder(view) {
 
     private val binding = EventDetailHeaderViewHolderBinding.bind(itemView)
@@ -49,15 +49,15 @@ class HeaderViewHolder(
 
     private fun setupListeners() {
         binding.btnDraw.setOnClickListener {
-            onBetButtonClick.invoke(eventInfo.id, Bet.DRAW)
+            onBetButtonClick.invoke(Bet.DRAW)
         }
 
         binding.btnFirstPlayerWin.setOnClickListener {
-            onBetButtonClick.invoke(eventInfo.id, Bet.FIRST_PLAYER_WIN)
+            onBetButtonClick.invoke(Bet.FIRST_PLAYER_WIN)
         }
 
         binding.btnSecondPlayerWin.setOnClickListener {
-            onBetButtonClick.invoke(eventInfo.id, Bet.SECOND_PLAYER_WIN)
+            onBetButtonClick.invoke(Bet.SECOND_PLAYER_WIN)
         }
     }
 }
