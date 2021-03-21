@@ -32,12 +32,14 @@ class AppModule(private val context: Context) {
         return EventRepository(EventMockService())
     }
 
+//    @Singleton
+//    @Provides
+//    fun provideUserRepository(): UserRepository {
+//        return UserRepository(UserMockService())
+//    }
+
     @Singleton
     @Provides
-    fun provideUserRepository(): UserRepository {
-        return UserRepository(UserMockService())
-    }
-
     fun provideUserService(): UserService {
         return Retrofit.Builder()
             .baseUrl(API_URL)

@@ -27,6 +27,6 @@ class HeaderViewModel @Inject constructor(
     }
 
     private suspend fun updateWallet() {
-        _walletLiveData.postValue(userRepository.getWallet())
+        //_walletLiveData.postValue(userRepository.wallet())
     }
 }

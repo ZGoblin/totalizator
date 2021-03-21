@@ -3,6 +3,9 @@ package com.kvad.totalizator.data.api
 import com.kvad.totalizator.data.models.LoginRequest
 import com.kvad.totalizator.data.models.RegisterRequest
 import com.kvad.totalizator.data.models.Token
+import com.kvad.totalizator.data.models.Wallet
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class UserMockService: UserService {
         companion object {
@@ -13,7 +16,7 @@ class UserMockService: UserService {
         return Token("good")
     }
 
-    override suspend fun getWallet(): Wallet = withContext(Dispatchers.IO) {
+    override suspend fun wallet(): Wallet = withContext(Dispatchers.IO) {
         return@withContext Wallet(
             walletId = 1,
             amount = amount++

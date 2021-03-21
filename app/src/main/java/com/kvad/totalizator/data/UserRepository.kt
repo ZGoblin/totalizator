@@ -1,10 +1,10 @@
 package com.kvad.totalizator.data
 
-import android.util.Log
 import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.data.models.LoginRequest
 import com.kvad.totalizator.data.models.RegisterRequest
 import com.kvad.totalizator.data.models.Token
+import com.kvad.totalizator.data.models.Wallet
 import com.kvad.totalizator.shared.ResultWrapper
 import com.kvad.totalizator.tools.safeApiCall
 import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
@@ -23,6 +23,12 @@ class UserRepository @Inject constructor(
     suspend fun register(registerRequest: RegisterRequest) : ResultWrapper<Token> {
         return safeApiCall {
             userService.register(registerRequest)
+        }
+    }
+
+    suspend fun wallet() : ResultWrapper<Wallet> {
+        return safeApiCall {
+            userService.wallet()
         }
     }
 
