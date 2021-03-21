@@ -32,8 +32,7 @@ class EventMockService : EventService {
                     sport = "sport",
                     participantDto1 = participant,
                     participantDto2 = participant,
-                    betPool = betpool,
-                    setOf(Characteristic("Weight", "1", "2"))
+                    betPool = betpool
                 )
             )
         }
