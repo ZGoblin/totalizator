@@ -8,8 +8,8 @@ import com.kvad.totalizator.betfeature.model.BetDetailModel
 import com.kvad.totalizator.betfeature.model.ChoiceModel
 import com.kvad.totalizator.data.BetRepository
 import com.kvad.totalizator.shared.Bet
-import com.kvad.totalizator.shared.ResultWrapper
 import com.kvad.totalizator.tools.ErrorState
+import com.kvad.totalizator.tools.ResultWrapper
 import com.kvad.totalizator.tools.State
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,15 +33,10 @@ class BetViewModel @Inject constructor(
         this.bet = bet
     }
 
+
     fun createBet(amount: Double) {
         val betToServerModel = BetToServerModel(eventId, amount, bet)
         _betDetailLiveData.postValue(State.Loading)
-        viewModelScope.launch {
-            _betDetailLiveData.postValue( when (betRepository.doBet(betToServerModel)) {
-                is ResultWrapper.Success -> State.Content(Unit)
-                is ResultWrapper.DataLoadingError -> State.Error(ErrorState.LOADING_ERROR)
-                is ResultWrapper.LoginError -> State.Error(ErrorState.LOGIN_ERROR)
-            })
-        }
+
     }
 }

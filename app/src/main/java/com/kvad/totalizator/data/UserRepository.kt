@@ -1,13 +1,12 @@
 package com.kvad.totalizator.data
 
-import android.util.Log
 import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.data.models.LoginRequest
 import com.kvad.totalizator.data.models.RegisterRequest
 import com.kvad.totalizator.data.models.Token
 import com.kvad.totalizator.data.models.Wallet
-import com.kvad.totalizator.shared.ResultWrapper
 import com.kvad.totalizator.tools.REQUEST_DELAY
+import com.kvad.totalizator.tools.ResultWrapper
 import com.kvad.totalizator.tools.safeApiCall
 import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
 import kotlinx.coroutines.flow.Flow

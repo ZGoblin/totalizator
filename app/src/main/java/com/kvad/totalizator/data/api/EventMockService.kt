@@ -6,14 +6,15 @@ import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.data.models.ParticipantDTO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 import javax.inject.Inject
 
 // TODO 21.03.2021 clean up
 @Suppress("MagicNumber")
-class EventMockService : EventService {
+class EventMockService @Inject constructor() : EventService {
 
     @Suppress("UnusedPrivateMember")
-    override suspend fun getEvents(): List<Event> = withContext(Dispatchers.IO) {
+    override suspend fun getEvents(): Response<List<Event>> = withContext(Dispatchers.IO) {
         val list = mutableListOf<Event>()
         for (i in 1..10) {
             list.add(
@@ -39,6 +40,6 @@ class EventMockService : EventService {
             )
         }
 
-        return@withContext list
+        return@withContext Response.success(list)
     }
 }

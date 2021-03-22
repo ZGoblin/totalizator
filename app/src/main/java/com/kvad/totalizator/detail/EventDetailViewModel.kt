@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.EventRepository
 import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.detail.model.EventDetail
-import com.kvad.totalizator.shared.ResultWrapper
+import com.kvad.totalizator.tools.ResultWrapper
 import com.kvad.totalizator.tools.State
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

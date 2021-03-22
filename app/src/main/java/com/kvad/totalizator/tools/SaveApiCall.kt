@@ -1,6 +1,9 @@
 package com.kvad.totalizator.tools
 
-import android.util.Log
+/*import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.kvad.totalizator.data.models.ErrorResponse
 import com.kvad.totalizator.shared.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -30,14 +33,13 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> T): ResultWrapper<T> {
     }
 }
 
-//TODO если бєк будет присылать кастомные ошибки
-//    private fun convertErrorBody(exception: HttpException): ErrorResponse? {
-//        return try {
-//            exception.response()?.errorBody()?.source()?.let {
-//                val token = object : TypeToken<ErrorResponse>() {}.type
-//                gson.fromJson(it.toString(), token)
-//            }
-//        } catch (exception: Exception) {
-//            null
-//        }
-//    }
+private fun convertErrorBody(exception: HttpException): ErrorResponse? {
+    return try {
+        exception.response()?.errorBody()?.source()?.let {
+            val token = object : TypeToken<ErrorResponse>(){}.type
+            Gson().fromJson(it.toString(), token)
+        }
+    } catch (exception: Exception) {
+        null
+    }
+}*/
