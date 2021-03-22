@@ -9,7 +9,7 @@ import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.shared.ResultWrapper
 import com.kvad.totalizator.tools.State
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,32 +20,31 @@ class EventDetailViewModel @Inject constructor(
     private val mapEventToDetailUiModel: MapEventToDetailUiModel
 ) : ViewModel() {
 
-    companion object {
-        const val delay: Long = 3000L
-    }
-
     private val _eventDetailLiveData = MutableLiveData<eventDetailState>()
     val eventDetailLiveData: LiveData<eventDetailState> = _eventDetailLiveData
 
-    private lateinit var data: ResultWrapper<Event>
-
     fun uploadData(eventId: String) {
+        eventRepository.setIdForEventRequest(id = eventId)
+
         viewModelScope.launch {
             _eventDetailLiveData.value = State.Loading
-            while (true) {
-                data = eventRepository.getEventById(eventId)
-                _eventDetailLiveData.value = when (data) {
-                    is ResultWrapper.Success -> {
-                        State.Content(mapEventToDetailUiModel.map((data as ResultWrapper.Success<Event>).value))
-                    }
-                    else -> {
-                        State.Error(Unit)
-                    }
-                }
 
-                delay(delay)
+            eventRepository.latestEvent.collect {
+                updateUiState(it)
             }
         }
 
     }
+
+    private fun updateUiState(resultWrapper: ResultWrapper<Event>) {
+        _eventDetailLiveData.value = when (resultWrapper) {
+            is ResultWrapper.Success -> {
+                State.Content(mapEventToDetailUiModel.map(resultWrapper.value))
+            }
+            else -> {
+                State.Error(Unit)
+            }
+        }
+    }
+
 }

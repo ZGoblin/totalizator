@@ -1,7 +1,6 @@
 package com.kvad.totalizator.tools
 
 import android.view.View
-import androidx.core.view.isVisible
 
 class StateVisibilityController(
     private val progressBar: View,
