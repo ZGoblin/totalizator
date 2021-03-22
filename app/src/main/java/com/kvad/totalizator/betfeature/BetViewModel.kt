@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 typealias BetDetailState = State<Unit, ErrorState>
-typealias EventInfoState = State<Event, Unit>
+typealias EventInfoState = State<Event, ErrorState>
 
 class BetViewModel @Inject constructor(
     private val betUseCase: BetUseCase,
@@ -41,13 +41,12 @@ class BetViewModel @Inject constructor(
         _eventInfoLiveData.value =
             when (resultWrapper) {
                 is ResultWrapper.Success -> State.Content(resultWrapper.value)
-                is ResultWrapper.DataLoadingError -> TODO()
-                is ResultWrapper.LoginError -> TODO()
+                is ResultWrapper.DataLoadingError -> State.Error(ErrorState.LOADING_ERROR)
+                is ResultWrapper.LoginError -> State.Error(ErrorState.LOGIN_ERROR)
             }
     }
-    //modelka
-    fun createBet(eventId: String, amount: Double, bet: Bet) {
-        val betToServerModel = BetToServerModel(eventId, amount, bet)
+
+    fun createBet(betToServerModel: BetToServerModel) {
         _betDetailLiveData.postValue(State.Loading)
         viewModelScope.launch {
             _betDetailLiveData.postValue(

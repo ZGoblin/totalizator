@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
@@ -32,7 +33,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: BetDialogFragmentBinding
     private lateinit var detailBet: Bet
-    private var eventId : String = ""
+    private var eventId: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,7 +70,10 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
         binding.btnBet.setOnClickListener {
             val amount = binding.etBet.text.toString().toDouble()
-            viewModel.createBet(eventId, amount, detailBet)
+            val betToServerModel = BetToServerModel(
+                "455d46d3-b608-448e-b3bf-0e75f264af59", amount, detailBet
+            )
+            viewModel.createBet(betToServerModel)
         }
         binding.vClose.setOnClickListener {
             cancelBetDialog()
@@ -91,7 +95,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private fun observeBetLiveData() {
         viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> { }
+                is State.Loading -> MaterialDialog(requireContext()).customView(R.layout.progress_dialog)
                 is State.Content -> setupBetUiResult()
                 is State.Error -> showError(it.error)
             }
@@ -113,7 +117,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private fun showError(errorState: ErrorState) {
         when (errorState) {
             ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
-            ErrorState.LOADING_ERROR -> { }
+            ErrorState.LOADING_ERROR -> {
+                Toast.makeText(requireContext(), "Loading error...", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
