@@ -2,12 +2,8 @@ package com.kvad.totalizator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.StringRes
-import com.afollestad.materialdialogs.MaterialDialog
-import com.kvad.totalizator.betfeature.BetFragment
 import com.kvad.totalizator.databinding.ActivityMainBinding
 import com.kvad.totalizator.header.HeaderFragment
-import com.kvad.totalizator.onboard.OnBoardFragment
 import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
 import javax.inject.Inject
 
