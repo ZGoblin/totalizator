@@ -14,5 +14,5 @@ const val LOGIN_MIN_LENGTH = 3
 const val PASSWORD_MIN_LENGTH = 6
 const val API_URL = "https://classic-totalizator-ajg2w.ondigitalocean.app/"
 
-const val REQUEST_DELAY = 300L
+const val REQUEST_DELAY = 3000L
 

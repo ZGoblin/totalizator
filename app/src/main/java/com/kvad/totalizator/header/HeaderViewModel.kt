@@ -26,8 +26,8 @@ class HeaderViewModel @Inject constructor(
     fun getWallet(){
         viewModelScope.launch {
             while (true) {
-                delay(REQUEST_DELAY)
                 updateWallet()
+                delay(REQUEST_DELAY)
             }
         }
     }

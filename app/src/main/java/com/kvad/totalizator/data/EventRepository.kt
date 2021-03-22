@@ -26,14 +26,14 @@ class EventRepository @Inject constructor(
                 "id",
                 "sport",
                 ParticipantDTO(
-                    1, "Olexiy", "link", setOf(
+                    1, "Olexiy", "https://upload.wikimedia.org/wikipedia/commons/a/a9/Olexiy_yurin.jpg", setOf(
                         Characteristic("weight", "55"),
                         Characteristic("height", "55"),
                         Characteristic("age", "55")
                     )
                 ),
                 ParticipantDTO(
-                    1, "Rodion", "link", setOf(
+                    1, "Rodion", "https://stuki-druki.com/biofoto/Rodion-Tolokonnikov-Ryadovie.jpg", setOf(
                         Characteristic("weight", "55"),
                         Characteristic("height", "55"),
                         Characteristic("age", "55")

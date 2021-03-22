@@ -21,6 +21,8 @@ class EventHolder(view: View, private val onEventClick: (Event) -> Unit) :
                     draw = event.betPool.drawAmount.toInt()
                 )
             )
+            setFirstPlayerImg(event.participantDto1.photoLink)
+            setSecondPlayerImg(event.participantDto2.photoLink)
         }
 
         binding.root.setOnClickListener {

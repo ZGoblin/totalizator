@@ -2,12 +2,10 @@ package com.kvad.totalizator.betfeature
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
@@ -18,12 +16,9 @@ import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.betfeature.model.ChoiceModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
-import com.kvad.totalizator.events.EventsFragmentDirections
-import com.kvad.totalizator.login.LoginFragment
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.BET_DETAIL_KEY
 import com.kvad.totalizator.tools.ErrorState
-import com.kvad.totalizator.tools.Progress
 import com.kvad.totalizator.tools.State
 import javax.inject.Inject
 
