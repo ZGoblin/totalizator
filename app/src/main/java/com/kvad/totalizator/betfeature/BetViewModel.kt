@@ -37,11 +37,11 @@ class BetViewModel @Inject constructor(
         val betToServerModel = BetToServerModel(eventId, amount, bet)
         _betDetailLiveData.postValue(State.Loading)
         viewModelScope.launch {
-            _betDetailLiveData.value = when (betRepository.doBet(betToServerModel)) {
+            _betDetailLiveData.postValue( when (betRepository.doBet(betToServerModel)) {
                 is ResultWrapper.Success -> State.Content(Unit)
                 is ResultWrapper.DataLoadingError -> State.Error(ErrorState.LOADING_ERROR)
                 is ResultWrapper.LoginError -> State.Error(ErrorState.LOGIN_ERROR)
-            }
+            })
         }
     }
 }

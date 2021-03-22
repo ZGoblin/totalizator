@@ -69,7 +69,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupData() {
-        binding.tvGameDetails.text = getString(R.string.event_vs, detailBet.firstPlayerName, detailBet.secondPlayerName)
+        binding.tvGameDetails.text =
+            getString(R.string.event_vs, detailBet.firstPlayerName, detailBet.secondPlayerName)
         binding.tvWinnerName.text = when (detailBet.betState) {
             Bet.FIRST_PLAYER_WIN -> detailBet.firstPlayerName
             Bet.SECOND_PLAYER_WIN -> detailBet.secondPlayerName
@@ -84,6 +85,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding.btnBet.setOnClickListener {
             val amount = binding.etBet.text.toString().toDouble()
             viewModel.createBet(amount)
+        }
+        binding.vClose.setOnClickListener {
+            cancelBetDialog()
         }
     }
 
@@ -103,15 +107,26 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> MaterialDialog(requireContext()).show { customView(R.layout.progress_dialog) }
-                is State.Content -> showContent()
+                is State.Content ->{
+                    showContent()
+                    MaterialDialog(requireContext()).cancel()
+                }
+
                 is State.Error -> showError(it.error)
             }
         }
     }
 
-    private fun showContent(){
-        binding.tvCancel.visibility = View.GONE
-        binding.tvBetGood.visibility = View.VISIBLE
+    private fun showContent() {
+        binding.apply{
+            etBet.visibility = View.GONE
+            tvCancel.visibility = View.GONE
+            tvBetGood.visibility = View.VISIBLE
+            vClose.visibility = View.VISIBLE
+            btnBet.isEnabled = false
+            val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
+            btnBet.setBackgroundColor(color)
+        }
     }
 
     private fun showError(errorState: ErrorState) {
