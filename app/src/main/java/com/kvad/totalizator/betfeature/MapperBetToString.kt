@@ -6,7 +6,7 @@ import com.kvad.totalizator.tools.W1_SERVER_FLAG
 import com.kvad.totalizator.tools.W2_SERVER_FLAG
 import javax.inject.Inject
 
-class MapBetToString @Inject constructor() {
+class MapperBetToString @Inject constructor() {
 
     fun map(bet: Bet): String {
         return when (bet) {

@@ -50,6 +50,9 @@
     <string name="register_birthday_error">Only adults can use the application</string>
     <string name="register_error_dialog_button">OK</string>
     <string name="your_request_is_being_processed">Your request is being processed</string>
+    <string name="bet_accessed">Bet accessed</string>
+    <string name="loading_error">Loading error...</string>
     <string name="general_error_text">Oops, something went wrong</string>
+
 
 </resources>

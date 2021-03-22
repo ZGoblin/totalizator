@@ -15,6 +15,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/on_board_fragment"
+        android:name="com.kvad.totalizator.onboard.OnBoardFragment"
+        tools:layout="@layout/on_board">
+    </fragment>
+
+    <fragment
         android:id="@+id/detail_fragment"
         android:name="com.kvad.totalizator.detail.EventDetailFragment"
         tools:layout="@layout/event_detail_fragment">
