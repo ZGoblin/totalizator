@@ -14,7 +14,7 @@ class BetRepository @Inject constructor(
     suspend fun doBet(betToServerModel: BetToServerModel): ResultWrapper<Unit> {
         //todo
         val choiceToServer = mapperBetToString.map(betToServerModel.choice)
-        Log.d("tag",choiceToServer.toString())
+        Log.d("tag",choiceToServer)
         return safeApiCall {
             return@safeApiCall Unit
         }

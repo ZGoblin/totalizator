@@ -7,7 +7,10 @@ import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.data.models.ParticipantDTO
 import com.kvad.totalizator.shared.ResultWrapper
 import com.kvad.totalizator.tools.safeApiCall
+import java.util.*
 import javax.inject.Inject
+import kotlin.random.Random
+import kotlin.random.Random.Default.nextFloat
 
 class EventRepository @Inject constructor(
     private val eventService: EventService
@@ -26,14 +29,20 @@ class EventRepository @Inject constructor(
                 "id",
                 "sport",
                 ParticipantDTO(
-                    1, "Olexiy", "https://upload.wikimedia.org/wikipedia/commons/a/a9/Olexiy_yurin.jpg", setOf(
+                    1,
+                    "Olexiy",
+                    "https://upload.wikimedia.org/wikipedia/commons/a/a9/Olexiy_yurin.jpg",
+                    setOf(
                         Characteristic("weight", "55"),
                         Characteristic("height", "55"),
                         Characteristic("age", "55")
                     )
                 ),
                 ParticipantDTO(
-                    1, "Rodion", "https://stuki-druki.com/biofoto/Rodion-Tolokonnikov-Ryadovie.jpg", setOf(
+                    1,
+                    "Rodion",
+                    "https://stuki-druki.com/biofoto/Rodion-Tolokonnikov-Ryadovie.jpg",
+                    setOf(
                         Characteristic("weight", "55"),
                         Characteristic("height", "55"),
                         Characteristic("age", "55")
