@@ -15,7 +15,7 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> T): ResultWrapper<T> {
         } catch (throwable: Throwable) {
             when (throwable) {
                 is HttpException -> {
-                    Log.d("safeApiCall", throwable.code().toString())
+                    Log.d("safeApiCall", throwable.response().toString())
                     when (throwable.code()) {
                         LOGGING_ERROR_CODE -> ResultWrapper.LoginError
                         else -> ResultWrapper.DataLoadingError

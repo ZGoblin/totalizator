@@ -29,7 +29,7 @@ class UserRepository @Inject constructor(
 
     suspend fun wallet() : ResultWrapper<Wallet> {
         return safeApiCall {
-            userService.wallet(sharedPref.token)
+            userService.wallet()
         }
     }
 

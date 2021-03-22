@@ -7,6 +7,7 @@ import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.api.EventMockService
 import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.tools.API_URL
+import com.kvad.totalizator.tools.HeaderInterceptor
 import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
 import dagger.Module
 import dagger.Provides
@@ -33,8 +34,13 @@ class AppModule(private val context: Context) {
 
     @Singleton
     @Provides
-    fun provideUserService(): UserService {
+    fun provideUserService(headerInterceptor: HeaderInterceptor): UserService {
         return Retrofit.Builder()
+            .client(
+                OkHttpClient().newBuilder()
+                    .addInterceptor(headerInterceptor)
+                    .build()
+            )
             .baseUrl(API_URL)
             .addConverterFactory(
                 GsonConverterFactory.create(
