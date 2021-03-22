@@ -26,27 +26,25 @@ class EventRepository @Inject constructor(
     }
 
 
-    fun setId(id: String): Flow<ResultWrapper<Event>> {
-        latestNews = flow {
+    fun setIdForEventRequest(id: String) {
+        latestEvent = flow {
             while (true) {
                 val latestNews = getEventById(id = id)
                 emit(latestNews)
                 delay(3000)
             }
         }
-
-        return latestNews
     }
 
-    var latestNews: Flow<ResultWrapper<Event>> = flow {}
+    var latestEvent: Flow<ResultWrapper<Event>> = flow {}
         private set
 
     @Suppress("UnusedPrivateMember")
-    suspend fun getEventById(id: String): ResultWrapper<Event> {
+    private suspend fun getEventById(id: String): ResultWrapper<Event> {
 
-        val random1 = Random(300).nextFloat()
-        val random2 = Random(300).nextFloat()
-        val random3 = Random(300).nextFloat()
+        val random1 = Random.nextFloat() * 100
+        val random2 = Random.nextFloat() * 100
+        val random3 = Random.nextFloat() * 100
 
         return safeApiCall {
             Event(
@@ -55,7 +53,7 @@ class EventRepository @Inject constructor(
                 ParticipantDTO(
                     1,
                     "Olexiy",
-                    "https://upload.wikimedia.org/wikipedia/commons/a/a9/Olexiy_yurin.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/1/10/Bundesarchiv_Bild_183-S33882%2C_Adolf_Hitler_retouched.jpg",
                     setOf(
                         Characteristic("weight", "55"),
                         Characteristic("height", "55"),
@@ -65,7 +63,7 @@ class EventRepository @Inject constructor(
                 ParticipantDTO(
                     1,
                     "Rodion",
-                    "https://stuki-druki.com/biofoto/Rodion-Tolokonnikov-Ryadovie.jpg",
+                    "https://upload.wikimedia.org/wikipedia/commons/9/9b/CroppedStalin1943.jpg",
                     setOf(
                         Characteristic("weight", "55"),
                         Characteristic("height", "55"),
