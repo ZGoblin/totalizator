@@ -23,12 +23,44 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tvBetGood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/padding_start_tv_cancel"
+        android:paddingVertical="@dimen/padding_top_tv_cancel"
+        android:text="Bet accessed"
+        app:layout_constraintStart_toEndOf="@id/tvCancel"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <View
+        android:id="@+id/vClose"
+        android:clickable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ic_close"
+        android:layout_margin="10dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="50dp" />
+
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_height"
         android:background="@color/grey"
-        app:layout_constraintTop_toBottomOf="@id/tvCancel" />
+        app:layout_constraintTop_toBottomOf="@id/guideline" />
 
     <TextView
         android:id="@+id/tvWinnerName"

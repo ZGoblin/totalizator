@@ -103,13 +103,18 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> MaterialDialog(requireContext()).show { customView(R.layout.progress_dialog) }
-                is State.Content -> cancelBetDialog()
-                is State.Error -> handleErrors(it.error)
+                is State.Content -> showContent()
+                is State.Error -> showError(it.error)
             }
         }
     }
 
-    private fun handleErrors(errorState: ErrorState) {
+    private fun showContent(){
+        binding.tvCancel.visibility = View.GONE
+        binding.tvBetGood.visibility = View.VISIBLE
+    }
+
+    private fun showError(errorState: ErrorState) {
         when (errorState) {
             ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
             ErrorState.LOADING_ERROR -> { }
