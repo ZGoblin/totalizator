@@ -18,13 +18,14 @@ class HeaderFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: HeaderViewModel
-    private lateinit var binding: HeaderFragmentBinding
+    private var _binding: HeaderFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = HeaderFragmentBinding.inflate(inflater, container, false)
+        _binding = HeaderFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -86,5 +87,10 @@ class HeaderFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }
