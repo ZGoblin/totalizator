@@ -2,8 +2,8 @@ package com.kvad.totalizator.betfeature
 
 import com.kvad.totalizator.shared.Bet
 
-data class BetToServerModel(
+data class BetToServerModel (
     val eventId: String,
-    val amount: Int,
+    val amount: Double,
     val choice: Bet
 )

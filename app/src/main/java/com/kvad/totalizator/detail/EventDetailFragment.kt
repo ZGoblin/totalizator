@@ -88,10 +88,8 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun onBtnBetClick(bet: Bet) {
-        val fakeModelFromEvent = ChoiceModel(
-            eventId, bet, "First player", "Second player"
-        )
 
+        val fakeModelFromEvent = ChoiceModel(eventId, bet, "First player", "Second player")
         childFragmentManager.beginTransaction()
             .add(BetDialogFragment.newInstance(fakeModelFromEvent), "TAG")
             .commitAllowingStateLoss()

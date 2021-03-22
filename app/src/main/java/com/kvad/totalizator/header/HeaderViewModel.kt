@@ -11,6 +11,7 @@ import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.State
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,15 +26,14 @@ class HeaderViewModel @Inject constructor(
 
     fun getWallet(){
         viewModelScope.launch {
-            while (true) {
-                updateWallet()
-                delay(REQUEST_DELAY)
+            userRepository.wallet().collect {
+                updateWallet(it)
             }
         }
     }
 
-    private suspend fun updateWallet() {
-        when (val result = userRepository.wallet()) {
+    private fun updateWallet(result: ResultWrapper<Wallet>) {
+        when (result) {
             is ResultWrapper.Success -> _headerLiveData.value = State.Content(result.value)
             is ResultWrapper.DataLoadingError -> _headerLiveData.value = State.Error(ErrorState.LOADING_ERROR)
             is ResultWrapper.LoginError -> _headerLiveData.value = State.Error(ErrorState.LOGIN_ERROR)
