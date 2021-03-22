@@ -78,8 +78,11 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             cancelBetDialog()
         }
         binding.btnBet.setOnClickListener {
-            val amount = binding.etBet.text.toString().toInt()
+            val amount = binding.etBet.text.toString().toDouble()
             viewModel.createBet(amount)
+        }
+        binding.vClose.setOnClickListener {
+            cancelBetDialog()
         }
     }
 
@@ -99,13 +102,35 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> MaterialDialog(requireContext()).show { customView(R.layout.progress_dialog) }
-                is State.Content -> cancelBetDialog()
-                is State.Error -> handleErrors(it.error)
+                is State.Content -> {
+                    binding.apply {
+                        etBet.visibility = View.GONE
+                        tvCancel.visibility = View.GONE
+                        tvBetGood.visibility = View.VISIBLE
+                        vClose.visibility = View.VISIBLE
+                        btnBet.isEnabled = false
+                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
+                        btnBet.setBackgroundColor(color)
+                    }
+                }
+                is State.Error -> showError(it.error)
             }
         }
     }
+// TODO 22.03.2021
+//    private fun showContent() {
+//        binding.apply {
+//            etBet.visibility = View.GONE
+//            tvCancel.visibility = View.GONE
+//            tvBetGood.visibility = View.VISIBLE
+//            vClose.visibility = View.VISIBLE
+//            btnBet.isEnabled = false
+//            val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
+//            btnBet.setBackgroundColor(color)
+//        }
+//    }
 
-    private fun handleErrors(errorState: ErrorState) {
+    private fun showError(errorState: ErrorState) {
         when (errorState) {
             ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
             ErrorState.LOADING_ERROR -> { }
