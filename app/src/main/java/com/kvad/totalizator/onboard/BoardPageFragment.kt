@@ -1,13 +1,17 @@
 package com.kvad.totalizator.onboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.BoardPageBinding
+import com.kvad.totalizator.events.EventsFragment
 import com.kvad.totalizator.onboard.model.BoardInfo
 import com.kvad.totalizator.onboard.titleAdapter.BoardTitlesAdapter
 import com.kvad.totalizator.tools.INFO_PAGER_KEY
@@ -39,6 +43,17 @@ class BoardPageFragment : Fragment(R.layout.board_page) {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        hideBackButton()
+    }
+
+    private fun hideBackButton() {
+        if ((requireParentFragment() as OnBoardFragment).counter == 0) {
+            binding.tvBack.visibility = View.GONE
+        }
+    }
+
     private fun setupData() {
         binding.apply {
             tvBody.text = getString(info.body)
@@ -57,12 +72,17 @@ class BoardPageFragment : Fragment(R.layout.board_page) {
             )
 
         }
+
     }
 
 
     private fun setupListeners() {
         binding.tvNext.setOnClickListener {
             (requireParentFragment() as OnBoardFragment).swipeRight()
+            Toast.makeText(requireContext(),"${(requireParentFragment() as OnBoardFragment).counter}",Toast.LENGTH_SHORT).show()
+            if ((requireParentFragment() as OnBoardFragment).counter == 2){
+                requireActivity().onBackPressed()
+            }
         }
         binding.tvBack.setOnClickListener {
             (requireParentFragment() as OnBoardFragment).swipeLeft()

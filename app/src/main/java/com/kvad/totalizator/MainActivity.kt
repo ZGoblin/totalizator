@@ -7,14 +7,20 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.kvad.totalizator.betfeature.BetFragment
 import com.kvad.totalizator.databinding.ActivityMainBinding
 import com.kvad.totalizator.header.HeaderFragment
+import com.kvad.totalizator.onboard.OnBoardFragment
+import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    @Inject
+    lateinit var sharedPref: SharedPref
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupBinding()
-
+        
         supportActionBar?.hide()
         //todo
         supportFragmentManager.beginTransaction()
