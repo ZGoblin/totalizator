@@ -82,7 +82,7 @@
             android:layout_margin="@dimen/margin_edit_text"
             android:background="@color/white"
             android:focusable="true"
-            android:inputType="numberSigned"
+            android:inputType="numberDecimal"
             android:maxLength="9"
             android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black"

@@ -33,7 +33,7 @@ class BetViewModel @Inject constructor(
         this.bet = bet
     }
 
-    fun createBet(amount: Int) {
+    fun createBet(amount: Double) {
         val betToServerModel = BetToServerModel(eventId, amount, bet)
         _betDetailLiveData.postValue(State.Loading)
         viewModelScope.launch {

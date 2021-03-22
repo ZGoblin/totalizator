@@ -69,8 +69,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupData() {
-        binding.tvGameDetails.text =
-            getString(R.string.event_vs, detailBet.firstPlayerName, detailBet.secondPlayerName)
+        binding.tvGameDetails.text = getString(R.string.event_vs, detailBet.firstPlayerName, detailBet.secondPlayerName)
         binding.tvWinnerName.text = when (detailBet.betState) {
             Bet.FIRST_PLAYER_WIN -> detailBet.firstPlayerName
             Bet.SECOND_PLAYER_WIN -> detailBet.secondPlayerName
@@ -83,7 +82,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             cancelBetDialog()
         }
         binding.btnBet.setOnClickListener {
-            val amount = binding.etBet.text.toString().toInt()
+            val amount = binding.etBet.text.toString().toDouble()
             viewModel.createBet(amount)
         }
     }
