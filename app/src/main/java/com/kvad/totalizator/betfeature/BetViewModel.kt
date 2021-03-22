@@ -20,7 +20,7 @@ typealias BetDetailState = State<Unit, ErrorState>
 typealias EventInfoState = State<Event, Unit>
 
 class BetViewModel @Inject constructor(
-    private val betRepository: BetRepository,
+    private val betUseCase: BetUseCase,
     private val eventRepository: EventRepository
 ) : ViewModel() {
 
@@ -45,13 +45,13 @@ class BetViewModel @Inject constructor(
                 is ResultWrapper.LoginError -> TODO()
             }
     }
-
+    //modelka
     fun createBet(eventId: String, amount: Double, bet: Bet) {
         val betToServerModel = BetToServerModel(eventId, amount, bet)
         _betDetailLiveData.postValue(State.Loading)
         viewModelScope.launch {
             _betDetailLiveData.postValue(
-                when (betRepository.doBet(betToServerModel)) {
+                when (betUseCase.bet(betToServerModel)) {
                     is ResultWrapper.Success -> State.Content(Unit)
                     is ResultWrapper.DataLoadingError -> State.Error(ErrorState.LOADING_ERROR)
                     is ResultWrapper.LoginError -> State.Error(ErrorState.LOGIN_ERROR)
