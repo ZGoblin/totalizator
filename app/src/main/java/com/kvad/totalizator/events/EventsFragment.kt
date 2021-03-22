@@ -31,8 +31,12 @@ class EventsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = EventsFragmentBinding.inflate(inflater, container, false)
-        stateVisibilityController = StateVisibilityController(binding.pbProgress, binding.tvError)
         return binding.root
+    }
+
+    override fun onStart() {
+        stateVisibilityController = StateVisibilityController(binding.pbProgress, binding.tvError)
+        super.onStart()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,7 +86,6 @@ class EventsFragment : Fragment() {
     override fun onDestroyView() {
         binding.rvEvents.adapter = null
         _binding = null
-        stateVisibilityController.destroy()
         super.onDestroyView()
     }
 }
