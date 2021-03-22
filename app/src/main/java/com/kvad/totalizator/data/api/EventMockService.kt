@@ -15,24 +15,26 @@ class EventMockService : EventService {
     @Suppress("UnusedPrivateMember")
     override suspend fun getEvents(): List<Event> = withContext(Dispatchers.IO) {
         val list = mutableListOf<Event>()
-
-        val startRange = 1
-        val endRange = 10
-        val betpool = BetPool(1500f, 2500f, 100f)
-        val participant = ParticipantDTO(
-            id = 1,
-            name = "Oleg Zaets",
-            photoLink = "https",
-            characteristics = setOf(Characteristic("weight", "100"))
-        )
         for (i in 1..10) {
             list.add(
                 Event(
-                    id = "dsfsdf",
-                    sport = "sport",
-                    participantDto1 = participant,
-                    participantDto2 = participant,
-                    betPool = betpool
+                    "id",
+                    "sport",
+                    ParticipantDTO(
+                        1, "Olexiy", "https://upload.wikimedia.org/wikipedia/commons/a/a9/Olexiy_yurin.jpg", setOf(
+                            Characteristic("weight", "55"),
+                            Characteristic("height", "55"),
+                            Characteristic("age", "55")
+                        )
+                    ),
+                    ParticipantDTO(
+                        1, "Rodion", "https://stuki-druki.com/biofoto/Rodion-Tolokonnikov-Ryadovie.jpg", setOf(
+                            Characteristic("weight", "55"),
+                            Characteristic("height", "55"),
+                            Characteristic("age", "55")
+                        )
+                    ),
+                    BetPool(1F, 1F, 1F)
                 )
             )
         }
