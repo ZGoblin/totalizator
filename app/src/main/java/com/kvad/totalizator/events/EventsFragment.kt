@@ -21,7 +21,8 @@ class EventsFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: EventsViewModel
-    private lateinit var binding: EventsFragmentBinding
+    private var _binding: EventsFragmentBinding? = null
+    private val binding get() = _binding!!
     private val eventAdapter = EventAdapter(::onEventClick)
     private lateinit var stateVisibilityController: StateVisibilityController
 
@@ -29,7 +30,7 @@ class EventsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = EventsFragmentBinding.inflate(inflater, container, false)
+        _binding = EventsFragmentBinding.inflate(inflater, container, false)
         stateVisibilityController = StateVisibilityController(binding.pbProgress, binding.tvError)
         return binding.root
     }
@@ -80,7 +81,7 @@ class EventsFragment : Fragment() {
 
     override fun onDestroyView() {
         binding.rvEvents.adapter = null
-
+        _binding = null
         super.onDestroyView()
     }
 }
