@@ -13,7 +13,7 @@ import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.databinding.EventsFragmentBinding
 import com.kvad.totalizator.events.adapter.EventAdapter
 import com.kvad.totalizator.tools.ErrorState
-import com.kvad.totalizator.tools.Progress
+import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.State
 import javax.inject.Inject
 
@@ -23,14 +23,14 @@ class EventsFragment : Fragment() {
     lateinit var viewModel: EventsViewModel
     private lateinit var binding: EventsFragmentBinding
     private val eventAdapter = EventAdapter(::onEventClick)
-    private lateinit var progress: Progress
+    private lateinit var stateVisibilityController: StateVisibilityController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = EventsFragmentBinding.inflate(inflater, container, false)
-        progress = Progress(binding.pbProgress, binding.tvError)
+        stateVisibilityController = StateVisibilityController(binding.pbProgress, binding.tvError)
         return binding.root
     }
 
@@ -56,11 +56,11 @@ class EventsFragment : Fragment() {
     }
 
     private fun updateEvents(state: State<List<Event>, ErrorState>) {
-        progress.hideAll()
+        stateVisibilityController.hideAll()
         when (state) {
             is State.Content -> eventAdapter.submitList(state.data)
-            is State.Error -> progress.showError()
-            is State.Loading -> progress.showLoading()
+            is State.Error -> stateVisibilityController.showError()
+            is State.Loading -> stateVisibilityController.showLoading()
         }
     }
 

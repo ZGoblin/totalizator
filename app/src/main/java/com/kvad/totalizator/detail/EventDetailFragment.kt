@@ -5,15 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kvad.totalizator.App
 import com.kvad.totalizator.betfeature.BetDialogFragment
 import com.kvad.totalizator.betfeature.model.ChoiceModel
 import com.kvad.totalizator.databinding.EventDetailFragmentBinding
 import com.kvad.totalizator.detail.adapter.EventDetailAdapter
+import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.StateVisibilityController
 import javax.inject.Inject
 
 class EventDetailFragment : Fragment() {
@@ -24,12 +28,17 @@ class EventDetailFragment : Fragment() {
 
     private var eventId: String = ""
     private val eventDetailAdapter = EventDetailAdapter(::onBtnBetClick)
+    private lateinit var controller: StateVisibilityController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = EventDetailFragmentBinding.inflate(inflater, container, false)
+        controller = StateVisibilityController(
+            progressBar = binding.progressCircular,
+            errorView = binding.tvError
+        )
         return binding.root
     }
 
@@ -38,8 +47,6 @@ class EventDetailFragment : Fragment() {
 
         arguments?.let {
             eventId = EventDetailFragmentArgs.fromBundle(it).eventId
-            //todo clean up
-            Toast.makeText(context, eventId, Toast.LENGTH_SHORT).show()
         }
 
         setupDi()
@@ -62,25 +69,29 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun setupViewModelObserver() {
-        viewModel.commentLiveData.observe(viewLifecycleOwner) {
+        viewModel.eventDetailLiveData.observe(viewLifecycleOwner) {
             updateScreenInfo(it)
         }
     }
 
     private fun updateScreenInfo(state: eventDetailState) {
         when (state) {
-            is State.Content -> eventDetailAdapter.submitList(state.data)
-            is State.Error -> binding.rvEventDetailInfo.visibility = View.GONE
-            is State.Loading -> Toast.makeText(context, "Loading", Toast.LENGTH_LONG).show()
+            is State.Content -> showContent(state)
+            is State.Error -> controller.showError()
+            is State.Loading -> controller.showLoading()
         }
+    }
+
+    private fun showContent(content: State.Content<List<EventDetail>>) {
+        controller.hideAll()
+        eventDetailAdapter.submitList(content.data)
     }
 
     private fun onBtnBetClick(bet: Bet) {
         val fakeModelFromEvent = ChoiceModel(
-            eventId, bet,
-            "First player",
-            "Second player"
+            eventId, bet, "First player", "Second player"
         )
+
         childFragmentManager.beginTransaction()
             .add(BetDialogFragment.newInstance(fakeModelFromEvent), "TAG")
             .commitAllowingStateLoss()
