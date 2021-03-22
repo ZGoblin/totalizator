@@ -8,12 +8,14 @@ import com.kvad.totalizator.data.models.ParticipantDTO
 import com.kvad.totalizator.shared.ResultWrapper
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeApiCall
+
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.random.Random
+
 
 @Singleton
 class EventRepository @Inject constructor(
@@ -54,6 +56,7 @@ class EventRepository @Inject constructor(
                 ParticipantDTO(
                     1,
                     "Olexiy",
+
                     "https://upload.wikimedia.org/wikipedia/commons/1/10/Bundesarchiv_Bild_183-S33882%2C_Adolf_Hitler_retouched.jpg",
                     setOf(
                         Characteristic("weight", "55"),
