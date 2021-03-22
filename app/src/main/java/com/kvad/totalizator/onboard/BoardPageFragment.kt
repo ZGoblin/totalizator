@@ -79,7 +79,6 @@ class BoardPageFragment : Fragment(R.layout.board_page) {
     private fun setupListeners() {
         binding.tvNext.setOnClickListener {
             (requireParentFragment() as OnBoardFragment).swipeRight()
-            Toast.makeText(requireContext(),"${(requireParentFragment() as OnBoardFragment).counter}",Toast.LENGTH_SHORT).show()
             if ((requireParentFragment() as OnBoardFragment).counter == 2){
                 requireActivity().onBackPressed()
             }

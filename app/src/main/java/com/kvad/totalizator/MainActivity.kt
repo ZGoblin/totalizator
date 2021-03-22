@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupBinding()
-        
         supportActionBar?.hide()
         //todo
         supportFragmentManager.beginTransaction()
@@ -33,3 +32,4 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 }
+

@@ -107,27 +107,33 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> MaterialDialog(requireContext()).show { customView(R.layout.progress_dialog) }
-                is State.Content ->{
-                    showContent()
-                    MaterialDialog(requireContext()).cancel()
+                is State.Content -> {
+                    binding.apply {
+                        etBet.visibility = View.GONE
+                        tvCancel.visibility = View.GONE
+                        tvBetGood.visibility = View.VISIBLE
+                        vClose.visibility = View.VISIBLE
+                        btnBet.isEnabled = false
+                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
+                        btnBet.setBackgroundColor(color)
+                    }
                 }
-
                 is State.Error -> showError(it.error)
             }
         }
     }
-
-    private fun showContent() {
-        binding.apply{
-            etBet.visibility = View.GONE
-            tvCancel.visibility = View.GONE
-            tvBetGood.visibility = View.VISIBLE
-            vClose.visibility = View.VISIBLE
-            btnBet.isEnabled = false
-            val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
-            btnBet.setBackgroundColor(color)
-        }
-    }
+// TODO 22.03.2021
+//    private fun showContent() {
+//        binding.apply {
+//            etBet.visibility = View.GONE
+//            tvCancel.visibility = View.GONE
+//            tvBetGood.visibility = View.VISIBLE
+//            vClose.visibility = View.VISIBLE
+//            btnBet.isEnabled = false
+//            val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
+//            btnBet.setBackgroundColor(color)
+//        }
+//    }
 
     private fun showError(errorState: ErrorState) {
         when (errorState) {
