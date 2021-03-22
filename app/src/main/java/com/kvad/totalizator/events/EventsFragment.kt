@@ -77,4 +77,10 @@ class EventsFragment : Fragment() {
         val action = EventsFragmentDirections.actionDetailFragment(event.id)
         findNavController().navigate(action)
     }
+
+    override fun onDestroyView() {
+        binding.rvEvents.adapter = null
+
+        super.onDestroyView()
+    }
 }
