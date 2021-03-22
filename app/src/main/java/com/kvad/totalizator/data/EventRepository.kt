@@ -6,6 +6,7 @@ import com.kvad.totalizator.data.models.Characteristic
 import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.data.models.ParticipantDTO
 import com.kvad.totalizator.shared.ResultWrapper
+import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeApiCall
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -31,7 +32,7 @@ class EventRepository @Inject constructor(
             while (true) {
                 val latestNews = getEventById(id = id)
                 emit(latestNews)
-                delay(3000)
+                delay(REQUEST_DELAY)
             }
         }
     }
@@ -39,7 +40,7 @@ class EventRepository @Inject constructor(
     var latestEvent: Flow<ResultWrapper<Event>> = flow {}
         private set
 
-    @Suppress("UnusedPrivateMember")
+    @Suppress("MagicNumber", "MaxLineLength")
     private suspend fun getEventById(id: String): ResultWrapper<Event> {
 
         val random1 = Random.nextFloat() * 100
