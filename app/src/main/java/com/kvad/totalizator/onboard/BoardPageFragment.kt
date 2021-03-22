@@ -79,9 +79,6 @@ class BoardPageFragment : Fragment(R.layout.board_page) {
     private fun setupListeners() {
         binding.tvNext.setOnClickListener {
             (requireParentFragment() as OnBoardFragment).swipeRight()
-            if ((requireParentFragment() as OnBoardFragment).counter == 2){
-                requireActivity().onBackPressed()
-            }
         }
         binding.tvBack.setOnClickListener {
             (requireParentFragment() as OnBoardFragment).swipeLeft()
