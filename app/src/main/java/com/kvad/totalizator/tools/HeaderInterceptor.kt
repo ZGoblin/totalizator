@@ -12,8 +12,7 @@ class HeaderInterceptor @Inject constructor(
         proceed(
             request()
                 .newBuilder()
-                .addHeader("Accept", "application/json")
-                .addHeader("www-authenticate", "$sharedPref")
+                .addHeader("Authorization", "Bearer ${sharedPref.token}")
                 .build()
         )
     }
