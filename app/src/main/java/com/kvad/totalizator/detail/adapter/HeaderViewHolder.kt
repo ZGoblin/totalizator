@@ -1,7 +1,9 @@
 package com.kvad.totalizator.detail.adapter
 
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.EventDetailHeaderViewHolderBinding
 import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.shared.Bet
@@ -43,6 +45,13 @@ class HeaderViewHolder(
 
             setFirstPlayerName(eventInfo.participantDto1.name)
             setSecondPlayerName(eventInfo.participantDto2.name)
+
+        }
+
+
+        binding.apply {
+            btnFirstPlayerWin.text = itemView.resources.getString(R.string.bet_on, eventInfo.participantDto1.name)
+            btnSecondPlayerWin.text = itemView.resources.getString(R.string.bet_on, eventInfo.participantDto2.name)
         }
     }
 
