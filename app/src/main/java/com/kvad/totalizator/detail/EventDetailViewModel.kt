@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.EventRepository
 import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.detail.model.EventDetail
-import com.kvad.totalizator.tools.ResultWrapper
+import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -36,10 +36,10 @@ class EventDetailViewModel @Inject constructor(
 
     }
 
-    private fun updateUiState(resultWrapper: ResultWrapper<Event>) {
-        _eventDetailLiveData.value = when (resultWrapper) {
-            is ResultWrapper.Success -> {
-                State.Content(mapEventToDetailUiModel.map(resultWrapper.value))
+    private fun updateUiState(apiResultWrapper: ApiResultWrapper<Event>) {
+        _eventDetailLiveData.value = when (apiResultWrapper) {
+            is ApiResultWrapper.Success -> {
+                State.Content(mapEventToDetailUiModel.map(apiResultWrapper.value))
             }
             else -> {
                 State.Error(Unit)

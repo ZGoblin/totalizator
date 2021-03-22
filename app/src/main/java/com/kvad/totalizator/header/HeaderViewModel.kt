@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.models.Wallet
 import com.kvad.totalizator.tools.ErrorState
-import com.kvad.totalizator.tools.ResultWrapper
+import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -31,8 +31,8 @@ class HeaderViewModel @Inject constructor(
         }
     }
 
-    private fun updateWallet(resultWrapper: ResultWrapper<Wallet>) {
-        resultWrapper.doOnResult(
+    private fun updateWallet(apiResultWrapper: ApiResultWrapper<Wallet>) {
+        apiResultWrapper.doOnResult(
             onSuccess = ::doOnSuccess,
             onLoginError = ::doOnLoginError,
             onNetworkError = ::doOnNetworkError
@@ -44,12 +44,12 @@ class HeaderViewModel @Inject constructor(
         _headerLiveData.value = State.Content(wallet)
     }
 
-    private fun doOnLoginError(error: ResultWrapper.Error){
+    private fun doOnLoginError(error: ApiResultWrapper.Error){
         Log.d("ERROR_TAG", error.msg)
         _headerLiveData.value = State.Error(ErrorState.LOGIN_ERROR)
     }
 
-    private fun doOnNetworkError(error: ResultWrapper.Error){
+    private fun doOnNetworkError(error: ApiResultWrapper.Error){
         Log.d("ERROR_TAG", error.msg)
         _headerLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }

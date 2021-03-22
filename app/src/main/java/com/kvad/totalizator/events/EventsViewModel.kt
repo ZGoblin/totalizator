@@ -7,10 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.EventRepository
 import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.tools.ErrorState
-import com.kvad.totalizator.tools.ResultWrapper
+import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State
 import kotlinx.coroutines.launch
-import java.lang.Error
 import javax.inject.Inject
 
 typealias EventState = State<List<Event>, ErrorState>
@@ -38,7 +37,7 @@ class EventsViewModel @Inject constructor(
         _eventsLiveData.value = State.Content(eventList)
     }
 
-    private fun onError(error: ResultWrapper.Error){
+    private fun onError(error: ApiResultWrapper.Error){
         Log.d("ERROR_TAG", error.msg)
         _eventsLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }

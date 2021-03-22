@@ -4,13 +4,12 @@ import android.util.Log
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.models.RegisterRequest
 import com.kvad.totalizator.data.models.Token
-import com.kvad.totalizator.login.LoginState
 import com.kvad.totalizator.registration.RegisterState
 import com.kvad.totalizator.registration.models.RawRegisterRequest
 import com.kvad.totalizator.tools.ADULT
 import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
-import com.kvad.totalizator.tools.ResultWrapper
+import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.util.*
@@ -45,7 +44,7 @@ class RegisterUseCase @Inject constructor(
         state = RegisterState.WITHOUT_ERROR
     }
 
-    private fun doOnNetworkError(error: ResultWrapper.Error) {
+    private fun doOnNetworkError(error: ApiResultWrapper.Error) {
         Log.d("ERROR_TAG", error.msg)
         state = RegisterState.NETWORK_ERROR
     }

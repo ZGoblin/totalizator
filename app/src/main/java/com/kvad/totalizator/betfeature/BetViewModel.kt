@@ -1,16 +1,12 @@
 package com.kvad.totalizator.betfeature
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kvad.totalizator.data.BetRepository
 import com.kvad.totalizator.data.EventRepository
 import com.kvad.totalizator.data.models.Event
-import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.ErrorState
-import com.kvad.totalizator.tools.ResultWrapper
 import com.kvad.totalizator.tools.State
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -33,30 +29,28 @@ class BetViewModel @Inject constructor(
     fun uploadData() {
         viewModelScope.launch {
             _eventInfoLiveData.value = State.Loading
-            eventRepository.latestEvent.collect { updateUiState(it) }
-        }
-    }
-
-    private fun updateUiState(resultWrapper: ResultWrapper<Event>) {
-        _eventInfoLiveData.value =
-            when (resultWrapper) {
-                is ResultWrapper.Success -> State.Content(resultWrapper.value)
-                is ResultWrapper.DataLoadingError -> State.Error(ErrorState.LOADING_ERROR)
-                is ResultWrapper.LoginError -> State.Error(ErrorState.LOGIN_ERROR)
+            eventRepository.latestEvent.collect {
+                it.doOnResult(
+                    onSuccess = { event -> _eventInfoLiveData.value = State.Content(event) },
+                    onError = { _eventInfoLiveData.value = State.Error(ErrorState.LOADING_ERROR) }
+                )
             }
+        }
     }
 
     fun createBet(betToServerModel: BetToServerModel) {
-        _betDetailLiveData.postValue(State.Loading)
+        _betDetailLiveData.value = State.Loading
+
         viewModelScope.launch {
-            _betDetailLiveData.postValue(
-                when (betUseCase.bet(betToServerModel)) {
-                    is ResultWrapper.Success -> State.Content(Unit)
-                    is ResultWrapper.DataLoadingError -> State.Error(ErrorState.LOADING_ERROR)
-                    is ResultWrapper.LoginError -> State.Error(ErrorState.LOGIN_ERROR)
-                }
+
+            betUseCase.bet(betToServerModel).doOnResult(
+                onSuccess = { _betDetailLiveData.value = State.Content(it) },
+                onNetworkError = {_betDetailLiveData.value = State.Error(ErrorState.LOADING_ERROR)},
+                onLoginError = {_betDetailLiveData.value = State.Error(ErrorState.LOGIN_ERROR)}
             )
+
         }
+
     }
 
 }

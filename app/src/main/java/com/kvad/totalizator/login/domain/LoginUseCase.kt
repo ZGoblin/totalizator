@@ -5,7 +5,9 @@ import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.models.LoginRequest
 import com.kvad.totalizator.data.models.Token
 import com.kvad.totalizator.login.LoginState
-import com.kvad.totalizator.tools.*
+import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
+import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
+import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -36,7 +38,7 @@ class LoginUseCase @Inject constructor(
         state = LoginState.WITHOUT_ERROR
     }
 
-    private fun doOnNetworkError(error: ResultWrapper.Error) {
+    private fun doOnNetworkError(error: ApiResultWrapper.Error) {
         Log.d("ERROR_TAG", error.msg)
         state = LoginState.NETWORK_ERROR
     }

@@ -1,14 +1,13 @@
 package com.kvad.totalizator.data
 
 import com.kvad.totalizator.data.api.EventMockService
-import com.kvad.totalizator.data.api.EventService
 import com.kvad.totalizator.data.models.BetPool
 import com.kvad.totalizator.data.models.Characteristic
 import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.data.models.ParticipantDTO
 import com.kvad.totalizator.tools.REQUEST_DELAY
-import com.kvad.totalizator.tools.ResultWrapper
-import com.kvad.totalizator.tools.safeApiCall
+import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
+import com.kvad.totalizator.tools.safeapicall.safeApiCall
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -24,7 +23,7 @@ class EventRepository @Inject constructor(
     private val eventService: EventMockService
 ) {
 
-    suspend fun getEvents(): ResultWrapper<List<Event>> {
+    suspend fun getEvents(): ApiResultWrapper<List<Event>> {
         return safeApiCall {
             eventService.getEvents()
         }
@@ -41,11 +40,11 @@ class EventRepository @Inject constructor(
         }
     }
 
-    var latestEvent: Flow<ResultWrapper<Event>> = flow {}
+    var latestEvent: Flow<ApiResultWrapper<Event>> = flow {}
         private set
 
     @Suppress("MagicNumber", "MaxLineLength")
-    private suspend fun getEventById(id: String): ResultWrapper<Event> {
+    private suspend fun getEventById(id: String): ApiResultWrapper<Event> {
 
         val random1 = Random.nextFloat() * 100
         val random2 = Random.nextFloat() * 100
