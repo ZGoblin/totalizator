@@ -9,6 +9,7 @@ import com.kvad.totalizator.data.models.ParticipantDTO
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.ResultWrapper
 import com.kvad.totalizator.tools.safeApiCall
+
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,6 +17,7 @@ import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.random.Random
+
 
 @Singleton
 class EventRepository @Inject constructor(
