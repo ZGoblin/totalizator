@@ -51,7 +51,7 @@ class EventRepository @Inject constructor(
         return safeApiCall {
             Response.success(
                 Event(
-                    "535d1a2c-bb51-4416-a6d2-f302b99992ad",
+                    "34585102-5d08-4e81-be53-dbf1d2878afb",
                     "sport",
                     ParticipantDTO(
                         "1",
