@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
-import com.kvad.totalizator.data.models.Wallet
+import com.kvad.totalizator.data.requestmodels.Wallet
 import com.kvad.totalizator.databinding.HeaderFragmentBinding
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State

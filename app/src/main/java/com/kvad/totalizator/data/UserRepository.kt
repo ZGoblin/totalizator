@@ -1,7 +1,10 @@
 package com.kvad.totalizator.data
 
 import com.kvad.totalizator.data.api.UserService
-import com.kvad.totalizator.data.models.*
+import com.kvad.totalizator.data.requestmodels.LoginRequest
+import com.kvad.totalizator.data.requestmodels.RegisterRequest
+import com.kvad.totalizator.data.requestmodels.Token
+import com.kvad.totalizator.data.requestmodels.Wallet
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.safeApiCall

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.EventRepository
-import com.kvad.totalizator.data.models.Event
+import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import kotlinx.coroutines.flow.collect

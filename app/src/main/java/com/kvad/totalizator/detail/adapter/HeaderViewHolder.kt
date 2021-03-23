@@ -1,17 +1,16 @@
 package com.kvad.totalizator.detail.adapter
 
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.kvad.totalizator.R
+import com.kvad.totalizator.data.model.BetPool
 import com.kvad.totalizator.databinding.EventDetailHeaderViewHolderBinding
 import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.shared.Bet
-import com.kvad.totalizator.shared.BetAmountForEachOutcome
 
 class HeaderViewHolder(
     view: View,
-    private val onBetButtonClick: (Bet) -> Unit = {  _ -> }
+    private val onBetButtonClick: (Bet) -> Unit = { _ -> }
 ) : RecyclerView.ViewHolder(view) {
 
     private val binding = EventDetailHeaderViewHolderBinding.bind(itemView)
@@ -32,26 +31,28 @@ class HeaderViewHolder(
 
             eventInfo.betPool.apply {
                 setBetScale(
-                    BetAmountForEachOutcome(
-                        firstPlayerWinBetAmount = firstAmount.toInt(),
-                        secondPlayerWinBetAmount = secondAmount.toInt(),
-                        draw = drawAmount.toInt()
+                    BetPool(
+                        firstPlayerBetAmount = firstPlayerBetAmount,
+                        secondPlayerBetAmount = secondPlayerBetAmount,
+                        drawBetAmount = drawBetAmount
                     )
                 )
             }
 
-            setFirstPlayerImg(eventInfo.participantDto1.photoLink)
-            setSecondPlayerImg(eventInfo.participantDto2.photoLink)
+            setFirstPlayerImg(eventInfo.participant1.photoLink)
+            setSecondPlayerImg(eventInfo.participant2.photoLink)
 
-            setFirstPlayerName(eventInfo.participantDto1.name)
-            setSecondPlayerName(eventInfo.participantDto2.name)
+            setFirstPlayerName(eventInfo.participant1.name)
+            setSecondPlayerName(eventInfo.participant2.name)
 
         }
 
 
         binding.apply {
-            btnFirstPlayerWin.text = itemView.resources.getString(R.string.bet_on, eventInfo.participantDto1.name)
-            btnSecondPlayerWin.text = itemView.resources.getString(R.string.bet_on, eventInfo.participantDto2.name)
+            btnFirstPlayerWin.text =
+                itemView.resources.getString(R.string.bet_on, eventInfo.participant1.name)
+            btnSecondPlayerWin.text =
+                itemView.resources.getString(R.string.bet_on, eventInfo.participant2.name)
         }
     }
 
