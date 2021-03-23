@@ -9,4 +9,7 @@
     <style name="MyDatePicker" parent="android:Widget.Material.DatePicker">
         <item name="android:datePickerMode">spinner</item>
     </style>
+
+    <style name="CustomProgressBar" parent="android:Widget.Holo.ProgressBar">
+    </style>
 </resources>

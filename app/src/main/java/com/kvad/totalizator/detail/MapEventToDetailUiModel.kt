@@ -1,6 +1,5 @@
 package com.kvad.totalizator.detail
 
-import com.kvad.totalizator.data.model.BetPool
 import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.detail.model.EventDetail
 import javax.inject.Inject
@@ -17,7 +16,7 @@ class MapEventToDetailUiModel @Inject constructor() {
                 event.id,
                 event.firstParticipant,
                 event.secondParticipant,
-                BetPool(1000f, 1000f, 1000f)
+                event.betPool
             )
         )
 

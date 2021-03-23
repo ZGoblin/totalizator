@@ -36,14 +36,19 @@ class EventRepository @Inject constructor(
         }
     }
 
-    fun setIdForEventRequest(id: String) {
+    fun createEventFlowById(id: String): Flow<ApiResultWrapper<Event>> {
         latestEvent = flow {
             while (true) {
-                val latestNews = getEventById(id = id).mapSuccess(mapRequestEventToEvent::map)
+                val latestNews = safeApiCall {
+                    eventService.getEvent(id)
+                }.mapSuccess(mapRequestEventToEvent::map)
+
                 emit(latestNews)
                 delay(REQUEST_DELAY)
             }
         }
+
+        return latestEvent
     }
 
     var latestEvent: Flow<ApiResultWrapper<Event>> = flow {}

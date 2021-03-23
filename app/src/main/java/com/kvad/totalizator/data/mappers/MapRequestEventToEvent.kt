@@ -12,7 +12,7 @@ class MapRequestEventToEvent @Inject constructor() {
         id = requestEventModel.id,
         firstParticipant = requestEventModel.participant1,
         secondParticipant = requestEventModel.participant2,
-        startTime = ZonedDateTime.parse(requestEventModel.startTime),
+        startTime = parseZonedDateTime(requestEventModel.startTime),
         isEnded = requestEventModel.isEnded,
         margin = requestEventModel.margin,
         betPool = BetPool(
@@ -26,4 +26,11 @@ class MapRequestEventToEvent @Inject constructor() {
         return requestEventModelList.map { map(it) }
     }
 
+    //TODO delete if date always not null
+    private fun parseZonedDateTime(time: String): ZonedDateTime {
+        if (time.isNotEmpty()) {
+            return ZonedDateTime.parse(time)
+        }
+        return ZonedDateTime.now()
+    }
 }

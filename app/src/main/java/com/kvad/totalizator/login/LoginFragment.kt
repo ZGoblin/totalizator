@@ -17,14 +17,15 @@ class LoginFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: LoginViewModel
-    private lateinit var binding: LoginFragmentBinding
+    private var _binding: LoginFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = LoginFragmentBinding.inflate(inflater, container, false)
+        _binding = LoginFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -99,5 +100,10 @@ class LoginFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }

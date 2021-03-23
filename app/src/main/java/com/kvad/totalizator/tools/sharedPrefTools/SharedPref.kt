@@ -12,7 +12,7 @@ class SharedPref @Inject constructor(context: Context) {
         const val PRIVATE_SHARED_PREF = "PRIVATE_SHARED_PREF"
         const val KEY_TOKEN = "KEY_TOKEN"
         const val IS_FIRST_OPEN_KEY = "IS_FIRST_OPEN_KEY"
-        const val DEFAULT_VALUE_TOKEN = ""
+        const val DEFAULT_VALUE_TOKEN = "DEFAULT_VALUE_TOKEN"
         const val DEFAULT_VALUE_IS_FIRST_OPEN = true
     }
 
