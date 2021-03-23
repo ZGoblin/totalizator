@@ -43,6 +43,7 @@ class RegisterUseCase @Inject constructor(
         state = RegisterState.WITHOUT_ERROR
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun doOnError(error: ApiResultWrapper.Error) {
         state = RegisterState.NETWORK_ERROR
     }

@@ -41,6 +41,7 @@ class EventsViewModel @Inject constructor(
         _eventsLiveData.value = State.Content(line.events)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onError(error: ApiResultWrapper.Error){
         _eventsLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }

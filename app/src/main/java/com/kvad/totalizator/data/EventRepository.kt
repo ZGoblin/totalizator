@@ -1,7 +1,10 @@
 package com.kvad.totalizator.data
 
 import com.kvad.totalizator.data.api.EventService
-import com.kvad.totalizator.data.models.*
+import com.kvad.totalizator.data.models.Characteristic
+import com.kvad.totalizator.data.models.Event
+import com.kvad.totalizator.data.models.Line
+import com.kvad.totalizator.data.models.ParticipantDTO
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.safeApiCall
@@ -74,9 +77,9 @@ class EventRepository @Inject constructor(
                     false,
                     listOf("", ""),
                     0.5f,
-                    10,
-                    50,
-                    1000
+                    random1,
+                    random2,
+                    random3
                 )
             )
         }

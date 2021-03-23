@@ -37,6 +37,7 @@ class LoginUseCase @Inject constructor(
         state = LoginState.WITHOUT_ERROR
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun doOnError(error: ApiResultWrapper.Error) {
         state = LoginState.NETWORK_ERROR
     }

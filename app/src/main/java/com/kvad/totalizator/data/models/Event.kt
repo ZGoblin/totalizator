@@ -11,7 +11,7 @@ data class Event(
     @SerializedName("isEnded") val isEnded: Boolean,
     @SerializedName("possibleResults") val possibleResults: List<String>,
     @SerializedName("margin") val margin: Float,
-    @SerializedName("amountW1") val amountW1: Int,
-    @SerializedName("amountW2") val amountW2: Int,
-    @SerializedName("amountX") val amountX: Int
+    @SerializedName("amountW1") val amountW1: Float,
+    @SerializedName("amountW2") val amountW2: Float,
+    @SerializedName("amountX") val amountX: Float
 )

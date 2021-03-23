@@ -5,6 +5,7 @@ import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.detail.model.EventDetail
 import javax.inject.Inject
 
+@Suppress("MagicNumber")
 class MapEventToDetailUiModel @Inject constructor() {
 
     fun map(event: Event): List<EventDetail> {

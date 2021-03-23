@@ -16,17 +16,13 @@ class EventHolder(view: View, private val onEventClick: (Event) -> Unit) :
             setSecondPlayerName(event.participant2.name)
             setBetScale(
                 BetAmountForEachOutcome(
-                    firstPlayerWinBetAmount = event.amountW1,
-                    secondPlayerWinBetAmount = event.amountW2,
-                    draw = event.amountX
+                    firstPlayerWinBetAmount = event.amountW1.toInt(),
+                    secondPlayerWinBetAmount = event.amountW2.toInt(),
+                    draw = event.amountX.toInt()
                 )
             )
-            if (!event.participant1.photoLink.isNullOrEmpty()) {
-                setFirstPlayerImg(event.participant1.photoLink)
-            }
-            if (!event.participant2.photoLink.isNullOrEmpty()) {
-                setSecondPlayerImg(event.participant2.photoLink)
-            }
+            setFirstPlayerImg(event.participant1.photoLink)
+            setSecondPlayerImg(event.participant2.photoLink)
 
             setOnClickListener {
                 onEventClick(event)
