@@ -1,5 +1,6 @@
 package com.kvad.totalizator.detail
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.EventRepository
 import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.mapSuccess
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
@@ -24,24 +26,25 @@ class EventDetailViewModel @Inject constructor(
     val eventDetailLiveData: LiveData<eventDetailState> = _eventDetailLiveData
 
     fun uploadData(eventId: String) {
-        eventRepository.setIdForEventRequest(id = eventId)
-
+        _eventDetailLiveData.value = State.Loading
         viewModelScope.launch {
-            _eventDetailLiveData.value = State.Loading
-
-            eventRepository.latestEvent
+            eventRepository.createEventFlowById(id = eventId)
                 .map { it.mapSuccess(mapEventToDetailUiModel::map) }
-                .collect {
-                    it.doOnResult(
-                        onSuccess = { event ->
-                            _eventDetailLiveData.value =
-                                State.Content(event)
-                        },
-                        onError = { _eventDetailLiveData.value = State.Error(Unit) }
+                .collect { result ->
+                    result.doOnResult(
+                        onSuccess = ::doOnSuccess,
+                        onError = ::doOnError
                     )
                 }
         }
-
     }
 
+    private fun doOnSuccess(event: List<EventDetail>) {
+        _eventDetailLiveData.value = State.Content(event)
+    }
+
+    private fun doOnError(error: ApiResultWrapper.Error) {
+        Log.d("ErrorBody", error.msg)
+        _eventDetailLiveData.value = State.Error(Unit)
+    }
 }

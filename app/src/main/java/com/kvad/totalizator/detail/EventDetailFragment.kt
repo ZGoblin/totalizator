@@ -25,7 +25,6 @@ class EventDetailFragment : Fragment() {
     private var _binding: EventDetailFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private var eventId: String = ""
     private val eventDetailAdapter = EventDetailAdapter(::onBtnBetClick)
     private lateinit var controller: StateVisibilityController
 
@@ -44,14 +43,13 @@ class EventDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.let {
-            eventId = EventDetailFragmentArgs.fromBundle(it).eventId
-        }
-
         setupDi()
         setupRecyclerView()
         setupViewModelObserver()
-        viewModel.uploadData(eventId)
+
+        arguments?.let {
+            viewModel.uploadData(EventDetailFragmentArgs.fromBundle(it).eventId)
+        }
     }
 
     private fun setupDi() {
