@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.EventRepository
-import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.detail.model.EventDetail
-import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.safeapicall.mapSuccess
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,22 +29,19 @@ class EventDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _eventDetailLiveData.value = State.Loading
 
-            eventRepository.latestEvent.collect {
-                updateUiState(it)
-            }
+            eventRepository.latestEvent
+                .map { it.mapSuccess(mapEventToDetailUiModel::map) }
+                .collect {
+                    it.doOnResult(
+                        onSuccess = { event ->
+                            _eventDetailLiveData.value =
+                                State.Content(event)
+                        },
+                        onError = { _eventDetailLiveData.value = State.Error(Unit) }
+                    )
+                }
         }
 
-    }
-
-    private fun updateUiState(apiResultWrapper: ApiResultWrapper<Event>) {
-        _eventDetailLiveData.value = when (apiResultWrapper) {
-            is ApiResultWrapper.Success -> {
-                State.Content(mapEventToDetailUiModel.map(apiResultWrapper.value))
-            }
-            else -> {
-                State.Error(Unit)
-            }
-        }
     }
 
 }
