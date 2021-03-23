@@ -90,12 +90,12 @@ class EventDetailFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         controller.destroy()
+        binding.rvEventDetailInfo.adapter = null
         super.onDestroyView()
     }
 
     private fun onBtnBetClick(bet: Bet) {
         val action = EventDetailFragmentDirections.actionBetDialogFragment(bet)
-        Toast.makeText(requireContext(),"${bet}",Toast.LENGTH_SHORT).show()
         findNavController().navigate(action)
     }
 }
