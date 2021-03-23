@@ -44,13 +44,13 @@ class HeaderViewModel @Inject constructor(
         _headerLiveData.value = State.Content(wallet)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun doOnLoginError(error: ApiResultWrapper.Error){
-        Log.d("ERROR_TAG", error.msg)
         _headerLiveData.value = State.Error(ErrorState.LOGIN_ERROR)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun doOnNetworkError(error: ApiResultWrapper.Error){
-        Log.d("ERROR_TAG", error.msg)
         _headerLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 }

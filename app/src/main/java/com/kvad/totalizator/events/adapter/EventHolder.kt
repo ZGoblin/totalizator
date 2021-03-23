@@ -12,21 +12,21 @@ class EventHolder(view: View, private val onEventClick: (Event) -> Unit) :
 
     fun onBind(event: Event) {
         binding.evgEvent.apply {
-            setFirstPlayerName(event.participantDto1.name)
-            setSecondPlayerName(event.participantDto2.name)
+            setFirstPlayerName(event.participant1.name)
+            setSecondPlayerName(event.participant2.name)
             setBetScale(
                 BetAmountForEachOutcome(
-                    firstPlayerWinBetAmount = event.betPool.firstAmount.toInt(),
-                    secondPlayerWinBetAmount = event.betPool.secondAmount.toInt(),
-                    draw = event.betPool.drawAmount.toInt()
+                    firstPlayerWinBetAmount = event.amountW1.toInt(),
+                    secondPlayerWinBetAmount = event.amountW2.toInt(),
+                    draw = event.amountX.toInt()
                 )
             )
-            setFirstPlayerImg(event.participantDto1.photoLink)
-            setSecondPlayerImg(event.participantDto2.photoLink)
-        }
+            setFirstPlayerImg(event.participant1.photoLink)
+            setSecondPlayerImg(event.participant2.photoLink)
 
-        binding.root.setOnClickListener {
-            onEventClick(event)
+            setOnClickListener {
+                onEventClick(event)
+            }
         }
     }
 }

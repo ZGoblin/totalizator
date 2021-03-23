@@ -2,7 +2,6 @@ package com.kvad.totalizator.betfeature
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
-import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.BET_DETAIL_KEY
 import com.kvad.totalizator.tools.ErrorState
@@ -139,13 +137,13 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding.apply {
             tvGameDetails.text = getString(
                 R.string.event_vs,
-                state.data.participantDto1.name,
-                state.data.participantDto2.name
+                state.data.participant1.name,
+                state.data.participant2.name
             )
             tvWinnerName.text = when (detailBet) {
                 Bet.DRAW -> getString(R.string.draw)
-                Bet.SECOND_PLAYER_WIN -> state.data.participantDto1.name
-                Bet.FIRST_PLAYER_WIN -> state.data.participantDto2.name
+                Bet.SECOND_PLAYER_WIN -> state.data.participant1.name
+                Bet.FIRST_PLAYER_WIN -> state.data.participant2.name
             }
         }
         eventId = state.data.id

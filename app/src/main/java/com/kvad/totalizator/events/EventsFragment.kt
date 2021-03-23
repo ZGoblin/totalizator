@@ -82,6 +82,7 @@ class EventsFragment : Fragment() {
     override fun onDestroyView() {
         binding.rvEvents.adapter = null
         _binding = null
+        stateVisibilityController.destroy()
         super.onDestroyView()
     }
 }
