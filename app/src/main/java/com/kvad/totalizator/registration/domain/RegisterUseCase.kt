@@ -1,8 +1,8 @@
 package com.kvad.totalizator.registration.domain
 
 import com.kvad.totalizator.data.UserRepository
-import com.kvad.totalizator.data.models.RegisterRequest
-import com.kvad.totalizator.data.models.Token
+import com.kvad.totalizator.data.requestmodels.RegisterRequest
+import com.kvad.totalizator.data.requestmodels.Token
 import com.kvad.totalizator.registration.RegisterState
 import com.kvad.totalizator.registration.models.RawRegisterRequest
 import com.kvad.totalizator.tools.ADULT

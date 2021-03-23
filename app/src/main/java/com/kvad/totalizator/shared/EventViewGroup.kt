@@ -7,6 +7,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.kvad.totalizator.R
+import com.kvad.totalizator.data.model.BetPool
 import com.kvad.totalizator.databinding.EventViewGroupBinding
 
 class EventViewGroup @JvmOverloads constructor(
@@ -89,18 +90,18 @@ class EventViewGroup @JvmOverloads constructor(
         }
     }
 
-    fun setBetScale(betAmountForEachOutcome: BetAmountForEachOutcome) {
+    fun setBetScale(betAmountForEachOutcome: BetPool) {
         binding.tvFirstPlayerBetAmount.text = resources.getString(
             R.string.bet_currency,
-            betAmountForEachOutcome.firstPlayerWinBetAmount
+            betAmountForEachOutcome.firstPlayerBetAmount.toString()
         )
         binding.tvSecondPlayerBetAmount.text = resources.getString(
             R.string.bet_currency,
-            betAmountForEachOutcome.secondPlayerWinBetAmount
+            betAmountForEachOutcome.secondPlayerBetAmount.toString()
         )
         binding.tvDraw.text = resources.getString(
             R.string.draw_bet_amount,
-            betAmountForEachOutcome.draw
+            betAmountForEachOutcome.drawBetAmount.toString()
         )
 
         binding.bettingScale.setupData(betAmountForEachOutcome)

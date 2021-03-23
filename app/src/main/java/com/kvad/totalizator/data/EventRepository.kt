@@ -1,12 +1,15 @@
 package com.kvad.totalizator.data
 
 import com.kvad.totalizator.data.api.EventService
-import com.kvad.totalizator.data.models.Characteristic
-import com.kvad.totalizator.data.models.Event
-import com.kvad.totalizator.data.models.Line
-import com.kvad.totalizator.data.models.ParticipantDTO
+import com.kvad.totalizator.data.mappers.MapRequestEventToEvent
+import com.kvad.totalizator.data.model.Event
+import com.kvad.totalizator.data.requestmodels.Characteristic
+import com.kvad.totalizator.data.requestmodels.Line
+import com.kvad.totalizator.data.requestmodels.Participant
+import com.kvad.totalizator.data.requestmodels.RequestEventModel
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
+import com.kvad.totalizator.tools.safeapicall.mapSuccess
 import com.kvad.totalizator.tools.safeapicall.safeApiCall
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -18,12 +21,17 @@ import kotlin.random.Random
 
 @Singleton
 class EventRepository @Inject constructor(
-    private val eventService: EventService
+    private val eventService: EventService,
+    private val mapRequestEventToEvent: MapRequestEventToEvent
 ) {
 
-    suspend fun getLine(): Flow<ApiResultWrapper<Line>> = flow {
+    //todo
+    suspend fun getLine(): Flow<ApiResultWrapper<List<Event>>> = flow {
         while (true) {
-            emit(safeApiCall(eventService::getLine))
+            val line = safeApiCall(eventService::getLine).mapSuccess {
+                mapRequestEventToEvent.map(it.events)
+            }
+            emit(line)
             delay(REQUEST_DELAY)
         }
     }
@@ -31,7 +39,7 @@ class EventRepository @Inject constructor(
     fun setIdForEventRequest(id: String) {
         latestEvent = flow {
             while (true) {
-                val latestNews = getEventById(id = id)
+                val latestNews = getEventById(id = id).mapSuccess(mapRequestEventToEvent::map)
                 emit(latestNews)
                 delay(REQUEST_DELAY)
             }
@@ -42,7 +50,7 @@ class EventRepository @Inject constructor(
         private set
 
     @Suppress("MagicNumber", "MaxLineLength", "UnusedPrivateMember")
-    private suspend fun getEventById(id: String): ApiResultWrapper<Event> {
+    private suspend fun getEventById(id: String): ApiResultWrapper<RequestEventModel> {
 
         val random1 = Random.nextFloat() * 100
         val random2 = Random.nextFloat() * 100
@@ -50,10 +58,10 @@ class EventRepository @Inject constructor(
 
         return safeApiCall {
             Response.success(
-                Event(
+                RequestEventModel(
                     "535d1a2c-bb51-4416-a6d2-f302b99992ad",
                     "sport",
-                    ParticipantDTO(
+                    Participant(
                         "1",
                         "Olexiy",
                         "https://upload.wikimedia.org/wikipedia/commons/1/10/Bundesarchiv_Bild_183-S33882%2C_Adolf_Hitler_retouched.jpg",
@@ -63,7 +71,7 @@ class EventRepository @Inject constructor(
                             Characteristic("age", "55")
                         )
                     ),
-                    ParticipantDTO(
+                    Participant(
                         "1",
                         "Rodion",
                         "https://upload.wikimedia.org/wikipedia/commons/9/9b/CroppedStalin1943.jpg",
