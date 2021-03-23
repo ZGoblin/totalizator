@@ -13,11 +13,8 @@ import javax.inject.Inject
 //TODO add verify with wallet
 class BetUseCase @Inject constructor(
     private val betRepository: BetRepository,
-    private val userRepository: UserRepository,
     private val mapperBetModelToBetRequest: MapperBetModelToBetRequest
 ) {
-
-    private lateinit var state : BetState
 
     suspend fun bet(betToServerModel: BetToServerModel) : ApiResultWrapper<Unit> {
         val betRequest = mapperBetModelToBetRequest.map(betToServerModel)

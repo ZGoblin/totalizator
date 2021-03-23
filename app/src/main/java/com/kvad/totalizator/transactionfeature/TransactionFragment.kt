@@ -28,7 +28,5 @@ class TransactionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-
-
-
 }
+
