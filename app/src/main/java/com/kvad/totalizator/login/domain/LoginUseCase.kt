@@ -1,6 +1,5 @@
 package com.kvad.totalizator.login.domain
 
-import android.util.Log
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.models.LoginRequest
 import com.kvad.totalizator.data.models.Token
@@ -25,7 +24,7 @@ class LoginUseCase @Inject constructor(
         if (state == LoginState.WITHOUT_ERROR) {
             userRepository.login(loginRequest).doOnResult(
                 onSuccess = ::doOnSuccess,
-                onNetworkError = ::doOnNetworkError
+                onError = ::doOnError
             )
         }
 
@@ -38,8 +37,8 @@ class LoginUseCase @Inject constructor(
         state = LoginState.WITHOUT_ERROR
     }
 
-    private fun doOnNetworkError(error: ApiResultWrapper.Error) {
-        Log.d("ERROR_TAG", error.msg)
+    @Suppress("UNUSED_PARAMETER")
+    private fun doOnError(error: ApiResultWrapper.Error) {
         state = LoginState.NETWORK_ERROR
     }
 

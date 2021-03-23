@@ -29,7 +29,7 @@ suspend fun <T> safeApiCall(call: suspend () -> Response<T>) = withContext(Dispa
     }
 }
 
-inline fun <SOURCE, RESULT> ApiResultWrapper<SOURCE>.map(mapper: (SOURCE) -> RESULT): ApiResultWrapper<RESULT> {
+inline fun <SOURCE, RESULT> ApiResultWrapper<SOURCE>.mapSuccess(mapper: (SOURCE) -> RESULT): ApiResultWrapper<RESULT> {
     return when (this) {
         is ApiResultWrapper.Success -> ApiResultWrapper.Success(mapper(value))
         is ApiResultWrapper.Error -> this

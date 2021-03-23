@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.BoardPageBinding
+import com.kvad.totalizator.databinding.OnBoardBinding
 import com.kvad.totalizator.events.EventsFragment
 import com.kvad.totalizator.onboard.model.BoardInfo
 import com.kvad.totalizator.onboard.titleAdapter.BoardTitlesAdapter
@@ -18,7 +19,9 @@ import com.kvad.totalizator.tools.INFO_PAGER_KEY
 
 class BoardPageFragment : Fragment(R.layout.board_page) {
 
-    private lateinit var binding: BoardPageBinding
+    private var _binding: BoardPageBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var info: BoardInfo
     private lateinit var titleAdapter: BoardTitlesAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +39,7 @@ class BoardPageFragment : Fragment(R.layout.board_page) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = BoardPageBinding.inflate(inflater, container, false)
+        _binding = BoardPageBinding.inflate(inflater, container, false)
         setupData()
         setupListeners()
         setupRecycler()
@@ -84,6 +87,12 @@ class BoardPageFragment : Fragment(R.layout.board_page) {
             (requireParentFragment() as OnBoardFragment).swipeLeft()
         }
 
+    }
+
+    override fun onDestroyView() {
+        binding.rvTitle.adapter = null
+        _binding = null
+        super.onDestroyView()
     }
 
     companion object {
