@@ -3,8 +3,7 @@ package com.kvad.totalizator.data
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.betfeature.BetRequest
 import com.kvad.totalizator.data.api.UserService
-
-import com.kvad.totalizator.data.models.Wallet
+import com.kvad.totalizator.data.requestmodels.Wallet
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.single
 import com.kvad.totalizator.tools.safeapicall.safeApiCall

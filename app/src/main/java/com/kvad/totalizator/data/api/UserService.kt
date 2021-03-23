@@ -1,11 +1,8 @@
 package com.kvad.totalizator.data.api
 
 import com.kvad.totalizator.betfeature.BetRequest
+import com.kvad.totalizator.data.requestmodels.*
 
-import com.kvad.totalizator.data.requestmodels.Token
-import com.kvad.totalizator.data.requestmodels.LoginRequest
-import com.kvad.totalizator.data.requestmodels.RegisterRequest
-import com.kvad.totalizator.data.requestmodels.Wallet
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

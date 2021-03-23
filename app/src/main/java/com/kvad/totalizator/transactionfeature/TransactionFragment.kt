@@ -68,7 +68,7 @@ class TransactionFragment : Fragment() {
             when (it) {
                 is State.Loading -> progress.showLoading()
                 is State.Error -> { }
-                is State.Content -> progress.hideLoading()
+                is State.Content -> progress.hideAll()
             }
         }
     }
