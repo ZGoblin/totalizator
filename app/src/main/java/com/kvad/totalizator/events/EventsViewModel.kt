@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.EventRepository
 import com.kvad.totalizator.data.models.Event
-import com.kvad.totalizator.shared.ResultWrapper
+import com.kvad.totalizator.data.models.Line
 import com.kvad.totalizator.tools.ErrorState
+import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,15 +22,27 @@ class EventsViewModel @Inject constructor(
     val eventsLiveData = _eventsLiveData
 
     fun getEvents() {
+        _eventsLiveData.value = State.Loading
         viewModelScope.launch {
             updateEvents()
         }
     }
 
     private suspend fun updateEvents() {
-        when (val result = eventRepository.getEvents()) {
-            is ResultWrapper.Success -> _eventsLiveData.postValue(State.Content(result.value))
-            is ResultWrapper.DataLoadingError -> _eventsLiveData.postValue(State.Error(ErrorState.LOADING_ERROR))
+        eventRepository.getLine().collect {
+            it.doOnResult(
+                onSuccess = ::onSuccess,
+                onError = ::onError
+            )
         }
+    }
+
+    private fun onSuccess(line: Line){
+        _eventsLiveData.value = State.Content(line.events)
+    }
+
+    @Suppress("UNUSED_PARAMETER")
+    private fun onError(error: ApiResultWrapper.Error){
+        _eventsLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 }

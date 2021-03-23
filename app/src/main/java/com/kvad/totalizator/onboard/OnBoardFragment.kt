@@ -12,11 +12,13 @@ import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.OnBoardBinding
 import com.kvad.totalizator.events.EventsFragment
 import com.kvad.totalizator.onboard.viewPagerAdapter.BoardPagerAdapter
+import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
 import javax.inject.Inject
 
 class OnBoardFragment : Fragment(R.layout.on_board) {
 
-    private lateinit var binding: OnBoardBinding
+    private var _binding: OnBoardBinding? = null
+    private val binding get() = _binding!!
 
     @Inject
     lateinit var repository: BoardInfoRepository
@@ -26,7 +28,7 @@ class OnBoardFragment : Fragment(R.layout.on_board) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = OnBoardBinding.inflate(inflater, container, false)
+        _binding = OnBoardBinding.inflate(inflater, container, false)
         setupDi()
         return binding.root
     }
@@ -42,8 +44,12 @@ class OnBoardFragment : Fragment(R.layout.on_board) {
     }
 
     fun swipeRight() {
-        binding.vpInfo.currentItem += 1
-        counter = binding.vpInfo.currentItem
+        if (counter < 2) {
+            binding.vpInfo.currentItem += 1
+            counter = binding.vpInfo.currentItem
+        } else {
+            findNavController().navigate(R.id.events_fragment)
+        }
     }
 
     fun swipeLeft() {
@@ -56,4 +62,9 @@ class OnBoardFragment : Fragment(R.layout.on_board) {
         TabLayoutMediator(binding.tlOnBoard, binding.vpInfo) { _, _ -> }.attach()
     }
 
+    override fun onDestroyView() {
+        binding.vpInfo.adapter = null
+        _binding = null
+        super.onDestroyView()
+    }
 }

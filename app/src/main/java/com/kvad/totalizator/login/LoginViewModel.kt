@@ -19,7 +19,6 @@ class LoginViewModel @Inject constructor(
     val loginStateViewModel: LiveData<LoginState> = _loginStateViewModel
 
     fun login(loginRequest: LoginRequest) {
-        Log.d("safeApiCall", loginRequest.toString())
         viewModelScope.launch {
             _loginStateViewModel.value = loginUseCase.login(loginRequest)
         }

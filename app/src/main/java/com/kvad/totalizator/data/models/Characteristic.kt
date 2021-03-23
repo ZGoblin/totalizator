@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class Characteristic(
     @SerializedName("type") val type: String,
-    @SerializedName("first_player") val playerValue: String
+    @SerializedName("value") val value: String
 )
