@@ -26,6 +26,8 @@ class HeaderViewHolder(
 
     }
 
+    // TODO 23.03.2021
+    //  fix betpool
     private fun setupEventInfo() {
         binding.event.apply {
 
@@ -36,6 +38,7 @@ class HeaderViewHolder(
                         secondPlayerBetAmount = secondPlayerBetAmount,
                         drawBetAmount = drawBetAmount
                     )
+
                 )
             }
 

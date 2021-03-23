@@ -11,7 +11,6 @@ suspend fun <T> safeApiCall(call: suspend () -> Response<T>) = withContext(Dispa
     try {
         val response = call.invoke()
         val code = response.code()
-        Log.d("TAG","code -- $code")
         if (response.isSuccessful) {
             ApiResultWrapper.Success(response.body()!!)
         } else {

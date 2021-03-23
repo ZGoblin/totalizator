@@ -64,6 +64,7 @@ class EventRepository @Inject constructor(
 
         return safeApiCall {
             Response.success(
+
                 RequestEventModel(
                     "535d1a2c-bb51-4416-a6d2-f302b99992ad",
                     "sport",
