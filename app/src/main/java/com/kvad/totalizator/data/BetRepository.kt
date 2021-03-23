@@ -1,12 +1,14 @@
 package com.kvad.totalizator.data
 
+import android.util.Log
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.betfeature.BetRequest
 import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.data.requestmodels.Wallet
+
+import com.kvad.totalizator.tools.safeapicall.safeApiCall
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.single
-import com.kvad.totalizator.tools.safeapicall.safeApiCall
 
 import javax.inject.Inject
 

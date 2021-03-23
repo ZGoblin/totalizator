@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.databinding.EventHolderBinding
+import java.time.ZonedDateTime
 
 class EventHolder(
     view: View,
@@ -19,6 +20,8 @@ class EventHolder(
             setBetScale(event.betPool)
             setFirstPlayerImg(event.firstParticipant.photoLink)
             setSecondPlayerImg(event.secondParticipant.photoLink)
+
+            hideLive(!event.isLive)
 
             setOnClickListener {
                 onEventClick(event)

@@ -62,7 +62,7 @@ class TransactionFragment : Fragment() {
         viewModel.doDeposit(deposit)
         binding.etTransaction.text = null
     }
-
+	
     private fun observeLiveData() {
         progress.hideAll()
         viewModel.transactionLiveData.observe(viewLifecycleOwner) {
@@ -133,3 +133,5 @@ class TransactionFragment : Fragment() {
 
     }
 }
+
+
