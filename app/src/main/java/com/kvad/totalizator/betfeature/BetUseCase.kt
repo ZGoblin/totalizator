@@ -2,6 +2,7 @@ package com.kvad.totalizator.betfeature
 
 import android.util.Log
 import com.kvad.totalizator.data.BetRepository
+import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import javax.inject.Inject
 
@@ -12,7 +13,6 @@ class BetUseCase @Inject constructor(
 ) {
     suspend fun bet(betToServerModel: BetToServerModel) : ApiResultWrapper<Unit> {
         val betRequest = mapperBetModelToBetRequest.map(betToServerModel)
-        Log.d("TAG","betRequest -- ${betRequest.eventId.toString()}")
         return betRepository.doBet(betRequest)
     }
 }
