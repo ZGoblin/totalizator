@@ -2,6 +2,7 @@ package com.kvad.totalizator.betfeature
 
 import android.util.Log
 import com.kvad.totalizator.data.BetRepository
+import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import javax.inject.Inject
 
