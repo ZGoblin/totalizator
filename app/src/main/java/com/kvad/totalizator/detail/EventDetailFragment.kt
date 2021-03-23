@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kvad.totalizator.App
 import com.kvad.totalizator.betfeature.BetDialogFragment
-import com.kvad.totalizator.betfeature.model.ChoiceModel
 import com.kvad.totalizator.databinding.EventDetailFragmentBinding
 import com.kvad.totalizator.detail.adapter.EventDetailAdapter
 import com.kvad.totalizator.detail.model.EventDetail
@@ -52,7 +48,6 @@ class EventDetailFragment : Fragment() {
         setupDi()
         setupRecyclerView()
         setupViewModelObserver()
-
         viewModel.uploadData(eventId)
     }
 
@@ -87,11 +82,11 @@ class EventDetailFragment : Fragment() {
         eventDetailAdapter.submitList(content.data)
     }
 
+    // TODO 22.03.2021
+    //Replace with navigation component
     private fun onBtnBetClick(bet: Bet) {
-
-        val fakeModelFromEvent = ChoiceModel(eventId, bet, "First player", "Second player")
         childFragmentManager.beginTransaction()
-            .add(BetDialogFragment.newInstance(fakeModelFromEvent), "TAG")
+            .add(BetDialogFragment.newInstance(bet), "TAG")
             .commitAllowingStateLoss()
     }
 }

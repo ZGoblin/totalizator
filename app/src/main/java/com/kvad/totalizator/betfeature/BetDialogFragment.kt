@@ -2,10 +2,12 @@ package com.kvad.totalizator.betfeature
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
@@ -14,21 +16,24 @@ import com.afollestad.materialdialogs.customview.customView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
-import com.kvad.totalizator.betfeature.model.ChoiceModel
+import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
+import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.BET_DETAIL_KEY
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class BetDialogFragment : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var viewModel: BetViewModel
 
     private lateinit var binding: BetDialogFragmentBinding
-    private lateinit var detailBet: ChoiceModel
+    private lateinit var detailBet: Bet
+    private var eventId: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,40 +42,26 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     ): View {
         binding = BetDialogFragmentBinding.inflate(inflater, container, false)
         arguments?.let {
-            detailBet =
-                it.getParcelable(BET_DETAIL_KEY) ?: ChoiceModel("1", Bet.DRAW, "Error", "Error")
+            detailBet = it.getParcelable(BET_DETAIL_KEY) ?: Bet.DRAW
         }
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupDi()
-        setupData()
-        setupTextWatcher()
         setupListeners()
-        observeViewModel()
-
         binding.amountLayout.error = getString(R.string.min_bet)
         binding.etBet.requestFocus()
-        viewModel.setupData(detailBet.eventId, detailBet.betState)
-
+        viewModel.uploadData()
+        setupTextWatcher()
+        observeEventInfoLiveData()
+        observeBetLiveData()
     }
 
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
-    }
-
-    private fun setupData() {
-        binding.tvGameDetails.text =
-            getString(R.string.event_vs, detailBet.firstPlayerName, detailBet.secondPlayerName)
-        binding.tvWinnerName.text = when (detailBet.betState) {
-            Bet.FIRST_PLAYER_WIN -> detailBet.firstPlayerName
-            Bet.SECOND_PLAYER_WIN -> detailBet.secondPlayerName
-            Bet.DRAW -> getString(R.string.draw)
-        }
     }
 
     private fun setupListeners() {
@@ -79,7 +70,10 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
         binding.btnBet.setOnClickListener {
             val amount = binding.etBet.text.toString().toDouble()
-            viewModel.createBet(amount)
+            val betToServerModel = BetToServerModel(
+                "455d46d3-b608-448e-b3bf-0e75f264af59", amount, detailBet
+            )
+            viewModel.createBet(betToServerModel)
         }
         binding.vClose.setOnClickListener {
             cancelBetDialog()
@@ -98,43 +92,63 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         inputMethodManager.hideSoftInputFromWindow(view?.applicationWindowToken, 0)
     }
 
-    private fun observeViewModel() {
+    private fun observeBetLiveData() {
         viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> MaterialDialog(requireContext()).show { customView(R.layout.progress_dialog) }
-                is State.Content -> {
-                    binding.apply {
-                        etBet.visibility = View.GONE
-                        tvCancel.visibility = View.GONE
-                        tvBetGood.visibility = View.VISIBLE
-                        vClose.visibility = View.VISIBLE
-                        btnBet.isEnabled = false
-                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
-                        btnBet.setBackgroundColor(color)
-                    }
-                }
+                is State.Loading -> MaterialDialog(requireContext()).customView(R.layout.progress_dialog)
+                is State.Content -> setupBetUiResult()
                 is State.Error -> showError(it.error)
             }
         }
     }
-// TODO 22.03.2021
-//    private fun showContent() {
-//        binding.apply {
-//            etBet.visibility = View.GONE
-//            tvCancel.visibility = View.GONE
-//            tvBetGood.visibility = View.VISIBLE
-//            vClose.visibility = View.VISIBLE
-//            btnBet.isEnabled = false
-//            val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
-//            btnBet.setBackgroundColor(color)
-//        }
-//    }
+
+    private fun setupBetUiResult() {
+        binding.apply {
+            etBet.visibility = View.GONE
+            tvCancel.visibility = View.GONE
+            tvBetGood.visibility = View.VISIBLE
+            vClose.visibility = View.VISIBLE
+            btnBet.isEnabled = false
+            val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
+            btnBet.setBackgroundColor(color)
+        }
+    }
 
     private fun showError(errorState: ErrorState) {
         when (errorState) {
             ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
-            ErrorState.LOADING_ERROR -> { }
+            ErrorState.LOADING_ERROR -> {
+                Toast.makeText(requireContext(), "Loading error...", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    private fun observeEventInfoLiveData() {
+        viewModel.eventInfoLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is State.Loading -> {
+                }
+                is State.Content -> setupInfoForBet(it)
+                is State.Error -> {
+                }
+            }
+        }
+    }
+
+    private fun setupInfoForBet(state: State.Content<Event>) {
+        binding.apply {
+            tvGameDetails.text = getString(
+                R.string.event_vs,
+                state.data.participantDto1.name,
+                state.data.participantDto2.name
+            )
+            tvWinnerName.text = when (detailBet) {
+                Bet.DRAW -> getString(R.string.draw)
+                Bet.SECOND_PLAYER_WIN -> state.data.participantDto1.name
+                Bet.FIRST_PLAYER_WIN -> state.data.participantDto2.name
+            }
+        }
+        eventId = state.data.id
     }
 
     private fun setupTextWatcher() {
@@ -169,13 +183,14 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     companion object {
-        fun newInstance(choice: ChoiceModel) =
+        fun newInstance(bet: Bet) =
             BetDialogFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable(BET_DETAIL_KEY, choice)
+                    putParcelable(BET_DETAIL_KEY, bet)
                 }
             }
     }
 }
+
 
 
