@@ -43,17 +43,19 @@ class EventRepository @Inject constructor(
     var latestEvent: Flow<ApiResultWrapper<Event>> = flow {}
         private set
 
-    @Suppress("MagicNumber", "MaxLineLength","UnusedPrivateMember")
+    @Suppress("MagicNumber", "MaxLineLength", "UnusedPrivateMember")
     private suspend fun getEventById(id: String): ApiResultWrapper<Event> {
 
         val random1 = Random.nextFloat() * 100
         val random2 = Random.nextFloat() * 100
         val random3 = Random.nextFloat() * 100
 
+        val id = "70ab8247-2b21-42ed-9d90-551adb05b029"
+
         return safeApiCall {
             Response.success(
                 Event(
-                    "70ab8247-2b21-42ed-9d90-551adb05b029",
+                    id,
                     "sport",
                     ParticipantDTO(
                         1,
