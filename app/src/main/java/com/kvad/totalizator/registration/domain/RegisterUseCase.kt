@@ -1,8 +1,8 @@
 package com.kvad.totalizator.registration.domain
 
 import com.kvad.totalizator.data.UserRepository
-import com.kvad.totalizator.data.models.RegisterRequest
-import com.kvad.totalizator.data.models.Token
+import com.kvad.totalizator.data.requestmodels.RegisterRequest
+import com.kvad.totalizator.data.requestmodels.Token
 import com.kvad.totalizator.registration.RegisterState
 import com.kvad.totalizator.registration.models.RawRegisterRequest
 import com.kvad.totalizator.tools.ADULT
@@ -11,6 +11,7 @@ import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.lang.StringBuilder
 import java.util.*
 import javax.inject.Inject
 
@@ -18,7 +19,8 @@ class RegisterUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
     companion object {
-        private const val MONTH_BEFORE_ADD_NULL = 9
+        private const val MONTH_BEFORE_ADD_ZERO = 9
+        private const val DATE_SEPARATOR = "-"
     }
 
     private lateinit var state: RegisterState
@@ -27,7 +29,6 @@ class RegisterUseCase @Inject constructor(
 
         val state = verifyRegisterComponent(rawRegisterRequest)
         if (state == RegisterState.WITHOUT_ERROR) {
-
             userRepository.register(toRegisterRequest(rawRegisterRequest)).doOnResult(
                 onSuccess = ::doOnSuccess,
                 onError = ::doOnError
@@ -36,7 +37,6 @@ class RegisterUseCase @Inject constructor(
 
         state
     }
-
 
     private fun doOnSuccess(token: Token) {
         userRepository.updateToken(token)
@@ -77,10 +77,22 @@ class RegisterUseCase @Inject constructor(
         RegisterRequest(
             email = rawRegisterRequest.email,
             password = rawRegisterRequest.password,
-            dob = "${rawRegisterRequest.year}-${
-                if (rawRegisterRequest.month > MONTH_BEFORE_ADD_NULL) rawRegisterRequest.month
-                else "0${rawRegisterRequest.month}"
-            }-${rawRegisterRequest.day}"
+            dob = dateToString(rawRegisterRequest)
         )
+    }
+
+    private suspend fun dateToString(rawRegisterRequest: RawRegisterRequest) = withContext(Dispatchers.Default) {
+        StringBuilder()
+            .append(rawRegisterRequest.year)
+            .append(DATE_SEPARATOR)
+            .append(
+                if (rawRegisterRequest.month > MONTH_BEFORE_ADD_ZERO)
+                    rawRegisterRequest.month
+                else
+                    "0${rawRegisterRequest.month}"
+            )
+            .append(DATE_SEPARATOR)
+            .append(rawRegisterRequest.day)
+            .toString()
     }
 }
