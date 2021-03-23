@@ -15,10 +15,9 @@ class MapEventToDetailUiModel @Inject constructor() {
         resultList.add(
             EventDetail.HeaderInfoUiModel(
                 event.id,
-                event.sportName,
-                event.participant1,
-                event.participant2,
-                BetPool(event.amountW1, event.amountW2, event.amountX)
+                event.firstParticipant,
+                event.secondParticipant,
+                event.betPool
             )
         )
 
