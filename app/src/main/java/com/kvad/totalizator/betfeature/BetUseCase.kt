@@ -21,6 +21,7 @@ class BetUseCase @Inject constructor(
 
     suspend fun bet(betToServerModel: BetToServerModel) : ApiResultWrapper<Unit> {
         val betRequest = mapperBetModelToBetRequest.map(betToServerModel)
+        Log.d("TAG",betRequest.choice)
         return betRepository.doBet(betRequest)
     }
 //TODO

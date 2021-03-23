@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.kvad.totalizator.App
+import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.EventDetailFragmentBinding
 import com.kvad.totalizator.detail.adapter.EventDetailAdapter
 import com.kvad.totalizator.detail.model.EventDetail
@@ -91,6 +95,7 @@ class EventDetailFragment : Fragment() {
 
     private fun onBtnBetClick(bet: Bet) {
         val action = EventDetailFragmentDirections.actionBetDialogFragment(bet)
+        Toast.makeText(requireContext(),"${bet}",Toast.LENGTH_SHORT).show()
         findNavController().navigate(action)
     }
 }

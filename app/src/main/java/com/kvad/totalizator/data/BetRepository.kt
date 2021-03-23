@@ -1,5 +1,6 @@
 package com.kvad.totalizator.data
 
+import android.util.Log
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.betfeature.BetRequest
 import com.kvad.totalizator.data.api.UserService
@@ -15,6 +16,7 @@ class BetRepository @Inject constructor(
 
     suspend fun doBet(betRequest: BetRequest): ApiResultWrapper<Unit>  {
         return safeApiCall {
+            Log.d("TAG",betRequest.choice)
             userService.doBet(betRequest)
         }
     }

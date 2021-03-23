@@ -1,10 +1,11 @@
 package com.kvad.totalizator.shared
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
-enum class Bet : Parcelable {
+@Keep
+enum class Bet {
     FIRST_PLAYER_WIN,
     SECOND_PLAYER_WIN,
     DRAW
