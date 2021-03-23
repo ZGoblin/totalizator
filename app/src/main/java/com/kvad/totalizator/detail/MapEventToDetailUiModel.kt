@@ -17,7 +17,7 @@ class MapEventToDetailUiModel @Inject constructor() {
                 event.id,
                 event.firstParticipant,
                 event.secondParticipant,
-                BetPool(1000f, 1000f, 1000f)
+                event.betPool
             )
         )
 

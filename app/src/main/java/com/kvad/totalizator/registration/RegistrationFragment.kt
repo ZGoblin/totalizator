@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
+import com.kvad.totalizator.databinding.EventsFragmentBinding
 import com.kvad.totalizator.databinding.RegistrationFragmentBinding
 import com.kvad.totalizator.registration.models.RawRegisterRequest
 import java.util.*
@@ -19,14 +20,15 @@ class RegistrationFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: RegistrationViewModel
-    private lateinit var binding: RegistrationFragmentBinding
+    private var _binding: RegistrationFragmentBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = RegistrationFragmentBinding.inflate(inflater, container, false)
+        _binding = RegistrationFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -93,5 +95,10 @@ class RegistrationFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }
