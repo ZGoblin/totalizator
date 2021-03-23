@@ -33,13 +33,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="70dp"/>
+        app:layout_constraintGuide_begin="70dp" />
+
+    <ToggleButton
+        android:id="@+id/tbChoiceTransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textOff = "Deposit"
+        android:textOn="Withdraw"
+        app:layout_constraintTop_toBottomOf="@id/guideline_balance" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tlInputBalance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         app:counterMaxLength="9"
         app:layout_constraintTop_toBottomOf="@id/guideline_balance"
         tools:layout_editor_absoluteX="0dp">
@@ -48,7 +58,7 @@
             android:id="@+id/etTransaction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_edit_text"
+            android:layout_margin="20dp"
             android:background="@color/white"
             android:focusable="true"
             android:inputType="numberDecimal"
@@ -58,12 +68,13 @@
             android:textColorHint="@color/light_grey" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTransaction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="180dp"
             android:background="@color/lite_green"
             android:text="Поповнити рахунок"
+            android:enabled="false"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />

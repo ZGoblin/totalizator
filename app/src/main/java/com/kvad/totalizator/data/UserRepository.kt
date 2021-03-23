@@ -1,10 +1,7 @@
 package com.kvad.totalizator.data
 
 import com.kvad.totalizator.data.api.UserService
-import com.kvad.totalizator.data.models.LoginRequest
-import com.kvad.totalizator.data.models.RegisterRequest
-import com.kvad.totalizator.data.models.Token
-import com.kvad.totalizator.data.models.Wallet
+import com.kvad.totalizator.data.models.*
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.safeApiCall
@@ -34,6 +31,12 @@ class UserRepository @Inject constructor(
         while (true) {
             emit(safeApiCall(userService::wallet))
             delay(REQUEST_DELAY)
+        }
+    }
+
+    suspend fun doTransaction(transactionRequest: TransactionRequest) : ApiResultWrapper<Unit>{
+        return safeApiCall {
+            userService.transaction(transactionRequest)
         }
     }
 

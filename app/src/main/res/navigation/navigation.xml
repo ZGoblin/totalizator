@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/events_fragment">
+    app:startDestination="@id/transaction_fragment">
 
     <fragment
         android:id="@+id/events_fragment"
@@ -18,6 +18,12 @@
         android:id="@+id/on_board_fragment"
         android:name="com.kvad.totalizator.onboard.OnBoardFragment"
         tools:layout="@layout/on_board">
+    </fragment>
+
+    <fragment
+        android:id="@+id/transaction_fragment"
+        android:name="com.kvad.totalizator.transactionfeature.TransactionFragment"
+        tools:layout="@layout/transaction_fragment">
     </fragment>
 
     <fragment
