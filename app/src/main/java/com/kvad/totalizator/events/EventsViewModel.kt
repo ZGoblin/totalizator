@@ -4,8 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.EventRepository
-import com.kvad.totalizator.data.models.Event
-import com.kvad.totalizator.data.models.Line
+import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State
@@ -37,8 +36,8 @@ class EventsViewModel @Inject constructor(
         }
     }
 
-    private fun onSuccess(line: Line){
-        _eventsLiveData.value = State.Content(line.events)
+    private fun onSuccess(line: List<Event>){
+        _eventsLiveData.value = State.Content(line)
     }
 
     @Suppress("UNUSED_PARAMETER")

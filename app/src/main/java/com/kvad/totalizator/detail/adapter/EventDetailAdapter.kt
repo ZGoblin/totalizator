@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kvad.totalizator.R
-import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.shared.Bet
 
