@@ -1,12 +1,12 @@
-package com.kvad.totalizator.data.models
+package com.kvad.totalizator.data.requestmodels
 
 import com.google.gson.annotations.SerializedName
 
-data class Event(
+data class RequestEventModel(
     @SerializedName("id") val id: String,
     @SerializedName("sportName") val sportName: String,
-    @SerializedName("participant1") val participant1: ParticipantDTO,
-    @SerializedName("participant2") val participant2: ParticipantDTO,
+    @SerializedName("participant1") val participant1: Participant,
+    @SerializedName("participant2") val participant2: Participant,
     @SerializedName("startTime") val startTime: String,
     @SerializedName("isEnded") val isEnded: Boolean,
     @SerializedName("possibleResults") val possibleResults: List<String>,

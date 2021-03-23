@@ -1,7 +1,7 @@
 package com.kvad.totalizator.detail
 
-import com.kvad.totalizator.data.models.BetPool
-import com.kvad.totalizator.data.models.Event
+import com.kvad.totalizator.data.model.BetPool
+import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.detail.model.EventDetail
 import javax.inject.Inject
 
@@ -15,15 +15,14 @@ class MapEventToDetailUiModel @Inject constructor() {
         resultList.add(
             EventDetail.HeaderInfoUiModel(
                 event.id,
-                event.sportName,
-                event.participant1,
-                event.participant2,
+                event.firstParticipant,
+                event.secondParticipant,
                 BetPool(1000f, 1000f, 1000f)
             )
         )
 
-        event.participant1.characteristics.forEach { firstPlayerCharacteristic ->
-            event.participant2.characteristics.forEach { secondPlayerCharacteristic ->
+        event.firstParticipant.characteristics.forEach { firstPlayerCharacteristic ->
+            event.secondParticipant.characteristics.forEach { secondPlayerCharacteristic ->
                 if (firstPlayerCharacteristic.type == secondPlayerCharacteristic.type){
                     resultList.add(EventDetail.CharacteristicUiModel(
                         firstPlayerCharacteristic.type,

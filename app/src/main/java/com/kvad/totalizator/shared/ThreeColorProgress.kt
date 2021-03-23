@@ -9,6 +9,7 @@ import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import com.kvad.totalizator.R
+import com.kvad.totalizator.data.model.BetPool
 
 class ThreeColorProgress @JvmOverloads constructor(
     context: Context,
@@ -23,12 +24,12 @@ class ThreeColorProgress @JvmOverloads constructor(
 
     private var sumOfPercent: Float = 0F
 
-    fun setupData(betAmountForEachOutcome: BetAmountForEachOutcome) {
+    fun setupData(betAmountForEachOutcome: BetPool) {
 
         progressItems = arrayOf(
-            ProgressItemKt(betAmountForEachOutcome.firstPlayerWinBetAmount, R.color.blue),
-            ProgressItemKt(betAmountForEachOutcome.draw, R.color.light_grey),
-            ProgressItemKt(betAmountForEachOutcome.secondPlayerWinBetAmount, R.color.red)
+            ProgressItemKt(betAmountForEachOutcome.firstPlayerBetAmount.toInt(), R.color.blue),
+            ProgressItemKt(betAmountForEachOutcome.drawBetAmount.toInt(), R.color.light_grey),
+            ProgressItemKt(betAmountForEachOutcome.secondPlayerBetAmount.toInt(), R.color.red)
         )
 
         this.invalidate()

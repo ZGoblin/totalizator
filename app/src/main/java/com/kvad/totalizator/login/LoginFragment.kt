@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
-import com.kvad.totalizator.data.models.LoginRequest
+import com.kvad.totalizator.data.requestmodels.LoginRequest
 import com.kvad.totalizator.databinding.LoginFragmentBinding
 import javax.inject.Inject
 

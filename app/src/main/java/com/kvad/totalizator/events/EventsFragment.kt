@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.kvad.totalizator.App
-import com.kvad.totalizator.data.models.Event
+import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.databinding.EventsFragmentBinding
 import com.kvad.totalizator.events.adapter.EventAdapter
 import com.kvad.totalizator.tools.ErrorState
