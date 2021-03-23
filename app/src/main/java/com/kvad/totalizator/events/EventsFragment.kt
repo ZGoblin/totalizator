@@ -31,6 +31,7 @@ class EventsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = EventsFragmentBinding.inflate(inflater, container, false)
+        stateVisibilityController = StateVisibilityController(binding.pbProgress, binding.tvError)
         return binding.root
     }
 
@@ -40,7 +41,6 @@ class EventsFragment : Fragment() {
         setupDi()
         setupRecycler()
         setupLiveDataObserver()
-        stateVisibilityController = StateVisibilityController(binding.pbProgress, binding.tvError)
 
         viewModel.getEvents()
     }

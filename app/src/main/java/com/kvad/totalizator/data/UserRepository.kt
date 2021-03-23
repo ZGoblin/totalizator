@@ -1,5 +1,6 @@
 package com.kvad.totalizator.data
 
+import android.util.Log
 import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.data.models.LoginRequest
 import com.kvad.totalizator.data.models.RegisterRequest
