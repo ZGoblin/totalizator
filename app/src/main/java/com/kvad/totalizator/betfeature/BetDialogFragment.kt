@@ -71,7 +71,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding.btnBet.setOnClickListener {
             val amount = binding.etBet.text.toString().toDouble()
             val betToServerModel = BetToServerModel(
-                "70ab8247-2b21-42ed-9d90-551adb05b029", amount, detailBet
+                eventId, amount, detailBet
             )
             viewModel.createBet(betToServerModel)
         }
@@ -111,13 +111,14 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             btnBet.isEnabled = false
             val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
             btnBet.setBackgroundColor(color)
+            hideKeyBoard()
         }
     }
 
     private fun showError(errorState: ErrorState) {
         when (errorState) {
             ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
-            ErrorState.LOADING_ERROR -> { Toast.makeText(requireContext(), "Loading error...", Toast.LENGTH_SHORT).show() }
+            ErrorState.LOADING_ERROR -> { }
         }
     }
 
@@ -126,7 +127,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             when (it) {
                 is State.Loading -> { }
                 is State.Content -> setupInfoForBet(it)
-                is State.Error -> { }
+                is State.Error -> cancelBetDialog()
             }
         }
     }
@@ -140,8 +141,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             )
             tvWinnerName.text = when (detailBet) {
                 Bet.DRAW -> getString(R.string.draw)
-                Bet.SECOND_PLAYER_WIN -> state.data.participantDto1.name
-                Bet.FIRST_PLAYER_WIN -> state.data.participantDto2.name
+                Bet.SECOND_PLAYER_WIN -> state.data.participantDto2.name
+                Bet.FIRST_PLAYER_WIN -> state.data.participantDto1.name
             }
         }
         eventId = state.data.id
