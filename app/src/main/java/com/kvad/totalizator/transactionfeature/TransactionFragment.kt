@@ -18,7 +18,8 @@ class TransactionFragment : Fragment() {
 
     private lateinit var binding: TransactionFragmentBinding
     private lateinit var transactionState: TransactionState
-    private lateinit var progress : StateVisibilityController
+    private lateinit var progress: StateVisibilityController
+
     @Inject
     lateinit var viewModel: TransactionViewModel
 
@@ -35,7 +36,7 @@ class TransactionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progress = StateVisibilityController(binding.progressBarr,null)
+        progress = StateVisibilityController(binding.progressBarr, null)
         setupDi()
         setupListeners()
         setupTextWatcher()
@@ -67,7 +68,8 @@ class TransactionFragment : Fragment() {
         viewModel.transactionLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> progress.showLoading()
-                is State.Error -> { }
+                is State.Error -> {
+                }
                 is State.Content -> progress.hideAll()
             }
         }
@@ -75,17 +77,24 @@ class TransactionFragment : Fragment() {
 
     private fun setupListeners() {
         binding.tbChoiceTransaction.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                binding.btnTransaction.text = getString(R.string.deposit)
-                transactionState = TransactionState.DEPOSIT
-            } else {
-                binding.btnTransaction.text = getString(R.string.withdraw)
-                transactionState = TransactionState.WITHDRAW
-            }
+            setupCheck(isChecked)
         }
 
         binding.btnTransaction.setOnClickListener {
             doTransaction()
+        }
+    }
+
+    private fun setupCheck(check: Boolean) {
+        when (check) {
+            true -> {
+                binding.btnTransaction.text = getString(R.string.deposit)
+                transactionState = TransactionState.DEPOSIT
+            }
+            false -> {
+                binding.btnTransaction.text = getString(R.string.withdraw)
+                transactionState = TransactionState.WITHDRAW
+            }
         }
     }
 
@@ -100,17 +109,23 @@ class TransactionFragment : Fragment() {
                         binding.btnTransaction.setBackgroundColor(colorBackGround)
                         val colorForeGround =
                             ContextCompat.getColor(requireContext(), R.color.black)
-                        binding.btnTransaction.setTextColor(colorForeGround)
+                        binding.btnTransaction.apply {
+                            setBackgroundColor(colorBackGround)
+                            setTextColor(colorForeGround)
+                        }
                     }
                 }
                 else -> {
                     binding.btnTransaction.apply {
                         isEnabled = true
-                        val color = ContextCompat.getColor(requireContext(), R.color.lite_green)
-                        binding.btnTransaction.setBackgroundColor(color)
+                        val colorBackGround =
+                            ContextCompat.getColor(requireContext(), R.color.lite_green)
                         val colorForeGround =
                             ContextCompat.getColor(requireContext(), R.color.white)
-                        binding.btnTransaction.setTextColor(colorForeGround)
+                        binding.btnTransaction.apply {
+                            setBackgroundColor(colorBackGround)
+                            setTextColor(colorForeGround)
+                        }
                     }
                 }
             }

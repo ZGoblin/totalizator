@@ -55,6 +55,8 @@
 
     <string name="withdraw">withdraw</string>
     <string name="deposit">deposit</string>
+    <string name="go_deposit">Go Deposit</string>
+    <string name="go_withdraw">Go Withdraw</string>
 
 
 </resources>
