@@ -1,6 +1,5 @@
 package com.kvad.totalizator.registration.domain
 
-import android.util.Log
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.models.RegisterRequest
 import com.kvad.totalizator.data.models.Token
@@ -31,7 +30,7 @@ class RegisterUseCase @Inject constructor(
 
             userRepository.register(toRegisterRequest(rawRegisterRequest)).doOnResult(
                 onSuccess = ::doOnSuccess,
-                onNetworkError = ::doOnNetworkError
+                onError = ::doOnError
             )
         }
 
@@ -44,8 +43,7 @@ class RegisterUseCase @Inject constructor(
         state = RegisterState.WITHOUT_ERROR
     }
 
-    private fun doOnNetworkError(error: ApiResultWrapper.Error) {
-        Log.d("ERROR_TAG", error.msg)
+    private fun doOnError(error: ApiResultWrapper.Error) {
         state = RegisterState.NETWORK_ERROR
     }
 

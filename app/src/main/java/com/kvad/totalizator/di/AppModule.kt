@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.gson.GsonBuilder
 import com.kvad.totalizator.data.EventRepository
 import com.kvad.totalizator.data.UserRepository
-import com.kvad.totalizator.data.api.EventMockService
+import com.kvad.totalizator.data.api.EventService
 import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.tools.API_URL
 import com.kvad.totalizator.tools.HeaderInterceptor
@@ -28,13 +28,7 @@ class AppModule(private val context: Context) {
 
     @Singleton
     @Provides
-    fun provideEventRepository(): EventRepository {
-        return EventRepository(EventMockService())
-    }
-
-    @Singleton
-    @Provides
-    fun provideUserService(headerInterceptor: HeaderInterceptor): UserService {
+    fun provideRetrofit(headerInterceptor: HeaderInterceptor) : Retrofit {
         return Retrofit.Builder()
             .client(
                 OkHttpClient().newBuilder()
@@ -48,7 +42,17 @@ class AppModule(private val context: Context) {
                 )
             )
             .build()
-            .create(UserService::class.java)
     }
 
+    @Singleton
+    @Provides
+    fun provideUserService(retrofit: Retrofit): UserService {
+        return retrofit.create(UserService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEventService(retrofit: Retrofit): EventService {
+        return retrofit.create(EventService::class.java)
+    }
 }

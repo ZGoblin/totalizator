@@ -72,11 +72,17 @@ class EventViewGroup @JvmOverloads constructor(
     }
 
     fun setFirstPlayerImg(url: String) {
-        Glide.with(this).load(url).into(binding.ivFirstPlayer)
+        Glide.with(this)
+            .load(url)
+            .placeholder(R.drawable.player_image_not_found)
+            .into(binding.ivFirstPlayer)
     }
 
     fun setSecondPlayerImg(url: String) {
-        Glide.with(this).load(url).into(binding.ivSecondPlayer)
+        Glide.with(this)
+            .load(url)
+            .placeholder(R.drawable.player_image_not_found)
+            .into(binding.ivSecondPlayer)
     }
 
     fun setBetScale(betAmountForEachOutcome: BetAmountForEachOutcome) {

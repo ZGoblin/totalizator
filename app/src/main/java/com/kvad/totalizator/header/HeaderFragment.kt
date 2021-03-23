@@ -66,7 +66,6 @@ class HeaderFragment : Fragment() {
     private fun showLoginButton(show: Boolean) {
         binding.apply {
             if (show) {
-
                 tvLogin.visibility = View.VISIBLE
                 tvCurrency.visibility = View.GONE
                 tvCurrencyValue.visibility = View.GONE

@@ -45,12 +45,10 @@ class HeaderViewModel @Inject constructor(
     }
 
     private fun doOnLoginError(error: ApiResultWrapper.Error){
-        Log.d("ERROR_TAG", error.msg)
         _headerLiveData.value = State.Error(ErrorState.LOGIN_ERROR)
     }
 
     private fun doOnNetworkError(error: ApiResultWrapper.Error){
-        Log.d("ERROR_TAG", error.msg)
         _headerLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 }
