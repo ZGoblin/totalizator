@@ -1,5 +1,6 @@
 package com.kvad.totalizator.data
 
+import android.util.Log
 import com.kvad.totalizator.data.api.EventService
 import com.kvad.totalizator.data.mappers.MapRequestEventToEvent
 import com.kvad.totalizator.data.model.Event
