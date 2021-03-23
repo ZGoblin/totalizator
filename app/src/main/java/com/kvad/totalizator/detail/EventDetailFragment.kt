@@ -95,9 +95,9 @@ class EventDetailFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        _binding = null
         controller.destroy()
         binding.rvEventDetailInfo.adapter = null
+        _binding = null
         super.onDestroyView()
     }
 
