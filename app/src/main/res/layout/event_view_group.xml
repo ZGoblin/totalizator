@@ -120,4 +120,17 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7"/>
 
+    <TextView
+        android:id="@+id/tvLive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Live"
+        android:textSize="20sp"
+        android:background="@drawable/live_background"
+        android:layout_margin="20dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

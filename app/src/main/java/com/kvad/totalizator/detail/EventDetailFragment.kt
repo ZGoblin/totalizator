@@ -48,10 +48,17 @@ class EventDetailFragment : Fragment() {
 
         setupDi()
         setupRecyclerView()
+        setupListener()
         setupViewModelObserver()
 
         arguments?.let {
             viewModel.uploadData(EventDetailFragmentArgs.fromBundle(it).eventId)
+        }
+    }
+
+    private fun setupListener() {
+        binding.tvBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 

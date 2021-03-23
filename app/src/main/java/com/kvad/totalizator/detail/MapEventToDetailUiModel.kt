@@ -2,9 +2,9 @@ package com.kvad.totalizator.detail
 
 import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.detail.model.EventDetail
+import java.time.ZonedDateTime
 import javax.inject.Inject
 
-@Suppress("MagicNumber")
 class MapEventToDetailUiModel @Inject constructor() {
 
     fun map(event: Event): List<EventDetail> {
@@ -16,9 +16,19 @@ class MapEventToDetailUiModel @Inject constructor() {
                 event.id,
                 event.firstParticipant,
                 event.secondParticipant,
-                event.betPool
+                event.betPool,
+                event.isLive
             )
         )
+
+        if (!event.isLive) {
+            resultList.add(
+                EventDetail.ButtonsInfoUiModel(
+                    event.firstParticipant,
+                    event.secondParticipant
+                )
+            )
+        }
 
         event.firstParticipant.characteristics.forEach { firstPlayerCharacteristic ->
             event.secondParticipant.characteristics.forEach { secondPlayerCharacteristic ->

@@ -9,8 +9,7 @@ import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.shared.Bet
 
 class HeaderViewHolder(
-    view: View,
-    private val onBetButtonClick: (Bet) -> Unit = { _ -> }
+    view: View
 ) : RecyclerView.ViewHolder(view) {
 
     private val binding = EventDetailHeaderViewHolderBinding.bind(itemView)
@@ -20,10 +19,7 @@ class HeaderViewHolder(
     fun onBind(eventInfo: EventDetail.HeaderInfoUiModel) {
 
         this.eventInfo = eventInfo
-
-        setupListeners()
         setupEventInfo()
-
     }
 
     // TODO 23.03.2021
@@ -48,29 +44,7 @@ class HeaderViewHolder(
             setFirstPlayerName(eventInfo.participant1.name)
             setSecondPlayerName(eventInfo.participant2.name)
 
-        }
-
-
-        binding.apply {
-            btnFirstPlayerWin.text =
-                itemView.resources.getString(R.string.bet_on, eventInfo.participant1.name)
-            btnSecondPlayerWin.text =
-                itemView.resources.getString(R.string.bet_on, eventInfo.participant2.name)
-        }
-    }
-
-
-    private fun setupListeners() {
-        binding.btnDraw.setOnClickListener {
-            onBetButtonClick.invoke(Bet.DRAW)
-        }
-
-        binding.btnFirstPlayerWin.setOnClickListener {
-            onBetButtonClick.invoke(Bet.FIRST_PLAYER_WIN)
-        }
-
-        binding.btnSecondPlayerWin.setOnClickListener {
-            onBetButtonClick.invoke(Bet.SECOND_PLAYER_WIN)
+            hideLive(!eventInfo.isLive)
         }
     }
 }

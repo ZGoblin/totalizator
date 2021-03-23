@@ -20,7 +20,7 @@ class EventsViewModel @Inject constructor(
     private val _eventsLiveData = MutableLiveData<EventState>()
     val eventsLiveData = _eventsLiveData
 
-    fun getEvents() {
+    init {
         _eventsLiveData.value = State.Loading
         viewModelScope.launch {
             updateEvents()
