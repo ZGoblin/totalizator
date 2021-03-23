@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.kvad.totalizator.App
-import com.kvad.totalizator.betfeature.BetDialogFragment
 import com.kvad.totalizator.databinding.EventDetailFragmentBinding
-import com.kvad.totalizator.databinding.HeaderFragmentBinding
 import com.kvad.totalizator.detail.adapter.EventDetailAdapter
 import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.shared.Bet
@@ -25,7 +24,6 @@ class EventDetailFragment : Fragment() {
     private var _binding: EventDetailFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private var eventId: String = ""
     private val eventDetailAdapter = EventDetailAdapter(::onBtnBetClick)
     private lateinit var controller: StateVisibilityController
 
@@ -44,14 +42,13 @@ class EventDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.let {
-            eventId = EventDetailFragmentArgs.fromBundle(it).eventId
-        }
-
         setupDi()
         setupRecyclerView()
         setupViewModelObserver()
-        viewModel.uploadData(eventId)
+
+        arguments?.let {
+            viewModel.uploadData(EventDetailFragmentArgs.fromBundle(it).eventId)
+        }
     }
 
     private fun setupDi() {
@@ -74,6 +71,7 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun updateScreenInfo(state: eventDetailState) {
+        controller.hideAll()
         when (state) {
             is State.Content -> showContent(state)
             is State.Error -> controller.showError()
@@ -82,7 +80,6 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun showContent(content: State.Content<List<EventDetail>>) {
-        controller.hideAll()
         eventDetailAdapter.submitList(content.data)
     }
 
@@ -92,11 +89,8 @@ class EventDetailFragment : Fragment() {
         super.onDestroyView()
     }
 
-    // TODO 22.03.2021
-    //Replace with navigation component
     private fun onBtnBetClick(bet: Bet) {
-        childFragmentManager.beginTransaction()
-            .add(BetDialogFragment.newInstance(bet), "TAG")
-            .commitAllowingStateLoss()
+        val action = EventDetailFragmentDirections.actionBetDialogFragment(bet)
+        findNavController().navigate(action)
     }
 }

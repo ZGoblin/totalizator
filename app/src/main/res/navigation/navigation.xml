@@ -24,6 +24,9 @@
         android:id="@+id/detail_fragment"
         android:name="com.kvad.totalizator.detail.EventDetailFragment"
         tools:layout="@layout/event_detail_fragment">
+        <action
+            android:id="@+id/action_bet_dialog_fragment"
+            app:destination="@id/bet_dialog_fragment" />
         <argument
             android:name="eventId"
             app:argType="string"
@@ -33,15 +36,20 @@
     <fragment
         android:id="@+id/login_fragment"
         android:name="com.kvad.totalizator.login.LoginFragment"
-        tools:layout="@layout/login_fragment"/>
+        tools:layout="@layout/login_fragment" />
 
     <fragment
         android:id="@+id/registration_fragment"
         android:name="com.kvad.totalizator.registration.RegistrationFragment"
         tools:layout="@layout/registration_fragment" />
-    <fragment
-        android:id="@+id/header_fragment"
-        android:name="com.kvad.totalizator.header.HeaderFragment"
-        tools:layout="@layout/header_fragment" />
+
+    <dialog
+        android:id="@+id/bet_dialog_fragment"
+        android:name="com.kvad.totalizator.betfeature.BetDialogFragment"
+        tools:layout="@layout/bet_dialog_fragment" >
+        <argument
+            android:name="bet"
+            app:argType="com.kvad.totalizator.shared.Bet" />
+    </dialog>
 
 </navigation>
