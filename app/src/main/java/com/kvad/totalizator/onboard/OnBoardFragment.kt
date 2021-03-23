@@ -47,8 +47,7 @@ class OnBoardFragment : Fragment(R.layout.on_board) {
         if (counter < 2) {
             binding.vpInfo.currentItem += 1
             counter = binding.vpInfo.currentItem
-        }
-        else {
+        } else {
             findNavController().navigate(R.id.events_fragment)
         }
     }
@@ -64,6 +63,7 @@ class OnBoardFragment : Fragment(R.layout.on_board) {
     }
 
     override fun onDestroyView() {
+        binding.vpInfo.adapter = null
         _binding = null
         super.onDestroyView()
     }

@@ -1,14 +1,15 @@
 package com.kvad.totalizator.events
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.EventRepository
 import com.kvad.totalizator.data.models.Event
+import com.kvad.totalizator.data.models.Line
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,24 +22,27 @@ class EventsViewModel @Inject constructor(
     val eventsLiveData = _eventsLiveData
 
     fun getEvents() {
+        _eventsLiveData.value = State.Loading
         viewModelScope.launch {
             updateEvents()
         }
     }
 
     private suspend fun updateEvents() {
-        eventRepository.getEvents().doOnResult(
-            onSuccess = ::onSuccess,
-            onError = ::onError
-        )
+        eventRepository.getLine().collect {
+            it.doOnResult(
+                onSuccess = ::onSuccess,
+                onError = ::onError
+            )
+        }
     }
 
-    private fun onSuccess(eventList: List<Event>){
-        _eventsLiveData.value = State.Content(eventList)
+    private fun onSuccess(line: Line){
+        _eventsLiveData.value = State.Content(line.events)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun onError(error: ApiResultWrapper.Error){
-        Log.d("ERROR_TAG", error.msg)
         _eventsLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 }
