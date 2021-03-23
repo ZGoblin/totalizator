@@ -4,18 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.TransactionFragmentBinding
+import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.StateVisibilityController
+import javax.inject.Inject
 
 class TransactionFragment : Fragment() {
 
     private lateinit var binding: TransactionFragmentBinding
     private lateinit var transactionState: TransactionState
+    private lateinit var progress : StateVisibilityController
+    @Inject
+    lateinit var viewModel: TransactionViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,11 +35,13 @@ class TransactionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        progress = StateVisibilityController(binding.progressBarr,null)
         setupDi()
         setupListeners()
         setupTextWatcher()
         setupState()
         binding.etTransaction.requestFocus()
+        observeLiveData()
     }
 
     private fun setupDi() {
@@ -41,30 +49,43 @@ class TransactionFragment : Fragment() {
         app.getComponent().inject(this)
     }
 
-    private fun setupState(){
+    private fun setupState() {
         transactionState = TransactionState.DEPOSIT
     }
 
+    private fun doTransaction() {
+        val deposit = TransactionModel(
+            amount = binding.etTransaction.text.toString().toDouble(),
+            type = transactionState
+        )
+        viewModel.doDeposit(deposit)
+        binding.etTransaction.text = null
+    }
+
+    private fun observeLiveData() {
+        progress.hideAll()
+        viewModel.transactionLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is State.Loading -> progress.showLoading()
+                is State.Error -> { }
+                is State.Content -> progress.hideLoading()
+            }
+        }
+    }
 
     private fun setupListeners() {
         binding.tbChoiceTransaction.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                Toast.makeText(
-                    requireContext(),
-                    binding.tbChoiceTransaction.textOff.toString(),
-                    Toast.LENGTH_SHORT
-                ).show()
-                binding.btnTransaction.text = "Поповнити рахунок"
+                binding.btnTransaction.text = getString(R.string.deposit)
                 transactionState = TransactionState.DEPOSIT
             } else {
-                Toast.makeText(
-                    requireContext(),
-                    binding.tbChoiceTransaction.textOn.toString(),
-                    Toast.LENGTH_SHORT
-                ).show()
-                binding.btnTransaction.text = "Снять деньги"
+                binding.btnTransaction.text = getString(R.string.withdraw)
                 transactionState = TransactionState.WITHDRAW
             }
+        }
+
+        binding.btnTransaction.setOnClickListener {
+            doTransaction()
         }
     }
 
@@ -72,20 +93,23 @@ class TransactionFragment : Fragment() {
         binding.etTransaction.doOnTextChanged { text, _, _, _ ->
             when {
                 text?.isEmpty() == true -> {
-                    binding.btnTransaction.apply{
+                    binding.btnTransaction.apply {
                         isEnabled = false
-                        val colorBackGround = ContextCompat.getColor(requireContext(), R.color.light_grey)
+                        val colorBackGround =
+                            ContextCompat.getColor(requireContext(), R.color.light_grey)
                         binding.btnTransaction.setBackgroundColor(colorBackGround)
-                        val colorForeGround = ContextCompat.getColor(requireContext(), R.color.black)
+                        val colorForeGround =
+                            ContextCompat.getColor(requireContext(), R.color.black)
                         binding.btnTransaction.setTextColor(colorForeGround)
                     }
                 }
                 else -> {
-                    binding.btnTransaction.apply{
+                    binding.btnTransaction.apply {
                         isEnabled = true
                         val color = ContextCompat.getColor(requireContext(), R.color.lite_green)
                         binding.btnTransaction.setBackgroundColor(color)
-                        val colorForeGround = ContextCompat.getColor(requireContext(), R.color.white)
+                        val colorForeGround =
+                            ContextCompat.getColor(requireContext(), R.color.white)
                         binding.btnTransaction.setTextColor(colorForeGround)
                     }
                 }

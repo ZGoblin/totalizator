@@ -8,9 +8,8 @@ class TransactionUseCase @Inject constructor(
     private val userRepository: UserRepository,
     private val mapperTransactionToTransactionRequest: MapperTransactionToTransactionRequest
 ){
-    suspend fun deposit(transactionBody: TransactionBody) : ApiResultWrapper<Unit>{
-        val transactionRequest = mapperTransactionToTransactionRequest.map(transactionBody)
+    suspend fun deposit(transactionModel: TransactionModel) : ApiResultWrapper<Unit>{
+        val transactionRequest = mapperTransactionToTransactionRequest.map(transactionModel)
         return userRepository.doTransaction(transactionRequest)
     }
-
 }

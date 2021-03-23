@@ -5,10 +5,10 @@ import javax.inject.Inject
 
 class MapperTransactionToTransactionRequest @Inject constructor(){
 
-    fun map(transactionBody: TransactionBody) : TransactionRequest{
+    fun map(transactionModel: TransactionModel) : TransactionRequest{
         return TransactionRequest(
-            amount = transactionBody.amount,
-            type = when(transactionBody.type){
+            amount = transactionModel.amount,
+            type = when(transactionModel.type){
                 TransactionState.WITHDRAW -> "withdraw"
                 TransactionState.DEPOSIT -> "deposit"
             }

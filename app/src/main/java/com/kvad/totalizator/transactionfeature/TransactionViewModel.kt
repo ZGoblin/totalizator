@@ -18,15 +18,14 @@ class TransactionViewModel @Inject constructor(
     private var _transactionLiveData = MutableLiveData<transactionStateLiveData>()
     val transactionLiveData : LiveData<transactionStateLiveData> = _transactionLiveData
 
-    fun doDeposit(transactionBody: TransactionBody){
+    fun doDeposit(transactionModel: TransactionModel){
         _transactionLiveData.value = State.Loading
         viewModelScope.launch {
-            transactionUseCase.deposit(transactionBody).doOnResult (
+            transactionUseCase.deposit(transactionModel).doOnResult (
                 onSuccess = {_transactionLiveData.value = State.Content(it)},
                 onError = {_transactionLiveData.value = State.Error(ErrorState.LOGIN_ERROR)},
                 onLoginError = {_transactionLiveData.value = State.Error(ErrorState.LOADING_ERROR)}
             )
         }
     }
-
 }

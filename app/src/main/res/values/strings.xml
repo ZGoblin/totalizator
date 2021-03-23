@@ -35,7 +35,6 @@
     <string name="possible_gain">Возможный выиграш %d</string>
 
     <string name="draw">Draw</string>
-
     <string name="events_network_error">An error occurred while download events</string>
 
 
@@ -53,6 +52,9 @@
     <string name="bet_accessed">Bet accessed</string>
     <string name="loading_error">Loading error...</string>
     <string name="general_error_text">Oops, something went wrong</string>
+
+    <string name="withdraw">withdraw</string>
+    <string name="deposit">deposit</string>
 
 
 </resources>
