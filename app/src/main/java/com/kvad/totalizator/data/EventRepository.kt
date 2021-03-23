@@ -48,12 +48,10 @@ class EventRepository @Inject constructor(
         val random2 = Random.nextFloat() * 100
         val random3 = Random.nextFloat() * 100
 
-        val id = "70ab8247-2b21-42ed-9d90-551adb05b029"
-
         return safeApiCall {
             Response.success(
                 Event(
-                    id,
+                    "535d1a2c-bb51-4416-a6d2-f302b99992ad",
                     "sport",
                     ParticipantDTO(
                         "1",

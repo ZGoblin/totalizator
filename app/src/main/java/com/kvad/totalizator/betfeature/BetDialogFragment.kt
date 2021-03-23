@@ -139,8 +139,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             )
             tvWinnerName.text = when (detailBet) {
                 Bet.DRAW -> getString(R.string.draw)
-                Bet.SECOND_PLAYER_WIN -> state.data.participantDto2.name
-                Bet.FIRST_PLAYER_WIN -> state.data.participantDto1.name
+                Bet.SECOND_PLAYER_WIN -> state.data.participant2.name
+                Bet.FIRST_PLAYER_WIN -> state.data.participant1.name
             }
         }
         eventId = state.data.id

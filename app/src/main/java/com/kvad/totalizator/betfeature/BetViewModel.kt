@@ -8,9 +8,7 @@ import com.kvad.totalizator.data.EventRepository
 import com.kvad.totalizator.data.models.Event
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
-import com.kvad.totalizator.tools.safeapicall.map
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
