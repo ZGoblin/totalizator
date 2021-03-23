@@ -2,10 +2,8 @@ package com.kvad.totalizator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
 import androidx.navigation.Navigation
 import com.kvad.totalizator.databinding.ActivityMainBinding
-import com.kvad.totalizator.header.HeaderFragment
 import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
 import javax.inject.Inject
 
@@ -20,20 +18,11 @@ class MainActivity : AppCompatActivity() {
         setupBinding()
         setupDi()
         supportActionBar?.hide()
-        setupHeader()
     }
 
     override fun onStart() {
         super.onStart()
-
         isFirstOpen()
-    }
-
-    //todo
-    private fun setupHeader() {
-        supportFragmentManager.beginTransaction()
-            .add(binding.fcvHeader.id, HeaderFragment())
-            .commit()
     }
 
     private fun isFirstOpen() {

@@ -1,6 +1,5 @@
 package com.kvad.totalizator.detail
 
-import com.kvad.totalizator.data.model.BetPool
 import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.detail.model.EventDetail
 import javax.inject.Inject

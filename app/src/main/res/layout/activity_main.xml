@@ -10,8 +10,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcvHeader"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        app:defaultNavHost="true"
         app:navGraph="@navigation/navigation_header"
+        app:defaultNavHost="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
