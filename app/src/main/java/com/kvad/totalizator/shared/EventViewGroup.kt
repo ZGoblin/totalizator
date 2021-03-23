@@ -93,15 +93,15 @@ class EventViewGroup @JvmOverloads constructor(
     fun setBetScale(betAmountForEachOutcome: BetPool) {
         binding.tvFirstPlayerBetAmount.text = resources.getString(
             R.string.bet_currency,
-            betAmountForEachOutcome.firstPlayerBetAmount.toString()
+            betAmountForEachOutcome.firstPlayerBetAmount.toInt()
         )
         binding.tvSecondPlayerBetAmount.text = resources.getString(
             R.string.bet_currency,
-            betAmountForEachOutcome.secondPlayerBetAmount.toString()
+            betAmountForEachOutcome.secondPlayerBetAmount.toInt()
         )
         binding.tvDraw.text = resources.getString(
             R.string.draw_bet_amount,
-            betAmountForEachOutcome.drawBetAmount.toString()
+            betAmountForEachOutcome.drawBetAmount.toInt()
         )
 
         binding.bettingScale.setupData(betAmountForEachOutcome)
