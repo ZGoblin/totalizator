@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         setupDi()
         supportActionBar?.hide()
         setupHeader()
-        sharedPref.isFirstOpened = true
     }
 
     override fun onStart() {

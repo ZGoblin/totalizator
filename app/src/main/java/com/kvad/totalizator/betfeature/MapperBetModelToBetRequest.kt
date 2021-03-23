@@ -16,7 +16,7 @@ class MapperBetModelToBetRequest @Inject constructor() {
                 Bet.FIRST_PLAYER_WIN -> W1_SERVER_FLAG
                 Bet.SECOND_PLAYER_WIN -> W2_SERVER_FLAG
             },
-            amount = betModel.amount.toInt()
+            amount = betModel.amount
         )
     }
 }

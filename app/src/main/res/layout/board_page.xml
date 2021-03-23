@@ -77,7 +77,6 @@
         android:layout_marginStart="112dp"
         android:layout_marginTop="76dp"
         android:alpha="0.3"
-        android:visibility="gone"
         android:text="@string/back"
         android:textColor="@color/yellow"
         android:textSize="30sp"

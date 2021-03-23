@@ -71,7 +71,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding.btnBet.setOnClickListener {
             val amount = binding.etBet.text.toString().toDouble()
             val betToServerModel = BetToServerModel(
-                "455d46d3-b608-448e-b3bf-0e75f264af59", amount, detailBet
+                "70ab8247-2b21-42ed-9d90-551adb05b029", amount, detailBet
             )
             viewModel.createBet(betToServerModel)
         }
@@ -117,20 +117,16 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private fun showError(errorState: ErrorState) {
         when (errorState) {
             ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
-            ErrorState.LOADING_ERROR -> {
-                Toast.makeText(requireContext(), "Loading error...", Toast.LENGTH_SHORT).show()
-            }
+            ErrorState.LOADING_ERROR -> { Toast.makeText(requireContext(), "Loading error...", Toast.LENGTH_SHORT).show() }
         }
     }
 
     private fun observeEventInfoLiveData() {
         viewModel.eventInfoLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> {
-                }
+                is State.Loading -> { }
                 is State.Content -> setupInfoForBet(it)
-                is State.Error -> {
-                }
+                is State.Error -> { }
             }
         }
     }
