@@ -1,5 +1,6 @@
 package com.kvad.totalizator.betfeature
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -58,6 +59,7 @@ class BetViewModel @Inject constructor(
     }
 
     private fun doOnErrorBetInfo(error: ApiResultWrapper.Error) {
+        Log.d("ErrorBody", error.msg)
         _betInfoLiveData.value = State.Error(Unit)
     }
 
@@ -81,10 +83,12 @@ class BetViewModel @Inject constructor(
     }
 
     private fun doOnNetworkErrorDoBet(error: ApiResultWrapper.Error) {
+        Log.d("ErrorBody", error.msg)
         _betLiveData.value = State.Error(error = ErrorState.LOADING_ERROR)
     }
 
     private fun doOnLoginErrorDoBet(error: ApiResultWrapper.Error) {
+        Log.d("ErrorBody", error.msg)
         _betLiveData.value = State.Error(error = ErrorState.LOGIN_ERROR)
     }
 

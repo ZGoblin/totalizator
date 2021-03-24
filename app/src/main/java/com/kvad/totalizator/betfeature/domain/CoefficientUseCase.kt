@@ -4,11 +4,13 @@ import com.kvad.totalizator.betfeature.model.BetDetail
 import com.kvad.totalizator.shared.Bet
 import javax.inject.Inject
 
+@Suppress("MagicNumber")
 class CoefficientUseCase @Inject constructor() {
 
-    fun calculateCoefficient(lastBetDetail: BetDetail, bet: Bet, current : Float): Float {
-        val pool = current + lastBetDetail.firstPlayerAmount + lastBetDetail.secondPlayerAmount + lastBetDetail.drawAmount
-        val sumMargin = (pool * lastBetDetail.margin)/100
+    fun calculateCoefficient(lastBetDetail: BetDetail, bet: Bet, current: Float): Float {
+        val pool = current + lastBetDetail.firstPlayerAmount
+        +lastBetDetail.secondPlayerAmount + lastBetDetail.drawAmount
+        val sumMargin = (pool * lastBetDetail.margin) / 100
         val poolWithoutMargin = pool - sumMargin
         val choiceAmount = when (bet) {
             Bet.DRAW -> lastBetDetail.firstPlayerAmount + lastBetDetail.secondPlayerAmount
