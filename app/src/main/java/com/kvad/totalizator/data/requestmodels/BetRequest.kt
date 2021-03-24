@@ -1,4 +1,4 @@
-package com.kvad.totalizator.betfeature
+package com.kvad.totalizator.data.requestmodels
 
 import com.google.gson.annotations.SerializedName
 
