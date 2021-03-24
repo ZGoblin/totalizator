@@ -46,6 +46,7 @@
     <string name="login_terms_of_use">Terms of use</string>
     <string name="login_login_error">Login length must be greater than 3</string>
     <string name="login_password_error">Password length must be greater than 6</string>
+    <string name="login_username_error">Username length must be greater than 3</string>
     <string name="login_network_error_dialog_body">An error occurred while sending the request</string>
     <string name="login_network_error_dialog_button">OK</string>
 
