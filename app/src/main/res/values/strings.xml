@@ -4,8 +4,8 @@
     <string name="content_description_end_icon">end cross</string>
     <string name="first_player">First player</string>
 
-    <string name="bet_currency">%s UAH</string>
-    <string name="draw_bet_amount">Draw %s UAH</string>
+    <string name="bet_currency">%d UAH</string>
+    <string name="draw_bet_amount">Draw %d UAH</string>
     <string name="players_vs_players_title">Players VS Players</string>
     <string name="players_vs_players_body">Bet on winner - grab losers money. \nThe more you bet, the more prize share you get. When event started - bets stopped, video stream begins.</string>
 
@@ -57,5 +57,6 @@
     <string name="loading_error">Loading error...</string>
     <string name="general_error_text">Oops, something went wrong</string>
     <string name="something_went_wrong">Something went wrong</string>
+    <string name="user_image">User image</string>
 
 </resources>

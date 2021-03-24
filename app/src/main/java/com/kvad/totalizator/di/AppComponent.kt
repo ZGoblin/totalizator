@@ -2,6 +2,7 @@ package com.kvad.totalizator.di
 
 import com.kvad.totalizator.MainActivity
 import com.kvad.totalizator.betfeature.BetDialogFragment
+import com.kvad.totalizator.chat.ui.ChatFragment
 import com.kvad.totalizator.detail.EventDetailFragment
 import com.kvad.totalizator.events.EventsFragment
 import com.kvad.totalizator.header.HeaderFragment
@@ -12,7 +13,10 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class])
+@Component(
+    dependencies = [],
+    modules = [AppModule::class, DispatcherModule::class]
+)
 interface AppComponent {
 
     fun inject(activity: MainActivity)
@@ -25,11 +29,12 @@ interface AppComponent {
 
     fun inject(fragment: EventDetailFragment)
 
-
     fun inject(fragment: BetDialogFragment)
 
     fun inject(fragment: LoginFragment)
 
     fun inject(fragment: RegistrationFragment)
+
+    fun inject(fragment: ChatFragment)
 
 }

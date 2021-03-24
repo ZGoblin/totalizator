@@ -3,21 +3,24 @@ package com.kvad.totalizator.login.domain
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.requestmodels.LoginRequest
 import com.kvad.totalizator.data.requestmodels.Token
+import com.kvad.totalizator.di.DefaultDispatcher
 import com.kvad.totalizator.login.LoginState
 import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    @DefaultDispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
     private lateinit var state: LoginState
 
-    suspend fun login(loginRequest: LoginRequest) = withContext(Dispatchers.Default) {
+    suspend fun login(loginRequest: LoginRequest) = withContext(dispatcher) {
 
         state = verifyLoginComponent(loginRequest)
 
