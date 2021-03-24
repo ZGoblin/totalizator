@@ -6,24 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
-import com.kvad.totalizator.data.model.Event
+import com.kvad.totalizator.betfeature.model.BetDetail
+import com.kvad.totalizator.betfeature.model.BetToServerModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
-import com.kvad.totalizator.detail.EventDetailFragment
-import com.kvad.totalizator.detail.EventDetailFragmentArgs
 import com.kvad.totalizator.shared.Bet
-import com.kvad.totalizator.tools.BET_DETAIL_KEY
-import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.StateVisibilityController
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
@@ -35,6 +29,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private lateinit var binding: BetDialogFragmentBinding
     private lateinit var detailBet: Bet
     private var eventId: String = ""
+    private lateinit var stateVisibilityController: StateVisibilityController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,9 +41,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             val safeArgs = BetDialogFragmentArgs.fromBundle(it).bet
             detailBet = safeArgs
         }
-
-
-        Toast.makeText(requireContext(), "$detailBet", Toast.LENGTH_SHORT).show()
+        stateVisibilityController =
+            StateVisibilityController(binding.progressBarCircular, binding.tvError)
         return binding.root
     }
 
@@ -56,12 +50,10 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupDi()
         setupListeners()
-        binding.amountLayout.error = getString(R.string.min_bet)
-        binding.etBet.requestFocus()
-        viewModel.uploadData()
         setupTextWatcher()
-        observeEventInfoLiveData()
-        observeBetLiveData()
+        viewModel.uploadData()
+        observeBetInfoLiveData()
+        observeDoBetLiveData()
     }
 
     private fun setupDi() {
@@ -80,9 +72,114 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             )
             viewModel.createBet(betToServerModel)
         }
-        Toast.makeText(requireContext(), "$detailBet", Toast.LENGTH_SHORT).show()
         binding.vClose.setOnClickListener {
             cancelBetDialog()
+        }
+    }
+
+    private fun observeDoBetLiveData() {
+        viewModel.betLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is State.Loading -> stateVisibilityController.showLoading()
+                is State.Content -> {
+                    stateVisibilityController.hideAll()
+                    setupDoBetResult()
+                }
+                is State.Error -> findNavController().navigate(R.id.login_fragment)
+            }
+        }
+    }
+
+    private fun setupDoBetResult() {
+        binding.apply {
+            etBet.visibility = View.GONE
+            tvCancel.visibility = View.GONE
+            tvBetGood.visibility = View.VISIBLE
+            vClose.visibility = View.VISIBLE
+            btnBet.isEnabled = false
+            val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
+            btnBet.setBackgroundColor(color)
+            hideKeyBoard()
+        }
+    }
+
+    private fun observeBetInfoLiveData() {
+        viewModel.betInfoLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is State.Loading -> stateVisibilityController.showLoading()
+                is State.Content -> {
+                    stateVisibilityController.hideAll()
+                    setupBetInfo(it)
+                }
+                is State.Error -> {
+                    stateVisibilityController.showError()
+                }
+            }
+        }
+    }
+
+    private fun setupBetInfo(state: State.Content<BetDetail>) {
+        eventId = state.data.eventId
+        binding.apply {
+            tvGameDetails.text = getString(
+                R.string.event_vs,
+                state.data.firstPlayerName,
+                state.data.secondPlayerName
+            )
+            tvWinnerName.text = when (detailBet) {
+                Bet.DRAW -> getString(R.string.draw)
+                Bet.SECOND_PLAYER_WIN -> state.data.firstPlayerName
+                Bet.FIRST_PLAYER_WIN -> state.data.secondPlayerName
+            }
+        }
+    }
+
+    private fun setupTextWatcher() {
+        binding.amountLayout.error = getString(R.string.min_bet)
+        binding.etBet.requestFocus()
+        binding.etBet.doOnTextChanged { text, _, _, _ ->
+            when {
+                text?.isEmpty() == true -> {
+                    binding.apply {
+                        amountLayout.error = getString(R.string.min_bet)
+                        btnBet.isEnabled = false
+                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
+                        btnBet.setBackgroundColor(color)
+                        btnBet.text = getString(R.string.do_bet_simple)
+                        tvPraise.visibility = View.INVISIBLE
+                    }
+                }
+                text?.length == 1 -> {
+                    val coefficient =
+                        viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
+                    val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
+                    binding.apply {
+                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
+                        amountLayout.error = getString(R.string.min_bet)
+                        btnBet.isEnabled = false
+                        btnBet.setBackgroundColor(color)
+                        btnBet.text =
+                            getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
+                        tvPraise.visibility = View.VISIBLE
+                        tvPraise.text = getString(R.string.possible_gain, possibleGain)
+                    }
+                }
+                else -> {
+                    val coefficient =
+                        viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
+                    val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
+                    binding.apply {
+                        amountLayout.error = null
+                        btnBet.isEnabled = true
+                        val color = ContextCompat.getColor(requireContext(), R.color.yellow)
+                        btnBet.setBackgroundColor(color)
+                        btnBet.text =
+                            getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
+                        tvPraise.visibility = View.VISIBLE
+                        tvPraise.text = getString(R.string.possible_gain, possibleGain)
+                    }
+                }
+            }
         }
     }
 
@@ -96,94 +193,6 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         val inputMethodManager =
             this.context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.applicationWindowToken, 0)
-    }
-
-    private fun observeBetLiveData() {
-        viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
-            when (it) {
-                is State.Loading -> MaterialDialog(requireContext()).customView(R.layout.progress_dialog)
-                is State.Content -> setupBetUiResult()
-                is State.Error -> showError(it.error)
-            }
-        }
-    }
-
-    private fun setupBetUiResult() {
-        binding.apply {
-            etBet.visibility = View.GONE
-            tvCancel.visibility = View.GONE
-            tvBetGood.visibility = View.VISIBLE
-            vClose.visibility = View.VISIBLE
-            btnBet.isEnabled = false
-            val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
-            btnBet.setBackgroundColor(color)
-            hideKeyBoard()
-        }
-    }
-
-    private fun showError(errorState: ErrorState) {
-        when (errorState) {
-            ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
-            ErrorState.LOADING_ERROR -> { }
-        }
-    }
-
-    private fun observeEventInfoLiveData() {
-        viewModel.eventInfoLiveData.observe(viewLifecycleOwner) {
-            when (it) {
-                is State.Loading -> {
-                }
-                is State.Content -> setupInfoForBet(it)
-                is State.Error -> cancelBetDialog()
-            }
-        }
-    }
-
-    private fun setupInfoForBet(state: State.Content<Event>) {
-        binding.apply {
-            tvGameDetails.text = getString(
-                R.string.event_vs,
-                state.data.firstParticipant.name,
-                state.data.secondParticipant.name
-            )
-            tvWinnerName.text = when (detailBet) {
-                Bet.DRAW -> getString(R.string.draw)
-                Bet.SECOND_PLAYER_WIN -> state.data.firstParticipant.name
-                Bet.FIRST_PLAYER_WIN -> state.data.secondParticipant.name
-            }
-        }
-        eventId = state.data.id
-    }
-
-    private fun setupTextWatcher() {
-        binding.etBet.doOnTextChanged { text, _, _, _ ->
-            when {
-                text?.isEmpty() == true -> {
-                    binding.apply {
-                        amountLayout.error = getString(R.string.min_bet)
-                        btnBet.isEnabled = false
-                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
-                        btnBet.setBackgroundColor(color)
-                    }
-                }
-                text?.length == 1 -> {
-                    binding.apply {
-                        amountLayout.error = getString(R.string.min_bet)
-                        btnBet.isEnabled = false
-                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
-                        btnBet.setBackgroundColor(color)
-                    }
-                }
-                else -> {
-                    binding.apply {
-                        amountLayout.error = null
-                        btnBet.isEnabled = true
-                        val color = ContextCompat.getColor(requireContext(), R.color.yellow)
-                        btnBet.setBackgroundColor(color)
-                    }
-                }
-            }
-        }
     }
 
 }
