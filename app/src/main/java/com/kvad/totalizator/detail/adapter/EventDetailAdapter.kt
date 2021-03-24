@@ -18,7 +18,7 @@ class EventDetailAdapter constructor(
         CHARACTERISTIC
     }
 
-    override fun getItemViewType(position: Int): Int {
+    override fun getItemViewType(position: Int): Int  {
         return when (getItem(position)) {
             is EventDetail.HeaderInfoUiModel -> HolderType.HEADER
             is EventDetail.CharacteristicUiModel -> HolderType.CHARACTERISTIC
