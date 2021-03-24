@@ -26,7 +26,6 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var viewModel: BetViewModel
-
     private lateinit var binding: BetDialogFragmentBinding
     private lateinit var detailBet: Bet
     private var eventId: String = ""
