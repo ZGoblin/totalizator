@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_slogan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:gravity="center"
+        android:text="@string/bet_win_and_take_money_from_rivals"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_first_player_win"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="20dp"
+        android:background="@color/yellow"
+        android:text="@string/bet_on"
+        app:layout_constraintTop_toBottomOf="@id/tv_slogan" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_draw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="20dp"
+        android:text="@string/draw"
+        app:layout_constraintTop_toBottomOf="@id/btn_first_player_win" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_second_player_win"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="20dp"
+        android:background="@color/yellow"
+        android:text="@string/bet_on"
+        app:layout_constraintTop_toBottomOf="@id/btn_draw" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@drawable/shadow_bg"
+        app:layout_constraintTop_toBottomOf="@id/btn_second_player_win"
+        android:layout_marginTop="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

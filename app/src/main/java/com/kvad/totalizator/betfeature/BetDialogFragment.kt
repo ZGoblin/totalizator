@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -16,6 +18,8 @@ import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
+import com.kvad.totalizator.detail.EventDetailFragment
+import com.kvad.totalizator.detail.EventDetailFragmentArgs
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.BET_DETAIL_KEY
 import com.kvad.totalizator.tools.ErrorState
@@ -39,8 +43,12 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     ): View {
         binding = BetDialogFragmentBinding.inflate(inflater, container, false)
         arguments?.let {
-            detailBet = it.getParcelable(BET_DETAIL_KEY) ?: Bet.DRAW
+            val safeArgs = BetDialogFragmentArgs.fromBundle(it).bet
+            detailBet = safeArgs
         }
+
+
+        Toast.makeText(requireContext(), "$detailBet", Toast.LENGTH_SHORT).show()
         return binding.root
     }
 
@@ -72,6 +80,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             )
             viewModel.createBet(betToServerModel)
         }
+        Toast.makeText(requireContext(), "$detailBet", Toast.LENGTH_SHORT).show()
         binding.vClose.setOnClickListener {
             cancelBetDialog()
         }
@@ -122,7 +131,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private fun observeEventInfoLiveData() {
         viewModel.eventInfoLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> { }
+                is State.Loading -> {
+                }
                 is State.Content -> setupInfoForBet(it)
                 is State.Error -> cancelBetDialog()
             }
@@ -176,14 +186,6 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    companion object {
-        fun newInstance(bet: Bet) =
-            BetDialogFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelable(BET_DETAIL_KEY, bet)
-                }
-            }
-    }
 }
 
 

@@ -14,11 +14,12 @@ class MapRequestEventToEvent @Inject constructor() {
         secondParticipant = requestEventModel.participant2,
         startTime = parseZonedDateTime(requestEventModel.startTime),
         isEnded = requestEventModel.isEnded,
+        isLive = parseZonedDateTime(requestEventModel.startTime) <= ZonedDateTime.now(),
         margin = requestEventModel.margin,
         betPool = BetPool(
             firstPlayerBetAmount = requestEventModel.amountW1,
-            secondPlayerBetAmount = requestEventModel.amountX,
-            drawBetAmount = requestEventModel.amountW2
+            secondPlayerBetAmount = requestEventModel.amountW2,
+            drawBetAmount = requestEventModel.amountX
         )
     )
 

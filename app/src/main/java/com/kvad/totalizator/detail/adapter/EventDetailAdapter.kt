@@ -14,6 +14,7 @@ class EventDetailAdapter constructor(
 
     enum class HolderType {
         HEADER,
+        BUTTONS,
         CHARACTERISTIC
     }
 
@@ -21,24 +22,25 @@ class EventDetailAdapter constructor(
         return when (getItem(position)) {
             is EventDetail.HeaderInfoUiModel -> HolderType.HEADER
             is EventDetail.CharacteristicUiModel -> HolderType.CHARACTERISTIC
+            is EventDetail.ButtonsInfoUiModel -> HolderType.BUTTONS
         }.ordinal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val viewTypeEnum = HolderType.values()[viewType]
 
-        val layout = if (viewTypeEnum == HolderType.HEADER) {
-            R.layout.event_detail_header_view_holder
-        } else {
-            R.layout.event_detail_player_characteristic
+        val layout = when (viewTypeEnum) {
+            HolderType.HEADER -> R.layout.event_detail_header_view_holder
+            HolderType.CHARACTERISTIC -> R.layout.event_detail_player_characteristic
+            HolderType.BUTTONS -> R.layout.event_detail_buttons_holder
         }
 
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
 
-        return if (viewTypeEnum == HolderType.HEADER) {
-            HeaderViewHolder(view, onBetButtonClick)
-        } else {
-            CharacteristicViewHolder(view)
+        return when (viewTypeEnum) {
+            HolderType.HEADER -> HeaderViewHolder(view)
+            HolderType.CHARACTERISTIC -> CharacteristicViewHolder(view)
+            HolderType.BUTTONS -> ButtonsViewHolder(view, onBetButtonClick)
         }
     }
 
@@ -46,7 +48,7 @@ class EventDetailAdapter constructor(
         when (holder) {
             is HeaderViewHolder -> holder.onBind(getItem(position) as EventDetail.HeaderInfoUiModel)
             is CharacteristicViewHolder -> holder.onBind(getItem(position) as EventDetail.CharacteristicUiModel)
+            is ButtonsViewHolder -> holder.onBind(getItem(position) as EventDetail.ButtonsInfoUiModel)
         }
     }
-
 }

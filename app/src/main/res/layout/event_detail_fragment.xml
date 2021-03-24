@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5">
-
 
     <ProgressBar
         android:id="@+id/progress_circular"
@@ -32,5 +32,19 @@
         android:textSize="20sp"
         android:visibility="gone"
         android:text="@string/general_error_text"/>
+
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|top"
+        android:gravity="start"
+        android:textSize="20sp"
+        android:padding="8dp"
+        android:textColor="@color/white"
+        android:drawablePadding="8dp"
+        android:text="All events"
+        app:drawableStartCompat="@drawable/ic_left_arrow" />
 
 </FrameLayout>

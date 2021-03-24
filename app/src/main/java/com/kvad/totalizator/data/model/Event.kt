@@ -9,6 +9,7 @@ data class Event(
     val secondParticipant: Participant,
     val startTime: ZonedDateTime,
     val isEnded: Boolean,
+    val isLive: Boolean,
     val margin: Float,
     val betPool: BetPool
 )

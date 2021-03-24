@@ -14,6 +14,12 @@ sealed class EventDetail {
         val id: String,
         val participant1: Participant,
         val participant2: Participant,
-        val betPool: BetPool
+        val betPool: BetPool,
+        val isLive: Boolean
+    ) : EventDetail()
+
+    data class ButtonsInfoUiModel(
+        val participant1: Participant,
+        val participant2: Participant
     ) : EventDetail()
 }
