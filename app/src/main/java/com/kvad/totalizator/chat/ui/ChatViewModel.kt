@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kvad.totalizator.chat.MapMessagesToUi
+import com.kvad.totalizator.chat.UserMessageUi
 import com.kvad.totalizator.chat.data.ChatRepository
 import com.kvad.totalizator.chat.model.UserMessage
 import com.kvad.totalizator.tools.ErrorState
@@ -15,25 +17,34 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-typealias EventState = State<List<UserMessage>, ErrorState>
+typealias EventState = State<List<UserMessageUi>, ErrorState>
 
 class ChatViewModel @Inject constructor(
-    private val chatRepository: ChatRepository
+    private val chatRepository: ChatRepository,
+    private val mapUserMessageUi: MapMessagesToUi
 ) : ViewModel() {
 
     private val _chatLiveData = MutableLiveData<EventState>()
     val chatLiveData = _chatLiveData
 
+    private var currentUserId: String? = null
+
     init {
         _chatLiveData.value = State.Loading
         viewModelScope.launch {
+            // TODO 24.03.2021 normal user id get from back end
+            currentUserId = "currentUserId"
             updateChat()
         }
     }
 
     private suspend fun updateChat() {
         chatRepository.getMessage()
-            //.map { it.mapSuccess () }
+            .map{
+                it.mapSuccess{ msg ->
+                     mapUserMessageUi(currentUserId, msg)
+                }
+            }
             .collect {
                 it.doOnResult(
                     onSuccess = ::doOnSuccess,
@@ -47,7 +58,7 @@ class ChatViewModel @Inject constructor(
         _chatLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 
-    private fun doOnSuccess(messageList: List<UserMessage>) {
-        _chatLiveData.value = State.Content(messageList)
+    private fun doOnSuccess(messageApiModelList: List<UserMessageUi>) {
+        _chatLiveData.value = State.Content(messageApiModelList)
     }
 }
