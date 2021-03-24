@@ -1,5 +1,6 @@
 package com.kvad.totalizator.transactionfeature
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +16,7 @@ import javax.inject.Inject
 typealias transactionStateLiveData = State<Unit, ErrorState>
 
 class TransactionViewModel @Inject constructor(
-    private val transactionUseCase : TransactionUseCase
+    private val transactionUseCase: TransactionUseCase
 ) : ViewModel() {
 
     private var _transactionLiveData = MutableLiveData<transactionStateLiveData>()
@@ -24,7 +25,7 @@ class TransactionViewModel @Inject constructor(
     fun doTransaction(transactionModel: TransactionModel) {
         _transactionLiveData.value = State.Loading
         viewModelScope.launch {
-            transactionUseCase.deposit(transactionModel).doOnResult (
+            transactionUseCase.deposit(transactionModel).doOnResult(
                 onSuccess = ::doOnSuccess,
                 onLoginError = ::doOnLoginError,
                 onNetworkError = ::doOnNetworkError
@@ -32,15 +33,17 @@ class TransactionViewModel @Inject constructor(
         }
     }
 
-    private fun doOnSuccess(unit : Unit){
+    private fun doOnSuccess(unit: Unit) {
         _transactionLiveData.value = State.Content(unit)
     }
 
-    private fun doOnLoginError(apiResultWrapper: ApiResultWrapper.Error){
+    private fun doOnLoginError(error: ApiResultWrapper.Error) {
+        Log.d("ErrorBody", error.msg)
         _transactionLiveData.value = State.Error(ErrorState.LOGIN_ERROR)
     }
 
-    private fun doOnNetworkError(apiResultWrapper: ApiResultWrapper.Error){
+    private fun doOnNetworkError(error: ApiResultWrapper.Error) {
+        Log.d("ErrorBody", error.msg)
         _transactionLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 
