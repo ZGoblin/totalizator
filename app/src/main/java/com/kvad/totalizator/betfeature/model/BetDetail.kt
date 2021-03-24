@@ -1,4 +1,4 @@
-package com.kvad.totalizator.betfeature
+package com.kvad.totalizator.betfeature.model
 
 data class BetDetail (
     val firstPlayerName : String,

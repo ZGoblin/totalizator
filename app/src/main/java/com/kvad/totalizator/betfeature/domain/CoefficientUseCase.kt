@@ -1,7 +1,6 @@
-package com.kvad.totalizator.betfeature
+package com.kvad.totalizator.betfeature.domain
 
-import android.util.Log
-import com.kvad.totalizator.data.model.Event
+import com.kvad.totalizator.betfeature.model.BetDetail
 import com.kvad.totalizator.shared.Bet
 import javax.inject.Inject
 

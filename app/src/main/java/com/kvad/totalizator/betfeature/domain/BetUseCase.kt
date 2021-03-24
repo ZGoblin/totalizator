@@ -1,5 +1,8 @@
-package com.kvad.totalizator.betfeature
+package com.kvad.totalizator.betfeature.domain
 
+import com.kvad.totalizator.betfeature.BetState
+import com.kvad.totalizator.betfeature.data.MapperBetModelToBetRequest
+import com.kvad.totalizator.betfeature.model.BetToServerModel
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.requestmodels.Wallet
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper

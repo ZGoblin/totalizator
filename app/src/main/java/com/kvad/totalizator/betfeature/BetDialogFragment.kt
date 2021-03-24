@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
+import com.kvad.totalizator.betfeature.model.BetDetail
+import com.kvad.totalizator.betfeature.model.BetToServerModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.State

@@ -1,5 +1,6 @@
-package com.kvad.totalizator.betfeature
+package com.kvad.totalizator.betfeature.domain
 
+import com.kvad.totalizator.betfeature.model.BetDetail
 import com.kvad.totalizator.data.model.Event
 import javax.inject.Inject
 

@@ -1,12 +1,15 @@
 package com.kvad.totalizator.betfeature
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kvad.totalizator.betfeature.domain.BetUseCase
+import com.kvad.totalizator.betfeature.domain.CoefficientUseCase
+import com.kvad.totalizator.betfeature.domain.MapperEventToBetDetailModel
+import com.kvad.totalizator.betfeature.model.BetDetail
+import com.kvad.totalizator.betfeature.model.BetToServerModel
 import com.kvad.totalizator.data.EventRepository
-import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
@@ -82,7 +85,7 @@ class BetViewModel @Inject constructor(
     }
 
     private fun doOnLoginErrorDoBet(error: ApiResultWrapper.Error) {
-        _betLiveData.value = State.Error(ErrorState.LOGIN_ERROR)
+        _betLiveData.value = State.Error(error = ErrorState.LOGIN_ERROR)
     }
 
 }
