@@ -4,7 +4,7 @@ import com.kvad.totalizator.data.requestmodels.TransactionRequest
 import com.kvad.totalizator.tools.DEPOSIT_FLAG
 import com.kvad.totalizator.tools.WITHDRAW_FLAG
 import com.kvad.totalizator.transactionfeature.model.TransactionModel
-import com.kvad.totalizator.transactionfeature.TransactionState
+import com.kvad.totalizator.transactionfeature.TransactionType
 import javax.inject.Inject
 
 class MapperTransactionToTransactionRequest @Inject constructor(){
@@ -13,8 +13,8 @@ class MapperTransactionToTransactionRequest @Inject constructor(){
         return TransactionRequest(
             amount = transactionModel.amount,
             type = when(transactionModel.type){
-                TransactionState.WITHDRAW -> WITHDRAW_FLAG
-                TransactionState.DEPOSIT -> DEPOSIT_FLAG
+                TransactionType.WITHDRAW -> WITHDRAW_FLAG
+                TransactionType.DEPOSIT -> DEPOSIT_FLAG
             }
         )
 

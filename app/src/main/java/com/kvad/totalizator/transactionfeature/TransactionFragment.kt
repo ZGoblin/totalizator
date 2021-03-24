@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -20,7 +21,7 @@ import javax.inject.Inject
 class TransactionFragment : Fragment() {
 
     private lateinit var binding: TransactionFragmentBinding
-    private lateinit var transactionState: TransactionState
+    private lateinit var transactionState: TransactionType
     private lateinit var stateVisibilityController: StateVisibilityController
 
     @Inject
@@ -32,7 +33,7 @@ class TransactionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = TransactionFragmentBinding.inflate(inflater, container, false)
-        stateVisibilityController = StateVisibilityController(binding.progressBarr, null)
+        stateVisibilityController = StateVisibilityController(binding.progressBarr, binding.tvError)
         return binding.root
     }
 
@@ -53,7 +54,7 @@ class TransactionFragment : Fragment() {
     }
 
     private fun setupState() {
-        transactionState = TransactionState.DEPOSIT
+        transactionState = TransactionType.WITHDRAW
     }
 
     private fun doTransaction() {
@@ -76,10 +77,14 @@ class TransactionFragment : Fragment() {
         }
     }
 
-    private fun setupError(error: ErrorState) {
+    private fun setupError(error: TransactionState) {
         when (error) {
-            ErrorState.LOADING_ERROR -> findNavController().navigate(R.id.events_fragment)
-            ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
+            TransactionState.NO_MONEY -> {
+                stateVisibilityController.showError()
+                binding.etTransaction.text = null
+                binding.btnTransaction.isEnabled = false
+            }
+            TransactionState.LOADING -> { }
         }
     }
 
@@ -97,11 +102,11 @@ class TransactionFragment : Fragment() {
         when (check) {
             true -> {
                 binding.btnTransaction.text = getString(R.string.deposit)
-                transactionState = TransactionState.DEPOSIT
+                transactionState = TransactionType.DEPOSIT
             }
             false -> {
                 binding.btnTransaction.text = getString(R.string.withdraw)
-                transactionState = TransactionState.WITHDRAW
+                transactionState = TransactionType.WITHDRAW
             }
         }
     }

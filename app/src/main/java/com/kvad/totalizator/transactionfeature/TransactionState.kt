@@ -1,5 +1,5 @@
 package com.kvad.totalizator.transactionfeature
 
 enum class TransactionState {
-    DEPOSIT, WITHDRAW
+    NO_MONEY, WITHOUT_ERROR,LOADING
 }

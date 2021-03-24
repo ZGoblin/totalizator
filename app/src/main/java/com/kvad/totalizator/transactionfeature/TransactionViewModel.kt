@@ -13,7 +13,7 @@ import com.kvad.totalizator.transactionfeature.model.TransactionModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-typealias transactionStateLiveData = State<Unit, ErrorState>
+typealias transactionStateLiveData = State<Unit, TransactionState>
 
 class TransactionViewModel @Inject constructor(
     private val transactionUseCase: TransactionUseCase
@@ -28,7 +28,8 @@ class TransactionViewModel @Inject constructor(
             transactionUseCase.deposit(transactionModel).doOnResult(
                 onSuccess = ::doOnSuccess,
                 onLoginError = ::doOnLoginError,
-                onNetworkError = ::doOnNetworkError
+                onNetworkError = ::doOnNetworkError,
+                onError = ::doOnTransactionError
             )
         }
     }
@@ -39,12 +40,17 @@ class TransactionViewModel @Inject constructor(
 
     private fun doOnLoginError(error: ApiResultWrapper.Error) {
         Log.d("ErrorBody", error.msg)
-        _transactionLiveData.value = State.Error(ErrorState.LOGIN_ERROR)
+        _transactionLiveData.value = State.Error(TransactionState.LOADING)
     }
 
     private fun doOnNetworkError(error: ApiResultWrapper.Error) {
         Log.d("ErrorBody", error.msg)
-        _transactionLiveData.value = State.Error(ErrorState.LOADING_ERROR)
+        _transactionLiveData.value = State.Error(TransactionState.LOADING)
+    }
+
+    private fun doOnTransactionError(error: ApiResultWrapper.Error){
+        Log.d("ErrorBody", error.msg)
+        _transactionLiveData.value = State.Error(TransactionState.NO_MONEY)
     }
 
 }

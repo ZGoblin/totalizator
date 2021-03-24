@@ -1,8 +1,9 @@
 package com.kvad.totalizator.transactionfeature.model
 
-import com.kvad.totalizator.transactionfeature.TransactionState
+import com.kvad.totalizator.transactionfeature.TransactionType
+
 
 data class TransactionModel (
     val amount : Double,
-    val type : TransactionState
+    val type : TransactionType
         )

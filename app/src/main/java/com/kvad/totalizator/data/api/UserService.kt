@@ -21,6 +21,6 @@ interface UserService {
     @POST("/api/Bet")
     suspend fun doBet(@Body betRequest : BetRequest) : Response<Unit>
 
-    @POST("/api/Wallet/transaction")
+    @POST("/api/Wallet")
     suspend fun transaction(@Body transactionRequest : TransactionRequest) : Response<Unit>
 }
