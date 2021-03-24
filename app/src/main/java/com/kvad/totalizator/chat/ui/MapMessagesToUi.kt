@@ -1,5 +1,6 @@
-package com.kvad.totalizator.chat
+package com.kvad.totalizator.chat.ui
 
+import com.kvad.totalizator.chat.UserMessageUi
 import com.kvad.totalizator.chat.model.UserMessage
 import com.kvad.totalizator.di.DefaultDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -16,6 +17,7 @@ class MapMessagesToUi @Inject constructor(
             messagesList.map {
                 UserMessageUi(
                     id = it.id,
+                    userName = it.userName,
                     text = it.text,
                     image = it.image,
                     time = getStringTime(it.time),

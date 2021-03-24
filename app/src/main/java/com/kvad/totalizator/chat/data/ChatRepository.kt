@@ -22,10 +22,10 @@ class ChatRepository @Inject constructor(
             val msgLine = safeApiCall {
                 Response.success(
                     listOf(
-                        UserMessageApiModel(1, "hhlhdfg", "some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png", "17:56"),
-                        UserMessageApiModel(2, "hhlhdfg", "some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png","17:56"),
-                        UserMessageApiModel(3, "hhlhdfg", "some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png","17:56"),
-                        UserMessageApiModel(4, "hhlhdfg", "some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png","17:56"),
+                        UserMessageApiModel("userId", "hhlhdfg","userName" ,"some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png", "2021-03-24T20:39:51.742Z"),
+                        UserMessageApiModel("userId", "hhlhdfg","userName" ,"some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png","2021-03-24T20:39:51.742Z"),
+                        UserMessageApiModel("userId", "hhlhdfg","userName" ,"some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png","2021-03-24T20:39:51.742Z"),
+                        UserMessageApiModel("userId", "hhlhdfg","userName" ,"some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png","2021-03-24T20:39:51.742Z"),
                     )
                 )
             }.mapSuccess { mapApiMessageToUserMessage(it) }
