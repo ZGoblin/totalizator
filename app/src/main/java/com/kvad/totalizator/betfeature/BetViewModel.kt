@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 typealias BetLiveDataState = State<Unit, ErrorState>
-typealias BetInfoLivaDataState = State<BetDetail, Unit>
+typealias BetInfoLivaDataState = State<BetDetail, ErrorState>
 
 
 class BetViewModel @Inject constructor(
@@ -60,7 +60,7 @@ class BetViewModel @Inject constructor(
 
     private fun doOnErrorBetInfo(error: ApiResultWrapper.Error) {
         Log.d("ErrorBody", error.msg)
-        _betInfoLiveData.value = State.Error(Unit)
+        _betInfoLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 
     fun calculate(bet: Bet, current: Float): Float {

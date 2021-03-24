@@ -16,6 +16,7 @@ import com.kvad.totalizator.betfeature.model.BetDetail
 import com.kvad.totalizator.betfeature.model.BetToServerModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 import com.kvad.totalizator.shared.Bet
+import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
 import javax.inject.Inject
@@ -85,8 +86,15 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     stateVisibilityController.hideAll()
                     setupDoBetResult()
                 }
-                is State.Error -> findNavController().navigate(R.id.login_fragment)
+                is State.Error -> setupError(it.error)
             }
+        }
+    }
+
+    private fun setupError(error: ErrorState){
+        when(error){
+            ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
+            ErrorState.LOADING_ERROR -> findNavController().popBackStack()
         }
     }
 
