@@ -86,12 +86,12 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     stateVisibilityController.hideAll()
                     setupDoBetResult()
                 }
-                is State.Error -> setupError(it.error)
+                is State.Error -> setupDoBetError(it.error)
             }
         }
     }
 
-    private fun setupError(error: ErrorState){
+    private fun setupDoBetError(error: ErrorState){
         when(error){
             ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
             ErrorState.LOADING_ERROR -> findNavController().popBackStack()
