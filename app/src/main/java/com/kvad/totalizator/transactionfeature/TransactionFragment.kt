@@ -59,7 +59,7 @@ class TransactionFragment : Fragment() {
             amount = binding.etTransaction.text.toString().toDouble(),
             type = transactionState
         )
-        viewModel.doDeposit(deposit)
+        viewModel.doTransaction(deposit)
         binding.etTransaction.text = null
     }
 	

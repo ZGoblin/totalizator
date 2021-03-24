@@ -16,9 +16,9 @@ class TransactionViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var _transactionLiveData = MutableLiveData<transactionStateLiveData>()
-    val transactionLiveData : LiveData<transactionStateLiveData> = _transactionLiveData
+    val transactionLiveData: LiveData<transactionStateLiveData> = _transactionLiveData
 
-    fun doDeposit(transactionModel: TransactionModel){
+    fun doTransaction(transactionModel: TransactionModel) {
         _transactionLiveData.value = State.Loading
         viewModelScope.launch {
             transactionUseCase.deposit(transactionModel).doOnResult (
