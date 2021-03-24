@@ -12,6 +12,7 @@ import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.TransactionFragmentBinding
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
+import com.kvad.totalizator.transactionfeature.model.TransactionModel
 import javax.inject.Inject
 
 class TransactionFragment : Fragment() {

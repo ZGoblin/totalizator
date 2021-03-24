@@ -1,7 +1,9 @@
-package com.kvad.totalizator.transactionfeature
+package com.kvad.totalizator.transactionfeature.domain
 
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
+import com.kvad.totalizator.transactionfeature.data.MapperTransactionToTransactionRequest
+import com.kvad.totalizator.transactionfeature.model.TransactionModel
 import javax.inject.Inject
 
 class TransactionUseCase @Inject constructor(

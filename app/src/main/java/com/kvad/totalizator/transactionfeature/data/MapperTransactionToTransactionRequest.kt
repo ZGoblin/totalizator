@@ -1,8 +1,10 @@
-package com.kvad.totalizator.transactionfeature
+package com.kvad.totalizator.transactionfeature.data
 
 import com.kvad.totalizator.data.requestmodels.TransactionRequest
 import com.kvad.totalizator.tools.DEPOSIT_FLAG
 import com.kvad.totalizator.tools.WITHDRAW_FLAG
+import com.kvad.totalizator.transactionfeature.model.TransactionModel
+import com.kvad.totalizator.transactionfeature.TransactionState
 import javax.inject.Inject
 
 class MapperTransactionToTransactionRequest @Inject constructor(){

@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.transactionfeature.domain.TransactionUseCase
+import com.kvad.totalizator.transactionfeature.model.TransactionModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
