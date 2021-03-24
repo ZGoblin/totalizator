@@ -38,7 +38,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private lateinit var detailBet: Bet
     private var eventId: String = ""
     private var coefficient: Float = 0f
+    private var current : Float = 0f
     private lateinit var stateVisibilityController: StateVisibilityController
+
 
 
     override fun onCreateView(
@@ -150,8 +152,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             }
         }
         eventId = state.data.eventId
-        //Toast.makeText(requireContext(),state.data.margin.toString(),Toast.LENGTH_SHORT).show()
-        coefficient = viewModel.calculate(detailBet)
+        coefficient = viewModel.calculate(detailBet,current)
     }
 
     private fun setupTextWatcher() {
@@ -168,11 +169,12 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     }
                 }
                 text?.length == 1 -> {
+                    current = binding.etBet.text.toString().toFloat()
                     val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
                     binding.apply {
+                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
                         amountLayout.error = getString(R.string.min_bet)
                         btnBet.isEnabled = false
-                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
                         btnBet.setBackgroundColor(color)
                         btnBet.text = getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
                         tvPraise.visibility = View.VISIBLE
@@ -180,6 +182,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     }
                 }
                 else -> {
+                    current = binding.etBet.text.toString().toFloat()
                     val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
                     binding.apply {
                         amountLayout.error = null

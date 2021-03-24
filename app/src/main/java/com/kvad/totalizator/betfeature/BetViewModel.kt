@@ -58,8 +58,8 @@ class BetViewModel @Inject constructor(
         _eventInfoLiveData.value = State.Error(Unit)
     }
 
-    fun calculate(bet : Bet): Float {
-        return coefficientUseCase.calculateCoefficient(lastBetDetail,bet)
+    fun calculate(bet : Bet, current : Float): Float {
+        return coefficientUseCase.calculateCoefficient(lastBetDetail,bet,current)
     }
 
     fun createBet(betToServerModel: BetToServerModel) {
