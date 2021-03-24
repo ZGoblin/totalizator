@@ -19,8 +19,7 @@ class CoefficientUseCase @Inject constructor() {
             0.0f -> 1.0f
             else -> choiceAmount
         }
-        val result = poolWithoutMargin / (choiceBet + current)
-        return result
+        return poolWithoutMargin / (choiceBet + current)
     }
 
 }
