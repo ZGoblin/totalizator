@@ -35,14 +35,19 @@ class HeaderFragment : Fragment() {
         setupDi()
         setupListener()
         setupLiveDataObserver()
-
-        showLoginButton(false)
-        viewModel.getWallet()
     }
 
     private fun setupListener() {
-        binding.tvLogin.setOnClickListener {
-            findNavController().navigate(R.id.login_fragment)
+        binding.apply {
+            tvLogin.setOnClickListener {
+                findNavController().navigate(R.id.login_fragment)
+            }
+            tvCurrencyValue.setOnClickListener {
+                findNavController().navigate(R.id.transaction_fragment)
+            }
+            tvCurrency.setOnClickListener {
+                findNavController().navigate(R.id.transaction_fragment)
+            }
         }
     }
 
@@ -55,27 +60,60 @@ class HeaderFragment : Fragment() {
     private fun updateState(state: State<Wallet, ErrorState>) {
         when (state) {
             is State.Content -> {
-                showLoginButton(false)
+                showUser()
                 updateWallet(state.data)
             }
-            is State.Error -> showLoginButton(true)
-            else -> {}
+            is State.Error -> {
+                when (state.error) {
+                    ErrorState.LOGIN_ERROR -> showLoginButton()
+                    ErrorState.LOADING_ERROR -> showNoNetwork()
+                }
+            }
+            is State.Loading -> showProgressBar()
         }
     }
 
-    private fun showLoginButton(show: Boolean) {
+    private fun showProgressBar() {
         binding.apply {
-            if (show) {
-                tvLogin.visibility = View.VISIBLE
-                tvCurrency.visibility = View.GONE
-                tvCurrencyValue.visibility = View.GONE
-                ivAvatar.visibility = View.GONE
-            } else {
-                tvLogin.visibility = View.GONE
-                tvCurrency.visibility = View.VISIBLE
-                tvCurrencyValue.visibility = View.VISIBLE
-                ivAvatar.visibility = View.VISIBLE
-            }
+            pbProgress.visibility = View.VISIBLE
+            tvLogin.visibility = View.GONE
+            ivNoWifi.visibility = View.GONE
+            tvCurrency.visibility = View.GONE
+            tvCurrencyValue.visibility = View.GONE
+            ivAvatar.visibility = View.GONE
+        }
+    }
+
+    private fun showLoginButton() {
+        binding.apply {
+            tvLogin.visibility = View.VISIBLE
+            pbProgress.visibility = View.GONE
+            ivNoWifi.visibility = View.GONE
+            tvCurrency.visibility = View.GONE
+            tvCurrencyValue.visibility = View.GONE
+            ivAvatar.visibility = View.GONE
+        }
+    }
+
+    private fun showUser() {
+        binding.apply {
+            tvLogin.visibility = View.GONE
+            pbProgress.visibility = View.GONE
+            ivNoWifi.visibility = View.GONE
+            tvCurrency.visibility = View.VISIBLE
+            tvCurrencyValue.visibility = View.VISIBLE
+            ivAvatar.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showNoNetwork() {
+        binding.apply {
+            tvLogin.visibility = View.GONE
+            pbProgress.visibility = View.GONE
+            ivNoWifi.visibility = View.VISIBLE
+            tvCurrency.visibility = View.GONE
+            tvCurrencyValue.visibility = View.GONE
+            ivAvatar.visibility = View.GONE
         }
     }
 
