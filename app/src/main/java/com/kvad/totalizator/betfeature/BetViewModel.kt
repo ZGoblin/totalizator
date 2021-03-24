@@ -17,63 +17,72 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-typealias BetDetailState = State<Unit, ErrorState>
-typealias EventInfoState = State<BetDetail, Unit>
+typealias BetLiveDataState = State<Unit, ErrorState>
+typealias BetInfoLivaDataState = State<BetDetail, Unit>
 
 
 class BetViewModel @Inject constructor(
     private val coefficientUseCase: CoefficientUseCase,
     private val betUseCase: BetUseCase,
-    private val mapBetToBetDetailModel : MapperEventToBetDetailModel,
+    private val mapBetToBetDetailModel: MapperEventToBetDetailModel,
     private val eventRepository: EventRepository
 ) : ViewModel() {
 
-    private var _betDetailLiveData = MutableLiveData<BetDetailState>()
-    val betDetailLiveData: LiveData<BetDetailState> = _betDetailLiveData
+    private var _betLiveData = MutableLiveData<BetLiveDataState>()
+    val betLiveData: LiveData<BetLiveDataState> = _betLiveData
 
-    private var _eventInfoLiveData = MutableLiveData<EventInfoState>()
-    val eventInfoLiveData: LiveData<EventInfoState> = _eventInfoLiveData
+    private var _betInfoLiveData = MutableLiveData<BetInfoLivaDataState>()
+    val betInfoLiveData: LiveData<BetInfoLivaDataState> = _betInfoLiveData
 
-    lateinit var lastBetDetail : BetDetail
+    lateinit var lastBetDetail: BetDetail
         private set
 
     fun uploadData() {
-        _eventInfoLiveData.value = State.Loading
+        _betInfoLiveData.value = State.Loading
         viewModelScope.launch {
-            eventRepository.latestEvent.map{it.mapSuccess ( mapBetToBetDetailModel::map )}.collect {
+            eventRepository.latestEvent.map { it.mapSuccess(mapBetToBetDetailModel::map) }.collect {
                 it.doOnResult(
-                        onSuccess = ::doOnSuccess,
-                        onError = ::doOnError
-                    )
-                }
+                    onSuccess = ::doOnSuccessBetInfo,
+                    onError = ::doOnErrorBetInfo
+                )
             }
         }
+    }
 
-    private fun doOnSuccess(betModel : BetDetail){
+    private fun doOnSuccessBetInfo(betModel: BetDetail) {
         lastBetDetail = betModel
-        _eventInfoLiveData.value = State.Content(betModel)
+        _betInfoLiveData.value = State.Content(betModel)
     }
 
-    private fun doOnError(error: ApiResultWrapper.Error){
-        _eventInfoLiveData.value = State.Error(Unit)
+    private fun doOnErrorBetInfo(error: ApiResultWrapper.Error) {
+        _betInfoLiveData.value = State.Error(Unit)
     }
 
-    fun calculate(bet : Bet, current : Float): Float {
-        return coefficientUseCase.calculateCoefficient(lastBetDetail,bet,current)
+    fun calculate(bet: Bet, current: Float): Float {
+        return coefficientUseCase.calculateCoefficient(lastBetDetail, bet, current)
     }
 
     fun createBet(betToServerModel: BetToServerModel) {
-        _betDetailLiveData.value = State.Loading
+        _betLiveData.value = State.Loading
         viewModelScope.launch {
             betUseCase.bet(betToServerModel).doOnResult(
-                onSuccess = { _betDetailLiveData.value = State.Content(it) },
-                onNetworkError = {
-                    _betDetailLiveData.value = State.Error(ErrorState.LOADING_ERROR)
-                },
-                onLoginError = { _betDetailLiveData.value = State.Error(ErrorState.LOGIN_ERROR) }
+                onSuccess = ::doOnSuccessDoBet,
+                onNetworkError = ::doOnNetworkErrorDoBet,
+                onLoginError = ::doOnLoginErrorDoBet
             )
         }
+    }
 
+    private fun doOnSuccessDoBet(unit: Unit) {
+        _betLiveData.value = State.Content(unit)
+    }
+
+    private fun doOnNetworkErrorDoBet(error: ApiResultWrapper.Error) {
+        _betLiveData.value = State.Error(error = ErrorState.LOADING_ERROR)
+    }
+
+    private fun doOnLoginErrorDoBet(error: ApiResultWrapper.Error) {
+        _betLiveData.value = State.Error(ErrorState.LOGIN_ERROR)
     }
 
 }

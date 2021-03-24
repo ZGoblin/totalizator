@@ -56,5 +56,6 @@
     <string name="bet_accessed">Bet accessed</string>
     <string name="loading_error">Loading error...</string>
     <string name="general_error_text">Oops, something went wrong</string>
+    <string name="something_went_wrong">Something went wrong</string>
 
 </resources>

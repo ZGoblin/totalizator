@@ -1,29 +1,19 @@
 package com.kvad.totalizator.betfeature
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
-import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
-import com.kvad.totalizator.detail.EventDetailFragment
-import com.kvad.totalizator.detail.EventDetailFragmentArgs
 import com.kvad.totalizator.shared.Bet
-import com.kvad.totalizator.tools.BET_DETAIL_KEY
-import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
 import javax.inject.Inject
@@ -37,11 +27,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private lateinit var binding: BetDialogFragmentBinding
     private lateinit var detailBet: Bet
     private var eventId: String = ""
-    private var coefficient: Float = 0f
-    private var current : Float = 0f
     private lateinit var stateVisibilityController: StateVisibilityController
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +39,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             val safeArgs = BetDialogFragmentArgs.fromBundle(it).bet
             detailBet = safeArgs
         }
-        stateVisibilityController = StateVisibilityController(binding.progressBarCircular, null)
+        stateVisibilityController =
+            StateVisibilityController(binding.progressBarCircular, binding.tvError)
         return binding.root
     }
 
@@ -61,12 +48,10 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         setupDi()
         setupListeners()
-        binding.amountLayout.error = getString(R.string.min_bet)
-        binding.etBet.requestFocus()
-        viewModel.uploadData()
         setupTextWatcher()
-        observeEventInfoLiveData()
-        observeBetLiveData()
+        viewModel.uploadData()
+        observeBetInfoLiveData()
+        observeDoBetLiveData()
     }
 
     private fun setupDi() {
@@ -90,31 +75,20 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-
-    private fun cancelBetDialog() {
-        hideKeyBoard()
-        dialog?.cancel()
-        binding.etBet.clearFocus()
-    }
-
-    private fun hideKeyBoard() {
-        val inputMethodManager =
-            this.context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.applicationWindowToken, 0)
-    }
-
-    private fun observeBetLiveData() {
-        stateVisibilityController.hideAll()
-        viewModel.betDetailLiveData.observe(viewLifecycleOwner) {
+    private fun observeDoBetLiveData() {
+        viewModel.betLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> stateVisibilityController.showLoading()
-                is State.Content -> setupBetUiResult()
+                is State.Content -> {
+                    stateVisibilityController.hideAll()
+                    setupDoBetResult()
+                }
                 is State.Error -> findNavController().navigate(R.id.login_fragment)
             }
         }
     }
 
-    private fun setupBetUiResult() {
+    private fun setupDoBetResult() {
         binding.apply {
             etBet.visibility = View.GONE
             tvCancel.visibility = View.GONE
@@ -127,18 +101,23 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun observeEventInfoLiveData() {
-        stateVisibilityController.hideAll()
-        viewModel.eventInfoLiveData.observe(viewLifecycleOwner) {
+    private fun observeBetInfoLiveData() {
+        viewModel.betInfoLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> stateVisibilityController.showLoading()
-                is State.Content -> setupInfoForBet(it)
-                is State.Error -> cancelBetDialog()
+                is State.Content -> {
+                    stateVisibilityController.hideAll()
+                    setupBetInfo(it)
+                }
+                is State.Error -> {
+                    stateVisibilityController.showError()
+                }
             }
         }
     }
 
-    private fun setupInfoForBet(state: State.Content<BetDetail>) {
+    private fun setupBetInfo(state: State.Content<BetDetail>) {
+        eventId = state.data.eventId
         binding.apply {
             tvGameDetails.text = getString(
                 R.string.event_vs,
@@ -151,11 +130,11 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                 Bet.FIRST_PLAYER_WIN -> state.data.secondPlayerName
             }
         }
-        eventId = state.data.eventId
-        coefficient = viewModel.calculate(detailBet,current)
     }
 
     private fun setupTextWatcher() {
+        binding.amountLayout.error = getString(R.string.min_bet)
+        binding.etBet.requestFocus()
         binding.etBet.doOnTextChanged { text, _, _, _ ->
             when {
                 text?.isEmpty() == true -> {
@@ -169,33 +148,49 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     }
                 }
                 text?.length == 1 -> {
-                    current = binding.etBet.text.toString().toFloat()
+                    val coefficient =
+                        viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
                     val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
                     binding.apply {
                         val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
                         amountLayout.error = getString(R.string.min_bet)
                         btnBet.isEnabled = false
                         btnBet.setBackgroundColor(color)
-                        btnBet.text = getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
+                        btnBet.text =
+                            getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
                         tvPraise.visibility = View.VISIBLE
                         tvPraise.text = getString(R.string.possible_gain, possibleGain)
                     }
                 }
                 else -> {
-                    current = binding.etBet.text.toString().toFloat()
+                    val coefficient =
+                        viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
                     val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
                     binding.apply {
                         amountLayout.error = null
                         btnBet.isEnabled = true
                         val color = ContextCompat.getColor(requireContext(), R.color.yellow)
                         btnBet.setBackgroundColor(color)
-                        btnBet.text = getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
+                        btnBet.text =
+                            getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
                         tvPraise.visibility = View.VISIBLE
                         tvPraise.text = getString(R.string.possible_gain, possibleGain)
                     }
                 }
             }
         }
+    }
+
+    private fun cancelBetDialog() {
+        hideKeyBoard()
+        dialog?.cancel()
+        binding.etBet.clearFocus()
+    }
+
+    private fun hideKeyBoard() {
+        val inputMethodManager =
+            this.context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view?.applicationWindowToken, 0)
     }
 
 }
