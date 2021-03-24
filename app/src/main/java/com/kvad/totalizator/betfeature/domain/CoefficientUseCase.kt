@@ -9,8 +9,7 @@ import javax.inject.Inject
 class CoefficientUseCase @Inject constructor() {
 
     fun calculateCoefficient(lastBetDetail: BetDetail, bet: Bet, current: Float): Float {
-        val pool = current + lastBetDetail.firstPlayerAmount
-        +lastBetDetail.secondPlayerAmount + lastBetDetail.drawAmount
+        val pool = current + lastBetDetail.firstPlayerAmount+lastBetDetail.secondPlayerAmount + lastBetDetail.drawAmount
         val sumMargin = (pool * lastBetDetail.margin) / 100
         val poolWithoutMargin = pool - sumMargin
         val choiceAmount = when (bet) {

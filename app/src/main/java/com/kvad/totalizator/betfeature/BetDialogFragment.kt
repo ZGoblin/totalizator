@@ -91,8 +91,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun setupDoBetError(error: ErrorState){
-        when(error){
+    private fun setupDoBetError(error: ErrorState) {
+        when (error) {
             ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
             ErrorState.LOADING_ERROR -> findNavController().popBackStack()
         }
@@ -105,10 +105,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             tvBetGood.visibility = View.VISIBLE
             vClose.visibility = View.VISIBLE
             btnBet.isEnabled = false
-            val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
-            btnBet.setBackgroundColor(color)
-            hideKeyBoard()
+            btnBet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_grey))
         }
+        hideKeyBoard()
     }
 
     private fun observeBetInfoLiveData() {
@@ -136,8 +135,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             )
             tvWinnerName.text = when (detailBet) {
                 Bet.DRAW -> getString(R.string.draw)
-                Bet.SECOND_PLAYER_WIN -> state.data.firstPlayerName
-                Bet.FIRST_PLAYER_WIN -> state.data.secondPlayerName
+                Bet.FIRST_PLAYER_WIN -> state.data.firstPlayerName
+                Bet.SECOND_PLAYER_WIN -> state.data.secondPlayerName
             }
         }
     }
@@ -147,48 +146,65 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding.etBet.requestFocus()
         binding.etBet.doOnTextChanged { text, _, _, _ ->
             when {
-                text?.isEmpty() == true -> {
-                    binding.apply {
-                        amountLayout.error = getString(R.string.min_bet)
-                        btnBet.isEnabled = false
-                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
-                        btnBet.setBackgroundColor(color)
-                        btnBet.text = getString(R.string.do_bet_simple)
-                        tvPraise.visibility = View.INVISIBLE
-                    }
+                text?.isEmpty() == true -> checkTextIsEmpty()
+                text?.length == 1 -> checkTextLength(false)
+                else -> checkTextLength(true)
+            }
+        }
+    }
+
+
+    private fun checkTextIsEmpty() {
+        binding.amountLayout.error = getString(R.string.min_bet)
+        binding.btnBet.isEnabled = false
+        binding.btnBet.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.light_grey
+            )
+        )
+        binding.btnBet.text = getString(R.string.do_bet_simple)
+        binding.tvPraise.visibility = View.INVISIBLE
+    }
+
+    private fun checkTextLength(btnBetEnable: Boolean) {
+        when (btnBetEnable) {
+            true -> {
+                binding.apply{
+                    amountLayout.error = null
+                    btnBet.isEnabled = true
+                    btnBet.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.yellow
+                        )
+                    )
                 }
-                text?.length == 1 -> {
-                    val coefficient =
-                        viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
-                    val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
-                    binding.apply {
-                        val color = ContextCompat.getColor(requireContext(), R.color.light_grey)
-                        amountLayout.error = getString(R.string.min_bet)
-                        btnBet.isEnabled = false
-                        btnBet.setBackgroundColor(color)
-                        btnBet.text =
-                            getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
-                        tvPraise.visibility = View.VISIBLE
-                        tvPraise.text = getString(R.string.possible_gain, possibleGain)
-                    }
-                }
-                else -> {
-                    val coefficient =
-                        viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
-                    val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
-                    binding.apply {
-                        amountLayout.error = null
-                        btnBet.isEnabled = true
-                        val color = ContextCompat.getColor(requireContext(), R.color.yellow)
-                        btnBet.setBackgroundColor(color)
-                        btnBet.text =
-                            getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
-                        tvPraise.visibility = View.VISIBLE
-                        tvPraise.text = getString(R.string.possible_gain, possibleGain)
-                    }
+            }
+            false -> {
+                binding.apply{
+                    amountLayout.error = getString(R.string.min_bet)
+                    btnBet.isEnabled = false
+                    btnBet.setBackgroundColor(
+                        ContextCompat.getColor(
+                            requireContext(),
+                            R.color.light_grey
+                        )
+                    )
                 }
             }
         }
+        binding.apply{
+            btnBet.text = getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
+            tvPraise.visibility = View.VISIBLE
+        }
+        calculateAndSetupUi()
+    }
+
+    private fun calculateAndSetupUi() {
+        val coefficient = viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
+        val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
+        binding.tvPraise.text = getString(R.string.possible_gain, possibleGain)
     }
 
     private fun cancelBetDialog() {

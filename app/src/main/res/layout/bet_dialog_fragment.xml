@@ -140,7 +140,7 @@
             android:paddingHorizontal="@dimen/padding_start_tv_cancel"
             android:paddingVertical="@dimen/padding_top_tv_cancel"
             android:text="@string/possible_gain"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:textSize="16sp"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -164,7 +164,7 @@
         android:text="@string/something_went_wrong"
         android:textSize="16sp"
         android:padding="16dp"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:textColor="@color/red"
         tools:layout_editor_absoluteX="133dp"
         tools:layout_editor_absoluteY="16dp" />

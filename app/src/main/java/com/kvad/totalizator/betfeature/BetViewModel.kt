@@ -70,7 +70,7 @@ class BetViewModel @Inject constructor(
     fun createBet(betToServerModel: BetToServerModel) {
         _betLiveData.value = State.Loading
         viewModelScope.launch {
-            betUseCase.bet(betToServerModel).doOnResult(
+            betUseCase.doBet(betToServerModel).doOnResult(
                 onSuccess = ::doOnSuccessDoBet,
                 onNetworkError = ::doOnNetworkErrorDoBet,
                 onLoginError = ::doOnLoginErrorDoBet
