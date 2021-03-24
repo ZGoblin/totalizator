@@ -9,7 +9,9 @@ import com.kvad.totalizator.tools.safeapicall.mapSuccess
 import com.kvad.totalizator.tools.safeapicall.safeApiCall
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,8 +21,7 @@ class EventRepository @Inject constructor(
     private val mapRequestEventToEvent: MapRequestEventToEvent
 ) {
 
-    //todo
-    suspend fun getLine(): Flow<ApiResultWrapper<List<Event>>> = flow {
+    var lineFlow: Flow<ApiResultWrapper<List<Event>>> = flow {
         while (true) {
             val line = safeApiCall(eventService::getLine).mapSuccess {
                 mapRequestEventToEvent.map(it.events)
@@ -29,6 +30,29 @@ class EventRepository @Inject constructor(
             delay(REQUEST_DELAY)
         }
     }
+        private set
+
+    fun getEventById(id: String): Flow<ApiResultWrapper<Event>> {
+        return lineFlow
+            .filter { response ->
+                if (response.isSuccess()) {
+                    val events = response.asSuccess().value
+                    events.filter { event ->
+                        event.id == id
+                    }.let {
+                        return@filter true
+                    }
+                }
+                return@filter true
+            }
+            .map {
+                if (it.isSuccess()) {
+                    return@map ApiResultWrapper.Success(it.asSuccess().value.first())
+                }
+                return@map it.asError()
+            }
+    }
+
 
     fun createEventFlowById(id: String): Flow<ApiResultWrapper<Event>> {
         latestEvent = flow {

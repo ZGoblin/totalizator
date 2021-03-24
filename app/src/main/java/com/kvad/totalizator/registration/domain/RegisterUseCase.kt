@@ -8,6 +8,7 @@ import com.kvad.totalizator.registration.models.RawRegisterRequest
 import com.kvad.totalizator.tools.ADULT
 import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
+import com.kvad.totalizator.tools.USERNAME_MIN_LENGTH
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -52,6 +53,7 @@ class RegisterUseCase @Inject constructor(
         withContext(Dispatchers.Default) {
             when {
                 rawRegisterRequest.email.length < LOGIN_MIN_LENGTH -> RegisterState.LOGIN_LENGTH_ERROR
+                rawRegisterRequest.username.length < USERNAME_MIN_LENGTH -> RegisterState.USERNAME_ERROR
                 rawRegisterRequest.password.length < PASSWORD_MIN_LENGTH -> RegisterState.PASSWORD_LENGTH_ERROR
                 !isAdult(rawRegisterRequest) -> RegisterState.BIRTHDAY_ERROR
                 else -> RegisterState.WITHOUT_ERROR
@@ -75,6 +77,7 @@ class RegisterUseCase @Inject constructor(
 
     private suspend fun toRegisterRequest(rawRegisterRequest: RawRegisterRequest) = withContext(Dispatchers.Default) {
         RegisterRequest(
+            username = rawRegisterRequest.username,
             email = rawRegisterRequest.email,
             password = rawRegisterRequest.password,
             dob = dateToString(rawRegisterRequest)
