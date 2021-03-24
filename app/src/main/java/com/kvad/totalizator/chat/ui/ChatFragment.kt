@@ -5,8 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.kvad.totalizator.App
+import com.kvad.totalizator.chat.adapter.ChatRecyclerViewAdapter
 import com.kvad.totalizator.databinding.ChatFragmentBinding
+import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
 import javax.inject.Inject
 
@@ -17,8 +22,9 @@ class ChatFragment : Fragment() {
 
     private var _binding: ChatFragmentBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var stateVisibilityController: StateVisibilityController
+
+    private val chatAdapter = ChatRecyclerViewAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +39,26 @@ class ChatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupDi()
+        setupRecycler()
+        observeChatLiveData()
+    }
+
+    private fun observeChatLiveData() {
+        viewModel.chatLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is State.Loading -> { }
+                is State.Content -> { it.data }
+                is State.Error -> {}
+            }
+        }
+    }
+
+    private fun setupRecycler(){
+        binding.rvChat.apply {
+            (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+            adapter = chatAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        }
     }
 
     private fun setupDi() {
