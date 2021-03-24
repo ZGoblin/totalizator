@@ -14,6 +14,7 @@ import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class HeaderFragment : Fragment() {
 
     @Inject
