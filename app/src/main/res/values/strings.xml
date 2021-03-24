@@ -32,7 +32,10 @@
     <string name="event_vs">%1$s vs %2$s</string>
     <string name="min_bet">Минимальная ставка - 10.0</string>
     <string name="command_a">Command A</string>
-    <string name="possible_gain">Возможный выиграш %d</string>
+    <string name="possible_gain">Возможный выиграш %1$.1f</string>
+    <string name="do_bet">Сделать ставку %1$.1f</string>
+    <string name="do_bet_simple">Сделать ставку</string>
+
 
     <string name="draw">Draw</string>
 
@@ -53,6 +56,5 @@
     <string name="bet_accessed">Bet accessed</string>
     <string name="loading_error">Loading error...</string>
     <string name="general_error_text">Oops, something went wrong</string>
-
 
 </resources>

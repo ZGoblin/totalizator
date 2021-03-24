@@ -1,5 +1,6 @@
 package com.kvad.totalizator.data
 
+import com.kvad.totalizator.betfeature.BetRequest
 import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.data.requestmodels.LoginRequest
 import com.kvad.totalizator.data.requestmodels.RegisterRequest
@@ -40,4 +41,11 @@ class UserRepository @Inject constructor(
     fun updateToken(token: Token) {
         sharedPref.token = token.token
     }
+
+    suspend fun doBet(betRequest: BetRequest): ApiResultWrapper<Unit>  {
+        return safeApiCall {
+            userService.doBet(betRequest)
+        }
+    }
+
 }
