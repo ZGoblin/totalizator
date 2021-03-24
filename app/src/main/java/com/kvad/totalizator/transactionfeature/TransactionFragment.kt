@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.TransactionFragmentBinding
+import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.transactionfeature.model.TransactionModel
@@ -19,7 +21,7 @@ class TransactionFragment : Fragment() {
 
     private lateinit var binding: TransactionFragmentBinding
     private lateinit var transactionState: TransactionState
-    private lateinit var progress: StateVisibilityController
+    private lateinit var stateVisibilityController: StateVisibilityController
 
     @Inject
     lateinit var viewModel: TransactionViewModel
@@ -29,15 +31,14 @@ class TransactionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = TransactionFragmentBinding.inflate(inflater, container, false)
+        stateVisibilityController = StateVisibilityController(binding.progressBarr, null)
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        progress = StateVisibilityController(binding.progressBarr, null)
         setupDi()
         setupListeners()
         setupTextWatcher()
@@ -63,16 +64,22 @@ class TransactionFragment : Fragment() {
         viewModel.doTransaction(deposit)
         binding.etTransaction.text = null
     }
-	
+
     private fun observeLiveData() {
-        progress.hideAll()
+        stateVisibilityController.hideAll()
         viewModel.transactionLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> progress.showLoading()
-                is State.Error -> {
-                }
-                is State.Content -> progress.hideAll()
+                is State.Loading -> stateVisibilityController.showLoading()
+                is State.Error -> setupError(it.error)
+                is State.Content -> stateVisibilityController.hideAll()
             }
+        }
+    }
+
+    private fun setupError(error: ErrorState) {
+        when (error) {
+            ErrorState.LOADING_ERROR -> findNavController().navigate(R.id.events_fragment)
+            ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
         }
     }
 
