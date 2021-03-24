@@ -18,8 +18,6 @@ import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
-import com.kvad.totalizator.detail.EventDetailFragment
-import com.kvad.totalizator.detail.EventDetailFragmentArgs
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.BET_DETAIL_KEY
 import com.kvad.totalizator.tools.ErrorState
