@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.kvad.totalizator.App
 import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.databinding.EventsFragmentBinding
@@ -58,15 +59,22 @@ class EventsFragment : Fragment() {
         stateVisibilityController.hideAll()
         when (state) {
             is State.Content -> eventAdapter.submitList(state.data)
-            is State.Error -> stateVisibilityController.showError()
-            is State.Loading -> stateVisibilityController.showLoading()
+            is State.Error -> {
+                //eventAdapter.submitList(null)
+                stateVisibilityController.showError()
+            }
+            is State.Loading -> {
+                //eventAdapter.submitList(null)
+                stateVisibilityController.showLoading()
+            }
         }
     }
 
     private fun setupRecycler() {
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(binding.rvEvents)
         binding.rvEvents.apply {
+            val snapHelper = LinearSnapHelper()
+            snapHelper.attachToRecyclerView(this)
+            (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
             adapter = eventAdapter
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }

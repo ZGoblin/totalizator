@@ -51,6 +51,8 @@ class EventViewGroup @JvmOverloads constructor(
                 if (typedArray.getBoolean(R.styleable.EventViewGroup_containDraw, true))
                     View.VISIBLE
                 else View.GONE
+
+            tvLive.visibility = View.GONE
         }
 
         typedArray.recycle()
@@ -69,6 +71,14 @@ class EventViewGroup @JvmOverloads constructor(
             binding.tvDraw.visibility = View.GONE
         } else {
             binding.tvDraw.visibility = View.VISIBLE
+        }
+    }
+
+    fun hideLive(hide: Boolean) {
+        if (hide) {
+            binding.tvLive.visibility = View.GONE
+        } else {
+            binding.tvLive.visibility = View.VISIBLE
         }
     }
 
