@@ -58,6 +58,9 @@ class RegistrationFragment : Fragment() {
             RegisterState.PASSWORD_LENGTH_ERROR -> {
                 binding.tfPassword.error = getString(R.string.login_password_error)
             }
+            RegisterState.USERNAME_ERROR -> {
+                binding.tfUsername.error = getString(R.string.login_username_error)
+            }
         }
     }
 
@@ -82,6 +85,7 @@ class RegistrationFragment : Fragment() {
         binding.apply {
             viewModel.register(
                 RawRegisterRequest(
+                    username = teUsername.text.toString(),
                     email = teLogin.text.toString(),
                     password = tePassword.text.toString(),
                     day = dpBirthday.dayOfMonth,
