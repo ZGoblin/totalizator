@@ -4,8 +4,8 @@
     <string name="content_description_end_icon">end cross</string>
     <string name="first_player">First player</string>
 
-    <string name="bet_currency">%s UAH</string>
-    <string name="draw_bet_amount">Draw %s UAH</string>
+    <string name="bet_currency">%d UAH</string>
+    <string name="draw_bet_amount">Draw %d UAH</string>
     <string name="players_vs_players_title">Players VS Players</string>
     <string name="players_vs_players_body">Bet on winner - grab losers money. \nThe more you bet, the more prize share you get. When event started - bets stopped, video stream begins.</string>
 
@@ -32,7 +32,10 @@
     <string name="event_vs">%1$s vs %2$s</string>
     <string name="min_bet">Минимальная ставка - 10.0</string>
     <string name="command_a">Command A</string>
-    <string name="possible_gain">Возможный выиграш %d</string>
+    <string name="possible_gain">Возможный выиграш %1$.1f</string>
+    <string name="do_bet">Сделать ставку %1$.1f</string>
+    <string name="do_bet_simple">Сделать ставку</string>
+
 
     <string name="draw">Draw</string>
     <string name="events_network_error">An error occurred while download events</string>
@@ -42,6 +45,7 @@
     <string name="login_terms_of_use">Terms of use</string>
     <string name="login_login_error">Login length must be greater than 3</string>
     <string name="login_password_error">Password length must be greater than 6</string>
+    <string name="login_username_error">Username length must be greater than 3</string>
     <string name="login_network_error_dialog_body">An error occurred while sending the request</string>
     <string name="login_network_error_dialog_button">OK</string>
 
@@ -58,5 +62,8 @@
     <string name="go_deposit">Go Deposit</string>
     <string name="go_withdraw">Go Withdraw</string>
 
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="user_image">User image</string>
+    <string name="you">You</string>
 
 </resources>

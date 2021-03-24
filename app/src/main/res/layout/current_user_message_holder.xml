@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="@string/you"
+        android:textColor="#7B7B7B"
+        app:layout_constraintEnd_toStartOf="@id/tv_time"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textColor="#7B7B7B"
+        app:layout_constraintEnd_toStartOf="@id/iv_avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="17:38" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="tv_name, tv_time" />
+
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
+        android:contentDescription="@string/user_image"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+        tools:src="@drawable/user_login_24" />
+
+    <TextView
+        android:id="@+id/tv_message_body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/current_user_message_shape"
+        android:textColor="@color/black"
+        android:padding="8dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_time"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
+        app:layout_constraintWidth_max="300dp"
+        tools:text="Dale dale Barça;  Te sigo los partidos yote quidero" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
