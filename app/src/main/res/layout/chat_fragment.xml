@@ -11,11 +11,20 @@
         android:layout_height="match_parent"/>
 
     <ProgressBar
+        android:id="@+id/progress_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         style="@style/CustomProgressBar"
         android:padding="100dp"
         android:visibility="gone" />
 
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:text="@string/general_error_text"
+        android:visibility="gone"/>
 
 </FrameLayout>

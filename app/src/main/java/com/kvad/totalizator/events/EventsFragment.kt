@@ -41,8 +41,6 @@ class EventsFragment : Fragment() {
         setupDi()
         setupRecycler()
         setupLiveDataObserver()
-
-        viewModel.getEvents()
     }
 
     private fun setupDi() {
