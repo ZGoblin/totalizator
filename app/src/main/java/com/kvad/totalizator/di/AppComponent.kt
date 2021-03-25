@@ -14,7 +14,7 @@ import com.kvad.totalizator.transactionfeature.TransactionPagerFragment
 import com.kvad.totalizator.transactionfeature.WithdrawPageFragment
 import dagger.Component
 import javax.inject.Singleton
-
+@Suppress("TooManyFunctions")
 @Singleton
 @Component(
     dependencies = [],
