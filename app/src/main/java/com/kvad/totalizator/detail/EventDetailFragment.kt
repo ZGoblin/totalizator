@@ -101,8 +101,8 @@ class EventDetailFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun onBtnBetClick(bet: Bet) {
-        val action = EventDetailFragmentDirections.actionBetDialogFragment(bet)
+    private fun onBtnBetClick(bet: Bet, id: String) {
+        val action = EventDetailFragmentDirections.actionBetDialogFragment(bet, id)
         findNavController().navigate(action)
     }
 }

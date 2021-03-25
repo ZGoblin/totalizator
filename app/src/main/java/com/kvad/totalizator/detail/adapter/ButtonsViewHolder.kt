@@ -9,7 +9,7 @@ import com.kvad.totalizator.shared.Bet
 
 class ButtonsViewHolder(
     view: View,
-    private val onBetButtonClick: (Bet) -> Unit
+    private val onBetButtonClick: (Bet, String) -> Unit
 ) : RecyclerView.ViewHolder(view) {
     private val binding = EventDetailButtonsHolderBinding.bind(itemView)
 
@@ -21,20 +21,20 @@ class ButtonsViewHolder(
                 itemView.resources.getString(R.string.bet_on, buttonDetail.participant2.name)
         }
 
-        setupListeners()
+        setupListeners(buttonDetail)
     }
 
-    private fun setupListeners() {
+    private fun setupListeners(buttonDetail: EventDetail.ButtonsInfoUiModel) {
         binding.btnDraw.setOnClickListener {
-            onBetButtonClick.invoke(Bet.DRAW)
+            onBetButtonClick.invoke(Bet.DRAW, buttonDetail.id)
         }
 
         binding.btnFirstPlayerWin.setOnClickListener {
-            onBetButtonClick.invoke(Bet.FIRST_PLAYER_WIN)
+            onBetButtonClick.invoke(Bet.FIRST_PLAYER_WIN, buttonDetail.id)
         }
 
         binding.btnSecondPlayerWin.setOnClickListener {
-            onBetButtonClick.invoke(Bet.SECOND_PLAYER_WIN)
+            onBetButtonClick.invoke(Bet.SECOND_PLAYER_WIN, buttonDetail.id)
         }
     }
 }

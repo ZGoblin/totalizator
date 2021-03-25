@@ -24,6 +24,7 @@ class MapEventToDetailUiModel @Inject constructor() {
         if (!event.isLive) {
             resultList.add(
                 EventDetail.ButtonsInfoUiModel(
+                    event.id,
                     event.firstParticipant,
                     event.secondParticipant
                 )

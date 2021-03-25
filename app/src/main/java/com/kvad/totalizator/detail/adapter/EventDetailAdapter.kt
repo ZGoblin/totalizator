@@ -9,7 +9,7 @@ import com.kvad.totalizator.detail.model.EventDetail
 import com.kvad.totalizator.shared.Bet
 
 class EventDetailAdapter constructor(
-    private val onBetButtonClick: (Bet) -> Unit = {  _ -> }
+    private val onBetButtonClick: (Bet, String) -> Unit = {  _, _ -> }
 ) : ListAdapter<EventDetail, RecyclerView.ViewHolder>(DetailEventDiffUtil()) {
 
     enum class HolderType {
