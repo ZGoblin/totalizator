@@ -47,7 +47,7 @@ class ChatFragment : Fragment() {
         viewModel.chatLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> { }
-                is State.Content -> { it.data }
+                is State.Content -> { chatAdapter.submitList(it.data) }
                 is State.Error -> {}
             }
         }
