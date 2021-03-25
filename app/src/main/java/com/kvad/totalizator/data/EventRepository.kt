@@ -1,5 +1,6 @@
 package com.kvad.totalizator.data
 
+import android.util.Log
 import com.kvad.totalizator.data.api.EventService
 import com.kvad.totalizator.data.mappers.MapRequestEventToEvent
 import com.kvad.totalizator.data.model.Event
@@ -39,8 +40,11 @@ class EventRepository @Inject constructor(
                     }?.let { event ->
                         return@map ApiResultWrapper.Success(event)
                     }
+                    return@map ApiResultWrapper.Error.UnknownError("No event find")
                 }
-                return@map it.asError()
+                else {
+                    return@map it.asError()
+                }
             }
     }
 }
