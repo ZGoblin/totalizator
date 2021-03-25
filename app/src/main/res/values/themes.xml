@@ -16,10 +16,13 @@
 
     <style name="TabLayoutStyle">
         <item name="tabIndicatorColor">@color/yellow</item>
-<!--        <item name="tabIndicatorHeight">2dp</item>-->
-<!--        <item name="tabPaddingStart">8dp</item>-->
-<!--        <item name="tabPaddingEnd">8dp</item>-->
         <item name="tabBackground">@color/dark_yellow</item>
         <item name="tabSelectedTextColor">@color/grey</item>
+    </style>
+
+    <style name="TransactionTabLayoutStyle">
+        <item name="tabIndicatorColor">@color/red</item>
+        <item name="tabBackground">@color/red</item>
+        <item name="tabSelectedTextColor">@color/red</item>
     </style>
 </resources>

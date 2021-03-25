@@ -10,6 +10,7 @@ import com.kvad.totalizator.login.LoginFragment
 import com.kvad.totalizator.onboard.OnBoardFragment
 import com.kvad.totalizator.registration.RegistrationFragment
 import com.kvad.totalizator.transactionfeature.TransactionFragment
+import com.kvad.totalizator.transactionfeature.TransactionPagerFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -39,5 +40,7 @@ interface AppComponent {
     fun inject(fragment: TransactionFragment)
 
     fun inject(fragment: ChatFragment)
+
+    fun inject(fragment : TransactionPagerFragment)
 
 }
