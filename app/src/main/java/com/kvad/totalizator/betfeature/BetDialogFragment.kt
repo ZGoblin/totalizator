@@ -229,6 +229,3 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
 }
-
-
-
