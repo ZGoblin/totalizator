@@ -22,10 +22,10 @@ class ChatRepository @Inject constructor(
             val msgLine = safeApiCall {
                 Response.success(
                     listOf(
-                        UserMessageApiModel("userId", "hhlhdfg","userName" ,"some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png", "2021-03-24T20:39:51.742Z"),
-                        UserMessageApiModel("userId", "hhlhdfg","userName" ,"some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png","2021-03-24T20:39:51.742Z"),
-                        UserMessageApiModel("userId", "hhlhdfg","userName" ,"some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png","2021-03-24T20:39:51.742Z"),
-                        UserMessageApiModel("userId", "hhlhdfg","userName" ,"some text", "https://w7.pngwing.com/pngs/891/105/png-transparent-computer-icons-user-others-miscellaneous-face-service.png","2021-03-24T20:39:51.742Z"),
+                        UserMessageApiModel("userId", "sd","userName" ,"some text", "https://avatars.dicebear.com/api/human/rodion.png", "2021-03-24T20:39:51.742Z"),
+                        UserMessageApiModel("userId", "hhlhsdfdfg","userName" ,"some text", "https://avatars.dicebear.com/api/human/oleg.png","2021-03-24T20:39:51.742Z"),
+                        UserMessageApiModel("userId", "hhlhdfg","userName" ,"some text", "https://avatars.dicebear.com/api/human/oleh.png","2021-03-24T20:39:51.742Z"),
+                        UserMessageApiModel("userId", "hhlhddfg","userName" ,"some text", "https://avatars.dicebear.com/api/human/olexiy.png","2021-03-24T20:39:51.742Z"),
                     )
                 )
             }.mapSuccess { mapApiMessageToUserMessage(it) }
