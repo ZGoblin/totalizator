@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -117,12 +118,11 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             when (it) {
                 is State.Loading -> {
                     stateVisibilityController.showLoading()
-                    binding.etBet.isEnabled = false
                 }
                 is State.Content -> {
                     stateVisibilityController.hideAll()
                     setupBetInfo(it)
-                    binding.etBet.isEnabled = true
+                    calculateAndSetupUi()
                 }
                 is State.Error -> {
                     stateVisibilityController.showError()
@@ -161,6 +161,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
 
     private fun checkTextIsEmpty() {
+
         binding.amountLayout.error = getString(R.string.min_bet)
         binding.btnBet.isEnabled = false
         binding.btnBet.setBackgroundColor(
@@ -204,7 +205,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             btnBet.text = getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
             tvPraise.visibility = View.VISIBLE
         }
-        calculateAndSetupUi()
+        if (!binding.progressBarCircular.isVisible){
+            calculateAndSetupUi()
+        }
     }
 
     private fun calculateAndSetupUi() {
