@@ -5,7 +5,7 @@ import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.ANTI_INFINITY_VALUE
 import com.kvad.totalizator.tools.MIN_VALUE_FOR_COEF
 import javax.inject.Inject
-
+@Suppress("MagicNumber")
 class CoefficientUseCase @Inject constructor() {
 
     fun calculateCoefficient(lastBetDetail: BetDetail, bet: Bet, current: Float): Float {
