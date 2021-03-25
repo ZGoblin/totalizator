@@ -1,0 +1,19 @@
+package com.kvad.totalizator.transactionfeature
+
+import com.kvad.totalizator.data.UserRepository
+import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
+import com.kvad.totalizator.transactionfeature.data.MapperTransactionToTransactionRequest
+import com.kvad.totalizator.transactionfeature.model.TransactionModel
+import javax.inject.Inject
+
+class WithdrawUseCase @Inject constructor(
+    private val userRepository: UserRepository,
+    private val mapperTransactionToTransactionRequest: MapperTransactionToTransactionRequest
+) {
+
+    suspend fun withdraw(transactionModel: TransactionModel): ApiResultWrapper<Unit> {
+        val transactionRequest = mapperTransactionToTransactionRequest.map(transactionModel)
+        return userRepository.doTransaction(transactionRequest)
+    }
+
+}
