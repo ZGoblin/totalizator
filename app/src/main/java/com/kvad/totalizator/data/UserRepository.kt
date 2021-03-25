@@ -2,8 +2,9 @@ package com.kvad.totalizator.data
 
 import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.data.requestmodels.LoginRequest
-import com.kvad.totalizator.data.requestmodels.RegisterRequest
 import com.kvad.totalizator.data.requestmodels.Token
+import com.kvad.totalizator.data.requestmodels.TransactionRequest
+import com.kvad.totalizator.data.requestmodels.RegisterRequest
 import com.kvad.totalizator.data.requestmodels.Wallet
 import com.kvad.totalizator.data.requestmodels.AccountInfo
 import com.kvad.totalizator.data.requestmodels.BetRequest
@@ -57,6 +58,12 @@ class UserRepository @Inject constructor(
     private fun updateLastWallet(response: ApiResultWrapper<Wallet>) {
         if (response.isSuccess()) {
             lastWallet = response.asSuccess().value
+        }
+    }
+    
+    suspend fun doTransaction(transactionRequest: TransactionRequest) : ApiResultWrapper<Unit>{
+        return safeApiCall {
+            userService.transaction(transactionRequest)
         }
     }
 

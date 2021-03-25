@@ -31,7 +31,7 @@ class ChatViewModel @Inject constructor(
         _chatLiveData.value = State.Loading
         viewModelScope.launch {
             // TODO 24.03.2021 normal user id get from back end
-            currentUserId = "currentUserId"
+            currentUserId = "hhlhdfg"
             updateChat()
         }
     }

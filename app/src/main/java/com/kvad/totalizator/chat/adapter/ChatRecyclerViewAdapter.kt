@@ -21,10 +21,9 @@ class ChatRecyclerViewAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val viewTypeEnum = MessageViewType.values()[viewType]
 
-        //todo
         val layout = when (viewTypeEnum) {
             MessageViewType.CURRENT_USER_MSG -> R.layout.current_user_message_holder
-            MessageViewType.OTHER_USER_MSG -> R.layout.current_user_message_holder
+            MessageViewType.OTHER_USER_MSG -> R.layout.other_user_message_holder
         }
 
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
