@@ -52,7 +52,7 @@ class UserRepository @Inject constructor(
 
     suspend fun doBet(betRequest: BetRequest): ApiResultWrapper<Unit>  {
         return safeApiCall {
-            userService.bet(betRequest)
+            userService.doBet(betRequest)
         }
     }
 
