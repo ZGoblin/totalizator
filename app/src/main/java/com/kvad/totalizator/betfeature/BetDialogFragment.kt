@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
@@ -123,10 +124,14 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun setupDoBetError(error: ErrorState) {
+    private fun setupDoBetError(error: BetState) {
         when (error) {
-            ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
-            ErrorState.LOADING_ERROR -> findNavController().navigate(R.id.login_fragment)
+            BetState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
+            BetState.LOADING_ERROR -> cancelBetDialog()
+            BetState.NO_MONEY_LEFT -> {
+                binding.tvError.setText(R.string.no_money)
+                stateVisibilityController.showError()
+            }
         }
     }
 

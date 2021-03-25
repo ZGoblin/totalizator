@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-typealias BetLiveDataState = State<Unit, ErrorState>
+typealias BetLiveDataState = State<Unit, BetState>
 typealias BetInfoLivaDataState = State<BetDetail, ErrorState>
 
 
@@ -44,13 +44,18 @@ class BetViewModel @Inject constructor(
     fun uploadData(id: String) {
         _betInfoLiveData.value = State.Loading
         viewModelScope.launch {
-            eventRepository.getEventById(id).map { it.mapSuccess(mapBetToBetDetailModel::map) }.collect {
-                it.doOnResult(
-                    onSuccess = ::doOnSuccessBetInfo,
-                    onError = ::doOnErrorBetInfo
-                )
-            }
+            eventRepository.getEventById(id).map { it.mapSuccess(mapBetToBetDetailModel::map) }
+                .collect {
+                    it.doOnResult(
+                        onSuccess = ::doOnSuccessBetInfo,
+                        onError = ::doOnErrorBetInfo
+                    )
+                }
         }
+    }
+
+    fun calculate(bet: Bet, current: Float): Float {
+        return coefficientUseCase.calculateCoefficient(lastBetDetail, bet, current)
     }
 
     private fun doOnSuccessBetInfo(betModel: BetDetail) {
@@ -63,17 +68,14 @@ class BetViewModel @Inject constructor(
         _betInfoLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 
-    fun calculate(bet: Bet, current: Float): Float {
-        return coefficientUseCase.calculateCoefficient(lastBetDetail, bet, current)
-    }
-
     fun createBet(betToServerModel: BetToServerModel) {
         _betLiveData.value = State.Loading
         viewModelScope.launch {
             betUseCase.doBet(betToServerModel).doOnResult(
                 onSuccess = ::doOnSuccessDoBet,
                 onNetworkError = ::doOnNetworkErrorDoBet,
-                onLoginError = ::doOnLoginErrorDoBet
+                onLoginError = ::doOnLoginErrorDoBet,
+                onNoMoneyError = ::doOnNoMoneyError
             )
         }
     }
@@ -82,14 +84,21 @@ class BetViewModel @Inject constructor(
         _betLiveData.value = State.Content(unit)
     }
 
+    private fun doOnNoMoneyError(error: ApiResultWrapper.Error.NoMoneyError) {
+        Log.d("ErrorBody", error.msg)
+        _betLiveData.value = State.Error(error = BetState.NO_MONEY_LEFT)
+    }
+
+
+
     private fun doOnNetworkErrorDoBet(error: ApiResultWrapper.Error) {
         Log.d("ErrorBody", error.msg)
-        _betLiveData.value = State.Error(error = ErrorState.LOADING_ERROR)
+        _betLiveData.value = State.Error(error = BetState.LOADING_ERROR)
     }
 
     private fun doOnLoginErrorDoBet(error: ApiResultWrapper.Error) {
         Log.d("ErrorBody", error.msg)
-        _betLiveData.value = State.Error(error = ErrorState.LOGIN_ERROR)
+        _betLiveData.value = State.Error(error = BetState.LOGIN_ERROR)
     }
 
 }
