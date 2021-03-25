@@ -36,7 +36,7 @@
             android:maxLength="4"
             android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black"
-            android:textColorHint="@color/light_grey" />
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton

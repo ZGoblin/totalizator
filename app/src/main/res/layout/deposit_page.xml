@@ -35,8 +35,7 @@
             android:inputType="numberDecimal"
             android:maxLength="9"
             android:padding="@dimen/padding_edit_text"
-            android:textColor="@color/black"
-            android:textColorHint="@color/light_grey" />
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
