@@ -16,8 +16,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.collect
+
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -71,6 +73,14 @@ class UserRepository @Inject constructor(
         return safeApiCall {
             userService.transaction(transactionRequest)
         }
+    }
+
+    suspend fun getLastWallet(): Wallet? {
+        val wallet = this.wallet.first()
+        if (wallet.isSuccess()) {
+            return wallet.asSuccess().value
+        }
+        return null
     }
 
     suspend fun doBet(betRequest: BetRequest): ApiResultWrapper<Unit> {

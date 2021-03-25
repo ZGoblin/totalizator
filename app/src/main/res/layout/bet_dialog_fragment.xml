@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="350dp"
+    android:layout_height="wrap_content"
     android:background="@color/black">
 
     <TextView
@@ -99,9 +98,6 @@
         app:errorTextColor="@color/red"
         app:hintEnabled="false"
         app:hintTextColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGameDetails"
         app:suffixText="UAH">
 
@@ -114,7 +110,6 @@
             android:focusable="true"
             android:inputType="numberDecimal"
             android:maxLength="9"
-            android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black"
             android:textColorHint="@color/grey" />
 
@@ -131,18 +126,19 @@
         android:text="@string/do_bet_simple"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_btn_bet"
-        app:layout_constraintTop_toBottomOf="@id/amountLayout" />
+        app:layout_constraintTop_toBottomOf="@id/tvPraise"
+        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/tvPraise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:paddingHorizontal="@dimen/padding_start_tv_cancel"
-        android:paddingVertical="@dimen/padding_top_tv_cancel"
-        android:visibility="gone"
-        android:textSize="16sp"
         android:textColor="@color/white"
-        app:layout_constraintTop_toTopOf="@id/btnBet"/>
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/amountLayout" />
 
     <ProgressBar
         android:id="@+id/progressBarCircular"
@@ -158,13 +154,13 @@
         android:id="@+id/tvError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/something_went_wrong"
+        android:textColor="@color/red"
+        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/tvCancel"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/something_went_wrong"
-        android:textSize="16sp"
-        android:padding="16dp"
-        android:visibility="gone"
-        android:textColor="@color/red"
         tools:layout_editor_absoluteX="133dp"
         tools:layout_editor_absoluteY="16dp" />
 
