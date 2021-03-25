@@ -27,7 +27,7 @@ class BetUseCase @Inject constructor(
     }
 
     private suspend fun getWallet(): Double {
-        return userRepository.wallet().single().asSuccess().value.amount
+        return userRepository.wallet.single().asSuccess().value.amount
     }
 
 }

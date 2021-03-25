@@ -40,9 +40,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding = BetDialogFragmentBinding.inflate(inflater, container, false)
         arguments?.let {
             val bet = BetDialogFragmentArgs.fromBundle(it).bet
-            val eventId = BetDialogFragmentArgs.fromBundle(it).eventId
+            val eventId = BetDialogFragmentArgs.fromBundle(it)
             detailBet = bet
-            detailId = eventId
+            detailId = eventId.toString()
         }
         stateVisibilityController =
             StateVisibilityController(binding.progressBarCircular, binding.tvError)
@@ -117,11 +117,12 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             when (it) {
                 is State.Loading -> {
                     stateVisibilityController.showLoading()
-                    binding.etBet.visibility = View.GONE
+                    binding.etBet.isEnabled = false
                 }
                 is State.Content -> {
                     stateVisibilityController.hideAll()
                     setupBetInfo(it)
+                    binding.etBet.isEnabled = true
                 }
                 is State.Error -> {
                     stateVisibilityController.showError()
@@ -175,7 +176,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private fun checkTextLength(btnBetEnable: Boolean) {
         when (btnBetEnable) {
             true -> {
-                binding.apply{
+                binding.apply {
                     amountLayout.error = null
                     btnBet.isEnabled = true
                     btnBet.setBackgroundColor(
@@ -187,7 +188,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                 }
             }
             false -> {
-                binding.apply{
+                binding.apply {
                     amountLayout.error = getString(R.string.min_bet)
                     btnBet.isEnabled = false
                     btnBet.setBackgroundColor(
@@ -199,7 +200,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                 }
             }
         }
-        binding.apply{
+        binding.apply {
             btnBet.text = getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
             tvPraise.visibility = View.VISIBLE
         }
