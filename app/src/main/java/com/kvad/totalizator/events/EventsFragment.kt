@@ -22,6 +22,7 @@ import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.hideKeyboard
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class EventsFragment : Fragment() {
 
     @Inject
