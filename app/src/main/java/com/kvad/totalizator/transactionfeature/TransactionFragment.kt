@@ -100,10 +100,13 @@ class TransactionFragment : Fragment() {
             true -> {
                 binding.btnTransaction.text = getString(R.string.deposit)
                 transactionState = TransactionType.DEPOSIT
+                binding.etTransaction.text = null
             }
             false -> {
                 binding.btnTransaction.text = getString(R.string.withdraw)
                 transactionState = TransactionType.WITHDRAW
+                binding.etTransaction.text = null
+
             }
         }
     }
