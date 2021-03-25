@@ -44,12 +44,16 @@ class HeaderFragment : Fragment() {
                 findNavController().navigate(R.id.login_fragment)
             }
             tvCurrencyValue.setOnClickListener {
-                findNavController().navigate(R.id.transaction_fragment)
+                navigateToTransaction()
             }
             tvCurrency.setOnClickListener {
-                findNavController().navigate(R.id.transaction_fragment)
+                navigateToTransaction()
             }
         }
+    }
+
+    private fun navigateToTransaction() {
+        findNavController().navigate(R.id.transaction_fragment)
     }
 
     private fun setupLiveDataObserver() {
