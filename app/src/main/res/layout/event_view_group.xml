@@ -131,8 +131,11 @@
         android:background="@drawable/live_background"
         android:layout_margin="20dp"
         android:paddingStart="16dp"
+        android:textColor="@color/white"
         android:paddingEnd="16dp"
+        android:textAllCaps="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,4 +17,5 @@ class BoardPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         return BoardPageFragment.newInstance(items[position])
     }
+
 }

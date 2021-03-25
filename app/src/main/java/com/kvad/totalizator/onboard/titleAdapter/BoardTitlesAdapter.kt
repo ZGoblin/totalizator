@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kvad.totalizator.R
 import com.kvad.totalizator.onboard.titleAdapter.BoardTitleHolder
 
-class BoardTitlesAdapter(private val items: List<String>) :
-    RecyclerView.Adapter<BoardTitleHolder>() {
+class BoardTitlesAdapter(
+    private val items: List<String>
+) : RecyclerView.Adapter<BoardTitleHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardTitleHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.board_title_item,parent,false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.board_title_item, parent, false)
         return BoardTitleHolder(view)
     }
 
@@ -20,6 +23,5 @@ class BoardTitlesAdapter(private val items: List<String>) :
     override fun getItemCount(): Int {
         return items.size
     }
+
 }
-
-

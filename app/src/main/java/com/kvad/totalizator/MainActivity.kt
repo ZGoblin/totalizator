@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         setupBinding()
         setupDi()
         supportActionBar?.hide()
+
     }
 
     override fun onStart() {
@@ -26,10 +27,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isFirstOpen() {
-        if (sharedPref.isFirstOpened) {
-            sharedPref.isFirstOpened = false
+        //if (sharedPref.isFirstOpened) {
+        //    sharedPref.isFirstOpened = false
             Navigation.findNavController(this, R.id.fcvBody).navigate(R.id.on_board_fragment)
-        }
+        //}
     }
 
     private fun setupBinding() {
