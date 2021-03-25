@@ -102,6 +102,7 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun onBtnBetClick(bet: Bet, id: String) {
+        Toast.makeText(context, bet.name, Toast.LENGTH_SHORT).show()
         val action = EventDetailFragmentDirections.actionBetDialogFragment(bet, id)
         findNavController().navigate(action)
     }

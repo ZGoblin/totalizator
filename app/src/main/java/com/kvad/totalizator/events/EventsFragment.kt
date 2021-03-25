@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,12 +60,12 @@ class EventsFragment : Fragment() {
         when (state) {
             is State.Content -> eventAdapter.submitList(state.data)
             is State.Error -> {
-                //eventAdapter.submitList(null)
                 stateVisibilityController.showError()
             }
             is State.Loading -> {
-                //eventAdapter.submitList(null)
-                stateVisibilityController.showLoading()
+                if (eventAdapter.itemCount <= 0) {
+                    stateVisibilityController.showLoading()
+                }
             }
         }
     }
@@ -82,7 +81,6 @@ class EventsFragment : Fragment() {
     }
 
     private fun onEventClick(event: Event) {
-        Toast.makeText(context, event.id, Toast.LENGTH_SHORT).show()
         val action = EventsFragmentDirections.actionDetailFragment(event.id)
         findNavController().navigate(action)
     }

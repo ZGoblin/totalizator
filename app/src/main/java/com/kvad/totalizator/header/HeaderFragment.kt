@@ -36,6 +36,7 @@ class HeaderFragment : Fragment() {
         setupDi()
         setupListener()
         setupLiveDataObserver()
+        hideAll()
     }
 
     private fun setupListener() {
