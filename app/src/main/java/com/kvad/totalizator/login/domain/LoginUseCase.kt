@@ -46,7 +46,7 @@ class LoginUseCase @Inject constructor(
     }
 
     private suspend fun verifyLoginComponent(loginRequest: LoginRequest) =
-        withContext(Dispatchers.Default) {
+        withContext(dispatcher) {
             when {
                 loginRequest.login.length < LOGIN_MIN_LENGTH -> LoginState.LOGIN_LENGTH_ERROR
                 loginRequest.password.length < PASSWORD_MIN_LENGTH -> LoginState.PASSWORD_LENGTH_ERROR

@@ -22,7 +22,8 @@ class HeaderViewModel @Inject constructor(
     private val _headerLiveData = MutableLiveData<HeaderState>()
     val headerLiveData: LiveData<HeaderState> = _headerLiveData
 
-    fun getWallet() {
+    init {
+        _headerLiveData.value = State.Loading
         viewModelScope.launch {
             userRepository.wallet().collect {
                 updateWallet(it)
@@ -34,10 +35,9 @@ class HeaderViewModel @Inject constructor(
         apiResultWrapper.doOnResult(
             onSuccess = ::doOnSuccess,
             onLoginError = ::doOnLoginError,
-            onNetworkError = ::doOnNetworkError
+            onError = ::doOnError
         )
     }
-
 
     private fun doOnSuccess(wallet: Wallet) {
         _headerLiveData.value = State.Content(wallet)
@@ -49,7 +49,7 @@ class HeaderViewModel @Inject constructor(
     }
 
     @Suppress("UNUSED_PARAMETER")
-    private fun doOnNetworkError(error: ApiResultWrapper.Error){
+    private fun doOnError(error: ApiResultWrapper.Error){
         _headerLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 }

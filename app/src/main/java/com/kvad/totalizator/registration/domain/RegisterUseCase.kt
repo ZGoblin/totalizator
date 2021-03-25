@@ -3,6 +3,7 @@ package com.kvad.totalizator.registration.domain
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.requestmodels.RegisterRequest
 import com.kvad.totalizator.data.requestmodels.Token
+import com.kvad.totalizator.di.DefaultDispatcher
 import com.kvad.totalizator.registration.RegisterState
 import com.kvad.totalizator.registration.models.RawRegisterRequest
 import com.kvad.totalizator.tools.ADULT
@@ -10,6 +11,7 @@ import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
 import com.kvad.totalizator.tools.USERNAME_MIN_LENGTH
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.StringBuilder
@@ -17,7 +19,8 @@ import java.util.*
 import javax.inject.Inject
 
 class RegisterUseCase @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    @DefaultDispatcher private val dispatcher: CoroutineDispatcher
 ) {
     companion object {
         private const val MONTH_BEFORE_ADD_ZERO = 9
@@ -26,7 +29,7 @@ class RegisterUseCase @Inject constructor(
 
     private lateinit var state: RegisterState
 
-    suspend fun register(rawRegisterRequest: RawRegisterRequest) = withContext(Dispatchers.Default) {
+    suspend fun register(rawRegisterRequest: RawRegisterRequest) = withContext(dispatcher) {
 
         val state = verifyRegisterComponent(rawRegisterRequest)
         if (state == RegisterState.WITHOUT_ERROR) {
@@ -50,7 +53,7 @@ class RegisterUseCase @Inject constructor(
     }
 
     private suspend fun verifyRegisterComponent(rawRegisterRequest: RawRegisterRequest) =
-        withContext(Dispatchers.Default) {
+        withContext(dispatcher) {
             when {
                 rawRegisterRequest.email.length < LOGIN_MIN_LENGTH -> RegisterState.LOGIN_LENGTH_ERROR
                 rawRegisterRequest.username.length < USERNAME_MIN_LENGTH -> RegisterState.USERNAME_ERROR
@@ -61,7 +64,7 @@ class RegisterUseCase @Inject constructor(
         }
 
     private suspend fun isAdult(rawRegisterRequest: RawRegisterRequest) =
-        withContext(Dispatchers.Default) {
+        withContext(dispatcher) {
 
             val calendarAdult = Calendar.getInstance()
             calendarAdult.add(Calendar.YEAR, ADULT.inv())
@@ -75,7 +78,7 @@ class RegisterUseCase @Inject constructor(
             calendarAdult >= calendarBirthday
         }
 
-    private suspend fun toRegisterRequest(rawRegisterRequest: RawRegisterRequest) = withContext(Dispatchers.Default) {
+    private suspend fun toRegisterRequest(rawRegisterRequest: RawRegisterRequest) = withContext(dispatcher) {
         RegisterRequest(
             username = rawRegisterRequest.username,
             email = rawRegisterRequest.email,
@@ -84,7 +87,7 @@ class RegisterUseCase @Inject constructor(
         )
     }
 
-    private suspend fun dateToString(rawRegisterRequest: RawRegisterRequest) = withContext(Dispatchers.Default) {
+    private suspend fun dateToString(rawRegisterRequest: RawRegisterRequest) = withContext(dispatcher) {
         StringBuilder()
             .append(rawRegisterRequest.year)
             .append(DATE_SEPARATOR)
