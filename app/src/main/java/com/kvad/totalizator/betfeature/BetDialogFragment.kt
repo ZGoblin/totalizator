@@ -15,11 +15,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
+import com.kvad.totalizator.betfeature.domain.BetState
 import com.kvad.totalizator.betfeature.model.BetDetail
 import com.kvad.totalizator.betfeature.model.BetToServerModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 import com.kvad.totalizator.shared.Bet
-import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.hideKeyboard
 import com.kvad.totalizator.tools.disableDragging
@@ -39,17 +39,18 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     private fun Dialog.initDialogShowListener() {
         setOnShowListener { dialog ->
-            (dialog as BottomSheetDialog).findViewById<View>(R.id.design_bottom_sheet)?.let { view ->
-                BottomSheetBehavior.from(view).apply {
-                    disableDragging()
-                    setState(BottomSheetBehavior.STATE_EXPANDED)
+            (dialog as BottomSheetDialog).findViewById<View>(R.id.design_bottom_sheet)
+                ?.let { view ->
+                    BottomSheetBehavior.from(view).apply {
+                        disableDragging()
+                        setState(BottomSheetBehavior.STATE_EXPANDED)
+                    }
                 }
-            }
             setCancelable(true)
             setCanceledOnTouchOutside(false)
         }
     }
-    
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,10 +124,15 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun setupDoBetError(error: ErrorState) {
+    private fun setupDoBetError(error: BetState) {
+        stateVisibilityController.hideAll()
         when (error) {
-            ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
-            ErrorState.LOADING_ERROR -> findNavController().navigate(R.id.login_fragment)
+            BetState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
+            BetState.LOADING_ERROR -> cancelBetDialog()
+            BetState.NO_MONEY_LEFT -> {
+                binding.tvError.setText(R.string.no_money)
+                stateVisibilityController.showError()
+            }
         }
     }
 
@@ -136,8 +142,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             tvCancel.visibility = View.GONE
             tvBetGood.visibility = View.VISIBLE
             vClose.visibility = View.VISIBLE
-            btnBet.isEnabled = false
-            btnBet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey))
+            btnBet.visibility = View.GONE
+            tvPraise.visibility = View.GONE
         }
         hideKeyboard()
     }
@@ -234,14 +240,15 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             btnBet.text = getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
             tvPraise.visibility = View.VISIBLE
         }
-        if (!binding.progressBarCircular.isVisible){
+        if (!binding.progressBarCircular.isVisible) {
             calculateAndSetupUi()
         }
     }
 
     private fun calculateAndSetupUi() {
         if (!binding.etBet.text.isNullOrEmpty()) {
-            val coefficient = viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
+            val coefficient =
+                viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
             val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
             binding.tvPraise.text = getString(R.string.possible_gain, possibleGain)
         }

@@ -35,6 +35,12 @@ class ChatViewModel @Inject constructor(
         }
     }
 
+    fun sendMessage(text: String) {
+        viewModelScope.launch {
+            chatRepository.sendMessage(text)
+        }
+    }
+
     private suspend fun updateChat() {
         chatRepository.getMessageFromApi()
             .map{

@@ -86,7 +86,7 @@ class EventViewGroup @JvmOverloads constructor(
         url?.let {
             Glide.with(this)
                 .load(url)
-                .error(R.drawable.player_image_not_found)
+                .error(R.drawable.yellow_player_background)
                 .into(binding.ivFirstPlayer)
         }
     }
@@ -95,7 +95,7 @@ class EventViewGroup @JvmOverloads constructor(
         url?.let {
             Glide.with(this)
                 .load(url)
-                .error(R.drawable.player_image_not_found)
+                .error(R.drawable.red_player_background)
                 .into(binding.ivSecondPlayer)
         }
     }
