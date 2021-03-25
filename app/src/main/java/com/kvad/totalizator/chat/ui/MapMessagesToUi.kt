@@ -1,6 +1,5 @@
 package com.kvad.totalizator.chat.ui
 
-import com.kvad.totalizator.chat.UserMessageUi
 import com.kvad.totalizator.chat.model.UserMessage
 import com.kvad.totalizator.di.DefaultDispatcher
 import kotlinx.coroutines.CoroutineDispatcher

@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kvad.totalizator.R
-import com.kvad.totalizator.chat.UserMessageUi
+import com.kvad.totalizator.chat.ui.UserMessageUi
 import com.kvad.totalizator.databinding.CurrentUserMessageHolderBinding
 
 class CurrentUserMsgViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

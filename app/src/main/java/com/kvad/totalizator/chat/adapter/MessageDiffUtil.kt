@@ -1,8 +1,7 @@
 package com.kvad.totalizator.chat.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.kvad.totalizator.chat.UserMessageUi
-import com.kvad.totalizator.chat.model.UserMessageApiModel
+import com.kvad.totalizator.chat.ui.UserMessageUi
 
 class MessageDiffUtil : DiffUtil.ItemCallback<UserMessageUi>() {
     override fun areItemsTheSame(oldItem: UserMessageUi, newItem: UserMessageUi) =

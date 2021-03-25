@@ -2,6 +2,7 @@ package com.kvad.totalizator.chat.data
 
 import com.kvad.totalizator.chat.model.UserMessage
 import com.kvad.totalizator.chat.model.UserMessageApiModel
+import com.kvad.totalizator.chat.model.UserMessageApiResponse
 import com.kvad.totalizator.di.DefaultDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -12,9 +13,9 @@ class MapApiMessageToUserMessage @Inject constructor(
     @DefaultDispatcher private val dispatcher: CoroutineDispatcher
 ) {
 
-    suspend operator fun invoke(apiMessageList: List<UserMessageApiModel>): List<UserMessage> =
+    suspend operator fun invoke(messageApiModel: UserMessageApiResponse): List<UserMessage> =
         withContext(dispatcher) {
-            apiMessageList.map {
+            messageApiModel.message.map {
                 UserMessage(
                     id = it.id,
                     text = it.text,
