@@ -28,6 +28,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     lateinit var viewModel: BetViewModel
     private lateinit var binding: BetDialogFragmentBinding
     private lateinit var detailBet: Bet
+    private lateinit var detailId: String
     private var eventId: String = ""
     private lateinit var stateVisibilityController: StateVisibilityController
 
@@ -38,8 +39,10 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     ): View {
         binding = BetDialogFragmentBinding.inflate(inflater, container, false)
         arguments?.let {
-            val safeArgs = BetDialogFragmentArgs.fromBundle(it).bet
-            detailBet = safeArgs
+            val bet = BetDialogFragmentArgs.fromBundle(it).bet
+            val eventId = BetDialogFragmentArgs.fromBundle(it).eventId
+            detailBet = bet
+            detailId = eventId
         }
         stateVisibilityController =
             StateVisibilityController(binding.progressBarCircular, binding.tvError)
@@ -51,7 +54,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         setupDi()
         setupListeners()
         setupTextWatcher()
-        viewModel.uploadData()
+        viewModel.uploadData(detailId)
         observeBetInfoLiveData()
         observeDoBetLiveData()
     }

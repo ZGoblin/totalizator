@@ -19,6 +19,7 @@ sealed class EventDetail {
     ) : EventDetail()
 
     data class ButtonsInfoUiModel(
+        val id: String,
         val participant1: Participant,
         val participant2: Participant
     ) : EventDetail()

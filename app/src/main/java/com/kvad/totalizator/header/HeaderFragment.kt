@@ -44,12 +44,16 @@ class HeaderFragment : Fragment() {
                 findNavController().navigate(R.id.login_fragment)
             }
             tvCurrencyValue.setOnClickListener {
-                findNavController().navigate(R.id.transaction_fragment)
+                navigateToTransaction()
             }
             tvCurrency.setOnClickListener {
-                findNavController().navigate(R.id.transaction_fragment)
+                navigateToTransaction()
             }
         }
+    }
+
+    private fun navigateToTransaction() {
+        findNavController().navigate(R.id.transaction_fragment)
     }
 
     private fun setupLiveDataObserver() {
@@ -67,18 +71,16 @@ class HeaderFragment : Fragment() {
             is State.Error -> {
                 when (state.error) {
                     ErrorState.LOGIN_ERROR -> showLoginButton()
-                    ErrorState.LOADING_ERROR -> showNoNetwork()
+                    ErrorState.LOADING_ERROR -> hideAll()
                 }
             }
-            is State.Loading -> showProgressBar()
+            else -> {}
         }
     }
 
-    private fun showProgressBar() {
+    private fun hideAll() {
         binding.apply {
-            pbProgress.visibility = View.VISIBLE
             tvLogin.visibility = View.GONE
-            ivNoWifi.visibility = View.GONE
             tvCurrency.visibility = View.GONE
             tvCurrencyValue.visibility = View.GONE
             ivAvatar.visibility = View.GONE
@@ -88,8 +90,6 @@ class HeaderFragment : Fragment() {
     private fun showLoginButton() {
         binding.apply {
             tvLogin.visibility = View.VISIBLE
-            pbProgress.visibility = View.GONE
-            ivNoWifi.visibility = View.GONE
             tvCurrency.visibility = View.GONE
             tvCurrencyValue.visibility = View.GONE
             ivAvatar.visibility = View.GONE
@@ -99,22 +99,9 @@ class HeaderFragment : Fragment() {
     private fun showUser() {
         binding.apply {
             tvLogin.visibility = View.GONE
-            pbProgress.visibility = View.GONE
-            ivNoWifi.visibility = View.GONE
             tvCurrency.visibility = View.VISIBLE
             tvCurrencyValue.visibility = View.VISIBLE
             ivAvatar.visibility = View.VISIBLE
-        }
-    }
-
-    private fun showNoNetwork() {
-        binding.apply {
-            tvLogin.visibility = View.GONE
-            pbProgress.visibility = View.GONE
-            ivNoWifi.visibility = View.VISIBLE
-            tvCurrency.visibility = View.GONE
-            tvCurrencyValue.visibility = View.GONE
-            ivAvatar.visibility = View.GONE
         }
     }
 

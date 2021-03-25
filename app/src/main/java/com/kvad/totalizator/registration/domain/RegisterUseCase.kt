@@ -42,8 +42,8 @@ class RegisterUseCase @Inject constructor(
         state
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun doOnSuccess(token: Token) {
-        userRepository.updateToken(token)
         state = RegisterState.WITHOUT_ERROR
     }
 

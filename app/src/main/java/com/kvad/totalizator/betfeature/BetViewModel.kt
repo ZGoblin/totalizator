@@ -41,10 +41,10 @@ class BetViewModel @Inject constructor(
     lateinit var lastBetDetail: BetDetail
         private set
 
-    fun uploadData() {
+    fun uploadData(id: String) {
         _betInfoLiveData.value = State.Loading
         viewModelScope.launch {
-            eventRepository.latestEvent.map { it.mapSuccess(mapBetToBetDetailModel::map) }.collect {
+            eventRepository.getEventById(id).map { it.mapSuccess(mapBetToBetDetailModel::map) }.collect {
                 it.doOnResult(
                     onSuccess = ::doOnSuccessBetInfo,
                     onError = ::doOnErrorBetInfo
