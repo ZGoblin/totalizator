@@ -21,8 +21,10 @@
     </style>
 
     <style name="TransactionTabLayoutStyle">
-        <item name="tabIndicatorColor">@color/red</item>
-        <item name="tabBackground">@color/red</item>
-        <item name="tabSelectedTextColor">@color/red</item>
+
+        <item name="tabIndicatorColor">@color/yellow</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabBackground">@color/black</item>
+        <item name="tabTextColor">@color/light_grey</item>
     </style>
 </resources>

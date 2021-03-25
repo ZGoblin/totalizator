@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.tabs.TabLayoutMediator
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.OnBoardBinding
@@ -31,7 +32,10 @@ class TransactionPagerFragment : Fragment(R.layout.transaction_fragment) {
     }
 
     private fun setupTableLayout() {
-        //binding.vpTransaction.adapter = TransactionPagerAdapter()
+        binding.vpTransaction.adapter = TransactionPagerAdapter(this)
+        TabLayoutMediator(binding.tlTransaction, binding.vpTransaction) { tab, position ->
+            tab.text = if (position == 0) "Withdraw" else "Deposit"
+        }.attach()
     }
 
     private fun setupDi(){

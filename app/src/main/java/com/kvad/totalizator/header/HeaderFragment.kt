@@ -44,10 +44,10 @@ class HeaderFragment : Fragment() {
                 findNavController().navigate(R.id.login_fragment)
             }
             tvCurrencyValue.setOnClickListener {
-                findNavController().navigate(R.id.transaction_fragment)
+                findNavController().navigate(R.id.transaction_pager)
             }
             tvCurrency.setOnClickListener {
-                findNavController().navigate(R.id.transaction_fragment)
+                findNavController().navigate(R.id.transaction_pager)
             }
         }
     }
