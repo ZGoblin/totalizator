@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface EventService {
 
-    @GET("/api/Events/getEventPreview/{id}")
+    @GET("/api/Events/preview/{id}")
     suspend fun getEvent(
         @Path("id") eventId: String
     ) : Response<RequestEventModel>
