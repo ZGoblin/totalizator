@@ -43,5 +43,10 @@ class TransactionPagerFragment : Fragment(R.layout.transaction_fragment) {
         app.getComponent().inject(this)
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
 
 }
