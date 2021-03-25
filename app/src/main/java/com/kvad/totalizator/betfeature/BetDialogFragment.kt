@@ -19,7 +19,7 @@ import com.kvad.totalizator.betfeature.model.BetDetail
 import com.kvad.totalizator.betfeature.model.BetToServerModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 import com.kvad.totalizator.shared.Bet
-import com.kvad.totalizator.tools.disableDragging
+import com.kvad.totalizator.tools.*
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
