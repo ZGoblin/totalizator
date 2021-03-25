@@ -31,4 +31,5 @@ interface UserService {
   
     @POST("/api/Account")
     suspend fun accountInfo() : Response<AccountInfo>
+
 }
