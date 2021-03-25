@@ -19,7 +19,11 @@ import com.kvad.totalizator.betfeature.model.BetDetail
 import com.kvad.totalizator.betfeature.model.BetToServerModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 import com.kvad.totalizator.shared.Bet
-import com.kvad.totalizator.tools.*
+import com.kvad.totalizator.tools.ErrorState
+import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.hideKeyboard
+import com.kvad.totalizator.tools.disableDragging
+import com.kvad.totalizator.tools.StateVisibilityController
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
