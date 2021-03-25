@@ -35,7 +35,7 @@ class HeaderViewModel @Inject constructor(
         apiResultWrapper.doOnResult(
             onSuccess = ::doOnSuccess,
             onLoginError = ::doOnLoginError,
-            onError = ::doOnError
+            onNetworkError = ::doOnError
         )
     }
 
