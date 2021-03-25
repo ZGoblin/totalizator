@@ -136,8 +136,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             tvCancel.visibility = View.GONE
             tvBetGood.visibility = View.VISIBLE
             vClose.visibility = View.VISIBLE
-            btnBet.isEnabled = false
-            btnBet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey))
+            btnBet.visibility = View.GONE
+            tvPraise.visibility = View.GONE
         }
         hideKeyboard()
     }
