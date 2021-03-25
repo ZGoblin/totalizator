@@ -15,13 +15,13 @@ import javax.inject.Inject
 class TransactionPagerFragment : Fragment(R.layout.transaction_fragment) {
     private var _binding: TransactionViewPagerFragmentBinding? = null
     private val binding get() = _binding!!
-
+    private lateinit var viewPagerAdapter: TransactionPagerAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = TransactionViewPagerFragmentBinding.inflate(inflater,container,false)
+        _binding = TransactionViewPagerFragmentBinding.inflate(inflater, container, false)
         setupDi()
         return binding.root
     }
@@ -32,17 +32,17 @@ class TransactionPagerFragment : Fragment(R.layout.transaction_fragment) {
     }
 
     private fun setupTableLayout() {
-        binding.vpTransaction.adapter = TransactionPagerAdapter(this)
+        viewPagerAdapter = TransactionPagerAdapter(this)
+        binding.vpTransaction.adapter = viewPagerAdapter
         TabLayoutMediator(binding.tlTransaction, binding.vpTransaction) { tab, position ->
-            tab.text = if (position == 0) "Withdraw" else "Deposit"
+            tab.setText(viewPagerAdapter.getTabTitle(position))
         }.attach()
     }
 
-    private fun setupDi(){
+    private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
     }
-
 
 
 }

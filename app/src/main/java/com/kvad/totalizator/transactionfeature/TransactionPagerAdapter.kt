@@ -1,5 +1,6 @@
 package com.kvad.totalizator.transactionfeature
 
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
@@ -15,5 +16,9 @@ class TransactionPagerAdapter(
         }
     }
 
+    @StringRes
+    fun getTabTitle(position: Int): Int {
+        return TransactionPage.values()[position].title
+    }
 
 }

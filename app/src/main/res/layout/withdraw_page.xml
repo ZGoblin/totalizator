@@ -6,7 +6,7 @@
     android:background="#F5F5F5">
 
     <TextView
-        android:id="@+id/tvDeposit"
+        android:id="@+id/tvWithdraw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -33,7 +33,7 @@
             android:background="@color/white"
             android:focusable="true"
             android:inputType="numberDecimal"
-            android:maxLength="9"
+            android:maxLength="4"
             android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black"
             android:textColorHint="@color/light_grey" />

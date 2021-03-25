@@ -1,4 +1,4 @@
-package com.kvad.totalizator.transactionfeature
+package com.kvad.totalizator.transactionfeature.domain
 
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
