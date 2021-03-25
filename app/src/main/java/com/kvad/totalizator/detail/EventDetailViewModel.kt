@@ -28,7 +28,7 @@ class EventDetailViewModel @Inject constructor(
     fun uploadData(eventId: String) {
         _eventDetailLiveData.value = State.Loading
         viewModelScope.launch {
-            eventRepository.getEventById(id = eventId)
+            eventRepository.getEventById(eventId)
                 .map { it.mapSuccess(mapEventToDetailUiModel::map) }
                 .collect { result ->
                     result.doOnResult(
