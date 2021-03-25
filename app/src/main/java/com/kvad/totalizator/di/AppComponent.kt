@@ -9,10 +9,12 @@ import com.kvad.totalizator.header.HeaderFragment
 import com.kvad.totalizator.login.LoginFragment
 import com.kvad.totalizator.onboard.OnBoardFragment
 import com.kvad.totalizator.registration.RegistrationFragment
-import com.kvad.totalizator.transactionfeature.TransactionFragment
+import com.kvad.totalizator.transactionfeature.DepositPageFragment
+import com.kvad.totalizator.transactionfeature.TransactionPagerFragment
+import com.kvad.totalizator.transactionfeature.WithdrawPageFragment
 import dagger.Component
 import javax.inject.Singleton
-
+@Suppress("TooManyFunctions")
 @Singleton
 @Component(
     dependencies = [],
@@ -25,7 +27,7 @@ interface AppComponent {
     fun inject(fragment: HeaderFragment)
 
     fun inject(fragment: EventsFragment)
-  
+
     fun inject(fragment: OnBoardFragment)
 
     fun inject(fragment: EventDetailFragment)
@@ -36,8 +38,12 @@ interface AppComponent {
 
     fun inject(fragment: RegistrationFragment)
 
-    fun inject(fragment: TransactionFragment)
-
     fun inject(fragment: ChatFragment)
+
+    fun inject(fragment: TransactionPagerFragment)
+
+    fun inject(fragment: WithdrawPageFragment)
+
+    fun inject(fragment: DepositPageFragment)
 
 }

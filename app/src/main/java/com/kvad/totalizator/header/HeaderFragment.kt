@@ -54,7 +54,7 @@ class HeaderFragment : Fragment() {
     }
 
     private fun navigateToTransaction() {
-        findNavController().navigate(R.id.transaction_fragment)
+        findNavController().navigate(R.id.transaction_pager)
     }
 
     private fun setupLiveDataObserver() {
