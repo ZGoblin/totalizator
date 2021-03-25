@@ -1,4 +1,4 @@
-package com.kvad.totalizator.transactionfeature
+package com.kvad.totalizator.transactionfeature.withdraw
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
+import com.kvad.totalizator.transactionfeature.TransactionErrorState
 import com.kvad.totalizator.transactionfeature.domain.WithdrawUseCase
 import com.kvad.totalizator.transactionfeature.model.TransactionModel
 import kotlinx.coroutines.launch

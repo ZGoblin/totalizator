@@ -8,9 +8,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
-import com.kvad.totalizator.databinding.OnBoardBinding
 import com.kvad.totalizator.databinding.TransactionViewPagerFragmentBinding
-import javax.inject.Inject
+import com.kvad.totalizator.transactionfeature.adapter.TransactionPagerAdapter
 
 class TransactionPagerFragment : Fragment(R.layout.transaction_fragment) {
     private var _binding: TransactionViewPagerFragmentBinding? = null
