@@ -9,7 +9,6 @@ import com.kvad.totalizator.tools.safeapicall.mapSuccess
 import com.kvad.totalizator.tools.safeapicall.safeApiCall
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -33,26 +32,15 @@ class EventRepository @Inject constructor(
 
     fun getEventById(id: String): Flow<ApiResultWrapper<Event>> {
         return lineFlow
-            .filter { response ->
-                filterById(response, id)
-            }
             .map {
                 if (it.isSuccess()) {
-                    return@map ApiResultWrapper.Success(it.asSuccess().value.first())
+                    it.asSuccess().value.find { event ->
+                        event.id == id
+                    }?.let { event ->
+                        return@map ApiResultWrapper.Success(event)
+                    }
                 }
                 return@map it.asError()
             }
-    }
-
-    private fun filterById(response: ApiResultWrapper<List<Event>>, id: String): Boolean {
-        if (response.isSuccess()) {
-            val events = response.asSuccess().value
-            events.filter { event ->
-                event.id == id
-            }.let {
-                return true
-            }
-        }
-        return true
     }
 }

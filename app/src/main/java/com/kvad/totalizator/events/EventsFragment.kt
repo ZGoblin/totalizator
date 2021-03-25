@@ -60,12 +60,12 @@ class EventsFragment : Fragment() {
         when (state) {
             is State.Content -> eventAdapter.submitList(state.data)
             is State.Error -> {
-                //eventAdapter.submitList(null)
                 stateVisibilityController.showError()
             }
             is State.Loading -> {
-                //eventAdapter.submitList(null)
-                stateVisibilityController.showLoading()
+                if (eventAdapter.itemCount <= 0) {
+                    stateVisibilityController.showLoading()
+                }
             }
         }
     }
