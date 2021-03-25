@@ -34,8 +34,7 @@ class HeaderViewModel @Inject constructor(
     private fun updateWallet(apiResultWrapper: ApiResultWrapper<Wallet>) {
         apiResultWrapper.doOnResult(
             onSuccess = ::doOnSuccess,
-            onLoginError = ::doOnLoginError,
-            onNetworkError = ::doOnError
+            onError = ::doOnLoginError
         )
     }
 
@@ -46,10 +45,5 @@ class HeaderViewModel @Inject constructor(
     @Suppress("UNUSED_PARAMETER")
     private fun doOnLoginError(error: ApiResultWrapper.Error){
         _headerLiveData.value = State.Error(ErrorState.LOGIN_ERROR)
-    }
-
-    @Suppress("UNUSED_PARAMETER")
-    private fun doOnError(error: ApiResultWrapper.Error){
-        _headerLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 }
