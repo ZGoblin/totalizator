@@ -24,6 +24,7 @@ class BoardPageFragment : Fragment(R.layout.board_page) {
 
     private lateinit var info: BoardInfo
     private lateinit var titleAdapter: BoardTitlesAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -40,15 +41,16 @@ class BoardPageFragment : Fragment(R.layout.board_page) {
         savedInstanceState: Bundle?
     ): View {
         _binding = BoardPageBinding.inflate(inflater, container, false)
-        setupData()
-        setupListeners()
-        setupRecycler()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         hideBackButton()
+        setupData()
+        setupListeners()
+        setupRecycler()
     }
 
     private fun hideBackButton() {
