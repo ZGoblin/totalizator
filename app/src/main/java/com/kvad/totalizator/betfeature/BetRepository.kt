@@ -9,13 +9,9 @@ import javax.inject.Inject
 class BetRepository @Inject constructor(
     private val userService: UserService
 ) {
-
-
-
     suspend fun doBet(betRequest: BetRequest): ApiResultWrapper<Unit> {
         return safeApiCall {
             userService.doBet(betRequest)
         }
     }
-
 }

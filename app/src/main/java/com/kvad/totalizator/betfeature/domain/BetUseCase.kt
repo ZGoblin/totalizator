@@ -1,6 +1,6 @@
 package com.kvad.totalizator.betfeature.domain
 
-import android.util.Log
+import com.kvad.totalizator.betfeature.BetRepository
 import com.kvad.totalizator.betfeature.data.MapperBetModelToBetRequest
 import com.kvad.totalizator.betfeature.model.BetToServerModel
 import com.kvad.totalizator.data.UserRepository
@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 class BetUseCase @Inject constructor(
     private val userRepository: UserRepository,
+    private val betRepository: BetRepository,
     private val mapperBetModelToBetRequest: MapperBetModelToBetRequest,
 ) {
 
@@ -18,7 +19,7 @@ class BetUseCase @Inject constructor(
         if (betRequest.amount > getWallet()) {
             return ApiResultWrapper.Error.NoMoneyError("Money Error")
         }
-        return userRepository.doBet(betRequest)
+        return betRepository.doBet(betRequest)
     }
 
     private suspend fun getWallet(): Double {
