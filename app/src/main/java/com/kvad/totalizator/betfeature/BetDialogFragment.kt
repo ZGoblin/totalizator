@@ -1,16 +1,17 @@
 package com.kvad.totalizator.betfeature
 
-import android.app.Activity
+import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
@@ -34,6 +35,43 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private lateinit var detailId: String
     private var eventId: String = ""
     private lateinit var stateVisibilityController: StateVisibilityController
+
+    private fun Dialog.initDialogShowListener() {
+        setOnShowListener { dialog ->
+            (dialog as BottomSheetDialog).findViewById<View>(R.id.design_bottom_sheet)?.let { view ->
+                BottomSheetBehavior.from(view).apply {
+                    disableDragging()
+                    setState(BottomSheetBehavior.STATE_EXPANDED)
+                }
+            }
+            setCancelable(true)
+            setCanceledOnTouchOutside(false)
+        }
+    }
+
+    fun BottomSheetBehavior<View>.disableDragging() {
+        addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                // stub
+            }
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    state = BottomSheetBehavior.STATE_EXPANDED
+                }
+            }
+        })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.QuickBetDialog)
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return super.onCreateDialog(savedInstanceState).apply {
+            initDialogShowListener()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -110,7 +148,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             tvBetGood.visibility = View.VISIBLE
             vClose.visibility = View.VISIBLE
             btnBet.isEnabled = false
-            btnBet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_grey))
+            btnBet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey))
         }
         hideKeyboard()
     }
@@ -169,7 +207,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding.btnBet.setBackgroundColor(
             ContextCompat.getColor(
                 requireContext(),
-                R.color.light_grey
+                R.color.grey
             )
         )
         binding.btnBet.text = getString(R.string.do_bet_simple)
@@ -197,7 +235,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     btnBet.setBackgroundColor(
                         ContextCompat.getColor(
                             requireContext(),
-                            R.color.light_grey
+                            R.color.grey
                         )
                     )
                 }

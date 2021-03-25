@@ -27,8 +27,8 @@ class ThreeColorProgress @JvmOverloads constructor(
     fun setupData(betAmountForEachOutcome: BetPool) {
 
         progressItems = arrayOf(
-            ProgressItemKt(betAmountForEachOutcome.firstPlayerBetAmount.toInt(), R.color.blue),
-            ProgressItemKt(betAmountForEachOutcome.drawBetAmount.toInt(), R.color.light_grey),
+            ProgressItemKt(betAmountForEachOutcome.firstPlayerBetAmount.toInt(), R.color.yellow),
+            ProgressItemKt(betAmountForEachOutcome.drawBetAmount.toInt(), R.color.white),
             ProgressItemKt(betAmountForEachOutcome.secondPlayerBetAmount.toInt(), R.color.red)
         )
 

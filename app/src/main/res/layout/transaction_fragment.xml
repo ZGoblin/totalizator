@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/dark_grey"
     >
 
     <ToggleButton
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        android:background="@color/grey"
+        android:background="@color/dark_grey"
         app:counterMaxLength="9"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp">
@@ -38,7 +38,7 @@
             android:maxLength="9"
             android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black"
-            android:textColorHint="@color/light_grey" />
+            android:textColorHint="@color/grey" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@color/light_grey"
+        android:background="@color/grey"
         android:enabled="false"
         android:text="@string/withdraw"
         android:textColor="@color/black"

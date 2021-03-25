@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.TransactionFragmentBinding
-import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.transactionfeature.model.TransactionModel
@@ -115,7 +112,7 @@ class TransactionFragment : Fragment() {
                     binding.btnTransaction.apply {
                         isEnabled = false
                         val colorBackGround =
-                            ContextCompat.getColor(requireContext(), R.color.light_grey)
+                            ContextCompat.getColor(requireContext(), R.color.grey)
                         binding.btnTransaction.setBackgroundColor(colorBackGround)
                         val colorForeGround =
                             ContextCompat.getColor(requireContext(), R.color.black)
