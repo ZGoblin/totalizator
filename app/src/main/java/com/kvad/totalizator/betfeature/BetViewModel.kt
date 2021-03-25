@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 typealias BetLiveDataState = State<Unit, ErrorState>
-typealias BetInfoLivaDataState = State<BetDetail, Unit>
+typealias BetInfoLivaDataState = State<BetDetail, ErrorState>
 
 
 class BetViewModel @Inject constructor(
@@ -41,10 +41,10 @@ class BetViewModel @Inject constructor(
     lateinit var lastBetDetail: BetDetail
         private set
 
-    fun uploadData() {
+    fun uploadData(id: String) {
         _betInfoLiveData.value = State.Loading
         viewModelScope.launch {
-            eventRepository.latestEvent.map { it.mapSuccess(mapBetToBetDetailModel::map) }.collect {
+            eventRepository.getEventById(id).map { it.mapSuccess(mapBetToBetDetailModel::map) }.collect {
                 it.doOnResult(
                     onSuccess = ::doOnSuccessBetInfo,
                     onError = ::doOnErrorBetInfo
@@ -60,7 +60,7 @@ class BetViewModel @Inject constructor(
 
     private fun doOnErrorBetInfo(error: ApiResultWrapper.Error) {
         Log.d("ErrorBody", error.msg)
-        _betInfoLiveData.value = State.Error(Unit)
+        _betInfoLiveData.value = State.Error(ErrorState.LOADING_ERROR)
     }
 
     fun calculate(bet: Bet, current: Float): Float {
@@ -70,7 +70,7 @@ class BetViewModel @Inject constructor(
     fun createBet(betToServerModel: BetToServerModel) {
         _betLiveData.value = State.Loading
         viewModelScope.launch {
-            betUseCase.bet(betToServerModel).doOnResult(
+            betUseCase.doBet(betToServerModel).doOnResult(
                 onSuccess = ::doOnSuccessDoBet,
                 onNetworkError = ::doOnNetworkErrorDoBet,
                 onLoginError = ::doOnLoginErrorDoBet

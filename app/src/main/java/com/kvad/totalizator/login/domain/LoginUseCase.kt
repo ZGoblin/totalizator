@@ -34,9 +34,8 @@ class LoginUseCase @Inject constructor(
         return@withContext state
     }
 
-
+    @Suppress("UNUSED_PARAMETER")
     private fun doOnSuccess(token: Token) {
-        userRepository.updateToken(token)
         state = LoginState.WITHOUT_ERROR
     }
 

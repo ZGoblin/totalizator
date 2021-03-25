@@ -15,7 +15,11 @@ const val USERNAME_MIN_LENGTH = 3
 const val PASSWORD_MIN_LENGTH = 6
 const val API_URL = "https://classic-totalizator-ajg2w.ondigitalocean.app/"
 
-const val REQUEST_DELAY = 3000L
+const val REQUEST_DELAY = 1000L
+
+
+const val ANTI_INFINITY_VALUE = 0.0f
+const val MIN_VALUE_FOR_COEF = 1.0f
 
 const val WITHDRAW_FLAG = "withdraw"
 const val DEPOSIT_FLAG = "deposit"

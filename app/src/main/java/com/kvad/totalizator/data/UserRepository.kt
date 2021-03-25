@@ -21,36 +21,53 @@ class UserRepository @Inject constructor(
     private val userService: UserService,
     private val sharedPref: SharedPref
 ) {
-    suspend fun login(loginRequest: LoginRequest): ApiResultWrapper<Token> {
-        return safeApiCall {
-            userService.login(loginRequest)
-        }
-    }
-
-    suspend fun register(registerRequest: RegisterRequest): ApiResultWrapper<Token> {
-        return safeApiCall {
-            userService.register(registerRequest)
-        }
-    }
-
-    suspend fun wallet(): Flow<ApiResultWrapper<Wallet>> = flow {
+    val wallet: Flow<ApiResultWrapper<Wallet>> = flow {
         while (true) {
-            emit(safeApiCall(userService::wallet))
+            val response = safeApiCall(userService::wallet)
+            updateLastWallet(response)
+            emit(response)
             delay(REQUEST_DELAY)
         }
     }
 
+    var lastWallet: Wallet? = null
+        private set
+
+    suspend fun login(loginRequest: LoginRequest): ApiResultWrapper<Token> {
+        val result = safeApiCall {
+            userService.login(loginRequest)
+        }
+        updateToken(result)
+        return result
+    }
+
+    suspend fun register(registerRequest: RegisterRequest): ApiResultWrapper<Token> {
+        val result = safeApiCall {
+            userService.register(registerRequest)
+        }
+        updateToken(result)
+        return result
+    }
+
+    private fun updateToken(result: ApiResultWrapper<Token>) {
+        if (result.isSuccess()) {
+            sharedPref.token = result.asSuccess().value.token
+        }
+    }
+
+    private fun updateLastWallet(response: ApiResultWrapper<Wallet>) {
+        if (response.isSuccess()) {
+            lastWallet = response.asSuccess().value
+        }
+    }
+    
     suspend fun doTransaction(transactionRequest: TransactionRequest) : ApiResultWrapper<Unit>{
         return safeApiCall {
             userService.transaction(transactionRequest)
         }
     }
 
-    fun updateToken(token: Token) {
-        sharedPref.token = token.token
-    }
-
-    suspend fun doBet(betRequest: BetRequest): ApiResultWrapper<Unit>  {
+    suspend fun doBet(betRequest: BetRequest): ApiResultWrapper<Unit> {
         return safeApiCall {
             userService.doBet(betRequest)
         }

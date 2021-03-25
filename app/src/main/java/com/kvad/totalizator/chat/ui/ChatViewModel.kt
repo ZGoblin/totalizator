@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kvad.totalizator.chat.UserMessageUi
 import com.kvad.totalizator.chat.data.ChatRepository
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
@@ -37,13 +36,14 @@ class ChatViewModel @Inject constructor(
     }
 
     private suspend fun updateChat() {
-        chatRepository.getMessage()
+        chatRepository.getMessageFromApi()
             .map{
                 it.mapSuccess{ msg ->
                      mapUserMessageUi(currentUserId, msg)
                 }
             }
             .collect {
+                Log.d("ERROR_TAG", it.toString())
                 it.doOnResult(
                     onSuccess = ::doOnSuccess,
                     onError = ::doOnError
@@ -57,6 +57,7 @@ class ChatViewModel @Inject constructor(
     }
 
     private fun doOnSuccess(messageApiModelList: List<UserMessageUi>) {
+        Log.d("ERROR_TAG", messageApiModelList.toString())
         _chatLiveData.value = State.Content(messageApiModelList)
     }
 }
