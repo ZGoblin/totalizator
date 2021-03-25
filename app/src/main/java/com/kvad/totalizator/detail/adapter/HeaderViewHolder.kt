@@ -1,5 +1,6 @@
 package com.kvad.totalizator.detail.adapter
 
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.kvad.totalizator.R
@@ -22,20 +23,11 @@ class HeaderViewHolder(
         setupEventInfo()
     }
 
-    // TODO 23.03.2021
-    //  fix betpool
     private fun setupEventInfo() {
         binding.event.apply {
 
             eventInfo.betPool.apply {
-                setBetScale(
-                    BetPool(
-                        firstPlayerBetAmount = firstPlayerBetAmount,
-                        secondPlayerBetAmount = secondPlayerBetAmount,
-                        drawBetAmount = drawBetAmount
-                    )
-
-                )
+                setBetScale(eventInfo.betPool)
             }
 
             setFirstPlayerImg(eventInfo.participant1.photoLink)
