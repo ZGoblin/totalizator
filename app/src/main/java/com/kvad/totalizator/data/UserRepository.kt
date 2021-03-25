@@ -15,7 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
-@Suppress("WildcardImport")
+
 class UserRepository @Inject constructor(
     private val userService: UserService,
     private val sharedPref: SharedPref
