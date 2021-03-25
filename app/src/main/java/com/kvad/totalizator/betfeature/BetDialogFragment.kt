@@ -21,8 +21,9 @@ import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
-import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.hideKeyboard
+import com.kvad.totalizator.tools.disableDragging
+import com.kvad.totalizator.tools.StateVisibilityController
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
@@ -48,19 +49,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             setCanceledOnTouchOutside(false)
         }
     }
-
-    fun BottomSheetBehavior<View>.disableDragging() {
-        addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // stub
-            }
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
-                    state = BottomSheetBehavior.STATE_EXPANDED
-                }
-            }
-        })
-    }
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
