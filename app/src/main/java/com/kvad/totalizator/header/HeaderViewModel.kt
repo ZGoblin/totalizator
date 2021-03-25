@@ -25,7 +25,7 @@ class HeaderViewModel @Inject constructor(
     init {
         _headerLiveData.value = State.Loading
         viewModelScope.launch {
-            userRepository.wallet().collect {
+            userRepository.wallet.collect {
                 updateWallet(it)
             }
         }

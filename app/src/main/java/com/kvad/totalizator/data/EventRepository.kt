@@ -21,7 +21,7 @@ class EventRepository @Inject constructor(
     private val mapRequestEventToEvent: MapRequestEventToEvent
 ) {
 
-    var lineFlow: Flow<ApiResultWrapper<List<Event>>> = flow {
+    val lineFlow: Flow<ApiResultWrapper<List<Event>>> = flow {
         while (true) {
             val line = safeApiCall(eventService::getLine).mapSuccess {
                 mapRequestEventToEvent.map(it.events)
@@ -30,7 +30,6 @@ class EventRepository @Inject constructor(
             delay(REQUEST_DELAY)
         }
     }
-        private set
 
     fun getEventById(id: String): Flow<ApiResultWrapper<Event>> {
         return lineFlow
