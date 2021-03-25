@@ -8,7 +8,7 @@ import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.requestmodels.BetRequest
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import javax.inject.Inject
-
+@Suppress("ReturnCount")
 class BetUseCase @Inject constructor(
     private val userRepository: UserRepository,
     private val betRepository: BetRepository,
