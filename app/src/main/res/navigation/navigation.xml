@@ -56,6 +56,10 @@
         <argument
             android:name="bet"
             app:argType="com.kvad.totalizator.shared.Bet" />
+        <argument
+            android:name="eventId"
+            app:argType="string"
+            android:defaultValue="0"/>
     </dialog>
 
 </navigation>
