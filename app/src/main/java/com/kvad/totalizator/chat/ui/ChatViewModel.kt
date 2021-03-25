@@ -49,7 +49,6 @@ class ChatViewModel @Inject constructor(
                 }
             }
             .collect {
-                Log.d("ERROR_TAG", it.toString())
                 it.doOnResult(
                     onSuccess = ::doOnSuccess,
                     onError = ::doOnError
@@ -63,7 +62,6 @@ class ChatViewModel @Inject constructor(
     }
 
     private fun doOnSuccess(messageApiModelList: List<UserMessageUi>) {
-        Log.d("ERROR_TAG", messageApiModelList.toString())
         _chatLiveData.value = State.Content(messageApiModelList)
     }
 }
