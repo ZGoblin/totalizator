@@ -21,6 +21,7 @@ import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
+import com.kvad.totalizator.tools.hideKeyboard
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
@@ -111,7 +112,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             btnBet.isEnabled = false
             btnBet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_grey))
         }
-        hideKeyBoard()
+        hideKeyboard()
     }
 
     private fun observeBetInfoLiveData() {
@@ -220,15 +221,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun cancelBetDialog() {
-        hideKeyBoard()
+        hideKeyboard()
         dialog?.cancel()
         binding.etBet.clearFocus()
-    }
-
-    private fun hideKeyBoard() {
-        val inputMethodManager =
-            this.context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.applicationWindowToken, 0)
     }
 
 }

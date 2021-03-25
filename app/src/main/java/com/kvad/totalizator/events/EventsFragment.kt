@@ -16,6 +16,7 @@ import com.kvad.totalizator.events.adapter.EventAdapter
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.hideKeyboard
 import javax.inject.Inject
 
 class EventsFragment : Fragment() {
@@ -42,6 +43,7 @@ class EventsFragment : Fragment() {
         setupDi()
         setupRecycler()
         setupLiveDataObserver()
+        hideKeyboard()
     }
 
     private fun setupDi() {
