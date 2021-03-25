@@ -12,26 +12,38 @@ import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.safeApiCall
 import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class UserRepository @Inject constructor(
     private val userService: UserService,
     private val sharedPref: SharedPref
 ) {
-    val wallet: Flow<ApiResultWrapper<Wallet>> = flow {
-        while (true) {
-            val response = safeApiCall(userService::wallet)
-            updateLastWallet(response)
-            emit(response)
-            delay(REQUEST_DELAY)
+
+    private val _wallet: MutableSharedFlow<ApiResultWrapper<Wallet>> = MutableSharedFlow()
+    val wallet: SharedFlow<ApiResultWrapper<Wallet>> = _wallet
+
+    init {
+        GlobalScope.launch {
+            flow {
+                while (true) {
+                    val response = safeApiCall(userService::wallet)
+                    emit(response)
+                    delay(REQUEST_DELAY)
+                }
+            }.collect {
+                _wallet.emit(it)
+            }
         }
     }
-
-    var lastWallet: Wallet? = null
-        private set
 
     suspend fun login(loginRequest: LoginRequest): ApiResultWrapper<Token> {
         val result = safeApiCall {
@@ -55,13 +67,7 @@ class UserRepository @Inject constructor(
         }
     }
 
-    private fun updateLastWallet(response: ApiResultWrapper<Wallet>) {
-        if (response.isSuccess()) {
-            lastWallet = response.asSuccess().value
-        }
-    }
-    
-    suspend fun doTransaction(transactionRequest: TransactionRequest) : ApiResultWrapper<Unit>{
+    suspend fun doTransaction(transactionRequest: TransactionRequest): ApiResultWrapper<Unit> {
         return safeApiCall {
             userService.transaction(transactionRequest)
         }

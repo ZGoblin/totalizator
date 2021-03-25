@@ -9,7 +9,6 @@ import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,7 +28,7 @@ class EventsViewModel @Inject constructor(
     }
 
     private suspend fun updateEvents() {
-        eventRepository.lineFlow.collect {
+        eventRepository.line.collect {
             it.doOnResult(
                 onSuccess = ::onSuccess,
                 onError = ::onError
