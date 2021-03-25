@@ -4,51 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/grey"
+    >
 
-    <TextView
-        android:id="@+id/tvBalance"
+    <ToggleButton
+        android:id="@+id/tbChoiceTransaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="balance:"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textOff="@string/go_deposit"
+        android:textOn="@string/go_withdraw"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvBalanceView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="balance value"
-        android:textColor="@color/yellow"
-        android:textSize="30sp"
-        app:layout_constraintStart_toEndOf="@id/tvBalance"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_balance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="70dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tlInputBalance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
+        android:background="@color/grey"
         app:counterMaxLength="9"
-        app:layout_constraintTop_toBottomOf="@id/guideline_balance"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etTransaction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_edit_text"
+            android:layout_margin="20dp"
             android:background="@color/white"
             android:focusable="true"
             android:inputType="numberDecimal"
@@ -56,19 +39,43 @@
             android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black"
             android:textColorHint="@color/light_grey" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="180dp"
-            android:background="@color/lite_green"
-            android:text="Поповнити рахунок"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
     </com.google.android.material.textfield.TextInputLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progressBarr"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/tbChoiceTransaction"
+        app:layout_constraintHorizontal_bias="0.754"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTransaction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@color/light_grey"
+        android:enabled="false"
+        android:text="@string/withdraw"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tlInputBalance" />
+
+    <TextView
+        android:textColor="@color/red"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/btnTransaction"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/no_money"
+        android:id="@+id/tvError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

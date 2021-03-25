@@ -20,6 +20,7 @@ class MapApiMessageToUserMessage @Inject constructor(
                     text = it.text,
                     image = it.image,
                     userId = it.userId,
+                    userName = it.userName,
                     time = parseZonedDateTime(it.time)
                 )
             }

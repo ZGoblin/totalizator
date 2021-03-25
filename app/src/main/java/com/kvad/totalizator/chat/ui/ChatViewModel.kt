@@ -4,10 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kvad.totalizator.chat.MapMessagesToUi
 import com.kvad.totalizator.chat.UserMessageUi
 import com.kvad.totalizator.chat.data.ChatRepository
-import com.kvad.totalizator.chat.model.UserMessage
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
@@ -33,7 +31,7 @@ class ChatViewModel @Inject constructor(
         _chatLiveData.value = State.Loading
         viewModelScope.launch {
             // TODO 24.03.2021 normal user id get from back end
-            currentUserId = "currentUserId"
+            currentUserId = "hhlhdfg"
             updateChat()
         }
     }
