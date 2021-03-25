@@ -61,7 +61,7 @@
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/line_height"
-        android:background="@color/grey"
+        android:background="@color/dark_grey"
         app:layout_constraintTop_toBottomOf="@id/guideline" />
 
     <TextView
@@ -83,7 +83,7 @@
         android:paddingHorizontal="@dimen/padding_start_game_details"
         android:paddingBottom="@dimen/padding_bottom_game_details"
         android:text="@string/command_a_command_b"
-        android:textColor="@color/light_grey"
+        android:textColor="@color/grey"
         android:textSize="@dimen/text_size_game_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,13 +120,13 @@
             android:maxLength="9"
             android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black"
-            android:textColorHint="@color/light_grey" />
+            android:textColorHint="@color/grey" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnBet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_grey"
+            android:background="@color/grey"
             android:enabled="false"
             android:gravity="center"
             android:text="@string/do_bet_simple"

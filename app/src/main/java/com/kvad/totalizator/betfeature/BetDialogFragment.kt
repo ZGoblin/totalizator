@@ -1,12 +1,9 @@
 package com.kvad.totalizator.betfeature
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
@@ -110,7 +107,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             tvBetGood.visibility = View.VISIBLE
             vClose.visibility = View.VISIBLE
             btnBet.isEnabled = false
-            btnBet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_grey))
+            btnBet.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.grey))
         }
         hideKeyboard()
     }
@@ -169,7 +166,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding.btnBet.setBackgroundColor(
             ContextCompat.getColor(
                 requireContext(),
-                R.color.light_grey
+                R.color.grey
             )
         )
         binding.btnBet.text = getString(R.string.do_bet_simple)
@@ -197,7 +194,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     btnBet.setBackgroundColor(
                         ContextCompat.getColor(
                             requireContext(),
-                            R.color.light_grey
+                            R.color.grey
                         )
                     )
                 }
