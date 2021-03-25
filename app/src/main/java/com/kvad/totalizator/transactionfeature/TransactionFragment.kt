@@ -79,12 +79,9 @@ class TransactionFragment : Fragment() {
 
     private fun setupError(error: TransactionState) {
         when (error) {
-            TransactionState.NO_MONEY -> {
-                stateVisibilityController.showError()
-                binding.etTransaction.text = null
-                binding.btnTransaction.isEnabled = false
-            }
+            TransactionState.NO_MONEY -> { }
             TransactionState.LOADING -> { }
+            TransactionState.WITHOUT_ERROR -> {}
         }
     }
 
