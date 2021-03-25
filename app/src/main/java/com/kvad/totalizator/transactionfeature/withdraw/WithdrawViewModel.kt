@@ -25,30 +25,19 @@ class WithdrawViewModel @Inject constructor(
         viewModelScope.launch{
             withdrawUseCase.withdraw(transactionMode).doOnResult(
                 onSuccess = ::doOnSuccess,
-                onLoginError = ::doOnLoginError,
-                onNetworkError = ::doOnNetworkError,
-                onError = ::doOnTransactionError
+                onNoMoneyError = ::doOnNoMoneyError
+
             )
         }
     }
 
+    private fun doOnNoMoneyError(error: ApiResultWrapper.Error.NoMoneyError) {
+        Log.d("ErrorBody", error.msg)
+        _withdrawLiveData.value = State.Error(TransactionErrorState.NO_MONEY)
+    }
+
     private fun doOnSuccess(unit: Unit) {
         _withdrawLiveData.value = State.Content(unit)
-    }
-
-    private fun doOnLoginError(error: ApiResultWrapper.Error) {
-        Log.d("ErrorBody", error.msg)
-        _withdrawLiveData.value = State.Error(TransactionErrorState.ZERO_ERROR)
-    }
-
-    private fun doOnNetworkError(error: ApiResultWrapper.Error) {
-        Log.d("ErrorBody", error.msg)
-        _withdrawLiveData.value = State.Error(TransactionErrorState.ZERO_ERROR)
-    }
-
-    private fun doOnTransactionError(error: ApiResultWrapper.Error){
-        Log.d("ErrorBody", error.msg)
-        _withdrawLiveData.value = State.Error(TransactionErrorState.ZERO_ERROR)
     }
 
 }

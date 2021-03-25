@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.kvad.totalizator.App
+import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.WithdrawPageBinding
 import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.hideKeyboard
+import com.kvad.totalizator.transactionfeature.TransactionErrorState
 import com.kvad.totalizator.transactionfeature.domain.TransactionType
 import com.kvad.totalizator.transactionfeature.model.TransactionModel
 import javax.inject.Inject
@@ -21,6 +25,7 @@ class WithdrawPageFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: WithdrawViewModel
+    private lateinit var stateVisibilityController: StateVisibilityController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +34,7 @@ class WithdrawPageFragment : Fragment() {
     ): View? {
         _binding = WithdrawPageBinding.inflate(inflater, container, false)
         setupDi()
+        stateVisibilityController = StateVisibilityController(binding.progressWithdraw,binding.tvErrorWithdraw)
         return binding.root
     }
 
@@ -56,15 +62,23 @@ class WithdrawPageFragment : Fragment() {
     }
 
     private fun observeWithdrawLiveData() {
+        stateVisibilityController.hideAll()
         viewModel.withdrawLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> {
-                }
+                is State.Loading -> stateVisibilityController.showLoading()
                 is State.Error -> {
+                    setupErrors(it.error)
+                    stateVisibilityController.showError()
                 }
-                is State.Content -> {
-                }
+                is State.Content -> stateVisibilityController.hideAll()
             }
+        }
+    }
+
+    private fun setupErrors(error: TransactionErrorState) {
+        when(error){
+            TransactionErrorState.LOADING_ERROR -> {}
+            TransactionErrorState.NO_MONEY -> binding.etWithdraw.text = null
         }
     }
 
@@ -84,6 +98,7 @@ class WithdrawPageFragment : Fragment() {
 
     override fun onDestroyView() {
         _binding = null
+        stateVisibilityController.destroy()
         super.onDestroyView()
     }
 
