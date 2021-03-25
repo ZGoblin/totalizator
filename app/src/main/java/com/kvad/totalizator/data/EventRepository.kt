@@ -71,4 +71,5 @@ class EventRepository @Inject constructor(
 
     var latestEvent: Flow<ApiResultWrapper<Event>> = flow {}
         private set
+
 }

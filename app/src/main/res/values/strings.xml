@@ -38,7 +38,6 @@
 
 
     <string name="draw">Draw</string>
-
     <string name="events_network_error">An error occurred while download events</string>
 
 
@@ -57,8 +56,15 @@
     <string name="bet_accessed">Bet accessed</string>
     <string name="loading_error">Loading error...</string>
     <string name="general_error_text">Oops, something went wrong</string>
+
+    <string name="withdraw">withdraw</string>
+    <string name="deposit">deposit</string>
+    <string name="go_deposit">Go Deposit</string>
+    <string name="go_withdraw">Go Withdraw</string>
+
     <string name="something_went_wrong">Something went wrong</string>
     <string name="user_image">User image</string>
     <string name="you">You</string>
+    <string name="no_money">No money</string>
 
 </resources>

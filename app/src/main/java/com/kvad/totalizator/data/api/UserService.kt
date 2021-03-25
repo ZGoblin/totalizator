@@ -1,10 +1,11 @@
 package com.kvad.totalizator.data.api
 
 import com.kvad.totalizator.data.requestmodels.AccountInfo
-import com.kvad.totalizator.data.requestmodels.BetRequest
 import com.kvad.totalizator.data.requestmodels.Token
 import com.kvad.totalizator.data.requestmodels.Wallet
 import com.kvad.totalizator.data.requestmodels.LoginRequest
+import com.kvad.totalizator.data.requestmodels.BetRequest
+import com.kvad.totalizator.data.requestmodels.TransactionRequest
 import com.kvad.totalizator.data.requestmodels.RegisterRequest
 import retrofit2.Response
 import retrofit2.http.Body
@@ -25,6 +26,9 @@ interface UserService {
     @POST("/api/Bet")
     suspend fun doBet(@Body betRequest : BetRequest) : Response<Unit>
 
+    @POST("/api/Wallet")
+    suspend fun transaction(@Body transactionRequest : TransactionRequest) : Response<Unit>
+  
     @POST("/api/Account")
     suspend fun accountInfo() : Response<AccountInfo>
 }
