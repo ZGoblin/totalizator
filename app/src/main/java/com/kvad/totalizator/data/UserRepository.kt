@@ -3,7 +3,6 @@ package com.kvad.totalizator.data
 import com.kvad.totalizator.data.api.UserService
 import com.kvad.totalizator.data.requestmodels.LoginRequest
 import com.kvad.totalizator.data.requestmodels.Token
-import com.kvad.totalizator.data.requestmodels.BetRequest
 import com.kvad.totalizator.data.requestmodels.TransactionRequest
 import com.kvad.totalizator.data.requestmodels.RegisterRequest
 import com.kvad.totalizator.data.requestmodels.Wallet
