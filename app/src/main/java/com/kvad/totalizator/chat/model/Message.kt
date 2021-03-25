@@ -26,7 +26,7 @@ data class UserMessage(
 )
 
 data class SendMsg(
-    val text: String
+    @SerializedName("text") val text: String
 )
 
 data class UserInfo(

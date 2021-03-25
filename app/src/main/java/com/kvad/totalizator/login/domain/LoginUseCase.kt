@@ -9,7 +9,6 @@ import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

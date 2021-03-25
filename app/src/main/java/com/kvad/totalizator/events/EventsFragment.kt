@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.kvad.totalizator.App
+import com.kvad.totalizator.chat.adapter.ChatRecyclerViewAdapter
+import com.kvad.totalizator.chat.ui.ChatViewModel
+import com.kvad.totalizator.chat.ui.UserMessageUi
 import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.databinding.EventsFragmentBinding
 import com.kvad.totalizator.events.adapter.EventAdapter
@@ -19,12 +22,16 @@ import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.hideKeyboard
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class EventsFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: EventsViewModel
+    @Inject
+    lateinit var chatViewModel: ChatViewModel
     private var _binding: EventsFragmentBinding? = null
     private val binding get() = _binding!!
+    private val chatAdapter = ChatRecyclerViewAdapter()
     private val eventAdapter = EventAdapter(::onEventClick)
     private lateinit var stateVisibilityController: StateVisibilityController
 
@@ -42,8 +49,15 @@ class EventsFragment : Fragment() {
 
         setupDi()
         setupRecycler()
+        setupListener()
         setupLiveDataObserver()
         hideKeyboard()
+    }
+
+    private fun setupListener() {
+        binding.tvSendMessage.setOnClickListener {
+            chatViewModel.sendMessage(binding.etMessage.text.toString())
+        }
     }
 
     private fun setupDi() {
@@ -54,6 +68,17 @@ class EventsFragment : Fragment() {
     private fun setupLiveDataObserver() {
         viewModel.eventsLiveData.observe(viewLifecycleOwner) {
             updateEvents(it)
+        }
+        chatViewModel.chatLiveData.observe(viewLifecycleOwner) {
+            updateChat(it)
+        }
+    }
+
+    private fun updateChat(state: State<List<UserMessageUi>, ErrorState>) {
+        when (state) {
+            is State.Loading -> { }
+            is State.Content -> { chatAdapter.submitList(state.data.reversed()) }
+            is State.Error -> {}
         }
     }
 
@@ -73,6 +98,19 @@ class EventsFragment : Fragment() {
     }
 
     private fun setupRecycler() {
+        setupEventsRecycler()
+        setupChatRecycler()
+    }
+
+    private fun setupChatRecycler() {
+        binding.rvChat.apply {
+            (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+            adapter = chatAdapter
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        }
+    }
+
+    private fun setupEventsRecycler() {
         binding.rvEvents.apply {
             val snapHelper = LinearSnapHelper()
             snapHelper.attachToRecyclerView(this)

@@ -35,6 +35,12 @@ class ChatViewModel @Inject constructor(
         }
     }
 
+    fun sendMessage(text: String) {
+        viewModelScope.launch {
+            chatRepository.sendMessage(text)
+        }
+    }
+
     private suspend fun updateChat() {
         chatRepository.getMessageFromApi()
             .map{
@@ -43,7 +49,6 @@ class ChatViewModel @Inject constructor(
                 }
             }
             .collect {
-                Log.d("ERROR_TAG", it.toString())
                 it.doOnResult(
                     onSuccess = ::doOnSuccess,
                     onError = ::doOnError
@@ -57,7 +62,6 @@ class ChatViewModel @Inject constructor(
     }
 
     private fun doOnSuccess(messageApiModelList: List<UserMessageUi>) {
-        Log.d("ERROR_TAG", messageApiModelList.toString())
         _chatLiveData.value = State.Content(messageApiModelList)
     }
 }

@@ -33,7 +33,7 @@
             android:background="@color/white"
             android:focusable="true"
             android:inputType="numberDecimal"
-            android:maxLength="4"
+            android:maxLength="6"
             android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black"
             />

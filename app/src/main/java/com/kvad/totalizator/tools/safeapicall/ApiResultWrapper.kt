@@ -9,6 +9,7 @@ sealed class ApiResultWrapper<out T> {
         data class UnknownError(val message: String) : Error(message)
         data class NetworkError(val message: String) : Error(message)
         data class LoginError(val message: String) : Error(message)
+        data class NoMoneyError(val message : String) : Error(message)
     }
 
     @Suppress("LongParameterList")
@@ -16,7 +17,8 @@ sealed class ApiResultWrapper<out T> {
         onSuccess: ((T) -> Unit)? = null,
         onNetworkError: ((error: Error.NetworkError) -> Unit)? = null,
         onLoginError: ((error: Error.LoginError) -> Unit)? = null,
-        onUnknownError: ((error: UnknownError) -> Unit)? = null,
+        onUnknownError: ((error: Error.UnknownError) -> Unit)? = null,
+        onNoMoneyError: ((error: Error.NoMoneyError) -> Unit)? = null,
         onError: ((error: Error) -> Unit)? = null,
         onFinish: (() -> Unit)? = null
     ): ApiResultWrapper<T> {
@@ -30,8 +32,11 @@ sealed class ApiResultWrapper<out T> {
             this is Error.LoginError && onLoginError != null -> {
                 onLoginError.invoke(this)
             }
-            this is UnknownError && onUnknownError != null -> {
+            this is Error.UnknownError && onUnknownError != null -> {
                 onUnknownError.invoke(this)
+            }
+            this is Error.NoMoneyError && onNoMoneyError != null -> {
+                onNoMoneyError.invoke(this)
             }
             this is Error -> {
                 onError?.invoke(this)
