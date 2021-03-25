@@ -1,8 +1,12 @@
 package com.kvad.totalizator.data
 
-import com.kvad.totalizator.data.requestmodels.BetRequest
 import com.kvad.totalizator.data.api.UserService
-import com.kvad.totalizator.data.requestmodels.*
+import com.kvad.totalizator.data.requestmodels.LoginRequest
+import com.kvad.totalizator.data.requestmodels.Token
+import com.kvad.totalizator.data.requestmodels.BetRequest
+import com.kvad.totalizator.data.requestmodels.TransactionRequest
+import com.kvad.totalizator.data.requestmodels.RegisterRequest
+import com.kvad.totalizator.data.requestmodels.Wallet
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.safeApiCall
@@ -11,7 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
-
+@Suppress("WildcardImport")
 class UserRepository @Inject constructor(
     private val userService: UserService,
     private val sharedPref: SharedPref
