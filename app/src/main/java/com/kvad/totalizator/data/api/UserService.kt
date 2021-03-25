@@ -29,7 +29,7 @@ interface UserService {
     @POST("/api/Wallet")
     suspend fun transaction(@Body transactionRequest : TransactionRequest) : Response<Unit>
   
-    @POST("/api/Account")
+    @POST("/api/Account/profile")
     suspend fun accountInfo() : Response<AccountInfo>
 
 }

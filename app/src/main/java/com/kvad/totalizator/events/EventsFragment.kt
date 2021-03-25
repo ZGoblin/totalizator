@@ -65,9 +65,7 @@ class EventsFragment : Fragment() {
                 stateVisibilityController.showError()
             }
             is State.Loading -> {
-                if (eventAdapter.itemCount <= 0) {
-                    stateVisibilityController.showLoading()
-                }
+                stateVisibilityController.showLoading()
             }
         }
     }
