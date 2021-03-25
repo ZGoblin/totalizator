@@ -17,3 +17,6 @@ const val API_URL = "https://classic-totalizator-ajg2w.ondigitalocean.app/"
 
 const val REQUEST_DELAY = 3000L
 
+const val WITHDRAW_FLAG = "withdraw"
+const val DEPOSIT_FLAG = "deposit"
+
