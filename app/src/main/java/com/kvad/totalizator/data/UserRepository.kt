@@ -12,45 +12,68 @@ import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.safeApiCall
 import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class UserRepository @Inject constructor(
     private val userService: UserService,
     private val sharedPref: SharedPref
 ) {
+
+    private val _wallet: MutableSharedFlow<ApiResultWrapper<Wallet>> = MutableSharedFlow()
+    val wallet: SharedFlow<ApiResultWrapper<Wallet>> = _wallet
+
+    init {
+        GlobalScope.launch {
+            flow {
+                while (true) {
+                    val response = safeApiCall(userService::wallet)
+                    emit(response)
+                    delay(REQUEST_DELAY)
+                }
+            }.collect {
+                _wallet.emit(it)
+            }
+        }
+    }
+
     suspend fun login(loginRequest: LoginRequest): ApiResultWrapper<Token> {
-        return safeApiCall {
+        val result = safeApiCall {
             userService.login(loginRequest)
         }
+        updateToken(result)
+        return result
     }
 
     suspend fun register(registerRequest: RegisterRequest): ApiResultWrapper<Token> {
-        return safeApiCall {
+        val result = safeApiCall {
             userService.register(registerRequest)
         }
+        updateToken(result)
+        return result
     }
 
-    suspend fun wallet(): Flow<ApiResultWrapper<Wallet>> = flow {
-        while (true) {
-            emit(safeApiCall(userService::wallet))
-            delay(REQUEST_DELAY)
+    private fun updateToken(result: ApiResultWrapper<Token>) {
+        if (result.isSuccess()) {
+            sharedPref.token = result.asSuccess().value.token
         }
     }
 
-    suspend fun doTransaction(transactionRequest: TransactionRequest) : ApiResultWrapper<Unit>{
+    suspend fun doTransaction(transactionRequest: TransactionRequest): ApiResultWrapper<Unit> {
         return safeApiCall {
             userService.transaction(transactionRequest)
         }
     }
 
-    fun updateToken(token: Token) {
-        sharedPref.token = token.token
-    }
-
-    suspend fun doBet(betRequest: BetRequest): ApiResultWrapper<Unit>  {
+    suspend fun doBet(betRequest: BetRequest): ApiResultWrapper<Unit> {
         return safeApiCall {
             userService.doBet(betRequest)
         }

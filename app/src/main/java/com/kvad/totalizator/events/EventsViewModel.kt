@@ -28,7 +28,7 @@ class EventsViewModel @Inject constructor(
     }
 
     private suspend fun updateEvents() {
-        eventRepository.lineFlow.collect {
+        eventRepository.line.collect {
             it.doOnResult(
                 onSuccess = ::onSuccess,
                 onError = ::onError
