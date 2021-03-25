@@ -44,7 +44,7 @@ class TransactionFragment : Fragment() {
         setupListeners()
         setupTextWatcher()
         setupState()
-        binding.etTransaction.requestFocus()
+        //binding.etTransaction.requestFocus()
         observeLiveData()
     }
 

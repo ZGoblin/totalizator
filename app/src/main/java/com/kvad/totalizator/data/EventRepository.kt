@@ -4,6 +4,7 @@ import android.util.Log
 import com.kvad.totalizator.data.api.EventService
 import com.kvad.totalizator.data.mappers.MapRequestEventToEvent
 import com.kvad.totalizator.data.model.Event
+import com.kvad.totalizator.data.requestmodels.RequestEventModel
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.mapSuccess
@@ -31,20 +32,29 @@ class EventRepository @Inject constructor(
         }
     }
 
-    fun getEventById(id: String): Flow<ApiResultWrapper<Event>> {
-        return lineFlow
-            .map {
-                if (it.isSuccess()) {
-                    it.asSuccess().value.find { event ->
-                        event.id == id
-                    }?.let { event ->
-                        return@map ApiResultWrapper.Success(event)
-                    }
-                    return@map ApiResultWrapper.Error.UnknownError("No event find")
-                }
-                else {
-                    return@map it.asError()
-                }
+//    fun getEventById(id: String): Flow<ApiResultWrapper<Event>> {
+//        return lineFlow
+//            .map {
+//                if (it.isSuccess()) {
+//                    it.asSuccess().value.find { event ->
+//                        event.id == id
+//                    }?.let { event ->
+//                        return@map ApiResultWrapper.Success(event)
+//                    }
+//                    return@map ApiResultWrapper.Error.UnknownError("No event find")
+//                }
+//                else {
+//                    return@map it.asError()
+//                }
+//            }
+//    }
+
+    fun getEventId(id: String): Flow<ApiResultWrapper<Event>> {
+        return  flow {
+            while (true) {
+                emit(safeApiCall { eventService.getEvent(id) }.mapSuccess {  mapRequestEventToEvent.map(it) })
+                delay(REQUEST_DELAY)
             }
+        }
     }
 }
