@@ -66,5 +66,7 @@
     <string name="user_image">User image</string>
     <string name="you">You</string>
     <string name="no_money">No money</string>
+    <string name="live">Live</string>
+    <string name="all_events">All events</string>
 
 </resources>

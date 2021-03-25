@@ -17,7 +17,7 @@
     <style name="TabLayoutStyle">
         <item name="tabIndicatorColor">@color/yellow</item>
         <item name="tabBackground">@color/dark_yellow</item>
-        <item name="tabSelectedTextColor">@color/grey</item>
+        <item name="tabSelectedTextColor">@color/dark_grey</item>
     </style>
 
     <style name="TransactionTabLayoutStyle">
