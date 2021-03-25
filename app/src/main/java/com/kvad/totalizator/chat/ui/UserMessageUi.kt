@@ -1,4 +1,4 @@
-package com.kvad.totalizator.chat
+package com.kvad.totalizator.chat.ui
 
 data class UserMessageUi(
     val id: String,

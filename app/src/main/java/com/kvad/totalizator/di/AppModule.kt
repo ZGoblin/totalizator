@@ -2,6 +2,7 @@ package com.kvad.totalizator.di
 
 import android.content.Context
 import com.google.gson.GsonBuilder
+import com.kvad.totalizator.chat.data.ChatService
 import com.kvad.totalizator.data.EventRepository
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.data.api.EventService
@@ -54,5 +55,11 @@ class AppModule(private val context: Context) {
     @Provides
     fun provideEventService(retrofit: Retrofit): EventService {
         return retrofit.create(EventService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideChatService(retrofit: Retrofit): ChatService {
+        return retrofit.create(ChatService::class.java)
     }
 }

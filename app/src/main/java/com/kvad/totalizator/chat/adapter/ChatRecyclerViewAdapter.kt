@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kvad.totalizator.R
-import com.kvad.totalizator.chat.UserMessageUi
+import com.kvad.totalizator.chat.ui.UserMessageUi
 
 class ChatRecyclerViewAdapter :
     ListAdapter<UserMessageUi, RecyclerView.ViewHolder>(MessageDiffUtil()) {
