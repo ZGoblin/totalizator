@@ -75,12 +75,12 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun getLastWallet(): Wallet {
+    suspend fun getLastWallet(): Wallet? {
         val wallet = this.wallet.first()
         if (wallet.isSuccess()) {
             return wallet.asSuccess().value
         }
-        return Wallet(0.0)
+        return null
     }
 
     suspend fun doBet(betRequest: BetRequest): ApiResultWrapper<Unit> {

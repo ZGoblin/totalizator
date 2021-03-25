@@ -89,16 +89,14 @@ class BetViewModel @Inject constructor(
         _betLiveData.value = State.Error(error = BetState.NO_MONEY_LEFT)
     }
 
-
-
-    private fun doOnNetworkErrorDoBet(error: ApiResultWrapper.Error) {
+    private fun doOnNetworkErrorDoBet(error: ApiResultWrapper.Error.NetworkError) {
         Log.d("ErrorBody", error.msg)
         _betLiveData.value = State.Error(error = BetState.LOADING_ERROR)
     }
 
-    private fun doOnLoginErrorDoBet(error: ApiResultWrapper.Error) {
+    private fun doOnLoginErrorDoBet(error: ApiResultWrapper.Error.LoginError) {
         Log.d("ErrorBody", error.msg)
-        _betLiveData.value = State.Error(error = BetState.LOGIN_ERROR)
+            _betLiveData.value = State.Error(error = BetState.LOGIN_ERROR)
     }
 
 }

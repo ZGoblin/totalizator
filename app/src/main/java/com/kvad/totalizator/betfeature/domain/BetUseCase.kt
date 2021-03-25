@@ -1,5 +1,6 @@
 package com.kvad.totalizator.betfeature.domain
 
+import android.util.Log
 import com.kvad.totalizator.betfeature.BetRepository
 import com.kvad.totalizator.betfeature.data.MapperBetModelToBetRequest
 import com.kvad.totalizator.betfeature.model.BetToServerModel
@@ -16,14 +17,17 @@ class BetUseCase @Inject constructor(
 
     suspend fun doBet(betToServerModel: BetToServerModel): ApiResultWrapper<Unit> {
         val betRequest: BetRequest = mapperBetModelToBetRequest.map(betToServerModel)
-        if (betRequest.amount > getWallet()) {
+        Log.d("AMOUNT", getWallet().toString())
+        if (getWallet() == null) {
+            return ApiResultWrapper.Error.LoginError("Login Error")
+        } else if (betRequest.amount > getWallet()!!) {
             return ApiResultWrapper.Error.NoMoneyError("Money Error")
         }
         return betRepository.doBet(betRequest)
     }
 
-    private suspend fun getWallet(): Double {
-        return userRepository.getLastWallet().amount
+    private suspend fun getWallet(): Double? {
+        return userRepository.getLastWallet()?.amount
     }
 
 }

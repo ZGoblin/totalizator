@@ -40,17 +40,18 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     private fun Dialog.initDialogShowListener() {
         setOnShowListener { dialog ->
-            (dialog as BottomSheetDialog).findViewById<View>(R.id.design_bottom_sheet)?.let { view ->
-                BottomSheetBehavior.from(view).apply {
-                    disableDragging()
-                    setState(BottomSheetBehavior.STATE_EXPANDED)
+            (dialog as BottomSheetDialog).findViewById<View>(R.id.design_bottom_sheet)
+                ?.let { view ->
+                    BottomSheetBehavior.from(view).apply {
+                        disableDragging()
+                        setState(BottomSheetBehavior.STATE_EXPANDED)
+                    }
                 }
-            }
             setCancelable(true)
             setCanceledOnTouchOutside(false)
         }
     }
-    
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,6 +126,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupDoBetError(error: BetState) {
+        stateVisibilityController.hideAll()
         when (error) {
             BetState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
             BetState.LOADING_ERROR -> cancelBetDialog()
@@ -239,14 +241,15 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             btnBet.text = getString(R.string.do_bet, binding.etBet.text.toString().toFloat())
             tvPraise.visibility = View.VISIBLE
         }
-        if (!binding.progressBarCircular.isVisible){
+        if (!binding.progressBarCircular.isVisible) {
             calculateAndSetupUi()
         }
     }
 
     private fun calculateAndSetupUi() {
         if (!binding.etBet.text.isNullOrEmpty()) {
-            val coefficient = viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
+            val coefficient =
+                viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
             val possibleGain = (coefficient * binding.etBet.text.toString().toFloat())
             binding.tvPraise.text = getString(R.string.possible_gain, possibleGain)
         }
