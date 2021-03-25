@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kvad.totalizator.betfeature.domain.BetState
 import com.kvad.totalizator.betfeature.domain.BetUseCase
 import com.kvad.totalizator.betfeature.domain.CoefficientUseCase
 import com.kvad.totalizator.betfeature.domain.MapperEventToBetDetailModel
