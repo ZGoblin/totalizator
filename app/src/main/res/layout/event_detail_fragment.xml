@@ -33,7 +33,6 @@
         android:visibility="gone"
         android:text="@string/general_error_text"/>
 
-
     <TextView
         android:id="@+id/tv_back"
         android:layout_width="match_parent"
