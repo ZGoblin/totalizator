@@ -112,7 +112,10 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private fun observeBetInfoLiveData() {
         viewModel.betInfoLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> stateVisibilityController.showLoading()
+                is State.Loading -> {
+                    stateVisibilityController.showLoading()
+                    binding.etBet.visibility = View.GONE
+                }
                 is State.Content -> {
                     stateVisibilityController.hideAll()
                     setupBetInfo(it)
