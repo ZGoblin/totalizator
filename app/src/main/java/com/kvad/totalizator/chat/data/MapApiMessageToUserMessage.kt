@@ -20,7 +20,7 @@ class MapApiMessageToUserMessage @Inject constructor(
                 UserMessage(
                     id = it.id,
                     text = it.text,
-                    image = "https://avatars.dicebear.com/api/human/put-id-here.png",//it.image,
+                    image = it.image,
                     userId = it.userId,
                     userName = it.userName,
                     time = parseZonedDateTime(it.time)
