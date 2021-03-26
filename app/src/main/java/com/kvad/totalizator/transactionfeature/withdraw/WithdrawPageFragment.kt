@@ -68,6 +68,7 @@ class WithdrawPageFragment : Fragment() {
                 is State.Loading -> stateVisibilityController.showLoading()
                 is State.Error -> {
                     setupErrors(it.error)
+                    stateVisibilityController.hideLoading()
                     stateVisibilityController.showError()
                 }
                 is State.Content -> stateVisibilityController.hideAll()

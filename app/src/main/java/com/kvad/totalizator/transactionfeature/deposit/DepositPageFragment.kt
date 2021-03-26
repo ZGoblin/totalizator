@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.databinding.DepositPageBinding
 import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.hideKeyboard
 import com.kvad.totalizator.transactionfeature.domain.TransactionType
 import com.kvad.totalizator.transactionfeature.model.TransactionModel
@@ -21,7 +22,7 @@ class DepositPageFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: DepositViewModel
-
+    lateinit var stateVisibilityController: StateVisibilityController
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,6 +30,7 @@ class DepositPageFragment : Fragment() {
     ): View? {
         _binding = DepositPageBinding.inflate(inflater, container, false)
         setupDi()
+        stateVisibilityController = StateVisibilityController(binding.progressDeposit,binding.tvErrorDeposit)
         return binding.root
     }
 
@@ -46,16 +48,18 @@ class DepositPageFragment : Fragment() {
     }
 
     private fun observeDepositLiveData(){
+        stateVisibilityController.hideAll()
         viewModel.depositLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading -> {
-                }
-                is State.Error -> {
-                }
-                is State.Content -> {
-                }
+                is State.Loading -> stateVisibilityController.showLoading()
+                is State.Error -> stateVisibilityController.showError()
+                is State.Content -> stateVisibilityController.hideAll()
             }
         }
+    }
+
+    private fun setupError(){
+
     }
 
     private fun doDeposit(){
@@ -83,6 +87,7 @@ class DepositPageFragment : Fragment() {
     }
     override fun onDestroyView() {
         _binding = null
+        stateVisibilityController.destroy()
         super.onDestroyView()
     }
 

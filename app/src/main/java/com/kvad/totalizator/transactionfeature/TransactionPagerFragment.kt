@@ -11,7 +11,7 @@ import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.TransactionViewPagerFragmentBinding
 import com.kvad.totalizator.transactionfeature.adapter.TransactionPagerAdapter
 
-class TransactionPagerFragment : Fragment(R.layout.transaction_fragment) {
+class TransactionPagerFragment : Fragment() {
     private var _binding: TransactionViewPagerFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewPagerAdapter: TransactionPagerAdapter
