@@ -13,7 +13,6 @@ suspend fun <T> safeApiCall(call: suspend () -> Response<T>) = withContext(Dispa
         if (response.isSuccessful) {
             ApiResultWrapper.Success(response.body()!!)
         } else {
-            Log.d("ErrorBackEnd", code.toString())
             when (code) {
                 LOGGING_ERROR_CODE -> ApiResultWrapper.Error.LoginError(
                     response.errorBody()?.string() ?: "empty error body"
