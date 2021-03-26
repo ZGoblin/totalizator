@@ -11,6 +11,10 @@
         tools:layout="@layout/events_fragment">
         <action
             android:id="@+id/action_detail_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
             app:destination="@id/detail_fragment" />
     </fragment>
 
@@ -42,7 +46,15 @@
     <fragment
         android:id="@+id/login_fragment"
         android:name="com.kvad.totalizator.login.LoginFragment"
-        tools:layout="@layout/login_fragment" />
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_to_registration"
+            app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/slide_in_left"
+            app:popEnterAnim="@anim/slide_out_right"
+            app:popExitAnim="@anim/slide_in_right"
+            app:destination="@id/registration_fragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/registration_fragment"
@@ -61,5 +73,22 @@
             app:argType="string"
             android:defaultValue="0"/>
     </dialog>
+
+    <action
+        android:id="@+id/action_to_login"
+        app:enterAnim="@anim/slide_in_top"
+        app:popExitAnim="@anim/slide_out_top"
+        app:destination="@id/login_fragment" />
+
+    <action
+        android:id="@+id/action_to_transaction"
+        app:enterAnim="@anim/slide_in_top"
+        app:popExitAnim="@anim/slide_out_top"
+        app:destination="@id/transaction_pager" />
+
+    <action
+        android:id="@+id/action_to_event_from_login"
+        app:enterAnim="@anim/slide_in_top"
+        app:destination="@id/events_fragment" />
 
 </navigation>
