@@ -23,7 +23,9 @@
         android:clickable="true"
         android:focusable="true"
         android:padding="100dp"
-        app:layout_constraintTop_toTopOf="parent" />
+        style="@style/YellowCustomProgressBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline"/>
 
     <EditText
         android:id="@+id/etMessage"

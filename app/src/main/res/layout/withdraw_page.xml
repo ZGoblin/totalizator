@@ -11,10 +11,30 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:gravity="center"
-        android:text="Снять деньги"
+        android:text="@string/withdraw_text"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/tvWithdraw"
+        android:text="@string/not_enough_money_to_withdraw"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:id="@+id/tvErrorWithdraw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ProgressBar
+        style="@style/YellowCustomProgressBar"
+        android:id="@+id/progress_withdraw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -35,8 +55,7 @@
             android:inputType="numberDecimal"
             android:maxLength="6"
             android:padding="@dimen/padding_edit_text"
-            android:textColor="@color/black"
-            />
+            android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -48,7 +67,6 @@
         android:text="@string/withdraw"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tlInputBalance" />
