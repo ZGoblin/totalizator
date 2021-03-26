@@ -1,17 +1,20 @@
 package com.kvad.totalizator.chat.data
 
-import android.util.Log
 import com.kvad.totalizator.chat.model.SendMsg
 import com.kvad.totalizator.chat.model.UserMessage
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.mapSuccess
 import com.kvad.totalizator.tools.safeapicall.safeApiCall
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 typealias MassageWrapper = ApiResultWrapper<List<UserMessage>>

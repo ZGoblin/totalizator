@@ -11,9 +11,10 @@ import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.mapSuccess
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 typealias EventState = State<List<UserMessageUi>, ErrorState>
@@ -21,8 +22,7 @@ typealias EventState = State<List<UserMessageUi>, ErrorState>
 class ChatViewModel @Inject constructor(
     private val chatRepository: ChatRepository,
     private val userRepository: UserRepository,
-    private val mapUserMessageUi: MapMessagesToUi,
-    @IoDispatcher private val dispatcher: CoroutineDispatcher
+    private val mapUserMessageUi: MapMessagesToUi
 ) : ViewModel() {
 
     private val _chatLiveData = MutableLiveData<EventState>()
