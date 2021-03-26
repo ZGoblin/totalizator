@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F5F5F5">
+    android:background="@color/light_gray">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEvents"
@@ -50,7 +50,7 @@
         android:id="@+id/tlMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Message"
+        android:hint="@string/message"
         app:layout_constraintTop_toTopOf="@id/guideline"
         app:layout_constraintEnd_toStartOf="@id/tvSendMessage"
         app:layout_constraintStart_toStartOf="parent">
@@ -63,7 +63,6 @@
             android:focusable="true"
             android:inputType="text"
             android:drawableEnd="@drawable/ic_send_massage_icon"
-            android:imeOptions="actionSend"
             android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
