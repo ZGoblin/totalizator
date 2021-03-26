@@ -4,7 +4,7 @@ import com.kvad.totalizator.data.requestmodels.TransactionRequest
 import com.kvad.totalizator.tools.DEPOSIT_FLAG
 import com.kvad.totalizator.tools.WITHDRAW_FLAG
 import com.kvad.totalizator.transactionfeature.model.TransactionModel
-import com.kvad.totalizator.transactionfeature.TransactionType
+import com.kvad.totalizator.transactionfeature.domain.TransactionType
 import javax.inject.Inject
 
 class MapperTransactionToTransactionRequest @Inject constructor(){

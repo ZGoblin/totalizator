@@ -23,7 +23,7 @@
         android:clickable="true"
         android:focusable="true"
         android:padding="100dp"
-        style="@style/CustomProgressBar"
+        style="@style/YellowCustomProgressBar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/guideline"/>
 

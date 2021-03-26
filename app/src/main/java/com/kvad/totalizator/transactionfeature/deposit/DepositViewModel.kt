@@ -1,4 +1,4 @@
-package com.kvad.totalizator.transactionfeature
+package com.kvad.totalizator.transactionfeature.deposit
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.data.UserRepository
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
+import com.kvad.totalizator.transactionfeature.TransactionErrorState
 import com.kvad.totalizator.transactionfeature.data.MapperTransactionToTransactionRequest
 import com.kvad.totalizator.transactionfeature.model.TransactionModel
 import kotlinx.coroutines.launch
@@ -18,7 +19,7 @@ class DepositViewModel @Inject constructor(
     private val mapperTransactionToTransactionRequest: MapperTransactionToTransactionRequest
 ) : ViewModel(){
 
-    private var _depositLiveData = MutableLiveData<State<Unit,TransactionErrorState>>()
+    private var _depositLiveData = MutableLiveData<State<Unit, TransactionErrorState>>()
     val depositLiveData : LiveData<State<Unit, TransactionErrorState>> = _depositLiveData
 
     fun deDeposit(transactionModel: TransactionModel) {

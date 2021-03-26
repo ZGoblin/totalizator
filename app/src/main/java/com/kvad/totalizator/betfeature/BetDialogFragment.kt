@@ -31,7 +31,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     @Inject
     lateinit var viewModel: BetViewModel
-    private lateinit var binding: BetDialogFragmentBinding
+    private var _binding: BetDialogFragmentBinding? = null
+    private val binding get() = _binding!!
     private lateinit var detailBet: Bet
     private lateinit var detailId: String
     private var eventId: String = ""
@@ -68,7 +69,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = BetDialogFragmentBinding.inflate(inflater, container, false)
+        _binding = BetDialogFragmentBinding.inflate(inflater, container, false)
         arguments?.let {
             val bet = BetDialogFragmentArgs.fromBundle(it).bet
             val eventId = BetDialogFragmentArgs.fromBundle(it).eventId
@@ -112,14 +113,15 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun observeDoBetLiveData() {
+        stateVisibilityController.hideAll()
         viewModel.betLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> stateVisibilityController.showLoading()
-                is State.Content -> {
-                    stateVisibilityController.hideAll()
-                    setupDoBetResult()
+                is State.Content -> setupDoBetResult()
+                is State.Error -> {
+                    setupDoBetError(it.error)
+                    stateVisibilityController.showError()
                 }
-                is State.Error -> setupDoBetError(it.error)
             }
         }
     }
@@ -130,8 +132,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             BetState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
             BetState.LOADING_ERROR -> cancelBetDialog()
             BetState.NO_MONEY_LEFT -> {
-                binding.tvError.setText(R.string.no_money)
-                stateVisibilityController.showError()
+                binding.tvError.setText(R.string.bet_less)
+                binding.etBet.text = null
             }
         }
     }
@@ -258,6 +260,11 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         hideKeyboard()
         dialog?.cancel()
         binding.etBet.clearFocus()
+    }
+    override fun onDestroyView() {
+        _binding = null
+        stateVisibilityController.destroy()
+        super.onDestroyView()
     }
 
 }
