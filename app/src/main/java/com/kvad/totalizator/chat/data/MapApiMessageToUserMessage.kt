@@ -1,5 +1,6 @@
 package com.kvad.totalizator.chat.data
 
+import android.util.Log
 import com.kvad.totalizator.chat.model.UserMessage
 import com.kvad.totalizator.chat.model.UserMessageApiModel
 import com.kvad.totalizator.chat.model.UserMessageApiResponse
