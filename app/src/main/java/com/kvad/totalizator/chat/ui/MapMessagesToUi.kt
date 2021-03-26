@@ -1,5 +1,6 @@
 package com.kvad.totalizator.chat.ui
 
+import android.util.Log
 import com.kvad.totalizator.chat.model.UserMessage
 import com.kvad.totalizator.di.DefaultDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -20,7 +21,7 @@ class MapMessagesToUi @Inject constructor(
                     text = it.text,
                     image = it.image,
                     time = getStringTime(it.time),
-                    isCurrentUserMessage = (it.userId == currentUserId)
+                    isCurrentUserMessage = it.userId == currentUserId
                 )
             }
         }
