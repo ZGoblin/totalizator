@@ -38,7 +38,7 @@ class WithdrawPageFragment : Fragment() {
     ): View? {
         _binding = WithdrawPageBinding.inflate(inflater, container, false)
         setupDi()
-        stateVisibilityController = StateVisibilityController(binding.progressWithdraw,null)
+        stateVisibilityController = StateVisibilityController(binding.progressWithdraw, null)
         return binding.root
     }
 
@@ -77,14 +77,17 @@ class WithdrawPageFragment : Fragment() {
     }
 
     private fun setupErrors(error: TransactionErrorState) {
-        when(error){
-            TransactionErrorState.LOADING_ERROR -> {}
-            TransactionErrorState.NO_MONEY -> {
-                MaterialDialog(requireContext()).customView(R.layout.withdraw_error_layout).negativeButton(R.string.close).show()
-                stateVisibilityController.hideLoading()
-                binding.etWithdraw.text = null
+        when (error) {
+            TransactionErrorState.LOADING_ERROR -> {
             }
+            TransactionErrorState.NO_MONEY -> setupNoMoneyError()
         }
+    }
+
+    private fun setupNoMoneyError() {
+        MaterialDialog(requireContext()).customView(R.layout.withdraw_error_layout)
+            .negativeButton(R.string.close).show()
+        stateVisibilityController.hideLoading()
     }
 
     private fun setupDi() {

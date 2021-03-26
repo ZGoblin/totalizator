@@ -10,6 +10,8 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -118,7 +120,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         viewModel.betLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> stateVisibilityController.showLoading()
-                is State.Content -> setupDoBetResult()
+                is State.Content -> setupDoBetSuccess()
                 is State.Error -> {
                     setupDoBetError(it.error)
                     stateVisibilityController.showError()
@@ -132,14 +134,18 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         when (error) {
             BetState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
             BetState.LOADING_ERROR -> cancelBetDialog()
-            BetState.NO_MONEY_LEFT -> {
-                binding.amountLayout.error = getString(R.string.bet_less)
-                binding.etBet.text = null
-            }
+            BetState.NO_MONEY_LEFT -> setupNoMoneyError()
         }
     }
 
-    private fun setupDoBetResult() {
+    private fun setupNoMoneyError() {
+        MaterialDialog(requireContext()).customView(R.layout.bet_no_enough_money_error_layout)
+            .positiveButton(R.string.deposit, click = {
+                findNavController().navigate(R.id.transaction_pager)
+            }).negativeButton(R.string.close).show()
+    }
+
+    private fun setupDoBetSuccess() {
         binding.apply {
             etBet.visibility = View.GONE
             tvCancel.visibility = View.GONE
@@ -258,10 +264,10 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun cancelBetDialog() {
-        hideKeyboard()
         dialog?.cancel()
         binding.etBet.clearFocus()
     }
+
     override fun onDestroyView() {
         _binding = null
         stateVisibilityController.destroy()
