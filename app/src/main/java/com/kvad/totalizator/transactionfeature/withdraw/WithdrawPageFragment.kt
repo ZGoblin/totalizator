@@ -71,7 +71,7 @@ class WithdrawPageFragment : Fragment() {
                     stateVisibilityController.hideLoading()
                     stateVisibilityController.showError()
                 }
-                is State.Content -> stateVisibilityController.hideAll()
+                is State.Content -> stateVisibilityController.hideLoading()
             }
         }
     }
