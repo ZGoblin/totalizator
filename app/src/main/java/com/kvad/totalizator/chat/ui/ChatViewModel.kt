@@ -6,20 +6,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.chat.data.ChatRepository
 import com.kvad.totalizator.data.UserRepository
+import com.kvad.totalizator.di.IoDispatcher
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.mapSuccess
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 typealias EventState = State<List<UserMessageUi>, ErrorState>
 
 class ChatViewModel @Inject constructor(
     private val chatRepository: ChatRepository,
-    private val mapUserMessageUi: MapMessagesToUi
+    private val userRepository: UserRepository,
+    private val mapUserMessageUi: MapMessagesToUi,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _chatLiveData = MutableLiveData<EventState>()
@@ -30,8 +33,11 @@ class ChatViewModel @Inject constructor(
     init {
         _chatLiveData.value = State.Loading
         viewModelScope.launch {
-            // TODO 24.03.2021 normal user id get from back end
-            currentUserId = "hhlhdfg"
+//            launch {
+//                getAccount()
+//            }.join()
+            getAccount()
+            Log.d("ErrorFlow", currentUserId!!)
             updateChat()
         }
     }
@@ -42,11 +48,20 @@ class ChatViewModel @Inject constructor(
         }
     }
 
+    private suspend fun getAccount() {
+        val account = userRepository.accountInfo()
+        if (account.isSuccess()) {
+            currentUserId = account.asSuccess().value.id
+            return
+        }
+        currentUserId = ""
+    }
+
     private suspend fun updateChat() {
-        chatRepository.getMessageFromApi()
-            .map{
-                it.mapSuccess{ msg ->
-                     mapUserMessageUi(currentUserId, msg)
+        chatRepository.message
+            .map {
+                it.mapSuccess { msg ->
+                    mapUserMessageUi(currentUserId, msg)
                 }
             }
             .collect {
