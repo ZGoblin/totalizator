@@ -69,5 +69,6 @@
     <string name="live">Live</string>
     <string name="all_events">All events</string>
     <string name="sport_logo">Sport logo</string>
+    <string name="message">Message</string>
 
 </resources>
