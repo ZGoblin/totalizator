@@ -58,10 +58,6 @@ class DepositPageFragment : Fragment() {
         }
     }
 
-    private fun setupError(){
-
-    }
-
     private fun doDeposit(){
         val deposit = TransactionModel(
             amount = binding.etDeposit.text.toString().toDouble(),
