@@ -19,7 +19,7 @@ class TransactionPagerFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = TransactionViewPagerFragmentBinding.inflate(inflater, container, false)
         setupDi()
         return binding.root

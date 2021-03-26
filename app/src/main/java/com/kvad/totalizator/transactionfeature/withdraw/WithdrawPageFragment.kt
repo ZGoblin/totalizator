@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.dialog.MaterialDialogs
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.WithdrawPageBinding
@@ -34,7 +38,7 @@ class WithdrawPageFragment : Fragment() {
     ): View? {
         _binding = WithdrawPageBinding.inflate(inflater, container, false)
         setupDi()
-        stateVisibilityController = StateVisibilityController(binding.progressWithdraw,binding.tvErrorWithdraw)
+        stateVisibilityController = StateVisibilityController(binding.progressWithdraw, null)
         return binding.root
     }
 
@@ -66,21 +70,24 @@ class WithdrawPageFragment : Fragment() {
         viewModel.withdrawLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> stateVisibilityController.showLoading()
-                is State.Error -> {
-                    setupErrors(it.error)
-                    stateVisibilityController.hideLoading()
-                    stateVisibilityController.showError()
-                }
-                is State.Content -> stateVisibilityController.hideAll()
+                is State.Error -> setupErrors(it.error)
+                is State.Content -> stateVisibilityController.hideLoading()
             }
         }
     }
 
     private fun setupErrors(error: TransactionErrorState) {
-        when(error){
-            TransactionErrorState.LOADING_ERROR -> {}
-            TransactionErrorState.NO_MONEY -> binding.etWithdraw.text = null
+        when (error) {
+            TransactionErrorState.LOADING_ERROR -> {
+            }
+            TransactionErrorState.NO_MONEY -> setupNoMoneyError()
         }
+    }
+
+    private fun setupNoMoneyError() {
+        MaterialDialog(requireContext()).customView(R.layout.withdraw_error_layout)
+            .negativeButton(R.string.close).show()
+        stateVisibilityController.hideLoading()
     }
 
     private fun setupDi() {
