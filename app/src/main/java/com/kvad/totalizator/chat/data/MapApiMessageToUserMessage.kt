@@ -1,5 +1,6 @@
 package com.kvad.totalizator.chat.data
 
+import android.util.Log
 import com.kvad.totalizator.chat.model.UserMessage
 import com.kvad.totalizator.chat.model.UserMessageApiModel
 import com.kvad.totalizator.chat.model.UserMessageApiResponse
@@ -21,7 +22,7 @@ class MapApiMessageToUserMessage @Inject constructor(
                     text = it.text,
                     image = "https://avatars.dicebear.com/api/human/put-id-here.png",//it.image,
                     userId = it.userId,
-                    userName = "it.userName",
+                    userName = it.userName,
                     time = parseZonedDateTime(it.time)
                 )
             }
