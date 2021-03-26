@@ -28,6 +28,7 @@ class EventsFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: EventsViewModel
+
     @Inject
     lateinit var chatViewModel: ChatViewModel
     private var _binding: EventsFragmentBinding? = null
@@ -46,7 +47,8 @@ class EventsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = EventsFragmentBinding.inflate(inflater, container, false)
-        stateVisibilityController = StateVisibilityController(binding.pbProgress, binding.tvError)
+        stateVisibilityController =
+            StateVisibilityController(progressBar = binding.pbProgress, errorView = binding.tvError)
         return binding.root
     }
 
@@ -85,9 +87,13 @@ class EventsFragment : Fragment() {
 
     private fun updateChat(state: State<List<UserMessageUi>, ErrorState>) {
         when (state) {
-            is State.Loading -> { }
-            is State.Content -> { chatAdapter.submitList(state.data.reversed()) }
-            is State.Error -> {}
+            is State.Loading -> {
+            }
+            is State.Content -> {
+                chatAdapter.submitList(state.data.reversed())
+            }
+            is State.Error -> {
+            }
         }
     }
 

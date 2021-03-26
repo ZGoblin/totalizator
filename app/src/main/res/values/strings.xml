@@ -68,7 +68,14 @@
     <string name="no_money">No money</string>
     <string name="live">Live</string>
     <string name="all_events">All events</string>
+
+    <string name="withdraw_text">Снять деньги</string>
+    <string name="deposit_text">Пополнить счет</string>
+    <string name="not_enough_money_to_withdraw">Not enough money to withdraw</string>
+    <string name="bet_less">Bet less</string>
+
     <string name="sport_logo">Sport logo</string>
     <string name="message">Message</string>
+
 
 </resources>
