@@ -47,7 +47,7 @@ class LoginFragment : Fragment() {
         hideInputError()
         when (state) {
             LoginState.WITHOUT_ERROR -> {
-                findNavController().navigate(R.id.events_fragment)
+                findNavController().navigate(R.id.action_to_event_from_login)
             }
             LoginState.NETWORK_ERROR -> {
                 showNetworkErrorDialog()
@@ -81,7 +81,7 @@ class LoginFragment : Fragment() {
                 login()
             }
             btnRegister.setOnClickListener {
-                findNavController().navigate(R.id.registration_fragment)
+                findNavController().navigate(R.id.action_to_registration)
             }
         }
     }
