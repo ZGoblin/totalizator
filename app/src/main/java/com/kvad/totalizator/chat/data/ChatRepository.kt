@@ -1,5 +1,6 @@
 package com.kvad.totalizator.chat.data
 
+import android.util.Log
 import com.kvad.totalizator.chat.model.SendMsg
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.mapSuccess
@@ -28,7 +29,8 @@ class ChatRepository @Inject constructor(
     }
 
     suspend fun sendMessage(text: String) = withContext(Dispatchers.IO) {
-        chatService.sendMessage(SendMsg(text))
+        safeApiCall {
+            chatService.sendMessage(SendMsg(text))
+        }
     }
-
 }

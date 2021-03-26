@@ -63,6 +63,9 @@ class EventsFragment : Fragment() {
     private fun setupListener() {
         binding.tvSendMessage.setOnClickListener {
             chatViewModel.sendMessage(binding.etMessage.text.toString())
+            binding.rvChat.scrollToPosition(0)
+            binding.etMessage.setText("")
+            hideKeyboard()
         }
     }
 
