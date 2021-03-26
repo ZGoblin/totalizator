@@ -77,7 +77,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             detailId = eventId
         }
         stateVisibilityController =
-            StateVisibilityController(binding.progressBarCircular, binding.tvError)
+            StateVisibilityController(binding.progressBarCircular, null)
         return binding.root
     }
 
@@ -133,7 +133,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             BetState.LOGIN_ERROR -> findNavController().navigate(R.id.login_fragment)
             BetState.LOADING_ERROR -> cancelBetDialog()
             BetState.NO_MONEY_LEFT -> {
-                binding.tvError.setText(R.string.bet_less)
+                binding.amountLayout.error = getString(R.string.bet_less)
                 binding.etBet.text = null
             }
         }

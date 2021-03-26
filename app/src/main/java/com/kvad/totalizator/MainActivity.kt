@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         setupBinding()
         setupDi()
         supportActionBar?.hide()
-
     }
 
     override fun onStart() {
