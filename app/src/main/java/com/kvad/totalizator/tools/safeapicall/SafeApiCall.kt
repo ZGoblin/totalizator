@@ -1,6 +1,5 @@
 package com.kvad.totalizator.tools.safeapicall
 
-import android.util.Log
 import com.kvad.totalizator.tools.LOGGING_ERROR_CODE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -14,7 +13,6 @@ suspend fun <T> safeApiCall(call: suspend () -> Response<T>) = withContext(Dispa
         if (response.isSuccessful) {
             ApiResultWrapper.Success(response.body()!!)
         } else {
-            Log.d("ErrorBackEnd", code.toString())
             when (code) {
                 LOGGING_ERROR_CODE -> ApiResultWrapper.Error.LoginError(
                     response.errorBody()?.string() ?: "empty error body"

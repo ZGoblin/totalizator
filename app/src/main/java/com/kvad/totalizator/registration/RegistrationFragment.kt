@@ -49,7 +49,7 @@ class RegistrationFragment : Fragment() {
 
     private fun updateState(state: RegisterState) {
         when (state) {
-            RegisterState.WITHOUT_ERROR -> findNavController().navigate(R.id.events_fragment)
+            RegisterState.WITHOUT_ERROR -> findNavController().navigate(R.id.action_to_event_from_login)
             RegisterState.BIRTHDAY_ERROR -> showDialogError(R.string.register_birthday_error)
             RegisterState.NETWORK_ERROR -> showDialogError(R.string.login_network_error_dialog_body)
             RegisterState.LOGIN_LENGTH_ERROR -> {

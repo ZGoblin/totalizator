@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
-        app:counterMaxLength="8"
+        app:counterMaxLength="4"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -42,7 +42,7 @@
             android:background="@color/white"
             android:focusable="true"
             android:inputType="numberDecimal"
-            android:maxLength="9"
+            android:maxLength="4"
             android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
