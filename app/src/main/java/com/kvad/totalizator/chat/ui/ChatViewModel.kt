@@ -19,7 +19,6 @@ typealias EventState = State<List<UserMessageUi>, ErrorState>
 
 class ChatViewModel @Inject constructor(
     private val chatRepository: ChatRepository,
-    private val userRepository: UserRepository,
     private val mapUserMessageUi: MapMessagesToUi
 ) : ViewModel() {
 

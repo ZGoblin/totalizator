@@ -34,8 +34,6 @@ class MapEventToDetailUiModel @Inject constructor() {
 
         val second = event.secondParticipant.characteristics
         val first = event.firstParticipant.characteristics
-//        val second = setOf(Characteristic("height", "180"), Characteristic("weight", "65"))
-//        val first = setOf(Characteristic("height", "165"), Characteristic("weight", "80"), Characteristic("Age", "65"))
 
         val parameters = mutableListOf<EventDetail.CharacteristicUiModel>()
         first.forEach { characteristic ->
