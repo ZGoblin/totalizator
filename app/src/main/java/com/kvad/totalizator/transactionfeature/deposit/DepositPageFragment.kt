@@ -30,7 +30,7 @@ class DepositPageFragment : Fragment() {
     ): View? {
         _binding = DepositPageBinding.inflate(inflater, container, false)
         setupDi()
-        stateVisibilityController = StateVisibilityController(binding.progressDeposit,binding.tvErrorDeposit)
+        stateVisibilityController = StateVisibilityController(binding.progressDeposit,null)
         return binding.root
     }
 

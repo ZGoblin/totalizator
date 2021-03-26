@@ -50,6 +50,9 @@ class HeaderFragment : Fragment() {
             tvCurrency.setOnClickListener {
                 navigateToTransaction()
             }
+            ivClock.setOnClickListener {
+                findNavController().navigate(R.id.bet_history_fragment)
+            }
         }
     }
 

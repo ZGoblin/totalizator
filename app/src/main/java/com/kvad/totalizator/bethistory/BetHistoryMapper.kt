@@ -2,6 +2,7 @@ package com.kvad.totalizator.bethistory
 
 import com.kvad.totalizator.tools.W1_SERVER_FLAG
 import com.kvad.totalizator.tools.W2_SERVER_FLAG
+import java.time.ZonedDateTime
 import javax.inject.Inject
 
 class BetHistoryMapper @Inject constructor() {
@@ -14,17 +15,21 @@ class BetHistoryMapper @Inject constructor() {
             W2_SERVER_FLAG -> BetChoice.SECOND_PLAYER_WIN
             else -> BetChoice.DRAW
         },
-        eventStartTime = requestBetHistoryModel.eventStartTime,
-        betStartTime = requestBetHistoryModel.betTime,
+        eventStartTime = parseZonedDateTime(requestBetHistoryModel.eventStartTime),
+        betStartTime = parseZonedDateTime(requestBetHistoryModel.betTime),
         amount = requestBetHistoryModel.amount,
         status = when (requestBetHistoryModel.status) {
-            "WIN" -> BetStatus.WIN
-            else -> BetStatus.LOSE
+            "Bet lost" -> BetStatus.LOSE
+            else -> BetStatus.WIN
         }
 
     )
 
     fun map(betHistoryPreview: List<RequestBetHistoryModel>): List<BetHistoryDetailModel> {
         return betHistoryPreview.map { map(it) }
+    }
+
+    private fun parseZonedDateTime(time: String): ZonedDateTime {
+        return ZonedDateTime.parse(time)
     }
 }
