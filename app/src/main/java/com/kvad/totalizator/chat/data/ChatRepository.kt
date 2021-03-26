@@ -33,5 +33,4 @@ class ChatRepository @Inject constructor(
             chatService.sendMessage(SendMsg(text))
         }
     }
-
 }
