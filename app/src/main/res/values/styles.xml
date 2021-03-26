@@ -13,6 +13,12 @@
     <style name="CustomProgressBar" parent="android:Widget.Holo.ProgressBar">
     </style>
 
+    <style name="YellowCustomProgressBar" parent="android:Widget.Holo.ProgressBar">
+        <item name="android:indeterminate">true</item>
+        <item name="android:indeterminateTintMode">src_atop</item>
+        <item name="android:indeterminateTint">@color/yellow</item>
+    </style>
+
     <style name="QuickBetDialog" parent="Theme.Design.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowSoftInputMode">adjustResize</item>

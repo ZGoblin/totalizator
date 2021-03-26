@@ -9,9 +9,9 @@ import com.kvad.totalizator.header.HeaderFragment
 import com.kvad.totalizator.login.LoginFragment
 import com.kvad.totalizator.onboard.OnBoardFragment
 import com.kvad.totalizator.registration.RegistrationFragment
-import com.kvad.totalizator.transactionfeature.DepositPageFragment
+import com.kvad.totalizator.transactionfeature.deposit.DepositPageFragment
 import com.kvad.totalizator.transactionfeature.TransactionPagerFragment
-import com.kvad.totalizator.transactionfeature.WithdrawPageFragment
+import com.kvad.totalizator.transactionfeature.withdraw.WithdrawPageFragment
 import dagger.Component
 import javax.inject.Singleton
 @Suppress("TooManyFunctions")

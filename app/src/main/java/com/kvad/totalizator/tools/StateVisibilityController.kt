@@ -14,6 +14,14 @@ class StateVisibilityController(
         errorView?.visibility = View.VISIBLE
     }
 
+    fun hideLoading() {
+        progressBar?.visibility = View.GONE
+    }
+
+    fun hideError() {
+        errorView?.visibility = View.GONE
+    }
+
     fun hideAll() {
         progressBar?.visibility = View.GONE
         errorView?.visibility = View.GONE
