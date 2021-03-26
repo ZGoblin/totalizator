@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.kvad.totalizator.App
+import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.DepositPageBinding
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
@@ -30,7 +33,7 @@ class DepositPageFragment : Fragment() {
     ): View? {
         _binding = DepositPageBinding.inflate(inflater, container, false)
         setupDi()
-        stateVisibilityController = StateVisibilityController(binding.progressDeposit,binding.tvErrorDeposit)
+        stateVisibilityController = StateVisibilityController(binding.progressDeposit,null)
         return binding.root
     }
 
@@ -52,7 +55,10 @@ class DepositPageFragment : Fragment() {
         viewModel.depositLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> stateVisibilityController.showLoading()
-                is State.Error -> stateVisibilityController.showError()
+                is State.Error -> {
+                    MaterialDialog(requireContext()).customView(R.layout.deposit_error_layout).negativeButton(R.string.close).show()
+                    stateVisibilityController.hideLoading()
+                }
                 is State.Content -> stateVisibilityController.hideAll()
             }
         }

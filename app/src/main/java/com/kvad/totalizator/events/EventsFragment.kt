@@ -64,9 +64,16 @@ class EventsFragment : Fragment() {
 
     private fun setupListener() {
         binding.tvSendMessage.setOnClickListener {
-            chatViewModel.sendMessage(binding.etMessage.text.toString())
+            sendMessage()
         }
     }
+
+    private fun sendMessage(){
+        chatViewModel.sendMessage(binding.etMessage.text.toString())
+        binding.etMessage.text = null
+        hideKeyboard()
+    }
+
 
     private fun setupDi() {
         val app = requireActivity().application as App

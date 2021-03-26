@@ -10,13 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:text="@string/something_went_wrong"
+        android:text="@string/not_enough_money_to_withdraw"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:textSize="24sp"
+        android:textSize="20sp"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

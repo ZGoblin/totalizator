@@ -17,17 +17,6 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        app:layout_constraintTop_toBottomOf="@id/tvWithdraw"
-        android:text="@string/not_enough_money_to_withdraw"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="@color/red"
-        android:textStyle="bold"
-        android:id="@+id/tvErrorWithdraw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <ProgressBar
         style="@style/YellowCustomProgressBar"
         android:id="@+id/progress_withdraw"
@@ -53,7 +42,7 @@
             android:background="@color/white"
             android:focusable="true"
             android:inputType="numberDecimal"
-            android:maxLength="6"
+            android:maxLength="4"
             android:padding="@dimen/padding_edit_text"
             android:textColor="@color/black" />
     </com.google.android.material.textfield.TextInputLayout>
