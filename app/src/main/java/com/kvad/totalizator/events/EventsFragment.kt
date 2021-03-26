@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +35,11 @@ class EventsFragment : Fragment() {
     private val chatAdapter = ChatRecyclerViewAdapter()
     private val eventAdapter = EventAdapter(::onEventClick)
     private lateinit var stateVisibilityController: StateVisibilityController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MASK_ADJUST);
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
