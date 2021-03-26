@@ -106,6 +106,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                 eventId, amount, detailBet
             )
             viewModel.createBet(betToServerModel)
+            binding.btnBet.isEnabled = false
         }
         binding.vClose.setOnClickListener {
             cancelBetDialog()
