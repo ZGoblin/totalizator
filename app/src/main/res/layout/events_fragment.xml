@@ -46,26 +46,20 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tlMessage"
+    <EditText
+        android:id="@+id/etMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/message"
         app:layout_constraintTop_toTopOf="@id/guideline"
         app:layout_constraintEnd_toStartOf="@id/tvSendMessage"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etMessage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:focusable="true"
-            android:inputType="text"
-            android:drawableEnd="@drawable/ic_send_massage_icon"
-            android:padding="@dimen/padding_edit_text"
-            android:textColor="@color/black" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/white"
+        android:focusable="true"
+        android:inputType="text"
+        android:hint="@string/message"
+        android:drawableEnd="@drawable/ic_send_massage_icon"
+        android:padding="@dimen/padding_edit_text"
+        android:textColor="@color/black"/>
 
     <View
         android:id="@+id/tvSendMessage"
@@ -74,13 +68,13 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintTop_toTopOf="@id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/tlMessage"/>
+        app:layout_constraintBottom_toBottomOf="@id/etMessage"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tlMessage"
+        app:layout_constraintTop_toBottomOf="@id/etMessage"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
