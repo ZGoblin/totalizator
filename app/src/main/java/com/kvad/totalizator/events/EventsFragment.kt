@@ -1,10 +1,12 @@
 package com.kvad.totalizator.events
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +35,7 @@ class EventsFragment : Fragment() {
     lateinit var chatViewModel: ChatViewModel
     private var _binding: EventsFragmentBinding? = null
     private val binding get() = _binding!!
+    private var messageSended = false
     private val chatAdapter = ChatRecyclerViewAdapter()
     private val eventAdapter = EventAdapter(::onEventClick)
     private lateinit var stateVisibilityController: StateVisibilityController
@@ -64,11 +67,17 @@ class EventsFragment : Fragment() {
 
     private fun setupListener() {
         binding.tvSendMessage.setOnClickListener {
-            chatViewModel.sendMessage(binding.etMessage.text.toString())
-            binding.rvChat.scrollToPosition(0)
-            binding.etMessage.setText("")
-            hideKeyboard()
+            onSendClick()
         }
+    }
+
+    private fun onSendClick() {
+        binding.apply {
+            messageSended = true
+            chatViewModel.sendMessage(etMessage.text.toString())
+            etMessage.setText("")
+        }
+        hideKeyboard()
     }
 
     private fun setupDi() {
@@ -78,26 +87,34 @@ class EventsFragment : Fragment() {
 
     private fun setupLiveDataObserver() {
         viewModel.eventsLiveData.observe(viewLifecycleOwner) {
-            updateEvents(it)
+            updateEventsState(it)
         }
         chatViewModel.chatLiveData.observe(viewLifecycleOwner) {
-            updateChat(it)
+            updateChatState(it)
         }
     }
 
-    private fun updateChat(state: State<List<UserMessageUi>, ErrorState>) {
+    private fun updateChatState(state: State<List<UserMessageUi>, ErrorState>) {
         when (state) {
             is State.Loading -> {
             }
             is State.Content -> {
-                chatAdapter.submitList(state.data.reversed())
+                updateChatContent(state.data)
             }
             is State.Error -> {
             }
         }
     }
 
-    private fun updateEvents(state: State<List<Event>, ErrorState>) {
+    private fun updateChatContent(messages: List<UserMessageUi>) {
+        chatAdapter.submitList(messages)
+        if (messageSended) {
+            messageSended = false
+            binding.rvChat.layoutManager?.scrollToPosition(0)
+        }
+    }
+
+    private fun updateEventsState(state: State<List<Event>, ErrorState>) {
         stateVisibilityController.hideAll()
         when (state) {
             is State.Content -> eventAdapter.submitList(state.data)
