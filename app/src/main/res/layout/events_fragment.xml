@@ -28,7 +28,8 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/tvSendMessage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvEvents" />
+        app:layout_constraintTop_toBottomOf="@id/rvEvents"
+        android:importantForAutofill="no" />
 
     <View
         android:id="@+id/tvSendMessage"
@@ -67,22 +68,23 @@
             android:padding="100dp"
             android:visibility="gone" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/light_gray"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/events_network_error"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </FrameLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvError"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/light_gray"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center"
-        android:text="@string/events_network_error"
-        android:textColor="@color/black"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

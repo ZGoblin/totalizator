@@ -31,39 +31,4 @@ class AppModule(private val context: Context) {
         return context
     }
 
-    @Singleton
-    @Provides
-    fun provideRetrofit(headerInterceptor: HeaderInterceptor) : Retrofit {
-        return Retrofit.Builder()
-            .client(
-                OkHttpClient().newBuilder()
-                    .addInterceptor(headerInterceptor)
-                    .build()
-            )
-            .baseUrl(API_URL)
-            .addConverterFactory(
-                GsonConverterFactory.create(
-                    GsonBuilder().setLenient().create()
-                )
-            )
-            .build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideUserService(retrofit: Retrofit): UserService {
-        return retrofit.create(UserService::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideEventService(retrofit: Retrofit): EventService {
-        return retrofit.create(EventService::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideChatService(retrofit: Retrofit): ChatService {
-        return retrofit.create(ChatService::class.java)
-    }
 }
