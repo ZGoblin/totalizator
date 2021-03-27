@@ -66,6 +66,8 @@ class ChatViewModel @Inject constructor(
             }
     }
 
+    fun isChatLoaded() = _chatLiveData.value is State.Content
+
     private fun doOnError(error: ApiResultWrapper.Error) {
         Log.d("ERROR_TAG", error.msg)
         _chatLiveData.value = State.Error(ErrorState.LOADING_ERROR)

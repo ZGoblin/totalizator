@@ -68,6 +68,7 @@
         android:drawablePadding="8dp"
         android:gravity="start"
         android:padding="8dp"
+        android:drawableStart="@drawable/ic_left_arrow"
         android:text="@string/all_events"
         android:textColor="@color/white"
         android:textSize="20sp"

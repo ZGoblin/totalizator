@@ -36,6 +36,8 @@ class EventsViewModel @Inject constructor(
         }
     }
 
+    fun isEventsLoaded() = _eventsLiveData.value is State.Content
+
     private fun onSuccess(line: List<Event>){
         _eventsLiveData.value = State.Content(line)
     }

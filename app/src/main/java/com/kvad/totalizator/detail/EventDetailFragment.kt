@@ -154,13 +154,8 @@ class EventDetailFragment : Fragment() {
 
     private fun updateChatState(state: State<List<UserMessageUi>, ErrorState>) {
         when (state) {
-            is State.Loading -> {
-            }
-            is State.Content -> {
-                updateChatContent(state.data)
-            }
-            is State.Error -> {
-            }
+            is State.Content -> updateChatContent(state.data)
+            else -> showChat(false)
         }
     }
 
