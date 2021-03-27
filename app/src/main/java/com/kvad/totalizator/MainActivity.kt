@@ -8,6 +8,7 @@ import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class MainActivity : AppCompatActivity() {
 
     @Inject
@@ -23,15 +24,16 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    private fun observeViewModel(){
-        viewModel.openNavigatorLiveData.observe(this){
+    private fun observeViewModel() {
+        viewModel.openNavigatorLiveData.observe(this) {
             navigate(it)
         }
     }
 
     private fun navigate(openNavigator: OpenNavigator) {
-        when(openNavigator){
-            OpenNavigator.FIRST_APP_OPEN -> Navigation.findNavController(this, R.id.fcvBody).navigate(R.id.on_board_fragment)
+        when (openNavigator) {
+            OpenNavigator.FIRST_APP_OPEN ->
+                Navigation.findNavController(this, R.id.fcvBody).navigate(R.id.on_board_fragment)
         }
     }
 
