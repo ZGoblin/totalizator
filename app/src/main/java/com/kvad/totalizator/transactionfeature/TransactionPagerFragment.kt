@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
-import com.kvad.totalizator.App
-import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.TransactionViewPagerFragmentBinding
 import com.kvad.totalizator.transactionfeature.adapter.TransactionPagerAdapter
 

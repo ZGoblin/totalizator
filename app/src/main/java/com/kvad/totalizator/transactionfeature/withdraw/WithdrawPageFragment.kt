@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.dialog.MaterialDialogs
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.WithdrawPageBinding
@@ -38,7 +35,7 @@ class WithdrawPageFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = WithdrawPageBinding.inflate(inflater, container, false)
         setupDi()
         stateVisibilityController = StateVisibilityController(binding.progressWithdraw, null)

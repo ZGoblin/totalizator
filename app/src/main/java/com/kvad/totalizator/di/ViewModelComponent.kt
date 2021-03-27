@@ -1,5 +1,6 @@
 package com.kvad.totalizator.di
 
+import com.kvad.totalizator.NavigationViewModel
 import com.kvad.totalizator.betfeature.BetViewModel
 import com.kvad.totalizator.bethistory.ui.BetHistoryViewModel
 import com.kvad.totalizator.chat.ui.ChatViewModel
@@ -16,6 +17,8 @@ import dagger.Component
 interface ViewModelComponent {
 
     fun inject(viewModel: ChatViewModel)
+
+    fun inject( viewModel: NavigationViewModel )
 
     fun inject(viewModel: EventDetailViewModel)
 

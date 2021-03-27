@@ -1,9 +1,7 @@
 package com.kvad.totalizator.detail
 
 import com.kvad.totalizator.data.model.Event
-import com.kvad.totalizator.data.requestmodels.Characteristic
 import com.kvad.totalizator.detail.model.EventDetail
-import java.time.ZonedDateTime
 import javax.inject.Inject
 
 class MapEventToDetailUiModel @Inject constructor() {

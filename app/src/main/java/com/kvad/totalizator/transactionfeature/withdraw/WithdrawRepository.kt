@@ -1,7 +1,6 @@
 package com.kvad.totalizator.transactionfeature.withdraw
 
 import com.kvad.totalizator.data.api.UserService
-import com.kvad.totalizator.data.requestmodels.BetRequest
 import com.kvad.totalizator.data.requestmodels.TransactionRequest
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.safeApiCall
