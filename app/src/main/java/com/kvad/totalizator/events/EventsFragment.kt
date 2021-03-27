@@ -16,6 +16,8 @@ import com.kvad.totalizator.chat.ui.ChatViewModel
 import com.kvad.totalizator.chat.ui.UserMessageUi
 import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.databinding.EventsFragmentBinding
+import com.kvad.totalizator.di.ViewModelFactory
+import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.events.adapter.EventAdapter
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.StateVisibilityController
@@ -27,13 +29,13 @@ import javax.inject.Inject
 class EventsFragment : Fragment() {
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+    private lateinit var chatViewModel: ChatViewModel
     lateinit var viewModel: EventsViewModel
 
-    @Inject
-    lateinit var chatViewModel: ChatViewModel
     private var _binding: EventsFragmentBinding? = null
     private val binding get() = _binding!!
-    private var messageSended = false
+    private lateinit var chatLayoutManager: LinearLayoutManager
     private val chatAdapter = ChatRecyclerViewAdapter()
     private val eventAdapter = EventAdapter(::onEventClick)
     private lateinit var stateVisibilityController: StateVisibilityController
@@ -71,7 +73,6 @@ class EventsFragment : Fragment() {
 
     private fun onSendClick() {
         binding.apply {
-            messageSended = true
             chatViewModel.sendMessage(etMessage.text.toString())
             etMessage.setText("")
         }
@@ -81,6 +82,8 @@ class EventsFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+        viewModel = injectViewModel(viewModelFactory)
+        chatViewModel = injectViewModel(viewModelFactory)
     }
 
     private fun setupLiveDataObserver() {
@@ -106,8 +109,7 @@ class EventsFragment : Fragment() {
 
     private fun updateChatContent(messages: List<UserMessageUi>) {
         chatAdapter.submitList(messages)
-        if (messageSended) {
-            messageSended = false
+        if (chatLayoutManager.findFirstVisibleItemPosition() < 2) {
             binding.rvChat.layoutManager?.scrollToPosition(0)
         }
     }
@@ -136,7 +138,8 @@ class EventsFragment : Fragment() {
         binding.rvChat.apply {
             (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
             adapter = chatAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            chatLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = chatLayoutManager
         }
     }
 
@@ -158,6 +161,7 @@ class EventsFragment : Fragment() {
     override fun onDestroyView() {
         binding.rvEvents.adapter = null
         binding.rvChat.adapter = null
+        binding.rvChat.layoutManager = null
         _binding = null
         stateVisibilityController.destroy()
         super.onDestroyView()

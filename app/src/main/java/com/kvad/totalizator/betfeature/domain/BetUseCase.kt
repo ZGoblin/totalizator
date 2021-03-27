@@ -17,7 +17,6 @@ class BetUseCase @Inject constructor(
 
     suspend fun doBet(betToServerModel: BetToServerModel): ApiResultWrapper<Unit> {
         val betRequest: BetRequest = mapperBetModelToBetRequest.map(betToServerModel)
-        Log.d("AMOUNT", getWallet().toString())
         if (getWallet() == null) {
             return ApiResultWrapper.Error.LoginError("Login Error")
         } else if (betRequest.amount > getWallet()!!) {

@@ -24,7 +24,6 @@ class ChatRepository @Inject constructor(
     private val chatService: ChatService
 ) {
 
-
     private val _message: MutableSharedFlow<MassageWrapper> = MutableSharedFlow(replay = 1)
     val message: SharedFlow<MassageWrapper> = _message
 

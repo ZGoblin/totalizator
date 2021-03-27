@@ -1,5 +1,6 @@
 package com.kvad.totalizator.di
 
+import androidx.lifecycle.ViewModel
 import com.kvad.totalizator.MainActivity
 import com.kvad.totalizator.betfeature.BetDialogFragment
 import com.kvad.totalizator.chat.ui.ChatFragment
@@ -13,12 +14,16 @@ import com.kvad.totalizator.transactionfeature.deposit.DepositPageFragment
 import com.kvad.totalizator.transactionfeature.TransactionPagerFragment
 import com.kvad.totalizator.transactionfeature.withdraw.WithdrawPageFragment
 import dagger.Component
+import dagger.MapKey
 import javax.inject.Singleton
+import kotlin.reflect.KClass
+
+
 @Suppress("TooManyFunctions")
 @Singleton
 @Component(
     dependencies = [],
-    modules = [AppModule::class, DispatcherModule::class]
+    modules = [AppModule::class, DispatcherModule::class, ViewModelModule::class]
 )
 interface AppComponent {
 

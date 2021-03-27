@@ -21,7 +21,6 @@ class TransactionPagerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = TransactionViewPagerFragmentBinding.inflate(inflater, container, false)
-        setupDi()
         return binding.root
     }
 
@@ -36,11 +35,6 @@ class TransactionPagerFragment : Fragment() {
         TabLayoutMediator(binding.tlTransaction, binding.vpTransaction) { tab, position ->
             tab.setText(viewPagerAdapter.getTabTitle(position))
         }.attach()
-    }
-
-    private fun setupDi() {
-        val app = requireActivity().application as App
-        app.getComponent().inject(this)
     }
 
     override fun onDestroyView() {

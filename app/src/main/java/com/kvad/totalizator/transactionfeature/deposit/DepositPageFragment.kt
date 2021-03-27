@@ -11,6 +11,8 @@ import com.afollestad.materialdialogs.customview.customView
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.DepositPageBinding
+import com.kvad.totalizator.di.ViewModelFactory
+import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.hideKeyboard
@@ -24,6 +26,7 @@ class DepositPageFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: DepositViewModel
     lateinit var stateVisibilityController: StateVisibilityController
     override fun onCreateView(
@@ -78,6 +81,7 @@ class DepositPageFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+        viewModel = injectViewModel(viewModelFactory)
     }
 
     private fun setupTextWatcher(){
