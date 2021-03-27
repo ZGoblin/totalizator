@@ -3,42 +3,41 @@ package com.kvad.totalizator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.Navigation
-import com.kvad.totalizator.databinding.ActivityMainBinding
-import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
+import androidx.navigation.findNavController
+import com.kvad.totalizator.di.ViewModelFactory
+import com.kvad.totalizator.di.injectViewModel
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
 
     @Inject
-    lateinit var sharedPref: SharedPref
+    lateinit var viewModelFactory: ViewModelFactory
+    lateinit var viewModel: NavigationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupBinding()
+        setContentView(R.layout.activity_main)
+
         setupDi()
+        observeViewModel()
         supportActionBar?.hide()
     }
 
-    override fun onStart() {
-        super.onStart()
-        isFirstOpen()
-    }
-
-    private fun isFirstOpen() {
-        if (sharedPref.isFirstOpened) {
-            sharedPref.isFirstOpened = false
-            Navigation.findNavController(this, R.id.fcvBody).navigate(R.id.on_board_fragment)
+    private fun observeViewModel(){
+        viewModel.openNavigatorLiveData.observe(this){
+            navigate(it)
         }
     }
 
-    private fun setupBinding() {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    private fun navigate(openNavigator: OpenNavigator) {
+        when(openNavigator){
+            OpenNavigator.FIRST_APP_OPEN -> Navigation.findNavController(this, R.id.fcvBody).navigate(R.id.on_board_fragment)
+        }
     }
 
     private fun setupDi() {
         val app = application as App
         app.getComponent().inject(this)
+        viewModel = injectViewModel(viewModelFactory)
     }
 }

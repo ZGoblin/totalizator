@@ -2,6 +2,7 @@ package com.kvad.totalizator.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.kvad.totalizator.NavigationViewModel
 import com.kvad.totalizator.betfeature.BetViewModel
 import com.kvad.totalizator.chat.ui.ChatViewModel
 import com.kvad.totalizator.detail.EventDetailViewModel
@@ -20,6 +21,11 @@ abstract class ViewModelModule {
     @Binds
     internal abstract fun bindViewModelFactory(
         factory: ViewModelFactory): ViewModelProvider.Factory
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NavigationViewModel::class)
+    internal abstract fun navigationViewModel(viewModel: NavigationViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -65,4 +71,5 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WithdrawViewModel::class)
     internal abstract fun withdrawViewModel(viewModel: WithdrawViewModel): ViewModel
+
 }
