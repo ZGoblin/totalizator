@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
-import com.kvad.totalizator.databinding.EventsFragmentBinding
 import com.kvad.totalizator.databinding.RegistrationFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
