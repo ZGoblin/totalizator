@@ -13,6 +13,7 @@ import com.kvad.totalizator.tools.safeapicall.mapSuccess
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import com.kvad.totalizator.data.model.Event
 import javax.inject.Inject
 
 typealias eventDetailState = State<List<EventDetail>, Unit>
@@ -25,11 +26,13 @@ class EventDetailViewModel @Inject constructor(
     private val _eventDetailLiveData = MutableLiveData<eventDetailState>()
     val eventDetailLiveData: LiveData<eventDetailState> = _eventDetailLiveData
 
+    var isLive = false
+        private set
+
     fun uploadData(eventId: String) {
         _eventDetailLiveData.value = State.Loading
         viewModelScope.launch {
             eventRepository.getEventById(eventId)
-                .map { it.mapSuccess(mapEventToDetailUiModel::map) }
                 .collect { result ->
                     result.doOnResult(
                         onSuccess = ::doOnSuccess,
@@ -39,8 +42,9 @@ class EventDetailViewModel @Inject constructor(
         }
     }
 
-    private fun doOnSuccess(event: List<EventDetail>) {
-        _eventDetailLiveData.value = State.Content(event)
+    private fun doOnSuccess(event: Event) {
+        isLive = event.isLive
+        _eventDetailLiveData.value = State.Content(mapEventToDetailUiModel.map(event))
     }
 
     private fun doOnError(error: ApiResultWrapper.Error) {
