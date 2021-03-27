@@ -10,6 +10,8 @@ import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.data.requestmodels.Wallet
 import com.kvad.totalizator.databinding.HeaderFragmentBinding
+import com.kvad.totalizator.di.ViewModelFactory
+import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import javax.inject.Inject
@@ -18,6 +20,7 @@ import javax.inject.Inject
 class HeaderFragment : Fragment() {
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: HeaderViewModel
     private var _binding: HeaderFragmentBinding? = null
     private val binding get() = _binding!!
@@ -113,6 +116,7 @@ class HeaderFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+        viewModel = injectViewModel(viewModelFactory)
     }
 
     override fun onDestroyView() {

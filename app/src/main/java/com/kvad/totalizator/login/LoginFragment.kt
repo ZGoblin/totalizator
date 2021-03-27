@@ -11,11 +11,14 @@ import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.data.requestmodels.LoginRequest
 import com.kvad.totalizator.databinding.LoginFragmentBinding
+import com.kvad.totalizator.di.ViewModelFactory
+import com.kvad.totalizator.di.injectViewModel
 import javax.inject.Inject
 
 class LoginFragment : Fragment() {
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: LoginViewModel
     private var _binding: LoginFragmentBinding? = null
     private val binding get() = _binding!!
@@ -100,6 +103,7 @@ class LoginFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+        viewModel = injectViewModel(viewModelFactory)
     }
 
     override fun onDestroyView() {

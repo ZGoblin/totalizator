@@ -14,6 +14,8 @@ import com.google.android.material.dialog.MaterialDialogs
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.WithdrawPageBinding
+import com.kvad.totalizator.di.ViewModelFactory
+import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.hideKeyboard
@@ -28,6 +30,7 @@ class WithdrawPageFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: WithdrawViewModel
     private lateinit var stateVisibilityController: StateVisibilityController
 
@@ -93,6 +96,7 @@ class WithdrawPageFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+        viewModel = injectViewModel(viewModelFactory)
     }
 
     private fun setupTextWatcher() {

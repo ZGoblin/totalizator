@@ -12,6 +12,8 @@ import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.EventsFragmentBinding
 import com.kvad.totalizator.databinding.RegistrationFragmentBinding
+import com.kvad.totalizator.di.ViewModelFactory
+import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.registration.models.RawRegisterRequest
 import java.util.*
 import javax.inject.Inject
@@ -19,6 +21,7 @@ import javax.inject.Inject
 class RegistrationFragment : Fragment() {
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: RegistrationViewModel
     private var _binding: RegistrationFragmentBinding? = null
     private val binding get() = _binding!!
@@ -99,6 +102,7 @@ class RegistrationFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+        viewModel = injectViewModel(viewModelFactory)
     }
 
     override fun onDestroyView() {

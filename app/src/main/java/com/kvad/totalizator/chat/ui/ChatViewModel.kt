@@ -33,11 +33,7 @@ class ChatViewModel @Inject constructor(
     init {
         _chatLiveData.value = State.Loading
         viewModelScope.launch {
-//            launch {
-//                getAccount()
-//            }.join()
             getAccount()
-            Log.d("ErrorFlow", currentUserId!!)
             updateChat()
         }
     }
