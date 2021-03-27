@@ -12,7 +12,7 @@ import com.kvad.totalizator.registration.RegistrationViewModel
 import com.kvad.totalizator.transactionfeature.deposit.DepositViewModel
 import com.kvad.totalizator.transactionfeature.withdraw.WithdrawViewModel
 import dagger.Component
-
+@Suppress("TooManyFunctions")
 @Component(modules = [ViewModelModule::class])
 interface ViewModelComponent {
 

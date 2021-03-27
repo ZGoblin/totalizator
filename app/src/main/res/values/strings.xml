@@ -86,5 +86,7 @@
     <string name="start_event">Start time: %s</string>
     <string name="stake">Stake: %s UAH</string>
     <string name="bet_history">Bet history</string>
+    <string name="login">Login</string>
+    <string name="uah">UAH</string>
 
 </resources>

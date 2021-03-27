@@ -1,5 +1,6 @@
 package com.kvad.totalizator.bethistory.ui
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -33,7 +34,9 @@ class BetHistoryViewModel @Inject constructor(
     }
 
     private fun doOnError(error: ApiResultWrapper.Error) {
+        Log.d("ErrorBody",error.msg)
         _betHistoryLiveData.value = State.Error(BetState.LOADING_ERROR)
     }
 
 }
+
