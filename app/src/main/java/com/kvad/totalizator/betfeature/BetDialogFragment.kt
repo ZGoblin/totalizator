@@ -113,6 +113,8 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             )
             viewModel.createBet(betToServerModel)
             binding.btnBet.isEnabled = false
+            binding.tvCancel.isEnabled = false
+
         }
         binding.vClose.setOnClickListener {
             cancelBetDialog()

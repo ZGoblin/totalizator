@@ -2,6 +2,7 @@ package com.kvad.totalizator.di
 
 import com.kvad.totalizator.MainActivity
 import com.kvad.totalizator.betfeature.BetDialogFragment
+import com.kvad.totalizator.bethistory.ui.BetHistoryFragment
 import com.kvad.totalizator.detail.EventDetailFragment
 import com.kvad.totalizator.events.EventsFragment
 import com.kvad.totalizator.header.HeaderFragment
@@ -43,5 +44,7 @@ interface AppComponent {
     fun inject(fragment: WithdrawPageFragment)
 
     fun inject(fragment: DepositPageFragment)
+
+    fun inject(fragment : BetHistoryFragment)
 
 }

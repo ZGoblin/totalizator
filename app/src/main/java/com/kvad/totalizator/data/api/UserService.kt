@@ -1,5 +1,6 @@
 package com.kvad.totalizator.data.api
 
+import com.kvad.totalizator.bethistory.model.BetHistoryPreview
 import com.kvad.totalizator.data.requestmodels.AccountInfo
 import com.kvad.totalizator.data.requestmodels.Token
 import com.kvad.totalizator.data.requestmodels.Wallet
@@ -31,5 +32,8 @@ interface UserService {
   
     @GET("/api/Account/profile")
     suspend fun accountInfo() : Response<AccountInfo>
+
+    @GET("/api/Bet/history")
+    suspend fun betHistory() : Response<BetHistoryPreview>
 
 }

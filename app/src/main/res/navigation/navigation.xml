@@ -25,6 +25,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/bet_history_fragment"
+        android:name="com.kvad.totalizator.bethistory.ui.BetHistoryFragment"
+        tools:layout="@layout/bet_history_fragment">
+    </fragment>
+
+    <fragment
         android:id="@+id/transaction_pager"
         android:name="com.kvad.totalizator.transactionfeature.TransactionPagerFragment"
         tools:layout="@layout/transaction_view_pager_fragment">
