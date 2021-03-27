@@ -13,6 +13,8 @@ import com.kvad.totalizator.bethistory.adapter.BetHistoryAdapter
 import com.kvad.totalizator.bethistory.model.BetHistoryDetailModel
 import com.kvad.totalizator.bethistory.ui.BetHistoryViewModel
 import com.kvad.totalizator.databinding.BetHistoryFragmentBinding
+import com.kvad.totalizator.di.ViewModelFactory
+import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
 import javax.inject.Inject
@@ -25,6 +27,7 @@ class BetHistoryFragment : Fragment() {
     private lateinit var stateVisibilityController : StateVisibilityController
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: BetHistoryViewModel
 
     override fun onCreateView(
@@ -67,6 +70,7 @@ class BetHistoryFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+        viewModel = injectViewModel(viewModelFactory)
     }
 
     private fun setupListeners() {
@@ -84,6 +88,7 @@ class BetHistoryFragment : Fragment() {
     override fun onDestroyView() {
         binding.rvBetHistory.adapter = null
         _binding = null
+        stateVisibilityController.destroy()
         super.onDestroyView()
     }
 
