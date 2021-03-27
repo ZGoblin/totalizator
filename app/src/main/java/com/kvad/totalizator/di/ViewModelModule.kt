@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.kvad.totalizator.NavigationViewModel
 import com.kvad.totalizator.betfeature.BetViewModel
+import com.kvad.totalizator.bethistory.ui.BetHistoryViewModel
 import com.kvad.totalizator.chat.ui.ChatViewModel
 import com.kvad.totalizator.detail.EventDetailViewModel
 import com.kvad.totalizator.events.EventsViewModel
@@ -72,4 +73,8 @@ abstract class ViewModelModule {
     @ViewModelKey(WithdrawViewModel::class)
     internal abstract fun withdrawViewModel(viewModel: WithdrawViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(BetHistoryViewModel::class)
+    internal abstract fun betHistoryViewModel(viewModel: BetHistoryViewModel): ViewModel
 }
