@@ -21,6 +21,8 @@ import com.kvad.totalizator.betfeature.domain.BetState
 import com.kvad.totalizator.betfeature.model.BetDetail
 import com.kvad.totalizator.betfeature.model.BetToServerModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
+import com.kvad.totalizator.di.ViewModelFactory
+import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.hideKeyboard
@@ -32,6 +34,7 @@ import javax.inject.Inject
 class BetDialogFragment : BottomSheetDialogFragment() {
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: BetViewModel
     private var _binding: BetDialogFragmentBinding? = null
     private val binding get() = _binding!!
@@ -96,6 +99,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+        viewModel = injectViewModel(viewModelFactory)
     }
 
     private fun setupListeners() {

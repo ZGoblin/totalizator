@@ -15,11 +15,12 @@ import com.kvad.totalizator.transactionfeature.TransactionPagerFragment
 import com.kvad.totalizator.transactionfeature.withdraw.WithdrawPageFragment
 import dagger.Component
 import javax.inject.Singleton
+
 @Suppress("TooManyFunctions")
 @Singleton
 @Component(
     dependencies = [],
-    modules = [AppModule::class, DispatcherModule::class]
+    modules = [AppModule::class, DispatcherModule::class, ViewModelModule::class, NetworkModule::class]
 )
 interface AppComponent {
 
@@ -38,8 +39,6 @@ interface AppComponent {
     fun inject(fragment: LoginFragment)
 
     fun inject(fragment: RegistrationFragment)
-
-    fun inject(fragment: ChatFragment)
 
     fun inject(fragment: TransactionPagerFragment)
 

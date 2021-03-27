@@ -17,7 +17,5 @@ class MapperTransactionToTransactionRequest @Inject constructor(){
                 TransactionType.DEPOSIT -> DEPOSIT_FLAG
             }
         )
-
     }
 }
-

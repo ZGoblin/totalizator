@@ -4,18 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.kvad.totalizator.App
-import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.EventDetailFragmentBinding
 import com.kvad.totalizator.detail.adapter.EventDetailAdapter
 import com.kvad.totalizator.detail.model.EventDetail
+import com.kvad.totalizator.di.ViewModelFactory
+import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
@@ -24,6 +22,7 @@ import javax.inject.Inject
 class EventDetailFragment : Fragment() {
 
     @Inject
+    lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: EventDetailViewModel
     private var _binding: EventDetailFragmentBinding? = null
     private val binding get() = _binding!!
@@ -65,6 +64,7 @@ class EventDetailFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
+        viewModel = injectViewModel(viewModelFactory)
     }
 
     private fun setupRecyclerView() {
