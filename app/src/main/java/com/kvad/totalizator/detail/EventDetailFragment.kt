@@ -27,6 +27,7 @@ import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.hideKeyboard
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class EventDetailFragment : Fragment() {
 
     @Inject
@@ -144,7 +145,11 @@ class EventDetailFragment : Fragment() {
 
     private fun openLiveChat() {
         if (viewModel.isLive) {
-            binding.rvEventDetailInfo.layoutParams = ConstraintLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            binding.rvEventDetailInfo.layoutParams =
+                ConstraintLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
             chatViewModel.chatLiveData.observe(viewLifecycleOwner) {
                 updateChatState(it)
             }
