@@ -150,6 +150,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupDoBetSuccess() {
+        stateVisibilityController.hideAll()
         binding.apply {
             etBet.visibility = View.GONE
             tvCancel.visibility = View.GONE
@@ -162,6 +163,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun observeBetInfoLiveData() {
+        stateVisibilityController.hideAll()
         viewModel.betInfoLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> {
