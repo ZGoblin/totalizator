@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/bet_history_fragment"
-        android:name="com.kvad.totalizator.bethistory.BetHistoryFragment"
+        android:name="com.kvad.totalizator.bethistory.ui.BetHistoryFragment"
         tools:layout="@layout/bet_history_fragment">
     </fragment>
 

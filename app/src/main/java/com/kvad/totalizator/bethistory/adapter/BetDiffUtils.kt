@@ -1,6 +1,7 @@
-package com.kvad.totalizator.bethistory
+package com.kvad.totalizator.bethistory.adapter
 
 import androidx.recyclerview.widget.DiffUtil
+import com.kvad.totalizator.bethistory.model.BetHistoryDetailModel
 
 class BetDiffUtils : DiffUtil.ItemCallback<BetHistoryDetailModel>() {
     override fun areItemsTheSame(

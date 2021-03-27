@@ -1,5 +1,7 @@
-package com.kvad.totalizator.bethistory
+package com.kvad.totalizator.bethistory.ui
 
+import com.kvad.totalizator.bethistory.model.BetHistoryDetailModel
+import com.kvad.totalizator.bethistory.model.RequestBetHistoryModel
 import com.kvad.totalizator.tools.W1_SERVER_FLAG
 import com.kvad.totalizator.tools.W2_SERVER_FLAG
 import java.time.ZonedDateTime
@@ -11,25 +13,23 @@ class BetHistoryMapper @Inject constructor() {
         id = requestBetHistoryModel.betId,
         teamConfrontation = requestBetHistoryModel.teamConfrontation,
         choice = when (requestBetHistoryModel.choice) {
-            W1_SERVER_FLAG -> BetChoice.FIRST_PLAYER_WIN
-            W2_SERVER_FLAG -> BetChoice.SECOND_PLAYER_WIN
-            else -> BetChoice.DRAW
+            W1_SERVER_FLAG -> "1"
+            W2_SERVER_FLAG -> "2"
+            else -> "X"
         },
         eventStartTime = parseZonedDateTime(requestBetHistoryModel.eventStartTime),
         betStartTime = parseZonedDateTime(requestBetHistoryModel.betTime),
         amount = requestBetHistoryModel.amount,
-        status = when (requestBetHistoryModel.status) {
-            "Bet lost" -> BetStatus.LOSE
-            else -> BetStatus.WIN
-        }
-
+        status = requestBetHistoryModel.status,
     )
 
     fun map(betHistoryPreview: List<RequestBetHistoryModel>): List<BetHistoryDetailModel> {
         return betHistoryPreview.map { map(it) }
     }
 
-    private fun parseZonedDateTime(time: String): ZonedDateTime {
-        return ZonedDateTime.parse(time)
+    private fun parseZonedDateTime(time: String): String {
+        val zonedDateTime = ZonedDateTime.parse(time,)
+        return "${zonedDateTime.dayOfMonth}.${zonedDateTime.monthValue}, ${zonedDateTime.hour}:${zonedDateTime.minute}"
     }
 }
+

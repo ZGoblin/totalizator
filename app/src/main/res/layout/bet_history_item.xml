@@ -5,47 +5,57 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:background="@drawable/bet_history_item_background"
-    android:padding="10dp">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/tvTeamConformation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="@string/something_went_wrong"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tvBetChoice"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvTeamConformation" />
+
+    <TextView
         android:id="@+id/tvEventStartTime"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="2021-03-27T15:46:00+00:00"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tvTeamConformation" />
+        android:textSize = "16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvBetChoice"
+        />
 
     <TextView
         android:id="@+id/tvBetTime"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="2021-03-26T17:24:45.58"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/tvEventStartTime" />
 
     <TextView
         android:id="@+id/tvAmount"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="245"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvBetTime" />
 
     <TextView
         android:id="@+id/tvStatus"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="bet status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tvAmount" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvBetTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,18 +1,20 @@
-package com.kvad.totalizator.bethistory
+package com.kvad.totalizator.bethistory.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kvad.totalizator.App
 import com.kvad.totalizator.betfeature.domain.BetState
+import com.kvad.totalizator.bethistory.adapter.BetHistoryAdapter
+import com.kvad.totalizator.bethistory.model.BetHistoryDetailModel
+import com.kvad.totalizator.bethistory.ui.BetHistoryViewModel
 import com.kvad.totalizator.databinding.BetHistoryFragmentBinding
 import com.kvad.totalizator.tools.State
-import kotlinx.coroutines.cancel
+import com.kvad.totalizator.tools.StateVisibilityController
 import javax.inject.Inject
 
 class BetHistoryFragment : Fragment() {
@@ -20,6 +22,7 @@ class BetHistoryFragment : Fragment() {
     private var _binding: BetHistoryFragmentBinding? = null
     private val binding get() = _binding!!
     private val betHistoryAdapter = BetHistoryAdapter()
+    private lateinit var stateVisibilityController : StateVisibilityController
 
     @Inject
     lateinit var viewModel: BetHistoryViewModel
@@ -30,6 +33,7 @@ class BetHistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = BetHistoryFragmentBinding.inflate(inflater, container, false)
+        stateVisibilityController = StateVisibilityController(binding.progressBarHistory,null)
         return binding.root
     }
 
@@ -39,6 +43,7 @@ class BetHistoryFragment : Fragment() {
         setupRecyclerView()
         setupLiveDataObserver()
         setupListeners()
+        viewModel.updateHistory()
     }
 
     private fun setupLiveDataObserver() {
@@ -49,11 +54,13 @@ class BetHistoryFragment : Fragment() {
 
     private fun updateBetHistory(state: State<List<BetHistoryDetailModel>, BetState>?) {
         when (state) {
-            is State.Content -> betHistoryAdapter.submitList(state.data)
+            is State.Content -> {
+                stateVisibilityController.hideLoading()
+                betHistoryAdapter.submitList(state.data)
+            }
             is State.Error -> {
             }
-            is State.Loading -> {
-            }
+            is State.Loading -> stateVisibilityController.showLoading()
         }
     }
 

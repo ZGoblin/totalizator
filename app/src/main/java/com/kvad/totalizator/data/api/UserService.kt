@@ -1,6 +1,6 @@
 package com.kvad.totalizator.data.api
 
-import com.kvad.totalizator.bethistory.BetHistoryPreview
+import com.kvad.totalizator.bethistory.model.BetHistoryPreview
 import com.kvad.totalizator.data.requestmodels.AccountInfo
 import com.kvad.totalizator.data.requestmodels.Token
 import com.kvad.totalizator.data.requestmodels.Wallet

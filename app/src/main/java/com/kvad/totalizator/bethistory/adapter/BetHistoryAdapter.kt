@@ -1,9 +1,10 @@
-package com.kvad.totalizator.bethistory
+package com.kvad.totalizator.bethistory.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.kvad.totalizator.R
+import com.kvad.totalizator.bethistory.model.BetHistoryDetailModel
 
 class BetHistoryAdapter : ListAdapter<BetHistoryDetailModel, BetHistoryItemHolder>(
     BetDiffUtils()

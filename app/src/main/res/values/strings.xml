@@ -79,7 +79,12 @@
 
     <string name="win">Win</string>
     <string name="lose">Lose</string>
+    <string name="active">Active</string>
     <string name="you_placed_a_bet">You placed a bet: $s</string>
     <string name="close">Close</string>
+    <string name="placed_bet">Placed: %s</string>
+    <string name="start_event">Start time: %s</string>
+    <string name="stake">Stake: %s UAH</string>
+    <string name="bet_history">Bet history</string>
 
 </resources>

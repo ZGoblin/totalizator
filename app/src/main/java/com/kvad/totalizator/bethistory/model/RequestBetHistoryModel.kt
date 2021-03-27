@@ -1,4 +1,4 @@
-package com.kvad.totalizator.bethistory
+package com.kvad.totalizator.bethistory.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -12,7 +12,10 @@ import com.kvad.totalizator.data.requestmodels.Wallet
 import com.kvad.totalizator.databinding.HeaderFragmentBinding
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
+import java.math.RoundingMode
 import javax.inject.Inject
+import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 
 @Suppress("TooManyFunctions")
 class HeaderFragment : Fragment() {
@@ -88,6 +91,7 @@ class HeaderFragment : Fragment() {
             tvCurrency.visibility = View.GONE
             tvCurrencyValue.visibility = View.GONE
             ivAvatar.visibility = View.GONE
+            ivClock.visibility = View.GONE
         }
     }
 
@@ -97,6 +101,7 @@ class HeaderFragment : Fragment() {
             tvCurrency.visibility = View.GONE
             tvCurrencyValue.visibility = View.GONE
             ivAvatar.visibility = View.GONE
+            ivClock.visibility = View.GONE
         }
     }
 
@@ -106,11 +111,13 @@ class HeaderFragment : Fragment() {
             tvCurrency.visibility = View.VISIBLE
             tvCurrencyValue.visibility = View.VISIBLE
             ivAvatar.visibility = View.VISIBLE
+            ivClock.visibility = View.VISIBLE
         }
     }
 
     private fun updateWallet(wallet: Wallet) {
-        binding.tvCurrencyValue.text = wallet.amount.toString()
+        val currencyValue = wallet.amount.toBigDecimal().setScale(2, RoundingMode.DOWN).toString()
+        binding.tvCurrencyValue.text = currencyValue
     }
 
     private fun setupDi() {

@@ -2,7 +2,7 @@ package com.kvad.totalizator.di
 
 import com.kvad.totalizator.MainActivity
 import com.kvad.totalizator.betfeature.BetDialogFragment
-import com.kvad.totalizator.bethistory.BetHistoryFragment
+import com.kvad.totalizator.bethistory.ui.BetHistoryFragment
 import com.kvad.totalizator.chat.ui.ChatFragment
 import com.kvad.totalizator.detail.EventDetailFragment
 import com.kvad.totalizator.events.EventsFragment
