@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
+import com.kvad.totalizator.data.requestmodels.AccountInfo
 import com.kvad.totalizator.data.requestmodels.Wallet
 import com.kvad.totalizator.databinding.HeaderFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
@@ -16,8 +18,6 @@ import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import java.math.RoundingMode
 import javax.inject.Inject
-import kotlin.math.roundToInt
-import kotlin.math.roundToLong
 
 @Suppress("TooManyFunctions")
 class HeaderFragment : Fragment() {
@@ -59,6 +59,9 @@ class HeaderFragment : Fragment() {
             ivClock.setOnClickListener {
                 findNavController().navigate(R.id.bet_history_fragment)
             }
+            ivAvatar.setOnClickListener {
+                findNavController().navigate(R.id.action_to_login)
+            }
         }
     }
 
@@ -67,22 +70,41 @@ class HeaderFragment : Fragment() {
     }
 
     private fun setupLiveDataObserver() {
-        viewModel.headerLiveData.observe(viewLifecycleOwner) {
-            updateState(it)
+        viewModel.walletLiveData.observe(viewLifecycleOwner) {
+            updateWalletState(it)
+        }
+        viewModel.accountLiveData.observe(viewLifecycleOwner) {
+            updateAccountState(it)
         }
     }
 
-    private fun updateState(state: State<Wallet, ErrorState>) {
+    private fun updateAccountState(state: State<AccountInfo, ErrorState>) {
+        when (state) {
+            is State.Content -> {
+                updateAvatar(state.data)
+            }
+            is State.Error -> {
+                showError(state)
+            }
+            else -> {}
+        }
+    }
+
+    private fun showError(state: State.Error<ErrorState>) {
+        when (state.error) {
+            ErrorState.LOGIN_ERROR -> showLoginButton()
+            ErrorState.LOADING_ERROR -> hideAll()
+        }
+    }
+
+    private fun updateWalletState(state: State<Wallet, ErrorState>) {
         when (state) {
             is State.Content -> {
                 showUser()
                 updateWallet(state.data)
             }
             is State.Error -> {
-                when (state.error) {
-                    ErrorState.LOGIN_ERROR -> showLoginButton()
-                    ErrorState.LOADING_ERROR -> hideAll()
-                }
+                showError(state)
             }
             else -> {}
         }
@@ -121,6 +143,13 @@ class HeaderFragment : Fragment() {
     private fun updateWallet(wallet: Wallet) {
         val currencyValue = wallet.amount.toBigDecimal().setScale(2, RoundingMode.DOWN).toString()
         binding.tvCurrencyValue.text = currencyValue
+    }
+
+    private fun updateAvatar(accountInfo: AccountInfo) {
+        Glide.with(this)
+            .load(accountInfo.avatarLink)
+            .error(R.drawable.ic_user_avatar)
+            .into(binding.ivAvatar)
     }
 
     private fun setupDi() {

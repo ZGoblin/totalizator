@@ -61,7 +61,9 @@ class BetViewModel @Inject constructor(
 
     private fun doOnSuccessBetInfo(betModel: BetDetail) {
         lastBetDetail = betModel
-        _betInfoLiveData.value = State.Content(betModel)
+        if (_betLiveData.value !is State.Loading) {
+            _betInfoLiveData.value = State.Content(betModel)
+        }
     }
 
     private fun doOnErrorBetInfo(error: ApiResultWrapper.Error) {

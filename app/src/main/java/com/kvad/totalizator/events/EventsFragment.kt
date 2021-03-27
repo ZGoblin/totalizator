@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +21,8 @@ import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.events.adapter.EventAdapter
 import com.kvad.totalizator.tools.ErrorState
-import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.hideKeyboard
 import javax.inject.Inject
 
@@ -50,8 +51,6 @@ class EventsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = EventsFragmentBinding.inflate(inflater, container, false)
-        stateVisibilityController =
-            StateVisibilityController(progressBar = binding.pbProgress, errorView = binding.tvError)
         return binding.root
     }
 
@@ -63,6 +62,10 @@ class EventsFragment : Fragment() {
         setupListener()
         setupLiveDataObserver()
         hideKeyboard()
+
+        binding.apply {
+            stateVisibilityController = StateVisibilityController(pbProgress, tvError)
+        }
     }
 
     private fun setupListener() {
@@ -97,13 +100,14 @@ class EventsFragment : Fragment() {
 
     private fun updateChatState(state: State<List<UserMessageUi>, ErrorState>) {
         when (state) {
-            is State.Loading -> {
-            }
             is State.Content -> {
-                updateChatContent(state.data)
+                if (viewModel.isEventsLoaded()) {
+                    updateChatContent(state.data)
+                    stateVisibilityController.hideAll()
+                }
             }
-            is State.Error -> {
-            }
+            is State.Error -> stateVisibilityController.showError()
+            is State.Loading -> stateVisibilityController.showLoading()
         }
     }
 
@@ -115,17 +119,15 @@ class EventsFragment : Fragment() {
     }
 
     private fun updateEventsState(state: State<List<Event>, ErrorState>) {
-        stateVisibilityController.hideAll()
         when (state) {
-            is State.Content -> eventAdapter.submitList(state.data)
-            is State.Error -> {
-                stateVisibilityController.showError()
-            }
-            is State.Loading -> {
-                if (eventAdapter.itemCount <= 0) {
-                    stateVisibilityController.showLoading()
+            is State.Content -> {
+                if (chatViewModel.isChatLoaded()) {
+                    eventAdapter.submitList(state.data)
+                    stateVisibilityController.hideAll()
                 }
             }
+            is State.Error -> stateVisibilityController.showError()
+            is State.Loading -> stateVisibilityController.showLoading()
         }
     }
 
