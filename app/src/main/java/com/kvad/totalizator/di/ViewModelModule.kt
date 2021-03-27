@@ -16,6 +16,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
+@Suppress("TooManyFunctions")
 @Module
 abstract class ViewModelModule {
     @Binds

@@ -8,7 +8,6 @@ import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
 import javax.inject.Inject
 
-@Suppress("TooManyFunctions")
 class MainActivity : AppCompatActivity() {
 
     @Inject
