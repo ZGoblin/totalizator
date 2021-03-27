@@ -31,5 +31,4 @@ interface ViewModelComponent {
     fun inject( viewModel: DepositViewModel)
 
     fun inject( viewModel: WithdrawViewModel)
-
 }
