@@ -8,15 +8,14 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_gravity="center"
-        android:background="@drawable/ic_no_money" />
+        android:background="@drawable/ic_smartphone" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/not_enough_money_to_withdraw"
+        android:gravity="center"
+        android:text="@string/something_went_wrong"
         android:textColor="@color/black"
         android:textSize="20sp" />
-
 
 </LinearLayout>

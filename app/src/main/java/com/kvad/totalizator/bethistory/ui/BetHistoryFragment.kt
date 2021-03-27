@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.kvad.totalizator.App
+import com.kvad.totalizator.R
 import com.kvad.totalizator.betfeature.domain.BetState
 import com.kvad.totalizator.bethistory.adapter.BetHistoryAdapter
 import com.kvad.totalizator.bethistory.model.BetHistoryDetailModel
@@ -24,7 +27,7 @@ class BetHistoryFragment : Fragment() {
     private var _binding: BetHistoryFragmentBinding? = null
     private val binding get() = _binding!!
     private val betHistoryAdapter = BetHistoryAdapter()
-    private lateinit var stateVisibilityController : StateVisibilityController
+    private lateinit var stateVisibilityController: StateVisibilityController
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -36,7 +39,7 @@ class BetHistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = BetHistoryFragmentBinding.inflate(inflater, container, false)
-        stateVisibilityController = StateVisibilityController(binding.progressBarHistory,null)
+        stateVisibilityController = StateVisibilityController(binding.progressBarHistory, null)
         return binding.root
     }
 
@@ -62,6 +65,9 @@ class BetHistoryFragment : Fragment() {
                 betHistoryAdapter.submitList(state.data)
             }
             is State.Error -> {
+                MaterialDialog(requireContext()).customView(R.layout.something_went_wrong_layout)
+                    .negativeButton(R.string.close).show()
+                stateVisibilityController.hideLoading()
             }
             is State.Loading -> stateVisibilityController.showLoading()
         }

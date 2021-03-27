@@ -175,7 +175,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
                     calculateAndSetupUi()
                 }
                 is State.Error -> {
-                    stateVisibilityController.showError()
+                    MaterialDialog(requireContext()).customView(R.layout.something_went_wrong_layout)
+                        .negativeButton(R.string.close).show()
+                    stateVisibilityController.hideLoading()
                 }
             }
         }
@@ -212,16 +214,18 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     private fun checkTextIsEmpty() {
 
-        binding.amountLayout.error = getString(R.string.min_bet)
-        binding.btnBet.isEnabled = false
-        binding.btnBet.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                R.color.grey
+        binding.apply{
+            amountLayout.error = getString(R.string.min_bet)
+            btnBet.isEnabled = false
+            btnBet.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.grey
+                )
             )
-        )
-        binding.btnBet.text = getString(R.string.do_bet_simple)
-        binding.tvPraise.visibility = View.INVISIBLE
+            btnBet.text = getString(R.string.do_bet_simple)
+            tvPraise.visibility = View.INVISIBLE
+        }
     }
 
     private fun checkTextLength(btnBetEnable: Boolean) {
