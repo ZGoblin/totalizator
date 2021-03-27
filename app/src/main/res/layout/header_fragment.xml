@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/black"
     android:padding="12dp">
 
@@ -19,7 +21,7 @@
         android:id="@+id/ivAvatar"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:paddingStart="8dp"
+        android:paddingHorizontal="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +31,7 @@
         android:id="@+id/tvCurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="UAH"
+        android:text="@string/uah"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:typeface="normal"
@@ -41,7 +43,7 @@
         android:id="@+id/tvCurrencyValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2 560.50"
+        tools:text="2 560.50"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:typeface="normal"
@@ -54,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="4dp"
-        android:text="Login"
+        android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -62,5 +64,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivClock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvCurrencyValue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_clock" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

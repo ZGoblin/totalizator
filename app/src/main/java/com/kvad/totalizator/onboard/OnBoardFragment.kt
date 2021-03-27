@@ -10,9 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.OnBoardBinding
-import com.kvad.totalizator.events.EventsFragment
 import com.kvad.totalizator.onboard.viewPagerAdapter.BoardPagerAdapter
-import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
 import javax.inject.Inject
 
 class OnBoardFragment : Fragment(R.layout.on_board) {

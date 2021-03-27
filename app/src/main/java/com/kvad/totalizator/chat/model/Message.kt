@@ -29,8 +29,3 @@ data class SendMsg(
     @SerializedName("text") val text: String
 )
 
-data class UserInfo(
-    val userId: String,
-    val photoLink: String,
-    val email: String
-)

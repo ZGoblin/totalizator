@@ -28,12 +28,12 @@ class DepositPageFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     lateinit var viewModel: DepositViewModel
-    lateinit var stateVisibilityController: StateVisibilityController
+    private lateinit var stateVisibilityController: StateVisibilityController
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = DepositPageBinding.inflate(inflater, container, false)
         setupDi()
         stateVisibilityController = StateVisibilityController(binding.progressDeposit,null)
