@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class BetHistoryMapper @Inject constructor() {
 
-    fun map(requestBetHistoryModel: RequestBetHistoryModel) = BetHistoryDetailModel(
+    fun mapItem(requestBetHistoryModel: RequestBetHistoryModel) = BetHistoryDetailModel(
         id = requestBetHistoryModel.betId,
         teamConfrontation = requestBetHistoryModel.teamConfrontation,
         choice = when (requestBetHistoryModel.choice) {
@@ -24,11 +24,11 @@ class BetHistoryMapper @Inject constructor() {
     )
 
     fun map(betHistoryPreview: List<RequestBetHistoryModel>): List<BetHistoryDetailModel> {
-        return betHistoryPreview.map { map(it) }
+        return betHistoryPreview.map { mapItem(it) }
     }
 
     private fun parseZonedDateTime(time: String): String {
-        val zonedDateTime = ZonedDateTime.parse(time,)
+        val zonedDateTime = ZonedDateTime.parse(time)
         return "${zonedDateTime.dayOfMonth}.${zonedDateTime.monthValue}, ${zonedDateTime.hour}:${zonedDateTime.minute}"
     }
 }

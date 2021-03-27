@@ -1,6 +1,7 @@
 package com.kvad.totalizator.betfeature.domain
 
 import com.kvad.totalizator.betfeature.model.BetDetail
+import com.kvad.totalizator.data.model.BetPool
 import com.kvad.totalizator.data.model.Event
 import com.kvad.totalizator.data.requestmodels.Characteristic
 import com.kvad.totalizator.data.requestmodels.Participant
@@ -30,6 +31,11 @@ internal class MapperEventToBetDetailModelTest {
     private val drawAmount = 400f
     private val margin = 2f
 
+    private val betPool = BetPool(
+        firstPlayerBetAmount = firstPlayerAmount,
+        secondPlayerBetAmount = secondPlayerAmount,
+        drawBetAmount = drawAmount
+    )
 
     @Test
     fun `map event to bet detail model`() {
@@ -44,12 +50,21 @@ internal class MapperEventToBetDetailModelTest {
             eventId = eventId
         )
 
-//        val dataEventModel = Event(
-//            id = eventId,
-//            firstParticipant = firstParticipant,
-//            secondParticipant = secondParticipant,
-//
-//        )
+        val dataEventModel = Event(
+            id = eventId,
+            firstParticipant = firstParticipant,
+            secondParticipant = secondParticipant,
+            startTime = ZonedDateTime.now(),
+            isEnded = true,
+            isLive = false,
+            margin = margin,
+            betPool = betPool
+        )
 
+        val mapper = MapperEventToBetDetailModel()
+
+        val actualBetDetailModel = mapper.map(dataEventModel)
+
+        assertEquals(expectedBetDetailModel, actualBetDetailModel)
     }
 }
