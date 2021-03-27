@@ -1,18 +1,13 @@
 package com.kvad.totalizator.onboard
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.BoardPageBinding
-import com.kvad.totalizator.databinding.OnBoardBinding
-import com.kvad.totalizator.events.EventsFragment
 import com.kvad.totalizator.onboard.model.BoardInfo
 import com.kvad.totalizator.onboard.titleAdapter.BoardTitlesAdapter
 import com.kvad.totalizator.tools.INFO_PAGER_KEY

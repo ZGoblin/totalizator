@@ -7,7 +7,6 @@ import com.kvad.totalizator.data.requestmodels.TransactionRequest
 import com.kvad.totalizator.data.requestmodels.RegisterRequest
 import com.kvad.totalizator.data.requestmodels.Wallet
 import com.kvad.totalizator.data.requestmodels.AccountInfo
-import com.kvad.totalizator.data.requestmodels.BetRequest
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.safeApiCall

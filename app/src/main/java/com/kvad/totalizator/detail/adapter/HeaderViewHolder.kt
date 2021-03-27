@@ -1,13 +1,9 @@
 package com.kvad.totalizator.detail.adapter
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.kvad.totalizator.R
-import com.kvad.totalizator.data.model.BetPool
 import com.kvad.totalizator.databinding.EventDetailHeaderViewHolderBinding
 import com.kvad.totalizator.detail.model.EventDetail
-import com.kvad.totalizator.shared.Bet
 
 class HeaderViewHolder(
     view: View
