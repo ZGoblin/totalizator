@@ -1,6 +1,6 @@
 package com.kvad.totalizator.betfeature.data
 
-import com.kvad.totalizator.beting.betfeature.model.BetToServerModel
+import com.kvad.totalizator.beting.quickbet.model.BetToServerModel
 import com.kvad.totalizator.beting.data.BetRequest
 import com.kvad.totalizator.beting.data.MapperBetModelToBetRequest
 import com.kvad.totalizator.shared.Bet

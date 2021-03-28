@@ -1,4 +1,4 @@
-package com.kvad.totalizator.beting.betfeature.model
+package com.kvad.totalizator.beting.quickbet.model
 
 import com.kvad.totalizator.shared.Bet
 

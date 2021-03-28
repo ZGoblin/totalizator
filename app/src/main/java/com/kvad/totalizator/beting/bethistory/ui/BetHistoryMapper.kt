@@ -30,12 +30,12 @@ class BetHistoryMapper @Inject constructor() {
     }
 
     private fun parseZonedDateTime(time: String): String {
-        val zonedDateTime = ZonedDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        val time = ZonedDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
 
         val month =
-            if (zonedDateTime.monthValue.toString().length < 2) "0${zonedDateTime.monthValue}" else "${zonedDateTime.monthValue}"
+            if (time.monthValue.toString().length < 2) "0${time.monthValue}" else "${time.monthValue}"
 
-        return "${zonedDateTime.dayOfMonth}.$month, ${zonedDateTime.hour}:${zonedDateTime.minute}"
+        return "${time.dayOfMonth}.$month, ${time.hour}:${time.minute}"
     }
 }
 

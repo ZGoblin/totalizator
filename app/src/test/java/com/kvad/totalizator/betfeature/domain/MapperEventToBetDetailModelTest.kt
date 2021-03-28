@@ -1,7 +1,7 @@
 package com.kvad.totalizator.betfeature.domain
 
 import com.kvad.totalizator.betfeature.model.BetDetail
-import com.kvad.totalizator.beting.betfeature.domain.MapperEventToBetDetailModel
+import com.kvad.totalizator.beting.quickbet.domain.MapperEventToBetDetailModel
 import com.kvad.totalizator.event.data.model.BetPool
 import com.kvad.totalizator.event.data.model.Event
 import com.kvad.totalizator.event.data.requestmodels.Characteristic

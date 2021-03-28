@@ -2,8 +2,8 @@ package com.kvad.totalizator.betfeature.domain
 
 import com.kvad.totalizator.account.data.UserRepository
 import com.kvad.totalizator.account.data.model.Wallet
-import com.kvad.totalizator.beting.betfeature.domain.BetUseCase
-import com.kvad.totalizator.beting.betfeature.model.BetToServerModel
+import com.kvad.totalizator.beting.quickbet.domain.BetUseCase
+import com.kvad.totalizator.beting.quickbet.model.BetToServerModel
 import com.kvad.totalizator.beting.data.BetRepository
 import com.kvad.totalizator.beting.data.BetRequest
 import com.kvad.totalizator.beting.data.MapperBetModelToBetRequest

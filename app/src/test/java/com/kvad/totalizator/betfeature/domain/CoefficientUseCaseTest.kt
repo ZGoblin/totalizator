@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Assertions.*
 internal class CoefficientUseCaseTest {
 
     @Test
-    fun calculateCoefficient() {
+    fun `Calculate coefficient works correctly`() {
+
+
     }
 }

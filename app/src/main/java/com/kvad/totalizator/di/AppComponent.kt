@@ -5,7 +5,7 @@ import com.kvad.totalizator.MainActivity
 import com.kvad.totalizator.account.transaction.TransactionPagerFragment
 import com.kvad.totalizator.account.transaction.deposit.DepositPageFragment
 import com.kvad.totalizator.account.transaction.withdraw.WithdrawPageFragment
-import com.kvad.totalizator.beting.betfeature.BetDialogFragment
+import com.kvad.totalizator.beting.quickbet.BetDialogFragment
 import com.kvad.totalizator.beting.bethistory.ui.BetHistoryFragment
 import com.kvad.totalizator.event.detail.EventDetailFragment
 import com.kvad.totalizator.event.feed.EventsFragment

@@ -69,7 +69,7 @@
 
     <dialog
         android:id="@+id/bet_dialog_fragment"
-        android:name="com.kvad.totalizator.beting.betfeature.BetDialogFragment"
+        android:name="com.kvad.totalizator.beting.quickbet.BetDialogFragment"
         tools:layout="@layout/bet_dialog_fragment" >
         <argument
             android:name="bet"

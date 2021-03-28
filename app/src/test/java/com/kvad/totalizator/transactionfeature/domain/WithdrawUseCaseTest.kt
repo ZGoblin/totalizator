@@ -8,11 +8,6 @@ import com.kvad.totalizator.account.transaction.domain.TransactionType
 import com.kvad.totalizator.account.transaction.domain.WithdrawUseCase
 import com.kvad.totalizator.account.transaction.model.TransactionModel
 import com.kvad.totalizator.account.transaction.withdraw.WithdrawRepository
-import com.kvad.totalizator.beting.betfeature.domain.BetUseCase
-import com.kvad.totalizator.beting.betfeature.model.BetToServerModel
-import com.kvad.totalizator.beting.data.BetRepository
-import com.kvad.totalizator.beting.data.BetRequest
-import com.kvad.totalizator.beting.data.MapperBetModelToBetRequest
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import io.kotlintest.shouldBe
 import io.mockk.coEvery
