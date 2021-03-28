@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.kvad.totalizator.App
+import com.kvad.totalizator.R
 import com.kvad.totalizator.chat.adapter.ChatRecyclerViewAdapter
 import com.kvad.totalizator.chat.ui.ChatViewModel
 import com.kvad.totalizator.chat.ui.UserMessageUi
@@ -105,8 +106,15 @@ class EventsFragment : Fragment() {
                     stateVisibilityController.hideAll()
                 }
             }
-            is State.Error -> stateVisibilityController.showError()
+            is State.Error -> updateChatErrorState(state)
             is State.Loading -> stateVisibilityController.showLoading()
+        }
+    }
+
+    private fun updateChatErrorState(state: State.Error<ErrorState>) {
+        when (state.error) {
+            ErrorState.LOGIN_ERROR -> findNavController().navigate(R.id.action_to_login)
+            ErrorState.LOADING_ERROR -> stateVisibilityController.showError()
         }
     }
 
