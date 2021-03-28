@@ -2,9 +2,16 @@ package com.kvad.totalizator.beting.bethistory.ui
 
 import com.kvad.totalizator.beting.bethistory.model.BetHistoryDetailModel
 import com.kvad.totalizator.beting.bethistory.model.RequestBetHistoryModel
-import com.kvad.totalizator.tools.W1_SERVER_FLAG
+import com.kvad.totalizator.tools.W1_BET_CHOICE
+import com.kvad.totalizator.tools.W2_BET_CHOICE
+import com.kvad.totalizator.tools.DRAW_BET_CHOICE
 import com.kvad.totalizator.tools.W2_SERVER_FLAG
+import com.kvad.totalizator.tools.W1_SERVER_FLAG
+
+
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+
 import javax.inject.Inject
 
 class BetHistoryMapper @Inject constructor() {
@@ -13,9 +20,9 @@ class BetHistoryMapper @Inject constructor() {
         id = requestBetHistoryModel.betId,
         teamConfrontation = requestBetHistoryModel.teamConfrontation,
         choice = when (requestBetHistoryModel.choice) {
-            W1_SERVER_FLAG -> "1"
-            W2_SERVER_FLAG -> "2"
-            else -> "X"
+            W1_SERVER_FLAG -> W1_BET_CHOICE
+            W2_SERVER_FLAG -> W2_BET_CHOICE
+            else -> DRAW_BET_CHOICE
         },
         eventStartTime = parseZonedDateTime(requestBetHistoryModel.eventStartTime),
         betStartTime = parseZonedDateTime(requestBetHistoryModel.betTime),
@@ -28,8 +35,12 @@ class BetHistoryMapper @Inject constructor() {
     }
 
     private fun parseZonedDateTime(time: String): String {
-        val zonedDateTime = ZonedDateTime.parse(time)
-        return "${zonedDateTime.dayOfMonth}.${zonedDateTime.monthValue}, ${zonedDateTime.hour}:${zonedDateTime.minute}"
+        val timeParsed = ZonedDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        val month =
+            if (timeParsed.monthValue.toString().length < 2) "0${timeParsed.monthValue}" else "${timeParsed.monthValue}"
+        val day =
+            if (timeParsed.dayOfMonth.toString().length < 2) "0${timeParsed.dayOfMonth}" else "${timeParsed.dayOfMonth}"
+        return "$day.$month, ${timeParsed.hour}:${timeParsed.minute}"
     }
 }
 

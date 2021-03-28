@@ -2,8 +2,9 @@ package com.kvad.totalizator.event.detail
 
 import com.kvad.totalizator.event.data.model.Event
 import com.kvad.totalizator.event.detail.model.EventDetail
+import java.util.*
 import javax.inject.Inject
-
+@Suppress("LongMethod")
 class MapEventToDetailUiModel @Inject constructor() {
 
     fun map(event: Event): List<EventDetail> {
@@ -20,15 +21,17 @@ class MapEventToDetailUiModel @Inject constructor() {
             )
         )
 
-        if (!event.isLive) {
-            resultList.add(
-                EventDetail.ButtonsInfoUiModel(
-                    event.id,
-                    event.firstParticipant,
-                    event.secondParticipant
-                )
-            )
+        if (event.isLive) {
+            return resultList
         }
+
+        resultList.add(
+            EventDetail.ButtonsInfoUiModel(
+                event.id,
+                event.firstParticipant,
+                event.secondParticipant
+            )
+        )
 
         val second = event.secondParticipant.characteristics
         val first = event.firstParticipant.characteristics
@@ -46,7 +49,7 @@ class MapEventToDetailUiModel @Inject constructor() {
 
         second.forEach { playerCharacteristic ->
             parameters.find { characteristic ->
-                characteristic.characteristicName == playerCharacteristic.type
+                characteristic.characteristicName.equals(playerCharacteristic.type, ignoreCase = true)
             }?.let {
                 parameters.add(
                     EventDetail.CharacteristicUiModel(

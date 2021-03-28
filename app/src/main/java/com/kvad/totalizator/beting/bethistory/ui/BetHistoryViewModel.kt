@@ -5,18 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.beting.data.BetRepository
-import com.kvad.totalizator.beting.betfeature.domain.BetState
+import com.kvad.totalizator.beting.quickbet.domain.BetState
 import com.kvad.totalizator.beting.bethistory.model.BetHistoryDetailModel
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+typealias BetHistoryLiveData = State<List<BetHistoryDetailModel>, BetState>
+
 class BetHistoryViewModel @Inject constructor(
     private val betRepository: BetRepository
 ) : ViewModel() {
 
-    private val _betHistoryLiveData = MutableLiveData<State<List<BetHistoryDetailModel>, BetState>>()
+    private val _betHistoryLiveData = MutableLiveData<BetHistoryLiveData>()
     val betHistoryLiveData = _betHistoryLiveData
 
     fun updateHistory(){
