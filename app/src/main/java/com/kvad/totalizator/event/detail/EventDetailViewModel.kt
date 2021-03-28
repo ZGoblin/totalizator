@@ -1,4 +1,4 @@
-package com.kvad.totalizator.event.detail.detail
+package com.kvad.totalizator.event.detail
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.event.data.EventRepository
-import com.kvad.totalizator.event.detail.detail.model.EventDetail
+import com.kvad.totalizator.event.detail.model.EventDetail
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.flow.collect

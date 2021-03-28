@@ -1,11 +1,12 @@
-package com.kvad.totalizator.registration
+package com.kvad.totalizator.accaunt.registration
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kvad.totalizator.registration.domain.RegisterUseCase
-import com.kvad.totalizator.registration.models.RawRegisterRequest
+import com.kvad.totalizator.accaunt.registration.RegisterState
+import com.kvad.totalizator.accaunt.registration.domain.RegisterUseCase
+import com.kvad.totalizator.accaunt.registration.models.RawRegisterRequest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

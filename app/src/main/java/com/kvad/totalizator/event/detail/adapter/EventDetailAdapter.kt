@@ -1,11 +1,11 @@
-package com.kvad.totalizator.event.detail.detail.adapter
+package com.kvad.totalizator.event.detail.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kvad.totalizator.R
-import com.kvad.totalizator.event.detail.detail.model.EventDetail
+import com.kvad.totalizator.event.detail.model.EventDetail
 import com.kvad.totalizator.shared.Bet
 
 class EventDetailAdapter constructor(

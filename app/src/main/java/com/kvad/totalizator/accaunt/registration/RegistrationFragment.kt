@@ -1,4 +1,4 @@
-package com.kvad.totalizator.registration
+package com.kvad.totalizator.accaunt.registration
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.RegistrationFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
-import com.kvad.totalizator.registration.models.RawRegisterRequest
+import com.kvad.totalizator.accaunt.registration.models.RawRegisterRequest
 import java.util.*
 import javax.inject.Inject
 

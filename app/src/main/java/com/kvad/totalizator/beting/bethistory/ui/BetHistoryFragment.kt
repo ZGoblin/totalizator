@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kvad.totalizator.App
-import com.kvad.totalizator.betfeature.domain.BetState
+import com.kvad.totalizator.beting.betfeature.domain.BetState
 import com.kvad.totalizator.beting.bethistory.adapter.BetHistoryAdapter
 import com.kvad.totalizator.beting.bethistory.model.BetHistoryDetailModel
 import com.kvad.totalizator.databinding.BetHistoryFragmentBinding

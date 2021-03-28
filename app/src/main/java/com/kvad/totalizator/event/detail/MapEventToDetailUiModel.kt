@@ -1,7 +1,7 @@
-package com.kvad.totalizator.event.detail.detail
+package com.kvad.totalizator.event.detail
 
 import com.kvad.totalizator.event.data.model.Event
-import com.kvad.totalizator.event.detail.detail.model.EventDetail
+import com.kvad.totalizator.event.detail.model.EventDetail
 import javax.inject.Inject
 
 class MapEventToDetailUiModel @Inject constructor() {

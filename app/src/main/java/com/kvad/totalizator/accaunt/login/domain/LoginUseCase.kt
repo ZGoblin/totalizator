@@ -1,10 +1,10 @@
-package com.kvad.totalizator.login.domain
+package com.kvad.totalizator.accaunt.login.domain
 
 import com.kvad.totalizator.accaunt.data.UserRepository
 import com.kvad.totalizator.accaunt.data.model.LoginRequest
 import com.kvad.totalizator.shared.Token
 import com.kvad.totalizator.di.DefaultDispatcher
-import com.kvad.totalizator.login.LoginState
+import com.kvad.totalizator.accaunt.login.LoginState
 import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper

@@ -1,4 +1,4 @@
-package com.kvad.totalizator.login
+package com.kvad.totalizator.accaunt.login
 
 import android.os.Bundle
 import android.view.LayoutInflater

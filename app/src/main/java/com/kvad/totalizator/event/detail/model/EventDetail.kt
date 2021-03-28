@@ -1,4 +1,4 @@
-package com.kvad.totalizator.event.detail.detail.model
+package com.kvad.totalizator.event.detail.model
 
 import com.kvad.totalizator.event.data.model.BetPool
 import com.kvad.totalizator.event.data.requestmodels.Participant

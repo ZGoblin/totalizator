@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kvad.totalizator.data.UserRepository
-import com.kvad.totalizator.data.requestmodels.AccountInfo
+import com.kvad.totalizator.accaunt.data.UserRepository
+import com.kvad.totalizator.accaunt.data.model.AccountInfo
+import com.kvad.totalizator.shared.SharedPref
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
-import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

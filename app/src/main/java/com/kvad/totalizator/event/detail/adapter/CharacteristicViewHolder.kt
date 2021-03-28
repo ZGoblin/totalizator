@@ -1,9 +1,9 @@
-package com.kvad.totalizator.event.detail.detail.adapter
+package com.kvad.totalizator.event.detail.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.kvad.totalizator.databinding.EventDetailPlayerCharacteristicBinding
-import com.kvad.totalizator.event.detail.detail.model.EventDetail
+import com.kvad.totalizator.event.detail.model.EventDetail
 
 class CharacteristicViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 

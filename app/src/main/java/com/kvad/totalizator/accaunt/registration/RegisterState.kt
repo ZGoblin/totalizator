@@ -1,4 +1,4 @@
-package com.kvad.totalizator.registration
+package com.kvad.totalizator.accaunt.registration
 
 enum class RegisterState {
     LOGIN_LENGTH_ERROR,

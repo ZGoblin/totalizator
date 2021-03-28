@@ -1,4 +1,4 @@
-package com.kvad.totalizator.login
+package com.kvad.totalizator.accaunt.login
 
 enum class LoginState {
     LOGIN_LENGTH_ERROR,

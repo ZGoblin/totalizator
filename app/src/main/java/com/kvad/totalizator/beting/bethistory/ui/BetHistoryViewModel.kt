@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.beting.data.BetRepository
-import com.kvad.totalizator.betfeature.domain.BetState
+import com.kvad.totalizator.beting.betfeature.domain.BetState
 import com.kvad.totalizator.beting.bethistory.model.BetHistoryDetailModel
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper

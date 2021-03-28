@@ -1,4 +1,4 @@
-package com.kvad.totalizator.betfeature.domain
+package com.kvad.totalizator.beting.betfeature.domain
 
 import com.kvad.totalizator.betfeature.model.BetDetail
 import com.kvad.totalizator.shared.Bet

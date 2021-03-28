@@ -1,4 +1,4 @@
-package com.kvad.totalizator.betfeature
+package com.kvad.totalizator.beting.betfeature
 
 import android.app.Dialog
 import android.os.Bundle
@@ -17,9 +17,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
-import com.kvad.totalizator.betfeature.domain.BetState
+import com.kvad.totalizator.beting.betfeature.domain.BetState
 import com.kvad.totalizator.betfeature.model.BetDetail
-import com.kvad.totalizator.betfeature.model.BetToServerModel
+import com.kvad.totalizator.beting.betfeature.model.BetToServerModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel

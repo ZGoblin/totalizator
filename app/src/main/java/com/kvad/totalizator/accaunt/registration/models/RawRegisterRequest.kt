@@ -1,4 +1,4 @@
-package com.kvad.totalizator.registration.models
+package com.kvad.totalizator.accaunt.registration.models
 
 data class RawRegisterRequest(
     val username: String,

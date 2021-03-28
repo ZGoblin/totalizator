@@ -1,6 +1,6 @@
-package com.kvad.totalizator.betfeature.data
+package com.kvad.totalizator.beting.data
 
-import com.kvad.totalizator.betfeature.model.BetToServerModel
+import com.kvad.totalizator.beting.betfeature.model.BetToServerModel
 import com.kvad.totalizator.beting.data.BetRequest
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.DRAW_SERVER_FLAG

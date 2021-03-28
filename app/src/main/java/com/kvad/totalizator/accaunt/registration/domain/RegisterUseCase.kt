@@ -1,11 +1,11 @@
-package com.kvad.totalizator.registration.domain
+package com.kvad.totalizator.accaunt.registration.domain
 
 import com.kvad.totalizator.accaunt.data.UserRepository
 import com.kvad.totalizator.accaunt.data.model.RegisterRequest
 import com.kvad.totalizator.shared.Token
 import com.kvad.totalizator.di.DefaultDispatcher
-import com.kvad.totalizator.registration.RegisterState
-import com.kvad.totalizator.registration.models.RawRegisterRequest
+import com.kvad.totalizator.accaunt.registration.RegisterState
+import com.kvad.totalizator.accaunt.registration.models.RawRegisterRequest
 import com.kvad.totalizator.tools.ADULT
 import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH

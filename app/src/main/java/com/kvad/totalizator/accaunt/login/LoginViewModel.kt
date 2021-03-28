@@ -1,11 +1,12 @@
-package com.kvad.totalizator.login
+package com.kvad.totalizator.accaunt.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.accaunt.data.model.LoginRequest
-import com.kvad.totalizator.login.domain.LoginUseCase
+import com.kvad.totalizator.accaunt.login.LoginState
+import com.kvad.totalizator.accaunt.login.domain.LoginUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

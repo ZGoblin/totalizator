@@ -1,4 +1,4 @@
-package com.kvad.totalizator.event.detail.detail
+package com.kvad.totalizator.event.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,8 +16,8 @@ import com.kvad.totalizator.chat.adapter.ChatRecyclerViewAdapter
 import com.kvad.totalizator.chat.ui.ChatViewModel
 import com.kvad.totalizator.chat.ui.UserMessageUi
 import com.kvad.totalizator.databinding.EventDetailFragmentBinding
-import com.kvad.totalizator.event.detail.detail.adapter.EventDetailAdapter
-import com.kvad.totalizator.event.detail.detail.model.EventDetail
+import com.kvad.totalizator.event.detail.adapter.EventDetailAdapter
+import com.kvad.totalizator.event.detail.model.EventDetail
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.shared.Bet

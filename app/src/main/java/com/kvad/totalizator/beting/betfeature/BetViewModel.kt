@@ -1,16 +1,16 @@
-package com.kvad.totalizator.betfeature
+package com.kvad.totalizator.beting.betfeature
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kvad.totalizator.betfeature.domain.BetState
-import com.kvad.totalizator.betfeature.domain.BetUseCase
-import com.kvad.totalizator.betfeature.domain.CoefficientUseCase
-import com.kvad.totalizator.betfeature.domain.MapperEventToBetDetailModel
+import com.kvad.totalizator.beting.betfeature.domain.BetState
+import com.kvad.totalizator.beting.betfeature.domain.BetUseCase
+import com.kvad.totalizator.beting.betfeature.domain.CoefficientUseCase
+import com.kvad.totalizator.beting.betfeature.domain.MapperEventToBetDetailModel
 import com.kvad.totalizator.betfeature.model.BetDetail
-import com.kvad.totalizator.betfeature.model.BetToServerModel
+import com.kvad.totalizator.beting.betfeature.model.BetToServerModel
 import com.kvad.totalizator.event.data.EventRepository
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.ErrorState
