@@ -1,6 +1,6 @@
-package com.kvad.totalizator.betfeature.domain
+package com.kvad.totalizator.beting.bethistory.quickbet.domain
 
-import com.kvad.totalizator.betfeature.model.BetDetail
+import com.kvad.totalizator.beting.bethistory.quickbet.model.BetDetail
 import com.kvad.totalizator.beting.quickbet.domain.MapperEventToBetDetailModel
 import com.kvad.totalizator.event.data.model.BetPool
 import com.kvad.totalizator.event.data.model.Event

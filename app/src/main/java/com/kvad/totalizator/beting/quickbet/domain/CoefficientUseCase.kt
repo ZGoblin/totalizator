@@ -1,9 +1,9 @@
 package com.kvad.totalizator.beting.quickbet.domain
 
-import com.kvad.totalizator.betfeature.model.BetDetail
+import com.kvad.totalizator.beting.bethistory.quickbet.model.BetDetail
 import com.kvad.totalizator.shared.Bet
 import com.kvad.totalizator.tools.ANTI_INFINITY_VALUE
-import com.kvad.totalizator.tools.MIN_VALUE_FOR_COEF
+import com.kvad.totalizator.tools.MIN_VALUE_FOR_COEFFICIENT
 import javax.inject.Inject
 @Suppress("MagicNumber")
 class CoefficientUseCase @Inject constructor() {
@@ -18,7 +18,7 @@ class CoefficientUseCase @Inject constructor() {
             Bet.SECOND_PLAYER_WIN -> lastBetDetail.firstPlayerAmount + lastBetDetail.drawAmount
         }
         val choiceBet = when (choiceAmount) {
-            ANTI_INFINITY_VALUE  -> MIN_VALUE_FOR_COEF
+            ANTI_INFINITY_VALUE  -> MIN_VALUE_FOR_COEFFICIENT
             else -> choiceAmount
         }
         return poolWithoutMargin / (choiceBet + current)

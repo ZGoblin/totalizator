@@ -9,7 +9,7 @@ import com.kvad.totalizator.beting.quickbet.domain.BetState
 import com.kvad.totalizator.beting.quickbet.domain.BetUseCase
 import com.kvad.totalizator.beting.quickbet.domain.CoefficientUseCase
 import com.kvad.totalizator.beting.quickbet.domain.MapperEventToBetDetailModel
-import com.kvad.totalizator.betfeature.model.BetDetail
+import com.kvad.totalizator.beting.bethistory.quickbet.model.BetDetail
 import com.kvad.totalizator.beting.quickbet.model.BetToServerModel
 import com.kvad.totalizator.event.data.EventRepository
 import com.kvad.totalizator.shared.Bet
@@ -99,7 +99,7 @@ class BetViewModel @Inject constructor(
 
     private fun doOnLoginErrorDoBet(error: ApiResultWrapper.Error.LoginError) {
         Log.d("ErrorBody", error.msg)
-            _betLiveData.value = State.Error(error = BetState.LOGIN_ERROR)
+        _betLiveData.value = State.Error(error = BetState.LOGIN_ERROR)
     }
 
 }

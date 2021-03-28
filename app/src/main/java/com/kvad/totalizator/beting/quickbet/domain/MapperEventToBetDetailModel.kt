@@ -1,6 +1,6 @@
 package com.kvad.totalizator.beting.quickbet.domain
 
-import com.kvad.totalizator.betfeature.model.BetDetail
+import com.kvad.totalizator.beting.bethistory.quickbet.model.BetDetail
 import com.kvad.totalizator.event.data.model.Event
 import javax.inject.Inject
 

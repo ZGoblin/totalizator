@@ -18,7 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
 import com.kvad.totalizator.beting.quickbet.domain.BetState
-import com.kvad.totalizator.betfeature.model.BetDetail
+import com.kvad.totalizator.beting.bethistory.quickbet.model.BetDetail
 import com.kvad.totalizator.beting.quickbet.model.BetToServerModel
 import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory

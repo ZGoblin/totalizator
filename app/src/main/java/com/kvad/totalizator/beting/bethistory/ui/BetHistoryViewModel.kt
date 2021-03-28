@@ -12,11 +12,13 @@ import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+typealias BetHistoryLiveData = State<List<BetHistoryDetailModel>, BetState>
+
 class BetHistoryViewModel @Inject constructor(
     private val betRepository: BetRepository
 ) : ViewModel() {
 
-    private val _betHistoryLiveData = MutableLiveData<State<List<BetHistoryDetailModel>, BetState>>()
+    private val _betHistoryLiveData = MutableLiveData<BetHistoryLiveData>()
     val betHistoryLiveData = _betHistoryLiveData
 
     fun updateHistory(){

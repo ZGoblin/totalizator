@@ -2,8 +2,7 @@ package com.kvad.totalizator.beting.bethistory.ui
 
 import com.kvad.totalizator.beting.bethistory.model.BetHistoryDetailModel
 import com.kvad.totalizator.beting.bethistory.model.RequestBetHistoryModel
-import com.kvad.totalizator.tools.W1_SERVER_FLAG
-import com.kvad.totalizator.tools.W2_SERVER_FLAG
+import com.kvad.totalizator.tools.*
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeFormatter.ISO_DATE
@@ -15,9 +14,9 @@ class BetHistoryMapper @Inject constructor() {
         id = requestBetHistoryModel.betId,
         teamConfrontation = requestBetHistoryModel.teamConfrontation,
         choice = when (requestBetHistoryModel.choice) {
-            W1_SERVER_FLAG -> "1"
-            W2_SERVER_FLAG -> "2"
-            else -> "X"
+            W1_SERVER_FLAG -> W1_BET_CHOICE
+            W2_SERVER_FLAG -> W2_BET_CHOICE
+            else -> DRAW_BET_CHOICE
         },
         eventStartTime = parseZonedDateTime(requestBetHistoryModel.eventStartTime),
         betStartTime = parseZonedDateTime(requestBetHistoryModel.betTime),
@@ -30,12 +29,12 @@ class BetHistoryMapper @Inject constructor() {
     }
 
     private fun parseZonedDateTime(time: String): String {
-        val time = ZonedDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-
+        val timeParsed = ZonedDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val month =
-            if (time.monthValue.toString().length < 2) "0${time.monthValue}" else "${time.monthValue}"
-
-        return "${time.dayOfMonth}.$month, ${time.hour}:${time.minute}"
+            if (timeParsed.monthValue.toString().length < 2) "0${timeParsed.monthValue}" else "${timeParsed.monthValue}"
+        val day =
+            if (timeParsed.dayOfMonth.toString().length < 2) "0${timeParsed.dayOfMonth}" else "${timeParsed.dayOfMonth}"
+        return "$day.$month, ${timeParsed.hour}:${timeParsed.minute}"
     }
 }
 

@@ -1,4 +1,4 @@
-package com.kvad.totalizator.betfeature.domain
+package com.kvad.totalizator.beting.bethistory.quickbet.domain
 
 import com.kvad.totalizator.account.data.UserRepository
 import com.kvad.totalizator.account.data.model.Wallet
