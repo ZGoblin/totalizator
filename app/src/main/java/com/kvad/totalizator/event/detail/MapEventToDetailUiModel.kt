@@ -47,25 +47,14 @@ class MapEventToDetailUiModel @Inject constructor() {
             )
         }
 
-        second.forEach { playerCharacteristic ->
-            parameters.find { characteristic ->
-                characteristic.characteristicName.equals(playerCharacteristic.type, ignoreCase = true)
-            }?.let {
-                parameters.add(
-                    EventDetail.CharacteristicUiModel(
-                        characteristicName = playerCharacteristic.type,
-                        firstPlayerValue = it.firstPlayerValue,
-                        secondPlayerValue = playerCharacteristic.value
-                    )
-                )
-                parameters.remove(it)
-                return@forEach
-            }
+        second.forEach { secondParams ->
+            val params = parameters.find { it.characteristicName == secondParams.type }
+            parameters.remove(params)
             parameters.add(
                 EventDetail.CharacteristicUiModel(
-                    characteristicName = playerCharacteristic.type,
-                    firstPlayerValue = "",
-                    secondPlayerValue = playerCharacteristic.value
+                    characteristicName = secondParams.type,
+                    firstPlayerValue = params?.firstPlayerValue ?: "",
+                    secondPlayerValue = secondParams.value
                 )
             )
         }
