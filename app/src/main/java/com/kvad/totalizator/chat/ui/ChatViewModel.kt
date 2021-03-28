@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-typealias EventState = State<List<UserMessageUi>, ErrorState>
+typealias ChatState = State<List<UserMessageUi>, ErrorState>
 
 class ChatViewModel @Inject constructor(
     private val chatRepository: ChatRepository,
@@ -23,7 +23,7 @@ class ChatViewModel @Inject constructor(
     private val mapUserMessageUi: MapMessagesToUi
 ) : ViewModel() {
 
-    private val _chatLiveData = MutableLiveData<EventState>()
+    private val _chatLiveData = MutableLiveData<ChatState>()
     val chatLiveData = _chatLiveData
 
     private var currentUserId: String? = null
@@ -38,8 +38,15 @@ class ChatViewModel @Inject constructor(
 
     fun sendMessage(text: String) {
         viewModelScope.launch {
-            chatRepository.sendMessage(text)
+            chatRepository.sendMessage(text).doOnResult(
+                onError = ::onLoginErrorSendMessage
+            )
         }
+    }
+
+    private fun onLoginErrorSendMessage(result: ApiResultWrapper<Unit>) {
+        Log.d("ERROR_TAG", result.asError().msg)
+        _chatLiveData.value = State.Error(ErrorState.LOGIN_ERROR)
     }
 
     private suspend fun getAccount() {

@@ -27,8 +27,6 @@ class HeaderViewModel @Inject constructor(
     private val _accountLiveData = MutableLiveData<AccountState>()
     val accountLiveData: LiveData<AccountState> = _accountLiveData
 
-    var accountAvatar: String? = null
-
     init {
         _walletLiveData.value = State.Loading
         viewModelScope.launch {

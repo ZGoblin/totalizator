@@ -13,10 +13,11 @@ import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.RegistrationFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
-import com.kvad.totalizator.account.registration.models.RawRegisterRequest
-import java.util.*
+import com.kvad.totalizator.accaunt.registration.models.RawRegisterRequest
+import java.util.Date
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class RegistrationFragment : Fragment() {
 
     @Inject
@@ -50,12 +51,13 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun updateState(state: RegisterState) {
+        hideErrorInput()
         when (state) {
             RegisterState.WITHOUT_ERROR -> findNavController().navigate(R.id.action_to_event_from_login)
             RegisterState.BIRTHDAY_ERROR -> showDialogError(R.string.register_birthday_error)
-            RegisterState.NETWORK_ERROR -> showDialogError(R.string.login_network_error_dialog_body)
+            RegisterState.NETWORK_ERROR -> showDialogError(R.string.register_network_error_dialog_body)
             RegisterState.LOGIN_LENGTH_ERROR -> {
-                binding.tfLogin.error = getString(R.string.login_login_error)
+                binding.tfEmail.error = getString(R.string.login_login_error)
             }
             RegisterState.PASSWORD_LENGTH_ERROR -> {
                 binding.tfPassword.error = getString(R.string.login_password_error)
@@ -63,6 +65,17 @@ class RegistrationFragment : Fragment() {
             RegisterState.USERNAME_ERROR -> {
                 binding.tfUsername.error = getString(R.string.login_username_error)
             }
+            RegisterState.EMAIL_ERROR -> {
+                binding.tfEmail.error = getString(R.string.login_username_symbol_error)
+            }
+        }
+    }
+
+    private fun hideErrorInput() {
+        binding.apply {
+            tfUsername.error = null
+            tfEmail.error = null
+            tfPassword.error = null
         }
     }
 
@@ -88,7 +101,7 @@ class RegistrationFragment : Fragment() {
             viewModel.register(
                 RawRegisterRequest(
                     username = teUsername.text.toString(),
-                    email = teLogin.text.toString(),
+                    email = teEmail.text.toString(),
                     password = tePassword.text.toString(),
                     day = dpBirthday.dayOfMonth,
                     month = dpBirthday.month,
@@ -105,6 +118,7 @@ class RegistrationFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.root.layoutAnimation = null
         _binding = null
         super.onDestroyView()
     }
