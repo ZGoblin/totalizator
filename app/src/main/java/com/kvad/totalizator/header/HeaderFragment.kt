@@ -9,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.kvad.totalizator.App
 import com.kvad.totalizator.R
-import com.kvad.totalizator.data.requestmodels.AccountInfo
-import com.kvad.totalizator.data.requestmodels.Wallet
+import com.kvad.totalizator.accaunt.data.model.AccountInfo
+import com.kvad.totalizator.accaunt.data.model.Wallet
 import com.kvad.totalizator.databinding.HeaderFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel

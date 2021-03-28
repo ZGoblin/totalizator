@@ -2,15 +2,15 @@ package com.kvad.totalizator.di
 
 import com.kvad.totalizator.NavigationViewModel
 import com.kvad.totalizator.betfeature.BetViewModel
-import com.kvad.totalizator.bethistory.ui.BetHistoryViewModel
+import com.kvad.totalizator.beting.bethistory.ui.BetHistoryViewModel
 import com.kvad.totalizator.chat.ui.ChatViewModel
-import com.kvad.totalizator.detail.EventDetailViewModel
-import com.kvad.totalizator.events.EventsViewModel
+import com.kvad.totalizator.event.detail.detail.EventDetailViewModel
+import com.kvad.totalizator.event.feed.EventsViewModel
 import com.kvad.totalizator.header.HeaderViewModel
 import com.kvad.totalizator.login.LoginViewModel
 import com.kvad.totalizator.registration.RegistrationViewModel
-import com.kvad.totalizator.transactionfeature.deposit.DepositViewModel
-import com.kvad.totalizator.transactionfeature.withdraw.WithdrawViewModel
+import com.kvad.totalizator.accaunt.transaction.deposit.DepositViewModel
+import com.kvad.totalizator.accaunt.transaction.withdraw.WithdrawViewModel
 import dagger.Component
 @Suppress("TooManyFunctions")
 @Component(modules = [ViewModelModule::class])

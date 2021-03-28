@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white">
 
-    <com.kvad.totalizator.shared.EventViewGroup
+    <com.kvad.totalizator.event.EventViewGroup
         android:id="@+id/event"
         android:layout_width="match_parent"
         android:layout_height="400dp"

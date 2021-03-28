@@ -2,16 +2,16 @@ package com.kvad.totalizator.di
 
 import com.kvad.totalizator.MainActivity
 import com.kvad.totalizator.betfeature.BetDialogFragment
-import com.kvad.totalizator.bethistory.ui.BetHistoryFragment
-import com.kvad.totalizator.detail.EventDetailFragment
-import com.kvad.totalizator.events.EventsFragment
+import com.kvad.totalizator.beting.bethistory.ui.BetHistoryFragment
+import com.kvad.totalizator.event.detail.detail.EventDetailFragment
+import com.kvad.totalizator.event.feed.EventsFragment
 import com.kvad.totalizator.header.HeaderFragment
 import com.kvad.totalizator.login.LoginFragment
 import com.kvad.totalizator.onboard.OnBoardFragment
 import com.kvad.totalizator.registration.RegistrationFragment
-import com.kvad.totalizator.transactionfeature.deposit.DepositPageFragment
-import com.kvad.totalizator.transactionfeature.TransactionPagerFragment
-import com.kvad.totalizator.transactionfeature.withdraw.WithdrawPageFragment
+import com.kvad.totalizator.accaunt.transaction.deposit.DepositPageFragment
+import com.kvad.totalizator.accaunt.transaction.TransactionPagerFragment
+import com.kvad.totalizator.accaunt.transaction.withdraw.WithdrawPageFragment
 import dagger.Component
 import javax.inject.Singleton
 

@@ -90,7 +90,7 @@
         app:layout_constraintBottom_toTopOf="@id/betting_scale"
         app:layout_constraintEnd_toEndOf="@id/betting_scale" />
 
-    <com.kvad.totalizator.shared.ThreeColorProgress
+    <com.kvad.totalizator.event.ThreeColorProgress
         android:id="@+id/betting_scale"
         android:layout_width="match_parent"
         android:layout_height="8dp"
