@@ -14,6 +14,7 @@ import com.kvad.totalizator.databinding.ProfileFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.tools.State
+import com.kvad.totalizator.tools.StateVisibilityController
 import javax.inject.Inject
 
 class ProfileFragment: Fragment() {
@@ -22,12 +23,14 @@ class ProfileFragment: Fragment() {
     lateinit var viewModel: ProfileViewModel
     private var _binding: ProfileFragmentBinding? = null
     private val binding get() = _binding!!
+    private lateinit var stateVisibilityController: StateVisibilityController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = ProfileFragmentBinding.inflate(inflater, container, false)
+        stateVisibilityController = StateVisibilityController(binding.pbProgress, binding.tvError)
         return binding.root
     }
 
@@ -47,11 +50,11 @@ class ProfileFragment: Fragment() {
     }
 
     private fun updateAccountInfo(state: AccountState) {
+        stateVisibilityController.hideAll()
         when (state) {
-            is State.Content -> {
-                setAccountInfo(state.data)
-            }
-            else -> {}
+            is State.Content -> setAccountInfo(state.data)
+            is State.Error -> stateVisibilityController.showError()
+            is State.Loading -> stateVisibilityController.showLoading()
         }
     }
 
