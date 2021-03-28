@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kvad.totalizator.data.UserRepository
-import com.kvad.totalizator.data.requestmodels.AccountInfo
-import com.kvad.totalizator.data.requestmodels.Wallet
+import com.kvad.totalizator.accaunt.data.UserRepository
+import com.kvad.totalizator.accaunt.data.model.AccountInfo
+import com.kvad.totalizator.accaunt.data.model.Wallet
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State
