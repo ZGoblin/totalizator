@@ -3,7 +3,7 @@ package com.kvad.totalizator.di
 import com.google.gson.GsonBuilder
 import com.kvad.totalizator.chat.data.ChatService
 import com.kvad.totalizator.event.data.api.EventService
-import com.kvad.totalizator.accaunt.data.UserService
+import com.kvad.totalizator.account.data.UserService
 import com.kvad.totalizator.tools.API_URL
 import com.kvad.totalizator.tools.HeaderInterceptor
 import dagger.Module
