@@ -6,12 +6,16 @@ import com.kvad.totalizator.shared.Token
 import com.kvad.totalizator.di.DefaultDispatcher
 import com.kvad.totalizator.accaunt.registration.RegisterState
 import com.kvad.totalizator.accaunt.registration.models.RawRegisterRequest
-import com.kvad.totalizator.tools.*
+import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
+import com.kvad.totalizator.tools.LOGIN_SPECIAL_SYMBOL
+import com.kvad.totalizator.tools.USERNAME_MIN_LENGTH
+import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
+import com.kvad.totalizator.tools.ADULT
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.lang.StringBuilder
-import java.util.*
+import java.util.Calendar
 import javax.inject.Inject
 
 class RegisterUseCase @Inject constructor(

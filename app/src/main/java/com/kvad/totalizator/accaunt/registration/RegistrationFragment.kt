@@ -14,9 +14,10 @@ import com.kvad.totalizator.databinding.RegistrationFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.accaunt.registration.models.RawRegisterRequest
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 class RegistrationFragment : Fragment() {
 
     @Inject
