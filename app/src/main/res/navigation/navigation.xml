@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/events_fragment"
-        android:name="com.kvad.totalizator.events.EventsFragment"
+        android:name="com.kvad.totalizator.event.feed.EventsFragment"
         tools:layout="@layout/events_fragment">
         <action
             android:id="@+id/action_detail_fragment"
@@ -26,19 +26,19 @@
 
     <fragment
         android:id="@+id/bet_history_fragment"
-        android:name="com.kvad.totalizator.bethistory.ui.BetHistoryFragment"
+        android:name="com.kvad.totalizator.beting.bethistory.ui.BetHistoryFragment"
         tools:layout="@layout/bet_history_fragment">
     </fragment>
 
     <fragment
         android:id="@+id/transaction_pager"
-        android:name="com.kvad.totalizator.transactionfeature.TransactionPagerFragment"
+        android:name="com.kvad.totalizator.accaunt.transaction.TransactionPagerFragment"
         tools:layout="@layout/transaction_view_pager_fragment">
     </fragment>
 
     <fragment
         android:id="@+id/detail_fragment"
-        android:name="com.kvad.totalizator.detail.EventDetailFragment"
+        android:name="com.kvad.totalizator.event.detail.EventDetailFragment"
         tools:layout="@layout/event_detail_fragment">
         <action
             android:id="@+id/action_bet_dialog_fragment"
@@ -51,7 +51,7 @@
 
     <fragment
         android:id="@+id/login_fragment"
-        android:name="com.kvad.totalizator.login.LoginFragment"
+        android:name="com.kvad.totalizator.accaunt.login.LoginFragment"
         tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/action_to_registration"
@@ -64,12 +64,12 @@
 
     <fragment
         android:id="@+id/registration_fragment"
-        android:name="com.kvad.totalizator.registration.RegistrationFragment"
+        android:name="com.kvad.totalizator.accaunt.registration.RegistrationFragment"
         tools:layout="@layout/registration_fragment" />
 
     <dialog
         android:id="@+id/bet_dialog_fragment"
-        android:name="com.kvad.totalizator.betfeature.BetDialogFragment"
+        android:name="com.kvad.totalizator.beting.betfeature.BetDialogFragment"
         tools:layout="@layout/bet_dialog_fragment" >
         <argument
             android:name="bet"

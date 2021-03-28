@@ -3,7 +3,7 @@ package com.kvad.totalizator
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.kvad.totalizator.tools.sharedPrefTools.SharedPref
+import com.kvad.totalizator.shared.SharedPref
 import javax.inject.Inject
 
 class NavigationViewModel @Inject constructor(
