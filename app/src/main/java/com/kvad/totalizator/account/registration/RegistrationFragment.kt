@@ -13,7 +13,7 @@ import com.kvad.totalizator.R
 import com.kvad.totalizator.databinding.RegistrationFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
-import com.kvad.totalizator.accaunt.registration.models.RawRegisterRequest
+import com.kvad.totalizator.account.registration.models.RawRegisterRequest
 import java.util.Date
 import javax.inject.Inject
 
