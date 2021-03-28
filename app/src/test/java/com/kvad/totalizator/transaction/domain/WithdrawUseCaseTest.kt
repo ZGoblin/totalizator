@@ -1,4 +1,4 @@
-package com.kvad.totalizator.transactionfeature.domain
+package com.kvad.totalizator.transaction.domain
 
 import com.kvad.totalizator.account.data.MapperTransactionToTransactionRequest
 import com.kvad.totalizator.account.data.UserRepository
@@ -13,9 +13,12 @@ import io.kotlintest.shouldBe
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.jupiter.api.Test
 
+@ExperimentalCoroutinesApi
 internal class WithdrawUseCaseTest {
 
     @Test
@@ -28,7 +31,12 @@ internal class WithdrawUseCaseTest {
             coEvery { getLastWallet() } returns Wallet(amount = 100.0)
         }
         val withdrawUseCase =
-            WithdrawUseCase(mockUserRepository, mockWithdrawRepository, mockMapper)
+            WithdrawUseCase(
+                mockUserRepository,
+                mockWithdrawRepository,
+                mockMapper,
+                TestCoroutineDispatcher()
+            )
         val testingModel = TransactionModel(amount = 10.0, type = TransactionType.WITHDRAW)
         runBlocking {
             withdrawUseCase.withdraw(testingModel) shouldBe ApiResultWrapper.Success(value = Unit)
@@ -48,7 +56,10 @@ internal class WithdrawUseCaseTest {
         val mockWithdrawRepository = mockk<WithdrawRepository>(relaxUnitFun = true)
         val betModel = mockk<TransactionModel>()
         val withdrawUseCase =
-            WithdrawUseCase(mockUserRepository, mockWithdrawRepository, mockMapper)
+            WithdrawUseCase(
+                mockUserRepository, mockWithdrawRepository, mockMapper,
+                TestCoroutineDispatcher()
+            )
         runBlocking {
             withdrawUseCase.withdraw(betModel) shouldBe ApiResultWrapper.Error.NoMoneyError(message = "Money Error")
         }
