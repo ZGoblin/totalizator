@@ -29,7 +29,7 @@ internal class BetHistoryMapperTest {
             W2_SERVER_FLAG to W2_BET_CHOICE,
             DRAW_SERVER_FLAG to DRAW_BET_CHOICE,
         ).map { (input, expected) ->
-            DynamicTest.dynamicTest("When input are $input, should expected $expected") {
+            DynamicTest.dynamicTest("When request have choice is $input, should expected $expected") {
                 val actualModel = RequestBetHistoryModel(
                     betId = betId,
                     teamConfrontation = teamConfrontation,

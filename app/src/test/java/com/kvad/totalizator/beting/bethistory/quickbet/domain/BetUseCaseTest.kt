@@ -40,7 +40,7 @@ internal class BetUseCaseTest {
     }
 
     @Test
-    fun `if user create bet and wallet is null return login error`() {
+    fun `if user create bet and wallet is null return login error works correctly`() {
         val mockMapper = mockk<MapperBetModelToBetRequest>(relaxed = true)
         val mockUserRepository = mockk<UserRepository> {
             coEvery { getLastWallet() } returns null
@@ -58,7 +58,7 @@ internal class BetUseCaseTest {
     }
 
     @Test
-    fun `if user create bet less money than have in wallet`(){
+    fun `if user create bet less money than have in wallet works correctly`(){
         val mockMapper = mockk<MapperBetModelToBetRequest> {
             every { map(any()) } returns BetRequest(eventId = "1",choice = "X",amount = 100.0)
         }

@@ -24,7 +24,7 @@ internal class MapperBetModelToBetRequestTest {
             Bet.FIRST_PLAYER_WIN to W1_SERVER_FLAG,
             Bet.SECOND_PLAYER_WIN to W2_SERVER_FLAG,
         ).map { (input, expected) ->
-            DynamicTest.dynamicTest("When input are $input, result should be $expected") {
+            DynamicTest.dynamicTest("When bet model choice are $input, request choice should be $expected") {
                 val actualModel = BetToServerModel(
                     eventId = eventId,
                     amount = amount,

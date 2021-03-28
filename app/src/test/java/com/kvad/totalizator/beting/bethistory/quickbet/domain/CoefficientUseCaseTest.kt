@@ -33,7 +33,7 @@ internal class CoefficientUseCaseTest {
             Bet.SECOND_PLAYER_WIN to 1.6333333f,
 
             ).map { (input, expected) ->
-            DynamicTest.dynamicTest("When choice $input,should be $expected") {
+            DynamicTest.dynamicTest("When choice $input, coefficient should be $expected") {
                 coefficientUseCase.calculateCoefficient(
                     lastBetDetail,
                     input,

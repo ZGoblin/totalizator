@@ -19,7 +19,7 @@ internal class MapperTransactionToTransactionRequestTest {
             TransactionType.WITHDRAW to "withdraw",
             TransactionType.DEPOSIT to "deposit"
         ).map { (input, expected) ->
-            DynamicTest.dynamicTest("When input $input, transaction request should be $expected ") {
+            DynamicTest.dynamicTest("When type of transaction is $input, transaction request should be have a type $expected ") {
                 mapper.map(
                     TransactionModel(
                         amount = amount,
