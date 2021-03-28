@@ -82,12 +82,14 @@
 
     <action
         android:id="@+id/action_to_login"
+        app:popUpTo="@id/events_fragment"
         app:enterAnim="@anim/slide_in_top"
         app:popExitAnim="@anim/slide_out_top"
         app:destination="@id/login_fragment" />
 
     <action
         android:id="@+id/action_to_transaction"
+        app:popUpTo="@id/events_fragment"
         app:enterAnim="@anim/slide_in_top"
         app:popExitAnim="@anim/slide_out_top"
         app:destination="@id/transaction_pager" />
@@ -104,8 +106,16 @@
 
     <action
         android:id="@+id/action_to_profile"
+        app:popUpTo="@id/events_fragment"
         app:enterAnim="@anim/slide_in_top"
         app:popExitAnim="@anim/slide_out_top"
         app:destination="@id/profile_fragment" />
+
+    <action
+        android:id="@+id/action_bet_history"
+        app:popUpTo="@id/events_fragment"
+        app:enterAnim="@anim/slide_in_top"
+        app:popExitAnim="@anim/slide_out_top"
+        app:destination="@id/bet_history_fragment" />
 
 </navigation>

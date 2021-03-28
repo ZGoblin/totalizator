@@ -26,7 +26,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfLogin"
+        android:id="@+id/tfEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
@@ -38,7 +38,7 @@
         app:startIconDrawable="@drawable/user_login_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/teLogin"
+            android:id="@+id/teEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -54,7 +54,7 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tfLogin"
+        app:layout_constraintTop_toBottomOf="@id/tfEmail"
         app:startIconDrawable="@drawable/password_24">
 
         <com.google.android.material.textfield.TextInputEditText

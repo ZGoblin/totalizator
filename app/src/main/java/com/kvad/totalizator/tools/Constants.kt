@@ -11,6 +11,7 @@ const val DRAW_SERVER_FLAG = "X"
 
 const val ADULT = 18
 const val LOGIN_MIN_LENGTH = 3
+const val LOGIN_SPECIAL_SYMBOL = "@"
 const val USERNAME_MIN_LENGTH = 3
 const val PASSWORD_MIN_LENGTH = 6
 const val API_URL = "https://classic-totalizator-ajg2w.ondigitalocean.app/"

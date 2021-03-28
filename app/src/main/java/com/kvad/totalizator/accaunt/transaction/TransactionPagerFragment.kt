@@ -36,6 +36,7 @@ class TransactionPagerFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.root.layoutAnimation = null
         _binding = null
         super.onDestroyView()
     }

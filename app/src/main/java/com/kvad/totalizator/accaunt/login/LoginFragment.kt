@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
@@ -53,13 +54,16 @@ class LoginFragment : Fragment() {
                 findNavController().navigate(R.id.action_to_event_from_login)
             }
             LoginState.NETWORK_ERROR -> {
-                showNetworkErrorDialog()
+                showNetworkErrorDialog(R.string.login_network_error_dialog_body)
             }
-            LoginState.LOGIN_LENGTH_ERROR -> {
+            LoginState.EMAIL_LENGTH_ERROR -> {
                 binding.tfLogin.error = getString(R.string.login_login_error)
             }
             LoginState.PASSWORD_LENGTH_ERROR -> {
                 binding.tfPassword.error = getString(R.string.login_password_error)
+            }
+            LoginState.EMAIL_DOG_NOT_INCLUDE -> {
+                binding.tfLogin.error = getString(R.string.login_username_symbol_error)
             }
         }
     }
@@ -71,9 +75,9 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun showNetworkErrorDialog() {
+    private fun showNetworkErrorDialog(@StringRes text: Int) {
         MaterialDialog(requireContext()).show {
-            message(R.string.login_network_error_dialog_body)
+            message(text)
             positiveButton(R.string.login_network_error_dialog_button)
         }
     }
@@ -107,6 +111,7 @@ class LoginFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.root.layoutAnimation = null
         _binding = null
         super.onDestroyView()
     }
