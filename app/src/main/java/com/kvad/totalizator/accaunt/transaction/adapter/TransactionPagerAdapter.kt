@@ -1,10 +1,10 @@
-package com.kvad.totalizator.transactionfeature.adapter
+package com.kvad.totalizator.accaunt.transaction.adapter
 
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.kvad.totalizator.transactionfeature.deposit.DepositPageFragment
-import com.kvad.totalizator.transactionfeature.withdraw.WithdrawPageFragment
+import com.kvad.totalizator.accaunt.transaction.deposit.DepositPageFragment
+import com.kvad.totalizator.accaunt.transaction.withdraw.WithdrawPageFragment
 
 class TransactionPagerAdapter(
     fragment: Fragment,

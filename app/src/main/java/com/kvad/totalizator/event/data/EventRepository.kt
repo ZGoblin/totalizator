@@ -1,8 +1,8 @@
-package com.kvad.totalizator.data
+package com.kvad.totalizator.event.data
 
-import com.kvad.totalizator.data.api.EventService
-import com.kvad.totalizator.data.mappers.MapRequestEventToEvent
-import com.kvad.totalizator.data.model.Event
+import com.kvad.totalizator.event.data.api.EventService
+import com.kvad.totalizator.event.data.mappers.MapRequestEventToEvent
+import com.kvad.totalizator.event.data.model.Event
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.safeapicall.mapSuccess

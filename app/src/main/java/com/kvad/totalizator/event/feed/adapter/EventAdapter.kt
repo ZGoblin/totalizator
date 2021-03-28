@@ -1,10 +1,10 @@
-package com.kvad.totalizator.events.adapter
+package com.kvad.totalizator.event.feed.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.kvad.totalizator.R
-import com.kvad.totalizator.data.model.Event
+import com.kvad.totalizator.event.data.model.Event
 
 class EventAdapter(
     private val onEventClick: (Event) -> Unit = {}

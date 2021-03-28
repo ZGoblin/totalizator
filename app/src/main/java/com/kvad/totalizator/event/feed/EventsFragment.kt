@@ -1,11 +1,10 @@
-package com.kvad.totalizator.events
+package com.kvad.totalizator.event.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,11 +14,11 @@ import com.kvad.totalizator.App
 import com.kvad.totalizator.chat.adapter.ChatRecyclerViewAdapter
 import com.kvad.totalizator.chat.ui.ChatViewModel
 import com.kvad.totalizator.chat.ui.UserMessageUi
-import com.kvad.totalizator.data.model.Event
+import com.kvad.totalizator.event.data.model.Event
 import com.kvad.totalizator.databinding.EventsFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
-import com.kvad.totalizator.events.adapter.EventAdapter
+import com.kvad.totalizator.event.feed.adapter.EventAdapter
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController

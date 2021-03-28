@@ -1,4 +1,4 @@
-package com.kvad.totalizator.transactionfeature.adapter
+package com.kvad.totalizator.accaunt.transaction.adapter
 
 import androidx.annotation.StringRes
 import com.kvad.totalizator.R

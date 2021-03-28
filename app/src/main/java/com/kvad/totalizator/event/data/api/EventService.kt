@@ -1,7 +1,7 @@
-package com.kvad.totalizator.data.api
+package com.kvad.totalizator.event.data.api
 
-import com.kvad.totalizator.data.requestmodels.Line
-import com.kvad.totalizator.data.requestmodels.RequestEventModel
+import com.kvad.totalizator.event.data.requestmodels.Line
+import com.kvad.totalizator.event.data.requestmodels.RequestEventModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

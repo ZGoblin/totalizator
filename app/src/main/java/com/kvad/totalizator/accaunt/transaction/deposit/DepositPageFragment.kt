@@ -1,4 +1,4 @@
-package com.kvad.totalizator.transactionfeature.deposit
+package com.kvad.totalizator.accaunt.transaction.deposit
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,8 +16,8 @@ import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.StateVisibilityController
 import com.kvad.totalizator.tools.hideKeyboard
-import com.kvad.totalizator.transactionfeature.domain.TransactionType
-import com.kvad.totalizator.transactionfeature.model.TransactionModel
+import com.kvad.totalizator.accaunt.transaction.domain.TransactionType
+import com.kvad.totalizator.accaunt.transaction.model.TransactionModel
 import javax.inject.Inject
 
 class DepositPageFragment : Fragment() {

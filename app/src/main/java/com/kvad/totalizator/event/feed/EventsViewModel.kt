@@ -1,10 +1,10 @@
-package com.kvad.totalizator.events
+package com.kvad.totalizator.event.feed
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kvad.totalizator.data.EventRepository
-import com.kvad.totalizator.data.model.Event
+import com.kvad.totalizator.event.data.EventRepository
+import com.kvad.totalizator.event.data.model.Event
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State

@@ -1,6 +1,6 @@
-package com.kvad.totalizator.transactionfeature.model
+package com.kvad.totalizator.accaunt.transaction.model
 
-import com.kvad.totalizator.transactionfeature.domain.TransactionType
+import com.kvad.totalizator.accaunt.transaction.domain.TransactionType
 
 
 data class TransactionModel (

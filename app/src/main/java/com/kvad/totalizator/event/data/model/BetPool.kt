@@ -1,4 +1,4 @@
-package com.kvad.totalizator.shared
+package com.kvad.totalizator.event.data.model
 
 data class BetPool(
     val firstPlayerBetAmount: Float,

@@ -1,7 +1,7 @@
-package com.kvad.totalizator.events.adapter
+package com.kvad.totalizator.event.feed.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.kvad.totalizator.data.model.Event
+import com.kvad.totalizator.event.data.model.Event
 
 class EventDiffUtils: DiffUtil.ItemCallback<Event>() {
     override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {

@@ -1,4 +1,4 @@
-package com.kvad.totalizator.transactionfeature.domain
+package com.kvad.totalizator.accaunt.transaction.domain
 
 enum class TransactionType {
     DEPOSIT, WITHDRAW

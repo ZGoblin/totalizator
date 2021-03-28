@@ -1,4 +1,4 @@
-package com.kvad.totalizator.accaunt.data
+package com.kvad.totalizator.accaunt.data.model
 
 import com.google.gson.annotations.SerializedName
 

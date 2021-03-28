@@ -1,4 +1,4 @@
-package com.kvad.totalizator.data.requestmodels
+package com.kvad.totalizator.event.data.requestmodels
 
 import com.google.gson.annotations.SerializedName
 

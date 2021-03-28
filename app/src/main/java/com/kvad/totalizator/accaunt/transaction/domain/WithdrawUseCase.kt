@@ -1,10 +1,10 @@
-package com.kvad.totalizator.transactionfeature.domain
+package com.kvad.totalizator.accaunt.transaction.domain
 
 import com.kvad.totalizator.accaunt.data.UserRepository
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
-import com.kvad.totalizator.transactionfeature.data.MapperTransactionToTransactionRequest
-import com.kvad.totalizator.transactionfeature.model.TransactionModel
-import com.kvad.totalizator.transactionfeature.withdraw.WithdrawRepository
+import com.kvad.totalizator.accaunt.data.MapperTransactionToTransactionRequest
+import com.kvad.totalizator.accaunt.transaction.model.TransactionModel
+import com.kvad.totalizator.accaunt.transaction.withdraw.WithdrawRepository
 import javax.inject.Inject
 
 class WithdrawUseCase @Inject constructor(

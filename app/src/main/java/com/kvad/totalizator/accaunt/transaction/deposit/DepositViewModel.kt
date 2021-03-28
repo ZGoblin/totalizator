@@ -1,4 +1,4 @@
-package com.kvad.totalizator.transactionfeature.deposit
+package com.kvad.totalizator.accaunt.transaction.deposit
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -8,9 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.kvad.totalizator.accaunt.data.UserRepository
 import com.kvad.totalizator.tools.State
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
-import com.kvad.totalizator.transactionfeature.TransactionErrorState
-import com.kvad.totalizator.transactionfeature.data.MapperTransactionToTransactionRequest
-import com.kvad.totalizator.transactionfeature.model.TransactionModel
+import com.kvad.totalizator.accaunt.transaction.TransactionErrorState
+import com.kvad.totalizator.accaunt.data.MapperTransactionToTransactionRequest
+import com.kvad.totalizator.accaunt.transaction.model.TransactionModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

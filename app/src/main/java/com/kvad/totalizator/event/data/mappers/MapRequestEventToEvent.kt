@@ -1,8 +1,8 @@
-package com.kvad.totalizator.data.mappers
+package com.kvad.totalizator.event.data.mappers
 
-import com.kvad.totalizator.data.model.Event
-import com.kvad.totalizator.data.model.BetPool
-import com.kvad.totalizator.data.requestmodels.RequestEventModel
+import com.kvad.totalizator.event.data.model.Event
+import com.kvad.totalizator.event.data.model.BetPool
+import com.kvad.totalizator.event.data.requestmodels.RequestEventModel
 import java.time.ZonedDateTime
 import javax.inject.Inject
 
