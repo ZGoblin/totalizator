@@ -1,9 +1,9 @@
 package com.kvad.totalizator.registration
 
-import com.kvad.totalizator.accaunt.data.UserRepository
-import com.kvad.totalizator.accaunt.registration.RegisterState
-import com.kvad.totalizator.accaunt.registration.domain.RegisterUseCase
-import com.kvad.totalizator.accaunt.registration.models.RawRegisterRequest
+import com.kvad.totalizator.account.data.UserRepository
+import com.kvad.totalizator.account.registration.RegisterState
+import com.kvad.totalizator.account.registration.domain.RegisterUseCase
+import com.kvad.totalizator.account.registration.models.RawRegisterRequest
 import com.kvad.totalizator.shared.Token
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import io.kotlintest.shouldBe

@@ -1,9 +1,9 @@
 package com.kvad.totalizator.login
 
-import com.kvad.totalizator.accaunt.data.UserRepository
-import com.kvad.totalizator.accaunt.data.model.LoginRequest
-import com.kvad.totalizator.accaunt.login.LoginState
-import com.kvad.totalizator.accaunt.login.domain.LoginUseCase
+import com.kvad.totalizator.account.data.UserRepository
+import com.kvad.totalizator.account.data.model.LoginRequest
+import com.kvad.totalizator.account.login.LoginState
+import com.kvad.totalizator.account.login.domain.LoginUseCase
 import com.kvad.totalizator.shared.Token
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import io.kotlintest.shouldBe
