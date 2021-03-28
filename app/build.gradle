@@ -57,7 +57,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     //LeakCanary2
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
+    //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
 
     // Navigation
     def nav_version = "2.3.4"
