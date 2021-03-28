@@ -97,4 +97,15 @@
         app:enterAnim="@anim/slide_in_top"
         app:destination="@id/events_fragment" />
 
+    <fragment
+        android:id="@+id/profile_fragment"
+        android:name="com.kvad.totalizator.profile.ProfileFragment"
+        tools:layout="@layout/profile_fragment" />
+
+    <action
+        android:id="@+id/action_to_profile"
+        app:enterAnim="@anim/slide_in_top"
+        app:popExitAnim="@anim/slide_out_top"
+        app:destination="@id/profile_fragment" />
+
 </navigation>

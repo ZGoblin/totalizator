@@ -10,6 +10,7 @@ import com.kvad.totalizator.event.detail.detail.EventDetailViewModel
 import com.kvad.totalizator.event.feed.EventsViewModel
 import com.kvad.totalizator.header.HeaderViewModel
 import com.kvad.totalizator.login.LoginViewModel
+import com.kvad.totalizator.profile.ProfileViewModel
 import com.kvad.totalizator.registration.RegistrationViewModel
 import com.kvad.totalizator.accaunt.transaction.deposit.DepositViewModel
 import com.kvad.totalizator.accaunt.transaction.withdraw.WithdrawViewModel
@@ -77,4 +78,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(BetHistoryViewModel::class)
     internal abstract fun betHistoryViewModel(viewModel: BetHistoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    internal abstract fun profileViewModel(viewModel: ProfileViewModel): ViewModel
 }

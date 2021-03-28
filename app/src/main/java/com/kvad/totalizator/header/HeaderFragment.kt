@@ -60,7 +60,7 @@ class HeaderFragment : Fragment() {
                 findNavController().navigate(R.id.bet_history_fragment)
             }
             ivAvatar.setOnClickListener {
-                findNavController().navigate(R.id.action_to_login)
+                findNavController().navigate(R.id.action_to_profile)
             }
         }
     }

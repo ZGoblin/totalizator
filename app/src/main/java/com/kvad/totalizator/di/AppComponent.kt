@@ -8,6 +8,7 @@ import com.kvad.totalizator.event.feed.EventsFragment
 import com.kvad.totalizator.header.HeaderFragment
 import com.kvad.totalizator.login.LoginFragment
 import com.kvad.totalizator.onboard.OnBoardFragment
+import com.kvad.totalizator.profile.ProfileFragment
 import com.kvad.totalizator.registration.RegistrationFragment
 import com.kvad.totalizator.accaunt.transaction.deposit.DepositPageFragment
 import com.kvad.totalizator.accaunt.transaction.TransactionPagerFragment
@@ -46,5 +47,7 @@ interface AppComponent {
     fun inject(fragment: DepositPageFragment)
 
     fun inject(fragment : BetHistoryFragment)
+
+    fun inject(fragment : ProfileFragment)
 
 }
