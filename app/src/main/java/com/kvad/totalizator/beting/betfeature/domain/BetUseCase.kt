@@ -3,7 +3,7 @@ package com.kvad.totalizator.beting.betfeature.domain
 import com.kvad.totalizator.beting.data.BetRepository
 import com.kvad.totalizator.beting.data.MapperBetModelToBetRequest
 import com.kvad.totalizator.beting.betfeature.model.BetToServerModel
-import com.kvad.totalizator.accaunt.data.UserRepository
+import com.kvad.totalizator.account.data.UserRepository
 import com.kvad.totalizator.beting.data.BetRequest
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import javax.inject.Inject

@@ -1,11 +1,10 @@
 package com.kvad.totalizator.transactionfeature.data
 
-import com.kvad.totalizator.data.requestmodels.TransactionRequest
-import com.kvad.totalizator.transactionfeature.domain.TransactionType
-import com.kvad.totalizator.transactionfeature.model.TransactionModel
+import com.kvad.totalizator.account.data.MapperTransactionToTransactionRequest
+import com.kvad.totalizator.account.data.model.TransactionRequest
+import com.kvad.totalizator.account.transaction.domain.TransactionType
+import com.kvad.totalizator.account.transaction.model.TransactionModel
 import io.kotlintest.shouldBe
-import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory

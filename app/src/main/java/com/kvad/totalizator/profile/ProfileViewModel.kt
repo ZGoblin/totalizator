@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kvad.totalizator.accaunt.data.UserRepository
-import com.kvad.totalizator.accaunt.data.model.AccountInfo
+import com.kvad.totalizator.account.data.UserRepository
+import com.kvad.totalizator.account.data.model.AccountInfo
 import com.kvad.totalizator.shared.SharedPref
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.State

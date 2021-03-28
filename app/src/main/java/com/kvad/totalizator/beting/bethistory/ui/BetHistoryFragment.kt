@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.kvad.totalizator.App
+import com.kvad.totalizator.R
 import com.kvad.totalizator.beting.betfeature.domain.BetState
 import com.kvad.totalizator.beting.bethistory.adapter.BetHistoryAdapter
 import com.kvad.totalizator.beting.bethistory.model.BetHistoryDetailModel

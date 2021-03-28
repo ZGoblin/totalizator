@@ -1,10 +1,11 @@
 package com.kvad.totalizator.betfeature.domain
 
 import com.kvad.totalizator.betfeature.model.BetDetail
-import com.kvad.totalizator.data.model.BetPool
-import com.kvad.totalizator.data.model.Event
-import com.kvad.totalizator.data.requestmodels.Characteristic
-import com.kvad.totalizator.data.requestmodels.Participant
+import com.kvad.totalizator.beting.betfeature.domain.MapperEventToBetDetailModel
+import com.kvad.totalizator.event.data.model.BetPool
+import com.kvad.totalizator.event.data.model.Event
+import com.kvad.totalizator.event.data.requestmodels.Characteristic
+import com.kvad.totalizator.event.data.requestmodels.Participant
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

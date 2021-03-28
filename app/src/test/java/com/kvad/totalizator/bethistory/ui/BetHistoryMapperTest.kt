@@ -1,16 +1,15 @@
 package com.kvad.totalizator.bethistory.ui
 
-import com.kvad.totalizator.bethistory.model.BetHistoryDetailModel
-import com.kvad.totalizator.bethistory.model.RequestBetHistoryModel
-import com.kvad.totalizator.detail.eventDetailState
-import io.kotlintest.shouldBe
-import io.mockk.mockk
-import org.junit.jupiter.api.Test
 
+
+import com.kvad.totalizator.beting.bethistory.model.BetHistoryDetailModel
+import com.kvad.totalizator.beting.bethistory.model.RequestBetHistoryModel
+import com.kvad.totalizator.beting.bethistory.ui.BetHistoryMapper
+import io.kotlintest.shouldBe
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
-import java.time.ZonedDateTime
+
 
 internal class BetHistoryMapperTest {
 

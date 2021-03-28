@@ -9,11 +9,11 @@ import com.kvad.totalizator.chat.ui.ChatViewModel
 import com.kvad.totalizator.event.detail.EventDetailViewModel
 import com.kvad.totalizator.event.feed.EventsViewModel
 import com.kvad.totalizator.header.HeaderViewModel
-import com.kvad.totalizator.accaunt.login.LoginViewModel
+import com.kvad.totalizator.account.login.LoginViewModel
 import com.kvad.totalizator.profile.ProfileViewModel
-import com.kvad.totalizator.accaunt.registration.RegistrationViewModel
-import com.kvad.totalizator.accaunt.transaction.deposit.DepositViewModel
-import com.kvad.totalizator.accaunt.transaction.withdraw.WithdrawViewModel
+import com.kvad.totalizator.account.registration.RegistrationViewModel
+import com.kvad.totalizator.account.transaction.deposit.DepositViewModel
+import com.kvad.totalizator.account.transaction.withdraw.WithdrawViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
