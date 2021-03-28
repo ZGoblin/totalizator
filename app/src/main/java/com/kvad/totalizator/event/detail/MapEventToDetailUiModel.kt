@@ -4,7 +4,7 @@ import com.kvad.totalizator.event.data.model.Event
 import com.kvad.totalizator.event.detail.model.EventDetail
 import java.util.*
 import javax.inject.Inject
-
+@Suppress("LongMethod")
 class MapEventToDetailUiModel @Inject constructor() {
 
     fun map(event: Event): List<EventDetail> {
