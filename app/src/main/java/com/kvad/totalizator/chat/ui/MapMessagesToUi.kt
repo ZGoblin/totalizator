@@ -25,6 +25,10 @@ class MapMessagesToUi @Inject constructor(
             }
         }
 
-    private fun getStringTime(time: ZonedDateTime) = "${time.hour}:${time.minute}"
+    private fun getStringTime(time: ZonedDateTime) : String{
+        val minutes =
+            if (time.minute.toString().length < 2) "0${time.minute}" else "${time.minute}"
+        return "${time.hour}:$minutes"
+    }
 
 }

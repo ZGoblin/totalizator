@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kvad.totalizator.accaunt.data.UserRepository
-import com.kvad.totalizator.accaunt.data.model.AccountInfo
-import com.kvad.totalizator.accaunt.data.model.Wallet
+import com.kvad.totalizator.account.data.UserRepository
+import com.kvad.totalizator.account.data.model.AccountInfo
+import com.kvad.totalizator.account.data.model.Wallet
 import com.kvad.totalizator.tools.ErrorState
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import com.kvad.totalizator.tools.State
@@ -26,8 +26,6 @@ class HeaderViewModel @Inject constructor(
 
     private val _accountLiveData = MutableLiveData<AccountState>()
     val accountLiveData: LiveData<AccountState> = _accountLiveData
-
-    var accountAvatar: String? = null
 
     init {
         _walletLiveData.value = State.Loading

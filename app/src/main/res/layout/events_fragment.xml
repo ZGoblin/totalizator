@@ -22,6 +22,7 @@
         android:background="@color/white"
         android:drawableEnd="@drawable/ic_send_massage_icon"
         android:focusable="true"
+        android:textCursorDrawable="@drawable/black_cursor"
         android:hint="@string/message"
         android:inputType="text"
         android:padding="@dimen/padding_edit_text"

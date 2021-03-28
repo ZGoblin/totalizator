@@ -30,11 +30,11 @@
     <string name="bet">BET</string>
     <string name="command_a_command_b">Command A vs Command B</string>
     <string name="event_vs">%1$s vs %2$s</string>
-    <string name="min_bet">Минимальная ставка - 10.0</string>
+    <string name="min_bet">Min stake - 10.0</string>
     <string name="command_a">Command A</string>
-    <string name="possible_gain">Возможный выиграш %1$.1f</string>
-    <string name="do_bet">Сделать ставку %1$.1f</string>
-    <string name="do_bet_simple">Сделать ставку</string>
+    <string name="possible_gain">Possible payment %1$.1f</string>
+    <string name="do_bet">Place a bet %1$.1f</string>
+    <string name="do_bet_simple">Place a bet</string>
 
     <string name="draw">Draw</string>
     <string name="events_network_error">An error occurred while download</string>
@@ -69,8 +69,8 @@
     <string name="live">Live</string>
     <string name="all_events">All events</string>
 
-    <string name="withdraw_text">Снять деньги</string>
-    <string name="deposit_text">Пополнить счет</string>
+    <string name="withdraw_text">Withdraw money</string>
+    <string name="deposit_text">Make a deposit</string>
     <string name="not_enough_money_to_withdraw">Not enough money to withdraw</string>
     <string name="not_enough_money_to_bet">Not enough money to bet</string>
     <string name="bet_less">Bet less</string>
@@ -90,5 +90,9 @@
     <string name="bet_history">Bet history</string>
     <string name="login">Login</string>
     <string name="uah">UAH</string>
+    <string name="sign_up">Sign up</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+
 
 </resources>
