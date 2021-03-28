@@ -2,10 +2,16 @@ package com.kvad.totalizator.beting.bethistory.ui
 
 import com.kvad.totalizator.beting.bethistory.model.BetHistoryDetailModel
 import com.kvad.totalizator.beting.bethistory.model.RequestBetHistoryModel
-import com.kvad.totalizator.tools.*
+import com.kvad.totalizator.tools.W1_BET_CHOICE
+import com.kvad.totalizator.tools.W2_BET_CHOICE
+import com.kvad.totalizator.tools.DRAW_BET_CHOICE
+import com.kvad.totalizator.tools.W2_SERVER_FLAG
+import com.kvad.totalizator.tools.W1_SERVER_FLAG
+
+
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatter.ISO_DATE
+
 import javax.inject.Inject
 
 class BetHistoryMapper @Inject constructor() {
