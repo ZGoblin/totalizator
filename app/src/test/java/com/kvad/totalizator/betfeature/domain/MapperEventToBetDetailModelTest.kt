@@ -12,33 +12,34 @@ import java.time.ZonedDateTime
 
 internal class MapperEventToBetDetailModelTest {
 
-    private val eventId = "1"
-    private val firstParticipant = Participant(
-        id = "2",
-        name = "First player",
-        photoLink = null,
-        characteristics = setOf(Characteristic(type = "weight", value = "70"))
-    )
-    private val secondParticipant = Participant(
-        id = "3",
-        name = "Second player",
-        photoLink = null,
-        characteristics = setOf(Characteristic(type = "weight", value = "75"))
-    )
-
-    private val firstPlayerAmount = 200f
-    private val secondPlayerAmount = 300f
-    private val drawAmount = 400f
-    private val margin = 2f
-
-    private val betPool = BetPool(
-        firstPlayerBetAmount = firstPlayerAmount,
-        secondPlayerBetAmount = secondPlayerAmount,
-        drawBetAmount = drawAmount
-    )
 
     @Test
     fun `map event to bet detail model`() {
+
+        val eventId = "1"
+        val firstParticipant = Participant(
+            id = "2",
+            name = "First player",
+            photoLink = null,
+            characteristics = setOf(Characteristic(type = "weight", value = "70"))
+        )
+        val secondParticipant = Participant(
+            id = "3",
+            name = "Second player",
+            photoLink = null,
+            characteristics = setOf(Characteristic(type = "weight", value = "75"))
+        )
+
+        val firstPlayerAmount = 200f
+        val secondPlayerAmount = 300f
+        val drawAmount = 400f
+        val margin = 2f
+
+        val betPool = BetPool(
+            firstPlayerBetAmount = firstPlayerAmount,
+            secondPlayerBetAmount = secondPlayerAmount,
+            drawBetAmount = drawAmount
+        )
 
         val expectedBetDetailModel = BetDetail(
             firstPlayerName = firstParticipant.name,

@@ -5,6 +5,8 @@ import com.kvad.totalizator.bethistory.model.RequestBetHistoryModel
 import com.kvad.totalizator.tools.W1_SERVER_FLAG
 import com.kvad.totalizator.tools.W2_SERVER_FLAG
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatter.ISO_DATE
 import javax.inject.Inject
 
 class BetHistoryMapper @Inject constructor() {
@@ -28,8 +30,12 @@ class BetHistoryMapper @Inject constructor() {
     }
 
     private fun parseZonedDateTime(time: String): String {
-        val zonedDateTime = ZonedDateTime.parse(time)
-        return "${zonedDateTime.dayOfMonth}.${zonedDateTime.monthValue}, ${zonedDateTime.hour}:${zonedDateTime.minute}"
+        val zonedDateTime = ZonedDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+
+        val month =
+            if (zonedDateTime.monthValue.toString().length < 2) "0${zonedDateTime.monthValue}" else "${zonedDateTime.monthValue}"
+
+        return "${zonedDateTime.dayOfMonth}.$month, ${zonedDateTime.hour}:${zonedDateTime.minute}"
     }
 }
 

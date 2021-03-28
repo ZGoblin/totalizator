@@ -2,7 +2,9 @@ package com.kvad.totalizator.bethistory.ui
 
 import com.kvad.totalizator.bethistory.model.BetHistoryDetailModel
 import com.kvad.totalizator.bethistory.model.RequestBetHistoryModel
+import com.kvad.totalizator.detail.eventDetailState
 import io.kotlintest.shouldBe
+import io.mockk.mockk
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -12,77 +14,44 @@ import java.time.ZonedDateTime
 
 internal class BetHistoryMapperTest {
 
-    private fun parseZonedDateTime(time: String): String {
-        val zonedDateTime = ZonedDateTime.parse(time)
-        return "${zonedDateTime.dayOfMonth}.${zonedDateTime.monthValue}, ${zonedDateTime.hour}:${zonedDateTime.minute}"
-    }
-
-
     private val id = "1"
     private val teamConfrontation = "England vs France"
-    private val eventStartTime = parseZonedDateTime( ZonedDateTime.now().toString())
-    private val betStartTime = parseZonedDateTime( ZonedDateTime.now().toString())
+    private val eventStartTimeFromRequest = "2021-03-28T12:22:50.187+03:00"
+    private val betStartTimeFromRequest = "2021-03-28T12:22:50.187+03:00"
+    private val eventStartTime = "22:50,28.03"
+    private val betStartTime = "22:50,28.03"
     private val amount = 100.0
     private val status = "status"
 
     @TestFactory
     fun `map request bet history to bet history model`(): List<DynamicTest> {
         val mapper = BetHistoryMapper()
+
         return listOf(
-            RequestBetHistoryModel(
-                betId = id,
-                teamConfrontation = teamConfrontation,
-                choice = "W1",
-                eventStartTime = eventStartTime,
-                betTime = betStartTime,
-                amount = amount,
-                status = status
-            ) to BetHistoryDetailModel(
-                id = id,
-                teamConfrontation = teamConfrontation,
-                choice = "1",
-                eventStartTime = eventStartTime,
-                betStartTime = betStartTime,
-                amount = amount,
-                status = status
-            ),
-            RequestBetHistoryModel(
-                betId = id,
-                teamConfrontation = teamConfrontation,
-                choice = "W2",
-                eventStartTime = eventStartTime,
-                betTime = betStartTime,
-                amount = amount,
-                status = status
-            ) to BetHistoryDetailModel(
-                id = id,
-                teamConfrontation = teamConfrontation,
-                choice = "2",
-                eventStartTime = eventStartTime,
-                betStartTime = betStartTime,
-                amount = amount,
-                status = status
-            ),
-            RequestBetHistoryModel(
-                betId = id,
-                teamConfrontation = teamConfrontation,
-                choice = "X",
-                eventStartTime = eventStartTime,
-                betTime = betStartTime,
-                amount = amount,
-                status = status
-            ) to BetHistoryDetailModel(
-                id = id,
-                teamConfrontation = teamConfrontation,
-                choice = "X",
-                eventStartTime = eventStartTime,
-                betStartTime = betStartTime,
-                amount = amount,
-                status = status
-            )
+            "W1" to "1",
+            "W2" to "2",
+            "X" to "X"
         ).map { (input, expected) ->
             DynamicTest.dynamicTest("When input $input, bet history model must be $expected") {
-                mapper.mapItem(input) shouldBe expected
+                mapper.mapItem(
+                    RequestBetHistoryModel(
+                        betId = id,
+                        teamConfrontation = teamConfrontation,
+                        choice = input,
+                        eventStartTime = eventStartTimeFromRequest,
+                        betTime = betStartTimeFromRequest,
+                        amount = amount,
+                        status = status
+                    )
+                ) shouldBe BetHistoryDetailModel(
+                    id = id,
+                    teamConfrontation = teamConfrontation,
+                    choice = expected,
+                    eventStartTime = eventStartTime,
+                    betStartTime = betStartTime,
+                    amount = amount,
+                    status = status
+                )
             }
         }
     }
