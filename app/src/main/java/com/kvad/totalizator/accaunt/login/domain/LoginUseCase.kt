@@ -26,22 +26,12 @@ class LoginUseCase @Inject constructor(
 
         if (state == LoginState.WITHOUT_ERROR) {
             userRepository.login(loginRequest).doOnResult(
-                onSuccess = ::doOnSuccess,
-                onError = ::doOnError
+                onSuccess = { state = LoginState.WITHOUT_ERROR },
+                onError = {  state = LoginState.NETWORK_ERROR }
             )
         }
 
         return@withContext state
-    }
-
-    @Suppress("UNUSED_PARAMETER")
-    private fun doOnSuccess(token: Token) {
-        state = LoginState.WITHOUT_ERROR
-    }
-
-    @Suppress("UNUSED_PARAMETER")
-    private fun doOnError(error: ApiResultWrapper.Error) {
-        state = LoginState.NETWORK_ERROR
     }
 
     private suspend fun verifyLoginComponent(loginRequest: LoginRequest) =

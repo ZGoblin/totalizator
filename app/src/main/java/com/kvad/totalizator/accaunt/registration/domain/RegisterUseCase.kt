@@ -2,7 +2,6 @@ package com.kvad.totalizator.accaunt.registration.domain
 
 import com.kvad.totalizator.accaunt.data.UserRepository
 import com.kvad.totalizator.accaunt.data.model.RegisterRequest
-import com.kvad.totalizator.shared.Token
 import com.kvad.totalizator.di.DefaultDispatcher
 import com.kvad.totalizator.accaunt.registration.RegisterState
 import com.kvad.totalizator.accaunt.registration.models.RawRegisterRequest
@@ -11,7 +10,6 @@ import com.kvad.totalizator.tools.LOGIN_SPECIAL_SYMBOL
 import com.kvad.totalizator.tools.USERNAME_MIN_LENGTH
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
 import com.kvad.totalizator.tools.ADULT
-import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.lang.StringBuilder
@@ -31,31 +29,21 @@ class RegisterUseCase @Inject constructor(
 
     suspend fun register(rawRegisterRequest: RawRegisterRequest) = withContext(dispatcher) {
 
-        val state = verifyRegisterComponent(rawRegisterRequest)
+        state = verifyRegisterComponent(rawRegisterRequest)
         if (state == RegisterState.WITHOUT_ERROR) {
             userRepository.register(toRegisterRequest(rawRegisterRequest)).doOnResult(
-                onSuccess = ::doOnSuccess,
-                onError = ::doOnError
+                onSuccess = { state = RegisterState.WITHOUT_ERROR },
+                onError = { state = RegisterState.NETWORK_ERROR }
             )
         }
 
         state
     }
 
-    @Suppress("UNUSED_PARAMETER")
-    private fun doOnSuccess(token: Token) {
-        state = RegisterState.WITHOUT_ERROR
-    }
-
-    @Suppress("UNUSED_PARAMETER")
-    private fun doOnError(error: ApiResultWrapper.Error) {
-        state = RegisterState.NETWORK_ERROR
-    }
-
     private suspend fun verifyRegisterComponent(rawRegisterRequest: RawRegisterRequest) =
         withContext(dispatcher) {
             when {
-                rawRegisterRequest.email.length < LOGIN_MIN_LENGTH -> RegisterState.LOGIN_LENGTH_ERROR
+                rawRegisterRequest.email.length < LOGIN_MIN_LENGTH -> RegisterState.EMAIL_LENGTH_ERROR
                 !rawRegisterRequest.email.contains(LOGIN_SPECIAL_SYMBOL) -> RegisterState.EMAIL_ERROR
                 rawRegisterRequest.username.length < USERNAME_MIN_LENGTH -> RegisterState.USERNAME_ERROR
                 rawRegisterRequest.password.length < PASSWORD_MIN_LENGTH -> RegisterState.PASSWORD_LENGTH_ERROR
