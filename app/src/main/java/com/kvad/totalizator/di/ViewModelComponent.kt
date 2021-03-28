@@ -8,6 +8,7 @@ import com.kvad.totalizator.detail.EventDetailViewModel
 import com.kvad.totalizator.events.EventsViewModel
 import com.kvad.totalizator.header.HeaderViewModel
 import com.kvad.totalizator.login.LoginViewModel
+import com.kvad.totalizator.profile.ProfileViewModel
 import com.kvad.totalizator.registration.RegistrationViewModel
 import com.kvad.totalizator.transactionfeature.deposit.DepositViewModel
 import com.kvad.totalizator.transactionfeature.withdraw.WithdrawViewModel
@@ -37,4 +38,6 @@ interface ViewModelComponent {
     fun inject(viewModel: WithdrawViewModel)
 
     fun inject(viewModel: BetHistoryViewModel)
+
+    fun inject(viewModel: ProfileViewModel)
 }
