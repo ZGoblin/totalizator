@@ -1,6 +1,7 @@
 package com.kvad.totalizator.beting.bethistory.ui
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,13 +13,13 @@ import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-typealias BetHistoryLiveData = State<List<BetHistoryDetailModel>, BetState>
+typealias BetHistoryState = State<List<BetHistoryDetailModel>, BetState>
 
 class BetHistoryViewModel @Inject constructor(
     private val betRepository: BetRepository
 ) : ViewModel() {
 
-    private val _betHistoryLiveData = MutableLiveData<BetHistoryLiveData>()
+    private val _betHistoryLiveData = MutableLiveData<BetHistoryState>()
     val betHistoryLiveData = _betHistoryLiveData
 
     fun updateHistory(){

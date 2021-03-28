@@ -14,13 +14,15 @@ import com.kvad.totalizator.account.transaction.model.TransactionModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+typealias DepositState = State<Unit, TransactionErrorState>
+
 class DepositViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val mapperTransactionToTransactionRequest: MapperTransactionToTransactionRequest
-) : ViewModel(){
+) : ViewModel() {
 
-    private var _depositLiveData = MutableLiveData<State<Unit, TransactionErrorState>>()
-    val depositLiveData : LiveData<State<Unit, TransactionErrorState>> = _depositLiveData
+    private var _depositLiveData = MutableLiveData<DepositState>()
+    val depositLiveData: LiveData<DepositState> = _depositLiveData
 
     fun deDeposit(transactionModel: TransactionModel) {
         _depositLiveData.value = State.Loading
