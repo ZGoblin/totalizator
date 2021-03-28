@@ -1,6 +1,10 @@
 package com.kvad.totalizator.accaunt.data
 
-import com.kvad.totalizator.accaunt.data.model.*
+import com.kvad.totalizator.accaunt.data.model.Wallet
+import com.kvad.totalizator.accaunt.data.model.RegisterRequest
+import com.kvad.totalizator.accaunt.data.model.AccountInfo
+import com.kvad.totalizator.accaunt.data.model.LoginRequest
+import com.kvad.totalizator.accaunt.data.model.TransactionRequest
 import com.kvad.totalizator.shared.Token
 import com.kvad.totalizator.tools.REQUEST_DELAY
 import com.kvad.totalizator.tools.safeapicall.ApiResultWrapper
