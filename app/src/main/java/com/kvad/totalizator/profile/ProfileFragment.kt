@@ -83,6 +83,7 @@ class ProfileFragment: Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.root.layoutAnimation = null
         _binding = null
         super.onDestroyView()
     }

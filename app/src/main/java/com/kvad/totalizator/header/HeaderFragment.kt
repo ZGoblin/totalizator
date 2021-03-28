@@ -57,7 +57,7 @@ class HeaderFragment : Fragment() {
                 navigateToTransaction()
             }
             ivClock.setOnClickListener {
-                findNavController().navigate(R.id.bet_history_fragment)
+                findNavController().navigate(R.id.action_bet_history)
             }
             ivAvatar.setOnClickListener {
                 findNavController().navigate(R.id.action_to_profile)
