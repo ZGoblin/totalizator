@@ -9,9 +9,9 @@
         android:id="@+id/tl_on_board"
         style="@style/TabLayoutStyle"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/height_tl_on_board"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/margin_top_tl_on_board"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

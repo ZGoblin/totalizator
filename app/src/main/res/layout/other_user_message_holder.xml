@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#F5F5F5">
+    android:background="@color/lite_white">
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:textColor="#7B7B7B"
+        android:layout_marginStart="@dimen/margin_start_tv_name_other_message"
+        android:textColor="@color/little_dark_grey"
         app:layout_constraintStart_toEndOf="@id/iv_avatar"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Alex" />
@@ -20,8 +20,8 @@
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:textColor="#7B7B7B"
+        android:layout_marginStart="@dimen/margin_start_tv_time_other_message"
+        android:textColor="@color/little_dark_grey"
         app:layout_constraintStart_toEndOf="@id/tv_name"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="17:38" />
@@ -35,22 +35,22 @@
 
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/width_iv_avatar_other_message"
+        android:layout_height="@dimen/height_iv_avatar_other_message"
         android:contentDescription="@string/user_image"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier"
         tools:src="@drawable/user_login_24"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="@dimen/margin_start_iv_avatar_other_message"/>
 
     <TextView
         android:id="@+id/tv_message_body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/other_user_message_shape"
-        android:padding="8dp"
-        android:textSize="16sp"
+        android:padding="@dimen/padding_other_message_body"
+        android:textSize="@dimen/text_size_other_message_body"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/tv_name"
         app:layout_constraintTop_toBottomOf="@id/barrier"

@@ -5,8 +5,8 @@
     android:orientation="vertical">
 
     <View
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="@dimen/width_something_went_wrong_view"
+        android:layout_height="@dimen/height_something_went_wrong_view"
         android:layout_gravity="center"
         android:background="@drawable/ic_smartphone" />
 
@@ -16,6 +16,6 @@
         android:gravity="center"
         android:text="@string/something_went_wrong"
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="@dimen/text_size_something_went_wrong" />
 
 </LinearLayout>

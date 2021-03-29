@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/lite_white">
 
     <TextView
         android:id="@+id/tvDeposit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/margin_tv_deposit"
         android:gravity="center"
         android:text="@string/deposit_text"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_tv_deposit"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +22,7 @@
         android:id="@+id/progress_deposit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/margin_progress_deposit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +30,7 @@
         android:id="@+id/tlInputBalance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="@dimen/margin_top_input_balance"
         app:counterMaxLength="4"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -38,7 +38,7 @@
             android:id="@+id/etDeposit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/margin_btn_deposit"
             android:background="@color/white"
             android:focusable="true"
             android:inputType="numberDecimal"
@@ -51,7 +51,7 @@
         android:id="@+id/btnDeposit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/margin_deposit"
         android:background="@color/lite_green"
         android:text="@string/deposit"
         android:textColor="@color/white"

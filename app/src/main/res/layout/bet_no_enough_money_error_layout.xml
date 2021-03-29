@@ -5,8 +5,8 @@
     android:orientation="vertical">
 
     <View
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="@dimen/error_view_width"
+        android:layout_height="@dimen/error_view_height"
         android:layout_gravity="center"
         android:background="@drawable/ic_money" />
 
@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:text="@string/not_enough_money_to_bet"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_not_enough_money"
         />
 
 </LinearLayout>
