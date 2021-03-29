@@ -12,10 +12,10 @@
     <string name="chat_troll_provoke_title">Chat, troll, provoke…</string>
     <string name="chat_troll_provoke_body">Application chat brings fun to the game.</string>
 
-    <string name="less_commission_title_1">LESS COMMISSION</string>
-    <string name="less_commission_title_2">MORE BONUSES</string>
+    <string name="minimum_commission">Minimal commission</string>
+    <string name="maximum_trust">Maximum trust</string>
 
-    <string name="less_commission_body">3% commission is taken from winnings. \n2% goes to the system, 1% - to the referrers. Get bonuses, spend them for little advantages like live coupons or cashouts.</string>
+    <string name="commission_from_bet_sum">1% commission from bet sum. \nBookmaker doesn\'t play, bookmaker guarantees.</string>
 
     <string name="error_title">ERROR</string>
     <string name="error_body">ERROR</string>
