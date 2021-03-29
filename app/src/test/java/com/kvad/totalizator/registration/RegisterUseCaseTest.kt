@@ -23,7 +23,7 @@ internal class RegisterUseCaseTest() {
     fun `if user not adult return BIRTHDAY_ERROR`() {
         val testingRequest = RawRegisterRequest(
             username = "username",
-            email = "@email.com",
+            email = "email@email.com",
             password = "password",
             day = 24,
             month = 12,
@@ -39,7 +39,7 @@ internal class RegisterUseCaseTest() {
     fun `if username length less then 3 return USERNAME_ERROR`() {
         val testingRequest = RawRegisterRequest(
             username = "us",
-            email = "@email.com",
+            email = "email@email.com",
             password = "password",
             day = 24,
             month = 12,
@@ -55,7 +55,7 @@ internal class RegisterUseCaseTest() {
     fun `if email length less then 3 return EMAIL_LENGTH_ERROR`() {
         val testingRequest = RawRegisterRequest(
             username = "username",
-            email = "@e",
+            email = "e@e",
             password = "password",
             day = 24,
             month = 12,
@@ -71,7 +71,7 @@ internal class RegisterUseCaseTest() {
     fun `if password length less then 6 return PASSWORD_LENGTH_ERROR`() {
         val testingRequest = RawRegisterRequest(
             username = "username",
-            email = "@email.com",
+            email = "email@email.com",
             password = "pas",
             day = 24,
             month = 12,
@@ -105,7 +105,7 @@ internal class RegisterUseCaseTest() {
 
         val testingRequest = RawRegisterRequest(
             username = "username",
-            email = "@email.com",
+            email = "email@email.com",
             password = "password",
             day = 24,
             month = 12,
@@ -123,7 +123,7 @@ internal class RegisterUseCaseTest() {
 
         val testingRequest = RawRegisterRequest(
             username = "username",
-            email = "@email.com",
+            email = "email@email.com",
             password = "password",
             day = 24,
             month = 12,
