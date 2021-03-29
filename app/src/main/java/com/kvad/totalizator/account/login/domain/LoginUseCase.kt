@@ -4,8 +4,6 @@ import com.kvad.totalizator.account.data.UserRepository
 import com.kvad.totalizator.account.data.model.LoginRequest
 import com.kvad.totalizator.di.DefaultDispatcher
 import com.kvad.totalizator.account.login.LoginState
-import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
-import com.kvad.totalizator.tools.LOGIN_SPECIAL_SYMBOL
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext

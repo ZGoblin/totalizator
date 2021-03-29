@@ -9,14 +9,11 @@ const val W2_SERVER_FLAG = "W2"
 const val DRAW_SERVER_FLAG = "X"
 
 const val ADULT = 18
-const val LOGIN_MIN_LENGTH = 3
-const val LOGIN_SPECIAL_SYMBOL = "@"
 const val USERNAME_MIN_LENGTH = 3
 const val PASSWORD_MIN_LENGTH = 6
 const val API_URL = "https://classic-totalizator-ajg2w.ondigitalocean.app/"
 
-
-const val REQUEST_DELAY = 3000L
+const val REQUEST_DELAY = 1500L
 
 const val ANTI_INFINITY_VALUE = 0.0f
 const val MIN_VALUE_FOR_COEFFICIENT = 1.0f
@@ -29,4 +26,3 @@ const val W2_BET_CHOICE = "2"
 const val DRAW_BET_CHOICE = "X"
 
 const val MIN_STAKE = 10f
-
