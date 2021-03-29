@@ -207,7 +207,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding.etBet.doOnTextChanged { text, _, _, _ ->
             when {
                 text?.isEmpty() == true -> checkTextIsEmpty()
-                text?.length == 1 -> checkTextLength(false)
+                text?.toString()?.toFloat()!! < 10f  -> checkTextLength(false)
                 else -> checkTextLength(true)
             }
         }

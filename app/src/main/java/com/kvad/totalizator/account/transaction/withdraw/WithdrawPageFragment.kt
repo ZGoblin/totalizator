@@ -79,6 +79,9 @@ class WithdrawPageFragment : Fragment() {
     private fun setupErrors(error: TransactionErrorState) {
         when (error) {
             TransactionErrorState.LOADING_ERROR -> {
+                MaterialDialog(requireContext()).customView(R.layout.something_went_wrong_layout)
+                    .negativeButton(R.string.close).show()
+                stateVisibilityController.hideLoading()
             }
             TransactionErrorState.NO_MONEY -> setupNoMoneyError()
         }

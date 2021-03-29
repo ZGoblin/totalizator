@@ -59,7 +59,7 @@ class DepositPageFragment : Fragment() {
             when (it) {
                 is State.Loading -> stateVisibilityController.showLoading()
                 is State.Error -> {
-                    MaterialDialog(requireContext()).customView(R.layout.deposit_error_layout)
+                    MaterialDialog(requireContext()).customView(R.layout.something_went_wrong_layout)
                         .negativeButton(R.string.close).show()
                     stateVisibilityController.hideLoading()
                 }
