@@ -97,7 +97,9 @@
     <string name="register">REGISTER</string>
     <string name="username">Username</string>
     <string name="log_out">Log out</string>
+    <string name="hint_username">Username</string>
     <string name="viewgroup_test_draw">Draw 1700 uah</string>
+
 
 
 </resources>

@@ -10,9 +10,9 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="@dimen/margin_end_chat_user_name"
         android:text="@string/you"
-        android:textColor="#7B7B7B"
+        android:textColor="@color/little_dark_grey"
         app:layout_constraintEnd_toStartOf="@id/tv_time"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,8 +20,8 @@
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textColor="#7B7B7B"
+        android:layout_marginEnd="@dimen/margin_end_current_user_tv_time"
+        android:textColor="@color/little_dark_grey"
         app:layout_constraintEnd_toStartOf="@id/iv_avatar"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="17:38" />
@@ -35,9 +35,9 @@
 
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="@dimen/width_current_user_chat_avatar"
+        android:layout_height="@dimen/height_current_user_chat_avatar"
+        android:layout_marginEnd="@dimen/margin_end_current_user_chat_avatar"
         android:contentDescription="@string/user_image"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,8 +50,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/current_user_message_shape"
         android:textColor="@color/black"
-        android:padding="8dp"
-        android:textSize="16sp"
+        android:padding="@dimen/padding_current_user_message"
+        android:textSize="@dimen/text_size_current_user_message"
         app:layout_constraintEnd_toEndOf="@id/tv_time"
         app:layout_constraintTop_toBottomOf="@id/barrier"
         app:layout_constraintWidth_max="300dp"

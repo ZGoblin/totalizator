@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintDimensionRatio="1:1"
-        android:layout_margin="12dp"
+        android:layout_margin="@dimen/margin_iv_avatar_profile"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/username"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_tv_user_name_profile"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/iv_avatar"
         app:layout_constraintBottom_toTopOf="@id/btn_logout"
@@ -34,8 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_out"
-        android:layout_margin="20dp"
-        android:textSize="20sp"
+        android:layout_margin="@dimen/margin_btn_logout_profile"
+        android:textSize="@dimen/text_size_btn_logout_profile"
         app:layout_constraintTop_toBottomOf="@id/tv_username"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
         android:layout_gravity="center"
         android:clickable="true"
         android:focusable="true"
-        android:padding="130dp"
+        android:padding="@dimen/padding_pb_progress_profile"
         android:visibility="gone" />
 
     <androidx.appcompat.widget.AppCompatTextView

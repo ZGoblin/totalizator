@@ -19,8 +19,8 @@ internal class BetHistoryMapperTest {
     private val teamConfrontation = "A vs B"
     private val betTime = "2021-03-28T17:31:55.657+00:00"
     private val eventTime = "2021-03-28T17:48:02.427652+00:00"
-    private val betTimeExpected = "28.03, 17:31"
-    private val eventTimeExpected = "28.03, 17:48"
+    private val betTimeExpected = "2021-03-28, 17:31"
+    private val eventTimeExpected = "2021-03-28, 17:48"
     private val amount = 100.0
     private val status = "Bet lost"
 

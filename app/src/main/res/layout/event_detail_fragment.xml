@@ -11,8 +11,9 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:clickable="true"
+        style="@style/YellowCustomProgressBar"
         android:focusable="true"
-        android:padding="170dp" />
+        android:padding="@dimen/padding_progress_circular" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_event_detail_info"
@@ -59,20 +60,20 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/general_error_text"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_tv_error_event_fragment"
         android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawablePadding="8dp"
+        android:drawablePadding="@dimen/padding_drawable_tv_back_event_detail_fragment"
         android:gravity="start"
-        android:padding="8dp"
+        android:padding="@dimen/padding_event_detail_fragment"
         android:drawableStart="@drawable/ic_left_arrow"
         android:text="@string/all_events"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_tv_back_event_detail"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

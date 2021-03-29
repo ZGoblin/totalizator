@@ -1,7 +1,6 @@
 package com.kvad.totalizator.tools
 
 const val INFO_PAGER_KEY = "INFO_PAGER_KEY"
-const val BET_DETAIL_KEY = "BET_DETAIL_KEY"
 
 const val LOGGING_ERROR_CODE = 403
 
@@ -28,4 +27,6 @@ const val DEPOSIT_FLAG = "deposit"
 const val W1_BET_CHOICE = "1"
 const val W2_BET_CHOICE = "2"
 const val DRAW_BET_CHOICE = "X"
+
+const val MIN_STAKE = 10f
 

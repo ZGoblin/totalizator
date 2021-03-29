@@ -19,5 +19,7 @@
     <color name="lite_green">#0BB219</color>
 
     <color name="light_gray">#F5F5F5</color>
+    <color name="little_dark_grey">#7B7B7B</color>
+    <color name="lite_white">#F5F5F5</color>
 
 </resources>

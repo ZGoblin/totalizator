@@ -11,6 +11,7 @@ import com.kvad.totalizator.tools.W2_SERVER_FLAG
 import com.kvad.totalizator.tools.W1_SERVER_FLAG
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import java.time.LocalDateTime
 
 
 import java.time.ZonedDateTime
@@ -44,12 +45,14 @@ class BetHistoryMapper @Inject constructor(
     }
 
     private fun parseZonedDateTime(time: String): String {
-        val timeParsed = ZonedDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-        val month =
-            if (timeParsed.monthValue.toString().length < 2) "0${timeParsed.monthValue}" else "${timeParsed.monthValue}"
-        val day =
-            if (timeParsed.dayOfMonth.toString().length < 2) "0${timeParsed.dayOfMonth}" else "${timeParsed.dayOfMonth}"
-        return "$day.$month, ${timeParsed.hour}:${timeParsed.minute}"
+
+        val timeParsed = LocalDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        val timeHour = timeParsed.hour
+        val timeMinutes =
+            if (timeParsed.minute.toString().length < 2) "0${timeParsed.minute}" else timeParsed.minute
+        val timeYearMonthDay = timeParsed.toLocalDate()
+        return "$timeYearMonthDay, $timeHour:$timeMinutes"
     }
+
 }
 

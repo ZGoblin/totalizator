@@ -137,7 +137,7 @@
         android:gravity="center"
         android:paddingHorizontal="@dimen/padding_start_tv_cancel"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_size_tv_praise"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/amountLayout" />
 

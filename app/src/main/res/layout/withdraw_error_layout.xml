@@ -5,8 +5,8 @@
     android:orientation="vertical">
 
     <View
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="@dimen/width_withdraw_view"
+        android:layout_height="@dimen/height_withdraw_view"
         android:layout_gravity="center"
         android:background="@drawable/ic_no_money" />
 
@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:text="@string/not_enough_money_to_withdraw"
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="@dimen/text_size_withdraw_view" />
 
 
 </LinearLayout>

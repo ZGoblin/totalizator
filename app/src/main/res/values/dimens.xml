@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Bet dialog fragment dimens   -->
     <dimen name="padding_title_item">10dp</dimen>
     <dimen name="margin_title_item">20dp</dimen>
     <dimen name="text_size_title_info">20sp</dimen>
@@ -21,4 +22,164 @@
     <dimen name="padding_edit_text">10dp</dimen>
     <dimen name="margin_top_btn_bet">10dp</dimen>
     <dimen name="text_size_btn_bet">20sp</dimen>
+    <dimen name="text_size_tv_praise">16sp</dimen>
+    <!-- Bet history fragment -->
+    <dimen name="text_size_bet_history">20sp</dimen>
+    <dimen name="iv_back_layout_margin">10dp</dimen>
+    <dimen name="progress_bar_margin_horizontal">10dp</dimen>
+    <dimen name="guide_line_begin">50dp</dimen>
+    <!-- Bet history item -->
+    <dimen name="layout_margin_bet_history_item">10dp</dimen>
+    <dimen name="padding_bet_history_item">16dp</dimen>
+    <dimen name="text_size_team_confrontation">20sp</dimen>
+    <dimen name="text_size_bet_choice">16sp</dimen>
+    <dimen name="text_size_event_start_time">16sp</dimen>
+    <dimen name="text_size_bet_time">16sp</dimen>
+    <dimen name="text_size_bet_amount">16sp</dimen>
+    <dimen name="text_size_status">16sp</dimen>
+    <!-- Bet not enough money error -->
+    <dimen name="error_view_width">64dp</dimen>
+    <dimen name="error_view_height">64dp</dimen>
+    <dimen name="text_size_not_enough_money">20sp</dimen>
+    <!-- OnBoard page -->
+    <dimen name="width_ufc_view">90dp</dimen>
+    <dimen name="height_ufc_view">30dp</dimen>
+    <dimen name="margin_horizontal_body">20dp</dimen>
+    <dimen name="margin_top_body">20dp</dimen>
+    <dimen name="text_size_body">20sp</dimen>
+    <dimen name="text_size_tv_next">30sp</dimen>
+    <dimen name="text_size_tv_back">30sp</dimen>
+    <!-- Board page item -->
+    <dimen name="margin_vertical_board_title_item">10dp</dimen>
+    <dimen name="padding_horizontal_board_title_item">20dp</dimen>
+    <!--Current user message item -->
+    <dimen name="margin_end_chat_user_name">4dp</dimen>
+    <dimen name="margin_end_current_user_tv_time">8dp</dimen>
+    <dimen name="width_current_user_chat_avatar">40dp</dimen>
+    <dimen name="height_current_user_chat_avatar">40dp</dimen>
+    <dimen name="margin_end_current_user_chat_avatar">10dp</dimen>
+    <dimen name="padding_current_user_message">8dp</dimen>
+    <dimen name="text_size_current_user_message">16sp</dimen>
+    <!--Deposit error -->
+    <dimen name="margin_horizontal_progress_bet">40dp</dimen>
+    <dimen name="text_size_progress_bet">24sp</dimen>
+    <!--Deposit page -->
+    <dimen name="margin_tv_deposit">20dp</dimen>
+    <dimen name="text_size_tv_deposit">20sp</dimen>
+    <dimen name="margin_progress_deposit">20dp</dimen>
+    <dimen name="margin_top_input_balance">70dp</dimen>
+    <dimen name="margin_deposit">20dp</dimen>
+    <dimen name="margin_btn_deposit">20dp</dimen>
+    <!-- Event detail buttons -->
+    <dimen name="margin_vertical_tv_slogan">20dp</dimen>
+    <dimen name="text_size_tv_slogan">14sp</dimen>
+    <dimen name="margin_horizontal_btn_first_player">16dp</dimen>
+    <dimen name="margin_vertical_btn_first_player">10dp</dimen>
+    <dimen name="margin_horizontal_btn_draw">16dp</dimen>
+    <dimen name="margin_vertical_btn_draw">10dp</dimen>
+    <dimen name="margin_horizontal_btn_second_player">16dp</dimen>
+    <dimen name="margin_vertical_btn_second_player">10dp</dimen>
+    <dimen name="background_view_height">8dp</dimen>
+    <dimen name="background_view_margin_top">16dp</dimen>
+    <!-- Event detail fragment -->
+    <dimen name="padding_progress_circular">170dp</dimen>
+    <dimen name="text_size_tv_error_event_fragment">20sp</dimen>
+    <dimen name="padding_drawable_tv_back_event_detail_fragment">8dp</dimen>
+    <dimen name="padding_event_detail_fragment">8dp</dimen>
+    <dimen name="text_size_tv_back_event_detail">20sp</dimen>
+    <!-- Event detail header -->
+    <dimen name="height_event">400dp</dimen>
+    <!-- Event detail player characteristic -->
+    <dimen name="margin_vertical_characteristic">20dp</dimen>
+    <dimen name="text_size_first_player_value">20sp</dimen>
+    <dimen name="text_size_characteristic_name">20sp</dimen>
+    <dimen name="text_size_second_player_value">20sp</dimen>
+    <!-- Event holder -->
+    <dimen name="width_event_holder">330dp</dimen>
+    <dimen name="padding_event_holder">8dp</dimen>
+    <!-- Event view group -->
+    <dimen name="margin_bottom_first_player_name">8dp</dimen>
+    <dimen name="text_size_first_player_name">12sp</dimen>
+    <dimen name="margin_bottom_tv_first_player_bet_amount">8dp</dimen>
+    <dimen name="text_size_tv_first_player_bet_amount">16sp</dimen>
+    <dimen name="margin_bottom_tv_second_player_name">8dp</dimen>
+    <dimen name="text_size_second_player_name">12sp</dimen>
+    <dimen name="margin_bottom_tv_second_player_bet_amount">8dp</dimen>
+    <dimen name="text_size_tv_second_player_bet_amount">16sp</dimen>
+    <dimen name="margin_bottom_tv_draw_group">8dp</dimen>
+    <dimen name="margin_tv_live">20dp</dimen>
+    <dimen name="padding_start_tv_live">16dp</dimen>
+    <dimen name="padding_end_tv_live">16dp</dimen>
+    <!-- Events fragment -->
+    <dimen name="padding_pb_progress">130dp</dimen>
+    <!-- Header -->
+    <dimen name="padding_header_layout">12dp</dimen>
+    <dimen name="padding_horizontal_avatar">8dp</dimen>
+    <dimen name="padding_tv_login">4dp</dimen>
+    <dimen name="text_size_tv_login">20sp</dimen>
+    <dimen name="margin_end_iv_clock">8dp</dimen>
+    <!-- Login -->
+    <dimen name="margin_horizontal_tf_login">8dp</dimen>
+    <dimen name="margin_top_tf_login">20dp</dimen>
+    <dimen name="margin_horizontal_tf_password">8dp</dimen>
+    <dimen name="margin_top_tf_password">20dp</dimen>
+    <dimen name="height_btn_login">60dp</dimen>
+    <dimen name="margin_horizontal_btn_login">8dp</dimen>
+    <dimen name="margin_top_btn_login">50dp</dimen>
+    <dimen name="margin_btn_register">20dp</dimen>
+    <dimen name="text_size_btn_register">20sp</dimen>
+    <dimen name="text_size_btn_login">20sp</dimen>
+    <!-- On board -->
+    <dimen name="height_tl_on_board">2dp</dimen>
+    <dimen name="margin_top_tl_on_board">30dp</dimen>
+    <!-- Other message -->
+    <dimen name="margin_start_tv_name_other_message">8dp</dimen>
+    <dimen name="margin_start_tv_time_other_message">4dp</dimen>
+    <dimen name="width_iv_avatar_other_message">40dp</dimen>
+    <dimen name="height_iv_avatar_other_message">40dp</dimen>
+    <dimen name="margin_start_iv_avatar_other_message">10dp</dimen>
+    <dimen name="padding_other_message_body">8dp</dimen>
+    <dimen name="text_size_other_message_body">16sp</dimen>
+    <!-- Profile -->
+    <dimen name="margin_iv_avatar_profile">12dp</dimen>
+    <dimen name="text_size_tv_user_name_profile">20sp</dimen>
+    <dimen name="margin_btn_logout_profile">20dp</dimen>
+    <dimen name="text_size_btn_logout_profile">20sp</dimen>
+    <dimen name="padding_pb_progress_profile">130dp</dimen>
+    <!-- Progress dialog -->
+    <dimen name="width_progress_dialog">64dp</dimen>
+    <dimen name="height_progress_dialog">64dp</dimen>
+    <dimen name="margin_start_progress_dialog">16dp</dimen>
+    <dimen name="margin_top_progress_dialog">16dp</dimen>
+    <dimen name="margin_horizontal_tv_progress_bet">40dp</dimen>
+    <dimen name="text_size_tv_progress_bet">16sp</dimen>
+    <!-- Registration -->
+    <dimen name="margin_horizontal_tf_username">8dp</dimen>
+    <dimen name="margin_top_tf_username">20dp</dimen>
+    <dimen name="margin_horizontal_tf_email">8dp</dimen>
+    <dimen name="margin_top_tf_email">20dp</dimen>
+    <dimen name="margin_horizontal_tf_password_fragment">8dp</dimen>
+    <dimen name="margin_top_tf_password_fragment">20dp</dimen>
+    <dimen name="padding_birthday">8dp</dimen>
+    <dimen name="margin_start_birthday">8dp</dimen>
+    <dimen name="height_dp_birthday">150dp</dimen>
+    <dimen name="height_btn_register">60dp</dimen>
+    <dimen name="margin_horizontal_btn_register">8dp</dimen>
+    <dimen name="text_size_btn_register_fragment">20sp</dimen>
+    <!-- Something went wrong -->
+    <dimen name="width_something_went_wrong_view">64dp</dimen>
+    <dimen name="height_something_went_wrong_view">64dp</dimen>
+    <dimen name="text_size_something_went_wrong">20sp</dimen>
+    <!-- Withdraw error -->
+    <dimen name="width_withdraw_view">64dp</dimen>
+    <dimen name="height_withdraw_view">64dp</dimen>
+    <dimen name="text_size_withdraw_view">20sp</dimen>
+    <!-- Withdraw page -->
+    <dimen name="margin_tv_withdraw">20dp</dimen>
+    <dimen name="text_size_tv_withdraw">20sp</dimen>
+    <dimen name="margin_progress_bar_withdraw">20dp</dimen>
+    <dimen name="margin_top_input_balance_withdraw">70dp</dimen>
+    <dimen name="margin_et_withdraw">20dp</dimen>
+    <dimen name="margin_btn_withdraw">20dp</dimen>
+
 </resources>
