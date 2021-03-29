@@ -14,14 +14,14 @@ class BoardInfoRepository @Inject constructor() {
             R.string.players_vs_players_body
         ),
         BoardInfo(
-            listOf(R.string.chat_troll_provoke_title),
-            R.string.chat_troll_provoke_body
+            listOf(
+                R.string.minimum_commission,
+                R.string.maximum_trust,
+            ), R.string.commission_from_bet_sum
         ),
         BoardInfo(
-            listOf(
-                R.string.less_commission_title_1,
-                R.string.less_commission_title_2,
-            ), R.string.less_commission_body
+            listOf(R.string.chat_troll_provoke_title),
+            R.string.chat_troll_provoke_body
         )
     )
 
