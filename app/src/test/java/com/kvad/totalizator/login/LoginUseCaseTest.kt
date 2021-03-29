@@ -27,19 +27,7 @@ internal class LoginUseCaseTest {
         )
 
         runBlocking {
-            loginUseCase.login(testingRequest) shouldBe LoginState.EMAIL_DOG_NOT_INCLUDE
-        }
-    }
-
-    @Test
-    fun `if email length less then 3 return EMAIL_LENGTH_ERROR`() {
-        val testingRequest = LoginRequest(
-            login = "lo",
-            password = "password",
-        )
-
-        runBlocking {
-            loginUseCase.login(testingRequest) shouldBe LoginState.EMAIL_LENGTH_ERROR
+            loginUseCase.login(testingRequest) shouldBe LoginState.EMAIL_VALIDATION_ERROR
         }
     }
 
@@ -48,7 +36,7 @@ internal class LoginUseCaseTest {
         coEvery { userRepository.login(any()) } returns ApiResultWrapper.Error.LoginError("")
 
         val testingRequest = LoginRequest(
-            login = "@login",
+            login = "login@login.com",
             password = "password",
         )
 
@@ -60,7 +48,7 @@ internal class LoginUseCaseTest {
     @Test
     fun `if password length less then 6 return PASSWORD_LENGTH_ERROR`() {
         val testingRequest = LoginRequest(
-            login = "@login",
+            login = "login@login.com",
             password = "pas",
         )
 
@@ -74,7 +62,7 @@ internal class LoginUseCaseTest {
         coEvery { userRepository.login(any()) } returns ApiResultWrapper.Success(Token(""))
 
         val testingRequest = LoginRequest(
-            login = "@login",
+            login = "login@login.com",
             password = "password",
         )
 

@@ -56,14 +56,11 @@ class LoginFragment : Fragment() {
             LoginState.NETWORK_ERROR -> {
                 showNetworkErrorDialog(R.string.login_network_error_dialog_body)
             }
-            LoginState.EMAIL_LENGTH_ERROR -> {
+            LoginState.EMAIL_VALIDATION_ERROR -> {
                 binding.tfLogin.error = getString(R.string.login_login_error)
             }
             LoginState.PASSWORD_LENGTH_ERROR -> {
                 binding.tfPassword.error = getString(R.string.login_password_error)
-            }
-            LoginState.EMAIL_DOG_NOT_INCLUDE -> {
-                binding.tfLogin.error = getString(R.string.login_username_symbol_error)
             }
         }
     }
