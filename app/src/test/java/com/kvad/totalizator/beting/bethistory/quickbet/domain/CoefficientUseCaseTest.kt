@@ -25,7 +25,7 @@ internal class CoefficientUseCaseTest {
     private val coefficientUseCase = CoefficientUseCase()
 
     @TestFactory
-    fun calculate coefficient works correctly(): List<DynamicTest> {
+    fun `calculate coefficient works correctly`(): List<DynamicTest> {
 
         return listOf(
             Bet.DRAW to 104.58085f,
