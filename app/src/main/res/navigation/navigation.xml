@@ -97,6 +97,8 @@
     <action
         android:id="@+id/action_to_event_from_login"
         app:enterAnim="@anim/slide_in_top"
+        app:popUpToInclusive="true"
+        app:popUpTo="@id/events_fragment"
         app:destination="@id/events_fragment" />
 
     <fragment
