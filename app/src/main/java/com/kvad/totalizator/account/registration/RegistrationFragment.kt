@@ -56,9 +56,6 @@ class RegistrationFragment : Fragment() {
             RegisterState.WITHOUT_ERROR -> findNavController().navigate(R.id.action_to_event_from_login)
             RegisterState.BIRTHDAY_ERROR -> showDialogError(R.string.register_birthday_error)
             RegisterState.NETWORK_ERROR -> showDialogError(R.string.register_network_error_dialog_body)
-            RegisterState.EMAIL_LENGTH_ERROR -> {
-                binding.tfEmail.error = getString(R.string.login_login_error)
-            }
             RegisterState.PASSWORD_LENGTH_ERROR -> {
                 binding.tfPassword.error = getString(R.string.login_password_error)
             }
@@ -66,7 +63,7 @@ class RegistrationFragment : Fragment() {
                 binding.tfUsername.error = getString(R.string.login_username_error)
             }
             RegisterState.EMAIL_ERROR -> {
-                binding.tfEmail.error = getString(R.string.login_username_symbol_error)
+                binding.tfEmail.error = getString(R.string.login_email_validation_error)
             }
         }
     }

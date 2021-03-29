@@ -15,6 +15,7 @@ import kotlinx.coroutines.withContext
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.Calendar
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 class RegisterUseCase @Inject constructor(
@@ -40,8 +41,7 @@ class RegisterUseCase @Inject constructor(
     private suspend fun verifyRegisterComponent(rawRegisterRequest: RawRegisterRequest) =
         withContext(dispatcher) {
             when {
-                !rawRegisterRequest.email.contains(LOGIN_SPECIAL_SYMBOL) -> RegisterState.EMAIL_ERROR
-                checkEmailLength(rawRegisterRequest.email) -> RegisterState.EMAIL_LENGTH_ERROR
+                !isValidEmail(rawRegisterRequest.email) -> RegisterState.EMAIL_ERROR
                 rawRegisterRequest.username.length < USERNAME_MIN_LENGTH -> RegisterState.USERNAME_ERROR
                 rawRegisterRequest.password.length < PASSWORD_MIN_LENGTH -> RegisterState.PASSWORD_LENGTH_ERROR
                 !isAdult(rawRegisterRequest) -> RegisterState.BIRTHDAY_ERROR
@@ -49,8 +49,20 @@ class RegisterUseCase @Inject constructor(
             }
         }
 
-    private fun checkEmailLength(email: String): Boolean {
-        return email.split(LOGIN_SPECIAL_SYMBOL).first().length < LOGIN_MIN_LENGTH
+    private suspend fun isValidEmail(email: String) = withContext(dispatcher) {
+        if (email.isNotEmpty()) {
+            val pattern = Pattern.compile(
+                "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                        "\\@" +
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{1,64}" +
+                        "(" +
+                        "\\." +
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{1,25}" +
+                        ")+"
+            )
+            return@withContext pattern.matcher(email).matches()
+        }
+        return@withContext false
     }
 
     private suspend fun isAdult(rawRegisterRequest: RawRegisterRequest) =

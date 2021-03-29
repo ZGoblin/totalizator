@@ -41,10 +41,10 @@
 
     <string name="login_password_wrong">Forgot your password?</string>
     <string name="login_terms_of_use">Terms of use</string>
-    <string name="login_login_error">Login length must be greater than 3</string>
+    <string name="login_login_error">Check if you entered the correct email address</string>
     <string name="login_password_error">Password length must be greater than 6</string>
     <string name="login_username_error">Username length must be greater than 3</string>
-    <string name="login_username_symbol_error">Email must contain @</string>
+    <string name="login_email_validation_error">Check if you entered the correct email address</string>
     <string name="login_network_error_dialog_body">User does not exist</string>
     <string name="login_network_error_dialog_button">OK</string>
 
