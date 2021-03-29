@@ -5,8 +5,6 @@ import com.kvad.totalizator.account.data.model.RegisterRequest
 import com.kvad.totalizator.di.DefaultDispatcher
 import com.kvad.totalizator.account.registration.RegisterState
 import com.kvad.totalizator.account.registration.models.RawRegisterRequest
-import com.kvad.totalizator.tools.LOGIN_MIN_LENGTH
-import com.kvad.totalizator.tools.LOGIN_SPECIAL_SYMBOL
 import com.kvad.totalizator.tools.USERNAME_MIN_LENGTH
 import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
 import com.kvad.totalizator.tools.ADULT
