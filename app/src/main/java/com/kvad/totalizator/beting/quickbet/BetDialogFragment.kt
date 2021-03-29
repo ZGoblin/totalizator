@@ -149,6 +149,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
             .positiveButton(R.string.deposit, click = {
                 findNavController().navigate(R.id.transaction_pager)
             }).negativeButton(R.string.close).show()
+        binding.tvCancel.isEnabled = true
     }
 
     private fun setupDoBetSuccess() {
