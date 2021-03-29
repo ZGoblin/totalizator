@@ -19,7 +19,7 @@ interface ViewModelComponent {
 
     fun inject(viewModel: ChatViewModel)
 
-    fun inject( viewModel: NavigationViewModel )
+    fun inject(viewModel: NavigationViewModel)
 
     fun inject(viewModel: EventDetailViewModel)
 

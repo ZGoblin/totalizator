@@ -13,9 +13,11 @@ import io.kotlintest.shouldBe
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.jupiter.api.Test
-
+@ExperimentalCoroutinesApi
 internal class BetUseCaseTest {
 
 
@@ -32,7 +34,7 @@ internal class BetUseCaseTest {
 
         val betModel = BetToServerModel(eventId = "1", amount = 20.0, choice = Bet.DRAW)
 
-        val betUseCase = BetUseCase(mockUserRepository,mockBetRepository,mockMapper)
+        val betUseCase = BetUseCase(mockUserRepository,mockBetRepository,mockMapper,TestCoroutineDispatcher())
 
         runBlocking{
             betUseCase.doBet(betModel) shouldBe ApiResultWrapper.Success(value = Unit)
@@ -40,7 +42,7 @@ internal class BetUseCaseTest {
     }
 
     @Test
-    fun `if user create bet and wallet is null return login error`() {
+    fun `if user create bet and wallet is null return login error works correctly`() {
         val mockMapper = mockk<MapperBetModelToBetRequest>(relaxed = true)
         val mockUserRepository = mockk<UserRepository> {
             coEvery { getLastWallet() } returns null
@@ -50,7 +52,9 @@ internal class BetUseCaseTest {
 
         val betModel = BetToServerModel(eventId = "1", amount = 20.0, choice = Bet.DRAW)
 
-        val betUseCase = BetUseCase(mockUserRepository,mockBetRepository,mockMapper)
+        val betUseCase = BetUseCase(mockUserRepository,mockBetRepository,mockMapper,
+            TestCoroutineDispatcher()
+        )
 
         runBlocking{
             betUseCase.doBet(betModel) shouldBe ApiResultWrapper.Error.LoginError("Login Error")
@@ -58,7 +62,7 @@ internal class BetUseCaseTest {
     }
 
     @Test
-    fun `if user create bet less money than have in wallet`(){
+    fun `if user create bet less money than have in wallet works correctly`(){
         val mockMapper = mockk<MapperBetModelToBetRequest> {
             every { map(any()) } returns BetRequest(eventId = "1",choice = "X",amount = 100.0)
         }
@@ -68,7 +72,7 @@ internal class BetUseCaseTest {
 
         val mockBetRepository = mockk<BetRepository>(relaxUnitFun = true)
         val betModel = mockk<BetToServerModel>()
-        val betUseCase = BetUseCase(mockUserRepository,mockBetRepository,mockMapper)
+        val betUseCase = BetUseCase(mockUserRepository,mockBetRepository,mockMapper,TestCoroutineDispatcher())
         runBlocking {
             betUseCase.doBet(betModel) shouldBe ApiResultWrapper.Error.NoMoneyError(message = "Money Error")
         }

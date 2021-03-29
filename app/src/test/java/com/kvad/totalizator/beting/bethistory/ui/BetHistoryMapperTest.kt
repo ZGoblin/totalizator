@@ -4,12 +4,15 @@ import com.kvad.totalizator.beting.bethistory.model.BetHistoryDetailModel
 import com.kvad.totalizator.beting.bethistory.model.RequestBetHistoryModel
 import com.kvad.totalizator.tools.*
 import io.kotlintest.shouldBe
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.TestFactory
-
+@ExperimentalCoroutinesApi
 internal class BetHistoryMapperTest {
 
     private val betId = "1"
@@ -23,13 +26,13 @@ internal class BetHistoryMapperTest {
 
     @TestFactory
     fun `map item works correctly`(): List<DynamicTest> {
-        val mockMapper = BetHistoryMapper()
+        val mockMapper = BetHistoryMapper(TestCoroutineDispatcher())
         return listOf(
             W1_SERVER_FLAG to W1_BET_CHOICE,
             W2_SERVER_FLAG to W2_BET_CHOICE,
             DRAW_SERVER_FLAG to DRAW_BET_CHOICE,
         ).map { (input, expected) ->
-            DynamicTest.dynamicTest("When input are $input, should expected $expected") {
+            DynamicTest.dynamicTest("When request have choice is $input, should expected $expected") {
                 val actualModel = RequestBetHistoryModel(
                     betId = betId,
                     teamConfrontation = teamConfrontation,
@@ -48,7 +51,10 @@ internal class BetHistoryMapperTest {
                     amount = amount,
                     status = status
                 )
-                mockMapper.mapItem(actualModel) shouldBe expectedModel
+                runBlocking {
+                    mockMapper.mapItem(actualModel) shouldBe expectedModel
+                }
+
             }
         }
     }

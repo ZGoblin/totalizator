@@ -13,12 +13,14 @@ import com.kvad.totalizator.account.transaction.model.TransactionModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+typealias WithdrawState = State<Unit, TransactionErrorState>
+
 class WithdrawViewModel @Inject constructor(
     private val withdrawUseCase: WithdrawUseCase
 ) : ViewModel() {
 
-    private var _withdrawLiveData = MutableLiveData<State<Unit, TransactionErrorState>>()
-    val withdrawLiveData : LiveData<State<Unit, TransactionErrorState>> = _withdrawLiveData
+    private var _withdrawLiveData = MutableLiveData<WithdrawState>()
+    val withdrawLiveData : LiveData<WithdrawState> = _withdrawLiveData
 
     fun doWithdraw(transactionMode : TransactionModel){
         _withdrawLiveData.value = State.Loading
