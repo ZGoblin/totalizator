@@ -271,9 +271,9 @@ class BetDialogFragment : BottomSheetDialogFragment() {
 
     private fun calculateAndSetupUi() {
         if (!binding.etBet.text.isNullOrEmpty()) {
-            val possiblePayment =
+            val possibleWin =
                 viewModel.calculate(detailBet, binding.etBet.text.toString().toFloat())
-            binding.tvPraise.text = getString(R.string.possible_gain, possiblePayment)
+            binding.tvPraise.text = getString(R.string.possible_gain, possibleWin)
         }
     }
 
