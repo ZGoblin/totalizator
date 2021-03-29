@@ -1,5 +1,6 @@
 package com.kvad.totalizator.tools.safeapicall
 
+import android.util.Log
 import com.kvad.totalizator.tools.LOGGING_ERROR_CODE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
