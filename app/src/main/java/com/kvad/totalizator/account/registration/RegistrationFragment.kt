@@ -104,7 +104,7 @@ class RegistrationFragment : Fragment() {
                     email = teEmail.text.toString(),
                     password = tePassword.text.toString(),
                     day = dpBirthday.dayOfMonth,
-                    month = dpBirthday.month,
+                    month = dpBirthday.month + 1,
                     year = dpBirthday.year
                 )
             )
