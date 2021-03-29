@@ -26,3 +26,5 @@ const val W2_BET_CHOICE = "2"
 const val DRAW_BET_CHOICE = "X"
 
 const val MIN_STAKE = 10f
+
+const val PERCENT = 100f

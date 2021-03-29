@@ -2,13 +2,14 @@ package com.kvad.totalizator.beting.quickbet.domain
 
 import com.kvad.totalizator.beting.bethistory.quickbet.model.BetDetail
 import com.kvad.totalizator.shared.Bet
+import com.kvad.totalizator.tools.PERCENT
 import javax.inject.Inject
 
 class CoefficientUseCase @Inject constructor() {
 
     fun calculateCoefficient(lastBetDetail: BetDetail, bet: Bet, current: Float): Float {
 
-        val margePercent = 1 - lastBetDetail.margin / 100F
+        val margePercent = 1 - lastBetDetail.margin / PERCENT
         var winPool = 0F
         var loosePool = 0F
 
