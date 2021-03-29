@@ -63,7 +63,7 @@ internal class RegisterUseCaseTest() {
         )
 
         runBlocking {
-            registerUseCase.register(testingRequest) shouldBe RegisterState.EMAIL_LENGTH_ERROR
+            registerUseCase.register(testingRequest) shouldBe RegisterState.EMAIL_ERROR
         }
     }
 
@@ -80,22 +80,6 @@ internal class RegisterUseCaseTest() {
 
         runBlocking {
             registerUseCase.register(testingRequest) shouldBe RegisterState.PASSWORD_LENGTH_ERROR
-        }
-    }
-
-    @Test
-    fun `if email not include @ return EMAIL_ERROR`() {
-        val testingRequest = RawRegisterRequest(
-            username = "username",
-            email = "email.com",
-            password = "password",
-            day = 24,
-            month = 12,
-            year = 1900
-        )
-
-        runBlocking {
-            registerUseCase.register(testingRequest) shouldBe RegisterState.EMAIL_ERROR
         }
     }
 

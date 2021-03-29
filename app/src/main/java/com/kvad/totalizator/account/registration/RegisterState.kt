@@ -1,7 +1,6 @@
 package com.kvad.totalizator.account.registration
 
 enum class RegisterState {
-    EMAIL_LENGTH_ERROR,
     USERNAME_ERROR,
     EMAIL_ERROR,
     PASSWORD_LENGTH_ERROR,
