@@ -1,9 +1,7 @@
 package com.kvad.totalizator.account.registration.domain
 
-
 import com.kvad.totalizator.account.data.UserRepository
 import com.kvad.totalizator.account.data.model.RegisterRequest
-import com.kvad.totalizator.shared.Token
 import com.kvad.totalizator.di.DefaultDispatcher
 import com.kvad.totalizator.account.registration.RegisterState
 import com.kvad.totalizator.account.registration.models.RawRegisterRequest
@@ -14,7 +12,8 @@ import com.kvad.totalizator.tools.PASSWORD_MIN_LENGTH
 import com.kvad.totalizator.tools.ADULT
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import java.lang.StringBuilder
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.util.Calendar
 import javax.inject.Inject
 
@@ -22,10 +21,6 @@ class RegisterUseCase @Inject constructor(
     private val userRepository: UserRepository,
     @DefaultDispatcher private val dispatcher: CoroutineDispatcher
 ) {
-    companion object {
-        private const val MONTH_BEFORE_ADD_ZERO = 9
-        private const val DATE_SEPARATOR = "-"
-    }
 
     private lateinit var state: RegisterState
 
@@ -45,8 +40,8 @@ class RegisterUseCase @Inject constructor(
     private suspend fun verifyRegisterComponent(rawRegisterRequest: RawRegisterRequest) =
         withContext(dispatcher) {
             when {
-                rawRegisterRequest.email.length < LOGIN_MIN_LENGTH -> RegisterState.EMAIL_LENGTH_ERROR
                 !rawRegisterRequest.email.contains(LOGIN_SPECIAL_SYMBOL) -> RegisterState.EMAIL_ERROR
+                checkEmailLength(rawRegisterRequest.email) -> RegisterState.EMAIL_LENGTH_ERROR
                 rawRegisterRequest.username.length < USERNAME_MIN_LENGTH -> RegisterState.USERNAME_ERROR
                 rawRegisterRequest.password.length < PASSWORD_MIN_LENGTH -> RegisterState.PASSWORD_LENGTH_ERROR
                 !isAdult(rawRegisterRequest) -> RegisterState.BIRTHDAY_ERROR
@@ -54,11 +49,15 @@ class RegisterUseCase @Inject constructor(
             }
         }
 
+    private fun checkEmailLength(email: String): Boolean {
+        return email.split(LOGIN_SPECIAL_SYMBOL).first().length < LOGIN_MIN_LENGTH
+    }
+
     private suspend fun isAdult(rawRegisterRequest: RawRegisterRequest) =
         withContext(dispatcher) {
 
             val calendarAdult = Calendar.getInstance()
-            calendarAdult.add(Calendar.YEAR, ADULT.inv())
+            calendarAdult.add(Calendar.YEAR, (ADULT - ADULT * 2))
             val calendarBirthday = Calendar.getInstance()
             calendarBirthday.set(
                 rawRegisterRequest.year,
@@ -79,17 +78,14 @@ class RegisterUseCase @Inject constructor(
     }
 
     private suspend fun dateToString(rawRegisterRequest: RawRegisterRequest) = withContext(dispatcher) {
-        StringBuilder()
-            .append(rawRegisterRequest.year)
-            .append(DATE_SEPARATOR)
-            .append(
-                if (rawRegisterRequest.month > MONTH_BEFORE_ADD_ZERO)
-                    rawRegisterRequest.month
-                else
-                    "0${rawRegisterRequest.month}"
-            )
-            .append(DATE_SEPARATOR)
-            .append(rawRegisterRequest.day)
+        ZonedDateTime.of(
+            rawRegisterRequest.year,
+            rawRegisterRequest.month,
+            rawRegisterRequest.day,
+            0, 0, 0, 0,
+            ZoneId.systemDefault()
+        )
+            .toLocalDateTime()
             .toString()
     }
 }
