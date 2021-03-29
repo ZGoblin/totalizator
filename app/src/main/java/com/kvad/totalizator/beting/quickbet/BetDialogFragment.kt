@@ -24,10 +24,12 @@ import com.kvad.totalizator.databinding.BetDialogFragmentBinding
 import com.kvad.totalizator.di.ViewModelFactory
 import com.kvad.totalizator.di.injectViewModel
 import com.kvad.totalizator.shared.Bet
+import com.kvad.totalizator.tools.MIN_STAKE
 import com.kvad.totalizator.tools.State
-import com.kvad.totalizator.tools.hideKeyboard
-import com.kvad.totalizator.tools.disableDragging
 import com.kvad.totalizator.tools.StateVisibilityController
+import com.kvad.totalizator.tools.disableDragging
+import com.kvad.totalizator.tools.hideKeyboard
+
 import javax.inject.Inject
 
 @Suppress("TooManyFunctions")
@@ -208,7 +210,7 @@ class BetDialogFragment : BottomSheetDialogFragment() {
         binding.etBet.doOnTextChanged { text, _, _, _ ->
             when {
                 text?.isEmpty() == true -> checkTextIsEmpty()
-                text?.toString()?.toFloat()!! < 10f  -> checkTextLength(false)
+                text?.toString()?.toFloat()!! < MIN_STAKE  -> checkTextLength(false)
                 else -> checkTextLength(true)
             }
         }

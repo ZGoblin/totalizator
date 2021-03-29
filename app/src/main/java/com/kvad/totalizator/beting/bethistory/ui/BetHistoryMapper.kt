@@ -47,17 +47,11 @@ class BetHistoryMapper @Inject constructor(
     private fun parseZonedDateTime(time: String): String {
 
         val timeParsed = LocalDateTime.parse(time, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-
-        val month =
-            if (timeParsed.monthValue.toString().length < 2) "0${timeParsed.monthValue}" else "${timeParsed.monthValue}"
-        val day =
-            if (timeParsed.dayOfMonth.toString().length < 2) "0${timeParsed.dayOfMonth}" else "${timeParsed.dayOfMonth}"
-        val hour =
-            if (timeParsed.hour.toString().length < 2) "0${timeParsed.hour}" else "${timeParsed.hour}"
-        val minute =
-            if (timeParsed.minute.toString().length < 2) "0${timeParsed.minute}" else "${timeParsed.minute}"
-
-        return "$day.$month, $hour:$minute"
+        val timeHour = timeParsed.hour
+        val timeMinutes =
+            if (timeParsed.minute.toString().length < 2) "0${timeParsed.minute}" else timeParsed.minute
+        val timeYearMonthDay = timeParsed.toLocalDate()
+        return "$timeYearMonthDay, $timeHour:$timeMinutes"
     }
 
 }
