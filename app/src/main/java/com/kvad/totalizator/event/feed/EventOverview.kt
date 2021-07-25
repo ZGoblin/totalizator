@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.AlignmentLine
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -34,7 +35,7 @@ fun EventOverview(
         modifier = Modifier
             .width(340.dp)
             .fillMaxHeight()
-            .padding(8.dp)
+            .padding(4.dp)
             .clickable { onEventClick(event) }
     ) {
         ParticipantsPhotos(
@@ -124,13 +125,17 @@ fun OverviewData(
             PlayerDataOverview(
                 event.firstParticipant.name,
                 event.betPool.firstPlayerBetAmount,
-                Modifier.weight(1f).padding(start = 8.dp, end = 8.dp),
+                Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp, end = 8.dp),
                 Alignment.Start
             )
             PlayerDataOverview(
                 event.secondParticipant.name,
                 event.betPool.secondPlayerBetAmount,
-                Modifier.weight(1f).padding(start = 8.dp, end = 8.dp),
+                Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp, end = 8.dp),
                 Alignment.End
             )
         }
@@ -155,21 +160,27 @@ fun BetsProgress(
     Row(
         modifier = modifier
     ) {
-        Box(
-            modifier = baseModifier
-                .weight(betPool.firstPlayerBetAmount)
-                .background(betPool.firstPlayerColorBar)
-        )
-        Box(
-            modifier = baseModifier
-                .weight(betPool.drawBetAmount)
-                .background(betPool.drawColorBar)
-        )
-        Box(
-            modifier = baseModifier
-                .weight(betPool.secondPlayerBetAmount)
-                .background(betPool.secondPlayerColorBar)
-        )
+        if (betPool.firstPlayerBetAmount > 0) {
+            Box(
+                modifier = baseModifier
+                    .weight(betPool.firstPlayerBetAmount)
+                    .background(betPool.firstPlayerColorBar)
+            )
+        }
+        if (betPool.drawBetAmount > 0) {
+            Box(
+                modifier = baseModifier
+                    .weight(betPool.drawBetAmount)
+                    .background(betPool.drawColorBar)
+            )
+        }
+        if (betPool.secondPlayerBetAmount > 0) {
+            Box(
+                modifier = baseModifier
+                    .weight(betPool.secondPlayerBetAmount)
+                    .background(betPool.secondPlayerColorBar)
+            )
+        }
     }
 }
 
