@@ -32,13 +32,12 @@ class EventsFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var chatViewModel: ChatViewModel
-    lateinit var viewModel: EventsViewModel
+    private lateinit var eventsViewModel: EventsViewModel
 
     private var _binding: EventsFragmentBinding? = null
     private val binding get() = _binding!!
     private lateinit var chatLayoutManager: LinearLayoutManager
     private val chatAdapter = ChatRecyclerViewAdapter()
-    private val eventAdapter = EventAdapter(::onEventClick)
     private lateinit var stateVisibilityController: StateVisibilityController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +64,7 @@ class EventsFragment : Fragment() {
 
         binding.apply {
             stateVisibilityController = StateVisibilityController(pbProgress, tvError)
+            eventFeedView.setOnEventClick(::onEventClick)
         }
     }
 
@@ -85,14 +85,11 @@ class EventsFragment : Fragment() {
     private fun setupDi() {
         val app = requireActivity().application as App
         app.getComponent().inject(this)
-        viewModel = injectViewModel(viewModelFactory)
         chatViewModel = injectViewModel(viewModelFactory)
+        eventsViewModel = injectViewModel(viewModelFactory)
     }
 
     private fun setupLiveDataObserver() {
-        viewModel.eventsLiveData.observe(viewLifecycleOwner) {
-            updateEventsState(it)
-        }
         chatViewModel.chatLiveData.observe(viewLifecycleOwner) {
             updateChatState(it)
         }
@@ -101,10 +98,8 @@ class EventsFragment : Fragment() {
     private fun updateChatState(state: State<List<UserMessageUi>, ErrorState>) {
         when (state) {
             is State.Content -> {
-                if (viewModel.isEventsLoaded()) {
-                    updateChatContent(state.data)
-                    stateVisibilityController.hideAll()
-                }
+                updateChatContent(state.data)
+                stateVisibilityController.hideAll()
             }
             is State.Error -> updateChatErrorState(state)
             is State.Loading -> stateVisibilityController.showLoading()
@@ -125,42 +120,13 @@ class EventsFragment : Fragment() {
         }
     }
 
-    private fun updateEventsState(state: State<List<Event>, ErrorState>) {
-        when (state) {
-            is State.Content -> {
-                if (chatViewModel.isChatLoaded()) {
-                    eventAdapter.submitList(state.data)
-                    stateVisibilityController.hideAll()
-                }
-            }
-            is State.Error -> stateVisibilityController.showError()
-            is State.Loading -> stateVisibilityController.showLoading()
-        }
-    }
-
     private fun setupRecycler() {
-        setupEventsRecycler()
-        setupChatRecycler()
-    }
-
-    private fun setupChatRecycler() {
         binding.rvChat.apply {
             (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
             adapter = chatAdapter
             chatLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             layoutManager = chatLayoutManager
-        }
-    }
-
-    private fun setupEventsRecycler() {
-        binding.rvEvents.apply {
-            val snapHelper = LinearSnapHelper()
-            snapHelper.attachToRecyclerView(this)
-            (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
-            adapter = eventAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        }
-    }
+        }    }
 
     private fun onEventClick(event: Event) {
         val action = EventsFragmentDirections.actionDetailFragment(event.id)
@@ -168,7 +134,6 @@ class EventsFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        binding.rvEvents.adapter = null
         binding.rvChat.adapter = null
         binding.rvChat.layoutManager = null
         _binding = null
