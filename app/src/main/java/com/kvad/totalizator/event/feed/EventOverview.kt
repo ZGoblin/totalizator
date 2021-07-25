@@ -128,8 +128,8 @@ fun OverviewData(
                 Alignment.Start
             )
             PlayerDataOverview(
-                event.firstParticipant.name,
-                event.betPool.firstPlayerBetAmount,
+                event.secondParticipant.name,
+                event.betPool.secondPlayerBetAmount,
                 Modifier.weight(1f).padding(start = 8.dp, end = 8.dp),
                 Alignment.End
             )
