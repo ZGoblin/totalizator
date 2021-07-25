@@ -28,15 +28,11 @@ import com.kvad.totalizator.tools.foreground
 
 @Composable
 fun EventOverview(
-    onEventClick: (Event) -> Unit,
-    event: Event
+    event: Event,
+    modifier: Modifier
 ) {
     Box(
-        modifier = Modifier
-            .width(340.dp)
-            .fillMaxHeight()
-            .padding(4.dp)
-            .clickable { onEventClick(event) }
+        modifier = modifier
     ) {
         ParticipantsPhotos(
             firstParticipant = event.firstParticipant,
@@ -117,6 +113,8 @@ fun OverviewData(
     event: Event,
     modifier: Modifier
 ) {
+    val playerDataModifier = Modifier.padding(start = 8.dp, end = 8.dp)
+
     Column(modifier = modifier) {
         Row(
             modifier = Modifier
@@ -125,17 +123,15 @@ fun OverviewData(
             PlayerDataOverview(
                 event.firstParticipant.name,
                 event.betPool.firstPlayerBetAmount,
-                Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp, end = 8.dp),
+                playerDataModifier
+                    .weight(1f),
                 Alignment.Start
             )
             PlayerDataOverview(
                 event.secondParticipant.name,
                 event.betPool.secondPlayerBetAmount,
-                Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp, end = 8.dp),
+                playerDataModifier
+                    .weight(1f),
                 Alignment.End
             )
         }

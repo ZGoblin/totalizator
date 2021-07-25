@@ -2,12 +2,18 @@ package com.kvad.totalizator.event.feed
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.kvad.totalizator.event.data.model.Event
 import com.kvad.totalizator.tools.State
 
@@ -53,8 +59,12 @@ fun Feed(
     LazyRow {
         items(items = events) { event ->
             EventOverview(
-                onEventClick = onEventClick,
-                event = event
+                event = event,
+                modifier = Modifier
+                    .width(340.dp)
+                    .fillMaxHeight()
+                    .padding(4.dp)
+                    .clickable { onEventClick(event) }
             )
         }
     }
