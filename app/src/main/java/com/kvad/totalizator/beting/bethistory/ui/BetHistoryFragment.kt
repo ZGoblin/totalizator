@@ -85,15 +85,15 @@ class BetHistoryFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.rvBetHistory.apply {
-            adapter = betHistoryAdapter
-            layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        }
+//        binding.rvBetHistory.apply {
+//            adapter = betHistoryAdapter
+//            layoutManager =
+//                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+//        }
     }
 
     override fun onDestroyView() {
-        binding.rvBetHistory.adapter = null
+//        binding.rvBetHistory.adapter = null
         _binding = null
         stateVisibilityController.destroy()
         super.onDestroyView()
