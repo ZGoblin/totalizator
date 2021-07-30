@@ -1,5 +1,6 @@
 package com.kvad.totalizator.event.feed
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,7 +19,7 @@ class EventsViewModel @Inject constructor(
     private val eventRepository: EventRepository
 ) : ViewModel() {
     private val _eventsLiveData = MutableLiveData<EventState>()
-    val eventsLiveData = _eventsLiveData
+    val eventsLiveData: LiveData<EventState> = _eventsLiveData
 
     init {
         _eventsLiveData.value = State.Loading

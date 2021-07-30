@@ -21,9 +21,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toStartOf="@id/tvSendMessage"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rvEvents"/>
+            app:layout_constraintTop_toBottomOf="@id/eventFeedView"/>
 
-        <Constraint android:id="@id/rvEvents"
+        <Constraint android:id="@id/eventFeedView"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:alpha="1"
@@ -41,7 +41,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <Constraint android:id="@id/rvEvents"
+        <Constraint android:id="@id/eventFeedView"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:alpha="0"

@@ -6,9 +6,8 @@
     android:background="@color/light_gray"
     app:layoutDescription="@xml/events_fragment_scene">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvEvents"
+    <com.kvad.totalizator.event.feed.EventFeedView
+        android:id="@+id/eventFeedView"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +28,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/tvSendMessage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvEvents"
+        app:layout_constraintTop_toBottomOf="@id/eventFeedView"
         android:importantForAutofill="no" />
 
     <View

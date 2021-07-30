@@ -1,5 +1,6 @@
 package com.kvad.totalizator.event.data.mappers
 
+import androidx.compose.ui.graphics.Color
 import com.kvad.totalizator.event.data.model.Event
 import com.kvad.totalizator.event.data.model.BetPool
 import com.kvad.totalizator.event.data.requestmodels.RequestEventModel
@@ -19,7 +20,10 @@ class MapRequestEventToEvent @Inject constructor() {
         betPool = BetPool(
             firstPlayerBetAmount = requestEventModel.amountW1,
             secondPlayerBetAmount = requestEventModel.amountW2,
-            drawBetAmount = requestEventModel.amountX
+            drawBetAmount = requestEventModel.amountX,
+            firstPlayerColorBar = Color.Yellow,
+            secondPlayerColorBar = Color.Red,
+            drawColorBar = Color.White
         )
     )
 
