@@ -98,5 +98,4 @@ class BetHistoryFragment : Fragment() {
         stateVisibilityController.destroy()
         super.onDestroyView()
     }
-
 }
